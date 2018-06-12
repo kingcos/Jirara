@@ -12,6 +12,7 @@
 		843973D220CFF64C00B14AB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843973D120CFF64C00B14AB7 /* Assets.xcassets */; };
 		843973D520CFF64C00B14AB7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843973D320CFF64C00B14AB7 /* Main.storyboard */; };
 		843973DE20D0149800B14AB7 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843973DD20D0149800B14AB7 /* MainWindowController.swift */; };
+		843973E720D022EB00B14AB7 /* LoginWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843973E520D022EB00B14AB7 /* LoginWindowController.swift */; };
 		CACFDF2552D85F070858118D /* Pods_Jirara.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A62425EE78D72A54CDC1894A /* Pods_Jirara.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		843973D620CFF64C00B14AB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		843973D720CFF64C00B14AB7 /* Jirara.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jirara.entitlements; sourceTree = "<group>"; };
 		843973DD20D0149800B14AB7 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		843973E520D022EB00B14AB7 /* LoginWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWindowController.swift; sourceTree = "<group>"; };
 		A2FE8ACC31D85D047A85C605 /* Pods-Jirara.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jirara.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Jirara/Pods-Jirara.debug.xcconfig"; sourceTree = "<group>"; };
 		A62425EE78D72A54CDC1894A /* Pods_Jirara.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jirara.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -70,8 +72,7 @@
 		843973CC20CFF64A00B14AB7 /* Jirara */ = {
 			isa = PBXGroup;
 			children = (
-				843973DD20D0149800B14AB7 /* MainWindowController.swift */,
-				843973CF20CFF64A00B14AB7 /* ViewController.swift */,
+				843973DF20D022A800B14AB7 /* Controller */,
 				843973CD20CFF64A00B14AB7 /* AppDelegate.swift */,
 				843973D120CFF64C00B14AB7 /* Assets.xcassets */,
 				843973D320CFF64C00B14AB7 /* Main.storyboard */,
@@ -79,6 +80,24 @@
 				843973D720CFF64C00B14AB7 /* Jirara.entitlements */,
 			);
 			path = Jirara;
+			sourceTree = "<group>";
+		};
+		843973DF20D022A800B14AB7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				843973E020D022C100B14AB7 /* Window */,
+				843973CF20CFF64A00B14AB7 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		843973E020D022C100B14AB7 /* Window */ = {
+			isa = PBXGroup;
+			children = (
+				843973DD20D0149800B14AB7 /* MainWindowController.swift */,
+				843973E520D022EB00B14AB7 /* LoginWindowController.swift */,
+			);
+			path = Window;
 			sourceTree = "<group>";
 		};
 		881409385CB01FFB70904BA6 /* Pods */ = {
@@ -185,6 +204,7 @@
 				843973D020CFF64A00B14AB7 /* ViewController.swift in Sources */,
 				843973CE20CFF64A00B14AB7 /* AppDelegate.swift in Sources */,
 				843973DE20D0149800B14AB7 /* MainWindowController.swift in Sources */,
+				843973E720D022EB00B14AB7 /* LoginWindowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
