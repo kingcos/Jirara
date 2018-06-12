@@ -11,9 +11,11 @@
 		843973D020CFF64A00B14AB7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843973CF20CFF64A00B14AB7 /* ViewController.swift */; };
 		843973D220CFF64C00B14AB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843973D120CFF64C00B14AB7 /* Assets.xcassets */; };
 		843973D520CFF64C00B14AB7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843973D320CFF64C00B14AB7 /* Main.storyboard */; };
+		CACFDF2552D85F070858118D /* Pods_Jirara.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A62425EE78D72A54CDC1894A /* Pods_Jirara.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5BF3BB22542F69B284DE1644 /* Pods-Jirara.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jirara.release.xcconfig"; path = "Pods/Target Support Files/Pods-Jirara/Pods-Jirara.release.xcconfig"; sourceTree = "<group>"; };
 		843973CA20CFF64A00B14AB7 /* Jirara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jirara.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		843973CD20CFF64A00B14AB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		843973CF20CFF64A00B14AB7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -21,6 +23,8 @@
 		843973D420CFF64C00B14AB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		843973D620CFF64C00B14AB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		843973D720CFF64C00B14AB7 /* Jirara.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jirara.entitlements; sourceTree = "<group>"; };
+		A2FE8ACC31D85D047A85C605 /* Pods-Jirara.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jirara.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Jirara/Pods-Jirara.debug.xcconfig"; sourceTree = "<group>"; };
+		A62425EE78D72A54CDC1894A /* Pods_Jirara.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jirara.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,17 +32,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CACFDF2552D85F070858118D /* Pods_Jirara.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63B49DAEB5DC44FD9C119E09 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A62425EE78D72A54CDC1894A /* Pods_Jirara.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		843973C120CFF64A00B14AB7 = {
 			isa = PBXGroup;
 			children = (
 				843973CC20CFF64A00B14AB7 /* Jirara */,
 				843973CB20CFF64A00B14AB7 /* Products */,
+				881409385CB01FFB70904BA6 /* Pods */,
+				63B49DAEB5DC44FD9C119E09 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +78,15 @@
 			path = Jirara;
 			sourceTree = "<group>";
 		};
+		881409385CB01FFB70904BA6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A2FE8ACC31D85D047A85C605 /* Pods-Jirara.debug.xcconfig */,
+				5BF3BB22542F69B284DE1644 /* Pods-Jirara.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -70,6 +94,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 843973DA20CFF64C00B14AB7 /* Build configuration list for PBXNativeTarget "Jirara" */;
 			buildPhases = (
+				545070D71D1C27E5C697792A /* [CP] Check Pods Manifest.lock */,
 				843973C620CFF64A00B14AB7 /* Sources */,
 				843973C720CFF64A00B14AB7 /* Frameworks */,
 				843973C820CFF64A00B14AB7 /* Resources */,
@@ -127,6 +152,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		545070D71D1C27E5C697792A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Jirara-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		843973C620CFF64A00B14AB7 /* Sources */ = {
@@ -267,6 +313,7 @@
 		};
 		843973DB20CFF64C00B14AB7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2FE8ACC31D85D047A85C605 /* Pods-Jirara.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jirara/Jirara.entitlements;
@@ -274,10 +321,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = LEG7CXMPKJ;
 				INFOPLIST_FILE = Jirara/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.maimieng.Jirara;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -286,6 +330,7 @@
 		};
 		843973DC20CFF64C00B14AB7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5BF3BB22542F69B284DE1644 /* Pods-Jirara.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jirara/Jirara.entitlements;
@@ -293,10 +338,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = LEG7CXMPKJ;
 				INFOPLIST_FILE = Jirara/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.maimieng.Jirara;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
