@@ -10,13 +10,18 @@
 		843973CE20CFF64A00B14AB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843973CD20CFF64A00B14AB7 /* AppDelegate.swift */; };
 		843973D020CFF64A00B14AB7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843973CF20CFF64A00B14AB7 /* ViewController.swift */; };
 		843973D220CFF64C00B14AB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843973D120CFF64C00B14AB7 /* Assets.xcassets */; };
-		843973D520CFF64C00B14AB7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843973D320CFF64C00B14AB7 /* Main.storyboard */; };
+		843973D520CFF64C00B14AB7 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843973D320CFF64C00B14AB7 /* Login.storyboard */; };
 		843973DE20D0149800B14AB7 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843973DD20D0149800B14AB7 /* MainWindowController.swift */; };
 		843973E720D022EB00B14AB7 /* LoginWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843973E520D022EB00B14AB7 /* LoginWindowController.swift */; };
 		843973EA20D024EC00B14AB7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843973E920D024EC00B14AB7 /* LoginViewController.swift */; };
 		849478B520D0C95600FC9853 /* EngineersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478B420D0C95600FC9853 /* EngineersListViewController.swift */; };
 		849478B720D0CC3E00FC9853 /* EngineerCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478B620D0CC3E00FC9853 /* EngineerCellView.swift */; };
 		849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478BA20D0D0A400FC9853 /* Engineer.swift */; };
+		849478BD20D112C500FC9853 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478BC20D112C500FC9853 /* UserDefaults+Extension.swift */; };
+		849478C320D13DAB00FC9853 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 849478C120D13DAA00FC9853 /* Main.storyboard */; };
+		849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478C720D13FFC00FC9853 /* JiraAPI.swift */; };
+		849478CA20D143EB00FC9853 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478C920D143EB00FC9853 /* String+Extension.swift */; };
+		849478CC20D152DE00FC9853 /* NSAlert+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478CB20D152DE00FC9853 /* NSAlert+Extension.swift */; };
 		84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FCBFF320D0BDFF00FFDA73 /* NSColor+Extension.swift */; };
 		CACFDF2552D85F070858118D /* Pods_Jirara.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A62425EE78D72A54CDC1894A /* Pods_Jirara.framework */; };
 /* End PBXBuildFile section */
@@ -27,7 +32,7 @@
 		843973CD20CFF64A00B14AB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		843973CF20CFF64A00B14AB7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		843973D120CFF64C00B14AB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		843973D420CFF64C00B14AB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		843973D420CFF64C00B14AB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		843973D620CFF64C00B14AB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		843973D720CFF64C00B14AB7 /* Jirara.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jirara.entitlements; sourceTree = "<group>"; };
 		843973DD20D0149800B14AB7 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
@@ -36,6 +41,11 @@
 		849478B420D0C95600FC9853 /* EngineersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineersListViewController.swift; sourceTree = "<group>"; };
 		849478B620D0CC3E00FC9853 /* EngineerCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineerCellView.swift; sourceTree = "<group>"; };
 		849478BA20D0D0A400FC9853 /* Engineer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engineer.swift; sourceTree = "<group>"; };
+		849478BC20D112C500FC9853 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
+		849478C220D13DAA00FC9853 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		849478C720D13FFC00FC9853 /* JiraAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraAPI.swift; sourceTree = "<group>"; };
+		849478C920D143EB00FC9853 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		849478CB20D152DE00FC9853 /* NSAlert+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAlert+Extension.swift"; sourceTree = "<group>"; };
 		84FCBFF320D0BDFF00FFDA73 /* NSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extension.swift"; sourceTree = "<group>"; };
 		A2FE8ACC31D85D047A85C605 /* Pods-Jirara.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jirara.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Jirara/Pods-Jirara.debug.xcconfig"; sourceTree = "<group>"; };
 		A62425EE78D72A54CDC1894A /* Pods_Jirara.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jirara.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,13 +92,15 @@
 		843973CC20CFF64A00B14AB7 /* Jirara */ = {
 			isa = PBXGroup;
 			children = (
+				849478C420D13EFA00FC9853 /* Util */,
 				849478B920D0D09700FC9853 /* Model */,
 				849478B820D0CC4200FC9853 /* View */,
 				84FCBFF220D0BDED00FFDA73 /* Extension */,
 				843973DF20D022A800B14AB7 /* Controller */,
 				843973CD20CFF64A00B14AB7 /* AppDelegate.swift */,
 				843973D120CFF64C00B14AB7 /* Assets.xcassets */,
-				843973D320CFF64C00B14AB7 /* Main.storyboard */,
+				843973D320CFF64C00B14AB7 /* Login.storyboard */,
+				849478C120D13DAA00FC9853 /* Main.storyboard */,
 				843973D620CFF64C00B14AB7 /* Info.plist */,
 				843973D720CFF64C00B14AB7 /* Jirara.entitlements */,
 			);
@@ -131,10 +143,21 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		849478C420D13EFA00FC9853 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				849478C720D13FFC00FC9853 /* JiraAPI.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		84FCBFF220D0BDED00FFDA73 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				84FCBFF320D0BDFF00FFDA73 /* NSColor+Extension.swift */,
+				849478BC20D112C500FC9853 /* UserDefaults+Extension.swift */,
+				849478C920D143EB00FC9853 /* String+Extension.swift */,
+				849478CB20D152DE00FC9853 /* NSAlert+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -208,8 +231,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849478C320D13DAB00FC9853 /* Main.storyboard in Resources */,
 				843973D220CFF64C00B14AB7 /* Assets.xcassets in Resources */,
-				843973D520CFF64C00B14AB7 /* Main.storyboard in Resources */,
+				843973D520CFF64C00B14AB7 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,10 +289,14 @@
 				843973D020CFF64A00B14AB7 /* ViewController.swift in Sources */,
 				849478B720D0CC3E00FC9853 /* EngineerCellView.swift in Sources */,
 				843973CE20CFF64A00B14AB7 /* AppDelegate.swift in Sources */,
+				849478CA20D143EB00FC9853 /* String+Extension.swift in Sources */,
 				84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */,
+				849478CC20D152DE00FC9853 /* NSAlert+Extension.swift in Sources */,
+				849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */,
 				843973DE20D0149800B14AB7 /* MainWindowController.swift in Sources */,
 				849478B520D0C95600FC9853 /* EngineersListViewController.swift in Sources */,
 				843973EA20D024EC00B14AB7 /* LoginViewController.swift in Sources */,
+				849478BD20D112C500FC9853 /* UserDefaults+Extension.swift in Sources */,
 				843973E720D022EB00B14AB7 /* LoginWindowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,10 +304,18 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		843973D320CFF64C00B14AB7 /* Main.storyboard */ = {
+		843973D320CFF64C00B14AB7 /* Login.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				843973D420CFF64C00B14AB7 /* Base */,
+			);
+			name = Login.storyboard;
+			sourceTree = "<group>";
+		};
+		849478C120D13DAA00FC9853 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				849478C220D13DAA00FC9853 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -410,8 +446,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = LEG7CXMPKJ;
 				INFOPLIST_FILE = Jirara/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maimieng.Jirara;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -428,8 +467,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = LEG7CXMPKJ;
 				INFOPLIST_FILE = Jirara/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maimieng.Jirara;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
