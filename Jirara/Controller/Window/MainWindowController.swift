@@ -16,6 +16,8 @@ class MainWindowController: NSWindowController {
         // 隐藏 TitleBar
         window?.titleVisibility = .hidden
         window?.titlebarAppearsTransparent = true
+        
+        window?.backgroundColor = NSColor(hex: "#333333")
     }
 
 }
