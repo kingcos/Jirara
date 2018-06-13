@@ -9,6 +9,7 @@
 import Foundation
 
 extension UserDefaults {
+    /// UserDefaults key enum for safety
     enum UserDefaultsKey: String {
         case jiraDomain = "com.maimieng.jirara.jiraDomain"
         case username = "con.maimieng.jirara.username"
@@ -16,10 +17,16 @@ extension UserDefaults {
         case userEmail = "com.maimieng.jirara.userEmail"
     }
     
-    class func save(_ stringValue: Any, for key: UserDefaultsKey) {
-        UserDefaults.standard.set(stringValue, forKey: key.rawValue)
+    /// Save to UserDefaults by key
+    ///
+    /// - Parameter value: Value to save, key: UserDefaults key enum
+    class func save(_ value: Any, for key: UserDefaultsKey) {
+        UserDefaults.standard.set(value, forKey: key.rawValue)
     }
     
+    /// Get string value from UserDefaults by key
+    ///
+    /// - Parameter key: UserDefaults key enum
     class func get(by key: UserDefaultsKey) -> String {
         return UserDefaults.standard.string(forKey: key.rawValue) ?? ""
     }

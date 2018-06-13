@@ -11,6 +11,7 @@ import Foundation
 enum JiraAPI: String {
     // 前缀
     case prefix = "https://"
+    // 个人
     case myself = "/rest/api/2/myself"
     case rapidViews = "/rest/greenhopper/1.0/rapidview"
     case sprints = "/rest/greenhopper/1.0/sprintquery/"

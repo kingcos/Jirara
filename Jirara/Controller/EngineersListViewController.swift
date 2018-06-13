@@ -12,7 +12,7 @@ class EngineersListViewController: NSViewController {
 
     @IBOutlet weak var listOutlineView: NSOutlineView!
     
-    var engineers = [Engineer]()
+    var viewModel = MainViewModel()
     var str = ["1", "2", "3"]
     
     override func viewDidLoad() {

@@ -75,6 +75,10 @@ extension LoginViewController {
         Alamofire.request(url, headers: headers)
                  .responseData { response in
                     guard let statusCode = response.response?.statusCode else {
+                        self.warningTextField.isHidden = false
+                        self.warningTextField.stringValue = "[Error] The connection is broken! Please check your Jira domain, network or VPN."
+                        self.reloadUI()
+                        
                         return
                     }
                     
@@ -82,19 +86,19 @@ extension LoginViewController {
                     case 200:
                         guard let data = response.data,
                             let engineer = try? Engineer(JSONData: data) else {
-                                return
+                                fatalError("myself API may be broken.")
                         }
                         
                         UserDefaults.save(engineer.emailAddress, for: .userEmail)
                         
                         let storyboard = NSStoryboard(name: .init("Main"), bundle: nil)
-//                        let mainSplitWindowController = storyboard.instantiateController(withIdentifier: .init("MainWindowController")) as? NSWindowController
-                        let mainSplitViewController = storyboard.instantiateController(withIdentifier: .init("MainSplitViewController")) as? NSViewController
-                        self.presentViewControllerAsModalWindow(mainSplitViewController!)
-//                        if let mainSplitWindow = mainSplitWindowController?.window {
-//                            NSApplication.shared.runModal(for: mainSplitWindow)
-//
-//                        }
+                        let mainSplitWindowController = storyboard.instantiateController(withIdentifier: .init("MainWindowController")) as? NSWindowController
+                        
+                        DispatchQueue.main.async {
+                            mainSplitWindowController?.showWindow(self)
+                            self.view.window?.close()
+                        }
+                        
                     case 401:
                         self.warningTextField.isHidden = false
                         self.warningTextField.stringValue = "[Error] You'd better to check your username or password!"

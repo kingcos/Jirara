@@ -690,10 +690,10 @@
                     <window key="window" title="Jirara Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="196" y="240" width="480" height="352"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <value key="minSize" type="size" width="480" height="270"/>
-                        <value key="maxSize" type="size" width="480" height="270"/>
+                        <value key="minSize" type="size" width="480" height="352"/>
+                        <value key="maxSize" type="size" width="480" height="352"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
                         </connections>
@@ -711,11 +711,11 @@
             <objects>
                 <viewController id="r0n-Gj-Gr6" customClass="LoginViewController" customModule="Jirara" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Xt8-OP-LKH">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="318"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="352"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jbe-uk-sNy">
-                                <rect key="frame" x="110" y="285" width="260" height="31"/>
+                                <rect key="frame" x="110" y="319" width="260" height="31"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="🎉 Welcome to Jirara 🎉" id="Piy-WU-yN5">
                                     <font key="font" size="15" name="AppleColorEmoji"/>
                                     <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
@@ -723,13 +723,13 @@
                                 </textFieldCell>
                             </textField>
                             <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UdH-G8-HHU">
-                                <rect key="frame" x="84" y="107" width="312" height="104"/>
+                                <rect key="frame" x="84" y="107" width="312" height="138"/>
                                 <subviews>
                                     <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cZW-Me-6F3">
-                                        <rect key="frame" x="0.0" y="76" width="312" height="28"/>
+                                        <rect key="frame" x="0.0" y="99" width="312" height="39"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNW-Fd-vrw">
-                                                <rect key="frame" x="-2" y="3" width="106" height="23"/>
+                                                <rect key="frame" x="-2" y="8" width="106" height="23"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Jira Domain" id="20p-jA-zKW">
                                                     <font key="font" size="15" name="SFMono-Regular"/>
                                                     <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
@@ -737,7 +737,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dPD-wF-Sfh">
-                                                <rect key="frame" x="112" y="0.0" width="200" height="28"/>
+                                                <rect key="frame" x="112" y="5" width="200" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="200" id="r0S-FE-M1l"/>
                                                 </constraints>
@@ -758,10 +758,10 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UNY-JD-Oh8">
-                                        <rect key="frame" x="0.0" y="38" width="312" height="28"/>
+                                        <rect key="frame" x="0.0" y="49" width="312" height="40"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yb7-gr-vRW">
-                                                <rect key="frame" x="-2" y="3" width="106" height="23"/>
+                                                <rect key="frame" x="-2" y="8" width="106" height="23"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Username" id="94A-TL-eku">
                                                     <font key="font" size="15" name="SFMono-Regular"/>
                                                     <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
@@ -769,7 +769,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3SP-Yr-ftN">
-                                                <rect key="frame" x="112" y="0.0" width="200" height="28"/>
+                                                <rect key="frame" x="112" y="6" width="200" height="28"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="uIm-T5-JGk">
                                                     <font key="font" size="15" name="SFMono-Regular"/>
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -787,10 +787,10 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pab-Xh-XKa">
-                                        <rect key="frame" x="0.0" y="0.0" width="312" height="28"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="312" height="39"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o4h-Mp-WQo">
-                                                <rect key="frame" x="-2" y="3" width="106" height="23"/>
+                                                <rect key="frame" x="-2" y="8" width="106" height="23"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Password" id="V4J-ss-tsG">
                                                     <font key="font" size="15" name="SFMono-Regular"/>
                                                     <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
@@ -798,7 +798,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XAL-b5-NKF">
-                                                <rect key="frame" x="112" y="0.0" width="200" height="28"/>
+                                                <rect key="frame" x="112" y="6" width="200" height="28"/>
                                                 <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="w2a-QBK-8kb-8MX" drawsBackground="YES" usesSingleLineMode="YES" id="KmN-Gd-het">
                                                     <font key="font" size="15" name="SFMono-Regular"/>
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -847,7 +847,7 @@
                                 </connections>
                             </button>
                             <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="BdQ-i6-FSs">
-                                <rect key="frame" x="190" y="238" width="100" height="20"/>
+                                <rect key="frame" x="190" y="272" width="100" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="GCY-oz-fJn"/>
                                 </constraints>
@@ -861,8 +861,11 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xp0-AD-DuV">
-                                <rect key="frame" x="213" y="33" width="54" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Warning" id="Sn0-iO-4Fi">
+                                <rect key="frame" x="216" y="33" width="48" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="Owg-qy-n1W"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="[Error]" id="Sn0-iO-4Fi">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -870,6 +873,7 @@
                             </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xp0-AD-DuV" secondAttribute="trailing" constant="5" id="8dD-DC-0sB"/>
                             <constraint firstItem="BdQ-i6-FSs" firstAttribute="top" secondItem="jbe-uk-sNy" secondAttribute="bottom" constant="28" id="9O8-5t-3B0"/>
                             <constraint firstItem="jbe-uk-sNy" firstAttribute="centerX" secondItem="Xt8-OP-LKH" secondAttribute="centerX" id="EFj-tx-QNW"/>
                             <constraint firstItem="poS-FT-RGC" firstAttribute="centerX" secondItem="Xt8-OP-LKH" secondAttribute="centerX" id="KaU-mQ-Yiy"/>
@@ -881,6 +885,7 @@
                             <constraint firstItem="UdH-G8-HHU" firstAttribute="centerX" secondItem="Xt8-OP-LKH" secondAttribute="centerX" id="hVM-19-V5U"/>
                             <constraint firstItem="BdQ-i6-FSs" firstAttribute="centerX" secondItem="Xt8-OP-LKH" secondAttribute="centerX" id="jOn-Fz-kdz"/>
                             <constraint firstItem="jbe-uk-sNy" firstAttribute="top" secondItem="Xt8-OP-LKH" secondAttribute="top" constant="2" id="jSl-c0-1Oi"/>
+                            <constraint firstItem="xp0-AD-DuV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Xt8-OP-LKH" secondAttribute="leading" constant="5" id="n6a-R2-lIs"/>
                             <constraint firstItem="UdH-G8-HHU" firstAttribute="centerY" secondItem="Xt8-OP-LKH" secondAttribute="centerY" id="yE9-qd-uxc"/>
                             <constraint firstAttribute="bottom" secondItem="poS-FT-RGC" secondAttribute="bottom" constant="2" id="ynA-xI-2wn"/>
                             <constraint firstItem="UdH-G8-HHU" firstAttribute="top" secondItem="BdQ-i6-FSs" secondAttribute="bottom" constant="28" id="zpF-e8-nhk"/>
@@ -897,7 +902,7 @@
                 </viewController>
                 <customObject id="sYr-0l-7gi" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="701" y="250"/>
+            <point key="canvasLocation" x="698" y="250"/>
         </scene>
     </scenes>
 </document>

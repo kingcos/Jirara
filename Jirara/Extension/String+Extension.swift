@@ -9,6 +9,7 @@
 import Foundation
 
 extension String {
+    /// The value after encoding by Base64
     var base64Encoded: String {
         get {
             guard let data = data(using: .utf8) else {

@@ -21,6 +21,7 @@ class LoginWindowController: NSWindowController {
         window?.titleVisibility = .hidden
         window?.titlebarAppearsTransparent = true
         
+        // 设置背景色
         window?.backgroundColor = NSColor(hex: "#333333")
     }
     

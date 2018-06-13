@@ -18,10 +18,13 @@
                             <outlet property="delegate" destination="gTV-ny-VpZ" id="gak-zt-s3w"/>
                         </connections>
                     </window>
+                    <connections>
+                        <segue destination="P9V-kj-sAn" kind="relationship" relationship="window.shadowedContentViewController" id="YQ2-ED-fUx"/>
+                    </connections>
                 </windowController>
                 <customObject id="2Ar-YY-3ou" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="90" y="1290"/>
+            <point key="canvasLocation" x="75" y="1284"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="zyY-ww-jn8">
@@ -140,7 +143,7 @@
                                             </tableColumns>
                                         </outlineView>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </clipView>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="HRw-u1-Gdl"/>
@@ -252,6 +255,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oSu-1o-yR3">
+                                <rect key="frame" x="271" y="378" width="59" height="20"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Status" id="TdU-au-p2o">
+                                    <font key="font" size="15" name="Monaco"/>
+                                    <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="4yr-AE-Mem" firstAttribute="leading" secondItem="owp-Lc-kCZ" secondAttribute="trailing" constant="8" symbolic="YES" id="0rf-KG-YNF"/>
@@ -260,7 +271,9 @@
                             <constraint firstItem="owp-Lc-kCZ" firstAttribute="leading" secondItem="epR-a5-jNk" secondAttribute="leading" constant="20" id="HdA-TV-bbZ"/>
                             <constraint firstItem="owp-Lc-kCZ" firstAttribute="top" secondItem="epR-a5-jNk" secondAttribute="top" constant="25" id="Yh9-sn-fJM"/>
                             <constraint firstAttribute="trailing" secondItem="4yr-AE-Mem" secondAttribute="trailing" constant="25" id="kaD-O5-NVO"/>
+                            <constraint firstItem="oSu-1o-yR3" firstAttribute="centerX" secondItem="epR-a5-jNk" secondAttribute="centerX" id="n5m-X7-OV4"/>
                             <constraint firstItem="4yr-AE-Mem" firstAttribute="top" secondItem="epR-a5-jNk" secondAttribute="top" constant="25" id="tXd-Oc-FBp"/>
+                            <constraint firstItem="oSu-1o-yR3" firstAttribute="top" secondItem="epR-a5-jNk" secondAttribute="top" constant="2" id="vLp-iQ-9Xo"/>
                         </constraints>
                     </view>
                 </viewController>
