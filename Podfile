@@ -5,5 +5,11 @@ target 'Jirara' do
   use_frameworks!
 
   # Pods for Jirara
+  
+  # Networking
+  pod 'Alamofire'
+  
+  # JSON Parser
+  pod 'Mappable'
 
 end
