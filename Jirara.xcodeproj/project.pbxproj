@@ -26,6 +26,8 @@
 		847C8C2420D2702F000C2854 /* IssueCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847C8C2220D2702F000C2854 /* IssueCollectionViewItem.xib */; };
 		847C8C2820D29A76000C2854 /* IssuesStatusHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C2720D29A76000C2854 /* IssuesStatusHeaderView.swift */; };
 		847C8C2A20D29AAC000C2854 /* IssuesStatusHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847C8C2920D29AAC000C2854 /* IssuesStatusHeaderView.xib */; };
+		847C8C7120D2AA26000C2854 /* MailUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C7020D2AA26000C2854 /* MailUtil.swift */; };
+		847C8C7320D2ACFA000C2854 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C7220D2ACFA000C2854 /* TitleViewController.swift */; };
 		849478B520D0C95600FC9853 /* EngineersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478B420D0C95600FC9853 /* EngineersListViewController.swift */; };
 		849478B720D0CC3E00FC9853 /* EngineerCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478B620D0CC3E00FC9853 /* EngineerCellView.swift */; };
 		849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478BA20D0D0A400FC9853 /* Engineer.swift */; };
@@ -62,6 +64,8 @@
 		847C8C2220D2702F000C2854 /* IssueCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCollectionViewItem.xib; sourceTree = "<group>"; };
 		847C8C2720D29A76000C2854 /* IssuesStatusHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesStatusHeaderView.swift; sourceTree = "<group>"; };
 		847C8C2920D29AAC000C2854 /* IssuesStatusHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuesStatusHeaderView.xib; sourceTree = "<group>"; };
+		847C8C7020D2AA26000C2854 /* MailUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailUtil.swift; sourceTree = "<group>"; };
+		847C8C7220D2ACFA000C2854 /* TitleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		849478B420D0C95600FC9853 /* EngineersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineersListViewController.swift; sourceTree = "<group>"; };
 		849478B620D0CC3E00FC9853 /* EngineerCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineerCellView.swift; sourceTree = "<group>"; };
 		849478BA20D0D0A400FC9853 /* Engineer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engineer.swift; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 				843973E920D024EC00B14AB7 /* LoginViewController.swift */,
 				849478B420D0C95600FC9853 /* EngineersListViewController.swift */,
 				8426D4EA20D213300007F180 /* DetailsViewController.swift */,
+				847C8C7220D2ACFA000C2854 /* TitleViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -191,6 +196,7 @@
 			children = (
 				849478C720D13FFC00FC9853 /* JiraAPI.swift */,
 				847C8C1D20D25338000C2854 /* Constants.swift */,
+				847C8C7020D2AA26000C2854 /* MailUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -337,7 +343,9 @@
 			files = (
 				849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */,
 				843973D020CFF64A00B14AB7 /* ViewController.swift in Sources */,
+				847C8C7120D2AA26000C2854 /* MailUtil.swift in Sources */,
 				849478B720D0CC3E00FC9853 /* EngineerCellView.swift in Sources */,
+				847C8C7320D2ACFA000C2854 /* TitleViewController.swift in Sources */,
 				843973CE20CFF64A00B14AB7 /* AppDelegate.swift in Sources */,
 				849478CA20D143EB00FC9853 /* String+Extension.swift in Sources */,
 				8426D4E520D197E60007F180 /* RapidViews.swift in Sources */,
