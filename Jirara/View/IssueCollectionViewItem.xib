@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="IssueCollectionViewItem" customModule="Jirara" customModuleProvider="target">
+            <connections>
+                <outlet property="summaryTextField" destination="xHv-xA-cCT" id="A5p-Uf-W3t"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="352" height="30"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <visualEffectView appearanceType="vibrantDark" blendingMode="behindWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="RZU-r6-3Nd">
+                    <rect key="frame" x="0.0" y="0.0" width="352" height="30"/>
+                    <subviews>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xHv-xA-cCT">
+                            <rect key="frame" x="3" y="7" width="37" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="8tm-Pt-TJN">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </textFieldCell>
+                        </textField>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="xHv-xA-cCT" firstAttribute="centerY" secondItem="RZU-r6-3Nd" secondAttribute="centerY" id="HNX-P4-vlT"/>
+                        <constraint firstItem="xHv-xA-cCT" firstAttribute="leading" secondItem="RZU-r6-3Nd" secondAttribute="leading" constant="5" id="cj1-hY-8hf"/>
+                    </constraints>
+                </visualEffectView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="RZU-r6-3Nd" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="C6G-Ps-G9n"/>
+                <constraint firstAttribute="bottom" secondItem="RZU-r6-3Nd" secondAttribute="bottom" id="KbW-fr-sfu"/>
+                <constraint firstItem="RZU-r6-3Nd" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="P7x-3j-Sqg"/>
+                <constraint firstAttribute="trailing" secondItem="RZU-r6-3Nd" secondAttribute="trailing" id="Q0M-Nd-RVr"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="88.5"/>
+        </customView>
+        <collectionViewItem id="SXJ-gq-dqA" customClass="IssueCollectionViewItem" customModule="Jirara" customModuleProvider="target"/>
+    </objects>
+</document>

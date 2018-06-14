@@ -12,19 +12,20 @@ import Charts
 class DetailsViewController: NSViewController {
     
     @IBOutlet weak var summaryChartView: PieChartView!
+    @IBOutlet weak var issuesCollectionView: NSCollectionView!
     
     var viewModel = MainViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        
+        setupUI()
         
         viewModel.fetchSprintReport {
             self.updateSummaryChart()
+            self.issuesCollectionView.reloadData()
         }
     }
-    
 }
 
 extension DetailsViewController {
@@ -43,12 +44,56 @@ extension DetailsViewController {
                                       label: nil)
         
         dataSet.colors = ChartColorTemplates.joyful()
-        
         summaryChartView.data = PieChartData(dataSet: dataSet)
-        summaryChartView.chartDescription = nil
         summaryChartView.centerAttributedText = NSAttributedString(string: "iOS Scrum",
                                                                    attributes: [.foregroundColor : NSColor.highlightColor])
-        summaryChartView.holeColor = .clear
+    }
+}
+
+extension DetailsViewController {
+    func setupUI() {
+        view.wantsLayer = true
         
+        setupIssuesCollectionView()
+        setupSummaryChartView()
+    }
+    
+    func setupIssuesCollectionView() {
+        let flowLayout = NSCollectionViewFlowLayout()
+        flowLayout.itemSize = NSSize(width: issuesCollectionView.frame.width, height: 30.0)
+        flowLayout.minimumInteritemSpacing = 0.0
+        flowLayout.minimumLineSpacing = 0.0
+        
+        issuesCollectionView.collectionViewLayout = flowLayout
+        issuesCollectionView.dataSource = self
+    }
+    
+    func setupSummaryChartView() {
+        summaryChartView.holeColor = .clear
+        summaryChartView.chartDescription = nil
+    }
+}
+
+extension DetailsViewController: NSCollectionViewDataSource {
+    func numberOfSections(in collectionView: NSCollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        let issue = (viewModel.sprintReport?.completedIssues ?? []) + (viewModel.sprintReport?.incompletedIssues ?? [])
+        
+        return issue.count
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView,
+                        itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
+        let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "IssueCollectionViewItem"), for: indexPath)
+        guard let issueCollectionViewItem = item as? IssueCollectionViewItem else { return item }
+        
+        let issue = (viewModel.sprintReport?.completedIssues ?? []) + (viewModel.sprintReport?.incompletedIssues ?? [])
+        issueCollectionViewItem.issue = issue[indexPath.item]
+        
+        return issueCollectionViewItem
     }
 }

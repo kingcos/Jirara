@@ -86,7 +86,7 @@ class MainViewModel {
                     guard let sprintReport = try? SprintReport(JSONData: data) else {
                         fatalError("\(url) may be broken.")
                     }
-                    let engineerUsernames = Array(Set((sprintReport.completedIssues + sprintReport.incompletedIssues).map { $0.assignee })).sorted()
+                    let engineerUsernames = Array(Set((sprintReport.completedIssues + sprintReport.incompletedIssues).map { $0.assignee }))
                     let requests = engineerUsernames.map {
                         Alamofire.request("https://jira.mobike.com/rest/api/2/user?username=\($0)", headers: headers)
                     }
@@ -102,6 +102,7 @@ class MainViewModel {
                                 self.engneers.append(engineer)
                                 
                                 if self.engneers.count == engineerUsernames.count {
+                                    self.engneers.sort { $0.name < $1.name }
                                     completion()
                                 }
                             case .failure(let error):

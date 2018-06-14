@@ -21,6 +21,9 @@
 		843973E720D022EB00B14AB7 /* LoginWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843973E520D022EB00B14AB7 /* LoginWindowController.swift */; };
 		843973EA20D024EC00B14AB7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843973E920D024EC00B14AB7 /* LoginViewController.swift */; };
 		847C8C1E20D25338000C2854 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C1D20D25338000C2854 /* Constants.swift */; };
+		847C8C2020D2630F000C2854 /* IssuesTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C1F20D2630F000C2854 /* IssuesTableHeaderView.swift */; };
+		847C8C2320D2702F000C2854 /* IssueCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C2120D2702F000C2854 /* IssueCollectionViewItem.swift */; };
+		847C8C2420D2702F000C2854 /* IssueCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847C8C2220D2702F000C2854 /* IssueCollectionViewItem.xib */; };
 		849478B520D0C95600FC9853 /* EngineersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478B420D0C95600FC9853 /* EngineersListViewController.swift */; };
 		849478B720D0CC3E00FC9853 /* EngineerCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478B620D0CC3E00FC9853 /* EngineerCellView.swift */; };
 		849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478BA20D0D0A400FC9853 /* Engineer.swift */; };
@@ -52,6 +55,9 @@
 		843973E520D022EB00B14AB7 /* LoginWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWindowController.swift; sourceTree = "<group>"; };
 		843973E920D024EC00B14AB7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		847C8C1D20D25338000C2854 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		847C8C1F20D2630F000C2854 /* IssuesTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesTableHeaderView.swift; sourceTree = "<group>"; };
+		847C8C2120D2702F000C2854 /* IssueCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCollectionViewItem.swift; sourceTree = "<group>"; };
+		847C8C2220D2702F000C2854 /* IssueCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCollectionViewItem.xib; sourceTree = "<group>"; };
 		849478B420D0C95600FC9853 /* EngineersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineersListViewController.swift; sourceTree = "<group>"; };
 		849478B620D0CC3E00FC9853 /* EngineerCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineerCellView.swift; sourceTree = "<group>"; };
 		849478BA20D0D0A400FC9853 /* Engineer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engineer.swift; sourceTree = "<group>"; };
@@ -155,6 +161,9 @@
 			isa = PBXGroup;
 			children = (
 				849478B620D0CC3E00FC9853 /* EngineerCellView.swift */,
+				847C8C1F20D2630F000C2854 /* IssuesTableHeaderView.swift */,
+				847C8C2120D2702F000C2854 /* IssueCollectionViewItem.swift */,
+				847C8C2220D2702F000C2854 /* IssueCollectionViewItem.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -263,6 +272,7 @@
 				849478C320D13DAB00FC9853 /* Main.storyboard in Resources */,
 				843973D220CFF64C00B14AB7 /* Assets.xcassets in Resources */,
 				843973D520CFF64C00B14AB7 /* Login.storyboard in Resources */,
+				847C8C2420D2702F000C2854 /* IssueCollectionViewItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,8 +337,10 @@
 				84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */,
 				849478CC20D152DE00FC9853 /* NSAlert+Extension.swift in Sources */,
 				8426D4E720D1A2670007F180 /* SprintReport.swift in Sources */,
+				847C8C2320D2702F000C2854 /* IssueCollectionViewItem.swift in Sources */,
 				8426D4DF20D18F350007F180 /* MainViewModel.swift in Sources */,
 				849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */,
+				847C8C2020D2630F000C2854 /* IssuesTableHeaderView.swift in Sources */,
 				843973DE20D0149800B14AB7 /* MainWindowController.swift in Sources */,
 				849478B520D0C95600FC9853 /* EngineersListViewController.swift in Sources */,
 				8426D4EB20D213300007F180 /* DetailsViewController.swift in Sources */,
