@@ -32,6 +32,7 @@
                     <constraints>
                         <constraint firstItem="xHv-xA-cCT" firstAttribute="centerY" secondItem="RZU-r6-3Nd" secondAttribute="centerY" id="HNX-P4-vlT"/>
                         <constraint firstItem="xHv-xA-cCT" firstAttribute="leading" secondItem="RZU-r6-3Nd" secondAttribute="leading" constant="5" id="cj1-hY-8hf"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xHv-xA-cCT" secondAttribute="trailing" constant="5" id="kLN-Zp-aaa"/>
                     </constraints>
                 </visualEffectView>
             </subviews>

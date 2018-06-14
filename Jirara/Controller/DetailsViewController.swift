@@ -66,6 +66,7 @@ extension DetailsViewController {
         
         issuesCollectionView.collectionViewLayout = flowLayout
         issuesCollectionView.dataSource = self
+        issuesCollectionView.delegate = self
     }
     
     func setupSummaryChartView() {
@@ -76,14 +77,19 @@ extension DetailsViewController {
 
 extension DetailsViewController: NSCollectionViewDataSource {
     func numberOfSections(in collectionView: NSCollectionView) -> Int {
-        return 1
+        return 2
     }
     
     func collectionView(_ collectionView: NSCollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        let issue = (viewModel.sprintReport?.completedIssues ?? []) + (viewModel.sprintReport?.incompletedIssues ?? [])
-        
-        return issue.count
+        switch section {
+        case 0:
+            return (viewModel.sprintReport?.completedIssues ?? []).count
+        case 1:
+            return (viewModel.sprintReport?.incompletedIssues ?? []).count
+        default:
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: NSCollectionView,
@@ -91,9 +97,52 @@ extension DetailsViewController: NSCollectionViewDataSource {
         let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "IssueCollectionViewItem"), for: indexPath)
         guard let issueCollectionViewItem = item as? IssueCollectionViewItem else { return item }
         
-        let issue = (viewModel.sprintReport?.completedIssues ?? []) + (viewModel.sprintReport?.incompletedIssues ?? [])
-        issueCollectionViewItem.issue = issue[indexPath.item]
+        switch indexPath.section {
+        case 0:
+            issueCollectionViewItem.issue = (viewModel.sprintReport?.completedIssues ?? [])[indexPath.item]
+        case 1:
+            issueCollectionViewItem.issue = (viewModel.sprintReport?.incompletedIssues ?? [])[indexPath.item]
+        default:
+            break
+        }
         
         return issueCollectionViewItem
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView,
+                        viewForSupplementaryElementOfKind kind: NSCollectionView.SupplementaryElementKind,
+                        at indexPath: IndexPath) -> NSView {
+        if kind == .sectionHeader {
+            if let view = collectionView.makeSupplementaryView(ofKind: kind,
+                                                            withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "IssuesStatusHeaderView"),
+                                                            for: indexPath) as? IssuesStatusHeaderView {
+                switch indexPath.section {
+                case 0:
+                    view.status = "已完成"
+                case 1:
+                    view.status = "进行中"
+                default:
+                    break
+                }
+                
+                return view
+            }
+        }
+        
+        return NSView()
+    }
+}
+
+extension DetailsViewController: NSCollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: NSCollectionView,
+                        layout collectionViewLayout: NSCollectionViewLayout,
+                        referenceSizeForHeaderInSection section: Int) -> NSSize {
+        return NSSize(width: collectionView.frame.width, height: 40.0)
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView,
+                        layout collectionViewLayout: NSCollectionViewLayout,
+                        referenceSizeForFooterInSection section: Int) -> NSSize {
+        return NSSize.zero
     }
 }
