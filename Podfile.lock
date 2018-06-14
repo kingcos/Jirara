@@ -1,20 +1,30 @@
 PODS:
   - Alamofire (4.7.2)
+  - Charts (3.1.1):
+    - Charts/Core (= 3.1.1)
+  - Charts/Core (3.1.1)
+  - Kingfisher (4.8.0)
   - Mappable (1.2.1)
 
 DEPENDENCIES:
   - Alamofire
+  - Charts
+  - Kingfisher
   - Mappable
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
+    - Charts
+    - Kingfisher
     - Mappable
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
+  Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
   Mappable: 3b0ee951fae981fe387a5bbfb835aa4644f3f8b7
 
-PODFILE CHECKSUM: 02a55e1a9dbcdb06789e809b4a1ec8a95d7da26a
+PODFILE CHECKSUM: 019d9c211b20405e34f6ee0a52646c0e7ddb381f
 
 COCOAPODS: 1.5.0

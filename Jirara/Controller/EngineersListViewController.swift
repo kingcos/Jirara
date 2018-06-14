@@ -7,13 +7,13 @@
 //
 
 import Cocoa
+import Kingfisher
 
 class EngineersListViewController: NSViewController {
 
     @IBOutlet weak var listOutlineView: NSOutlineView!
     
     var viewModel = MainViewModel()
-    var str = ["1", "2", "3"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +23,18 @@ class EngineersListViewController: NSViewController {
         listOutlineView.delegate = self
         
         listOutlineView.expandItem(listOutlineView.item(atRow: 0))
+        
+        viewModel.fetchEngineers {
+            self.listOutlineView.reloadData()
+        }
     }
     
     func isHeader(_ item: Any) -> Bool {
-        return (item as! String) == "ENGINEERS"
+        if let header = item as? String {
+            return header == "ENGINEERS"
+        } else {
+            return false
+        }
     }
     
 }
@@ -37,7 +45,7 @@ extension EngineersListViewController: NSOutlineViewDataSource {
                      numberOfChildrenOfItem item: Any?) -> Int {
         guard item != nil else { return 1 }
         
-        return str.count
+        return viewModel.engneers.count
     }
     
     func outlineView(_ outlineView: NSOutlineView,
@@ -50,7 +58,7 @@ extension EngineersListViewController: NSOutlineViewDataSource {
                      ofItem item: Any?) -> Any {
         guard item != nil else { return "ENGINEERS" }
         
-        return str[index]
+        return viewModel.engneers[index]
     }
     
     func outlineView(_ outlineView: NSOutlineView,
@@ -68,7 +76,18 @@ extension EngineersListViewController: NSOutlineViewDelegate {
             return outlineView.makeView(withIdentifier: .init(rawValue: "EngineerHeaderCell"), owner: self)
         } else {
             let view = outlineView.makeView(withIdentifier: .init(rawValue: "EngineerItemCell"), owner: self) as? EngineerCellView
-            view?.nameTextField.stringValue = (item as? String) ?? ""
+            guard let engineer = item as? Engineer else {
+                fatalError()
+            }
+            
+            let modifier = AnyModifier { urlRequest in
+                var request = urlRequest
+                request.setValue(UserDefaults.get(by: .userAuth), forHTTPHeaderField: "Authorization")
+                return request
+            }
+            
+            view?.nameTextField.stringValue = engineer.displayName
+            view?.avatarImageView.kf.setImage(with: URL(string: engineer.avatarURL), options: [.requestModifier(modifier)])
             
             return view
         }
@@ -94,6 +113,11 @@ extension EngineersListViewController: NSOutlineViewDelegate {
     }
     
     func outlineViewSelectionDidChange(_ notification: Notification) {
-        print(str[listOutlineView.selectedRow - 1])
+//        let engineer = viewModel.engneers[listOutlineView.selectedRow - 1]
+        let selectedIndex = listOutlineView.selectedRow - 1
+        
+        NotificationCenter.default.post(name: .SelectedEngineer,
+                                        object: self,
+                                        userInfo: [Constants.NotificationInfoKey.engineer : selectedIndex])
     }
 }

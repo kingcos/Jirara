@@ -13,7 +13,8 @@ enum JiraAPI: String {
     case prefix = "https://"
     // 个人
     case myself = "/rest/api/2/myself"
-    case rapidViews = "/rest/greenhopper/1.0/rapidview"
-    case sprints = "/rest/greenhopper/1.0/sprintquery/"
-    case sprintReport = "/rest/greenhopper/1.0/rapid/charts/sprintreport?rapidViewId=80&sprintId=1210"
+    case rapidView = "/rest/greenhopper/1.0/rapidview"
+    case sprintQuery = "/rest/greenhopper/1.0/sprintquery/"
+    case sprintReport = "/rest/greenhopper/1.0/rapid/charts/sprintreport"
+    case userAvatar = "/secure/useravatar?ownerId="
 }

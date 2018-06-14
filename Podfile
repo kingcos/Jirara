@@ -11,5 +11,10 @@ target 'Jirara' do
   
   # JSON Parser
   pod 'Mappable'
+  
+  # Images Cache
+  pod 'Kingfisher'
 
+  # Charts Lib
+  pod 'Charts'
 end

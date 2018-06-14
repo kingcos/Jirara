@@ -28,6 +28,8 @@ class LoginViewController: NSViewController {
         jiraDomainTextField.delegate = self
         usernameTextField.delegate = self
         passwordTextField.delegate = self
+        
+        clickOnLoginButton(loginButton)
     }
     
     func reloadUI() {
@@ -86,19 +88,15 @@ extension LoginViewController {
                     case 200:
                         guard let data = response.data,
                             let engineer = try? Engineer(JSONData: data) else {
-                                fatalError("myself API may be broken.")
+                                fatalError("\(url) may be broken.")
                         }
                         
                         UserDefaults.save(engineer.emailAddress, for: .userEmail)
                         
                         let storyboard = NSStoryboard(name: .init("Main"), bundle: nil)
                         let mainSplitWindowController = storyboard.instantiateController(withIdentifier: .init("MainWindowController")) as? NSWindowController
-                        
-                        DispatchQueue.main.async {
-                            mainSplitWindowController?.showWindow(self)
-                            self.view.window?.close()
-                        }
-                        
+                        mainSplitWindowController?.showWindow(self)
+                        self.view.window?.close()
                     case 401:
                         self.warningTextField.isHidden = false
                         self.warningTextField.stringValue = "[Error] You'd better to check your username or password!"

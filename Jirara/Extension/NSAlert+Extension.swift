@@ -22,3 +22,7 @@ extension NSAlert {
         alert.runModal()
     }
 }
+
+extension NSNotification.Name {
+    public static let SelectedEngineer = NSNotification.Name.init("SelectedEngineer")
+}
