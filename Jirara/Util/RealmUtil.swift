@@ -1,5 +1,5 @@
 //
-//  DataUtil.swift
+//  RealmUtil.swift
 //  Jirara
 //
 //  Created by kingcos on 2018/6/15.
@@ -10,9 +10,9 @@ import Alamofire
 import Foundation
 import RealmSwift
 
-class DataUtil {
+class RealmUtil {
     
-    func fetchEngineers(_ completion: @escaping () -> Void) {
+    class func saveEngineers(_ completion: @escaping () -> Void) {
         var engineers = [Engineer]()
         
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.sprintReport.rawValue
@@ -55,11 +55,46 @@ class DataUtil {
                                     engineers.sort { $0.name < $1.name }
                                     
                                     // 完成检索
-                                    completion()
+//                                    completion()
                                     
                                     // 存储 Realm
+                                    let realm = try! Realm()
+//                                    let folderPath = realm.configuration.fileURL!.deletingLastPathComponent().path
                                     
+                                    let engineersRealm = engineers.map { engineer -> EngineerRealm in
+                                        let eng = EngineerRealm()
+                                        eng.name = engineer.name
+                                        eng.emailAddress = engineer.emailAddress
+                                        eng.avatarURL = engineer.avatarURL
+                                        eng.displayName = engineer.displayName
+                                        
+                                        let issues = (sprintReport.completedIssues + sprintReport.incompletedIssues).map { issue -> IssueRealm? in
+                                            if issue.assignee == eng.name {
+                                                let iss = IssueRealm()
+                                                iss.id = issue.id
+                                                iss.summary = issue.summary
+                                                iss.priorityName = issue.priorityName
+                                                iss.assignee = issue.assignee
+                                                iss.statusName = issue.statusName
+                                                
+                                                return iss
+                                            } else {
+                                                return nil
+                                            }
+                                        }
+                                        
+                                        _ = issues.map { issue in
+                                            if let iss = issue {
+                                                eng.issues.append(iss)
+                                            }
+                                        }
+                                        
+                                        return eng
+                                    }
                                     
+                                    try! realm.write {
+                                        realm.add(engineersRealm, update: true)
+                                    }
                                 }
                             case .failure(let error):
                                 print((error as NSError).description)
@@ -72,7 +107,9 @@ class DataUtil {
         }
     }
     
-    
+    class func read() {
+        
+    }
     
     
 }

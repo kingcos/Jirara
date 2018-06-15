@@ -27,6 +27,10 @@ class DetailsViewController: NSViewController {
             self.updateSummaryChart()
             self.issuesCollectionView.reloadData()
         }
+        
+        RealmUtil.saveEngineers {
+            print("----")
+        }
     }
 }
 

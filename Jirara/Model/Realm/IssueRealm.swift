@@ -15,4 +15,8 @@ class IssueRealm: Object {
     @objc dynamic var priorityName = ""
     @objc dynamic var assignee = ""
     @objc dynamic var statusName = ""
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
 }
