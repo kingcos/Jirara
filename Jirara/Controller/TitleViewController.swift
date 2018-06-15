@@ -16,6 +16,6 @@ class TitleViewController: NSViewController {
     }
     
     @IBAction func clickOnSendEmailButton(_ sender: NSButton) {
-        MailUtil.send([], to: [])
+        
     }
 }

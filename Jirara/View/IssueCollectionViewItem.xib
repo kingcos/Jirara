@@ -22,17 +22,18 @@
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xHv-xA-cCT">
                             <rect key="frame" x="3" y="7" width="37" height="17"/>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="8tm-Pt-TJN">
+                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Label" id="8tm-Pt-TJN">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
                     </subviews>
                     <constraints>
                         <constraint firstItem="xHv-xA-cCT" firstAttribute="centerY" secondItem="RZU-r6-3Nd" secondAttribute="centerY" id="HNX-P4-vlT"/>
                         <constraint firstItem="xHv-xA-cCT" firstAttribute="leading" secondItem="RZU-r6-3Nd" secondAttribute="leading" constant="5" id="cj1-hY-8hf"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xHv-xA-cCT" secondAttribute="trailing" constant="5" id="kLN-Zp-aaa"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xHv-xA-cCT" secondAttribute="trailing" constant="20" symbolic="YES" id="kLN-Zp-aaa"/>
+                        <constraint firstAttribute="width" constant="352" id="lGR-Rx-TTG"/>
                     </constraints>
                 </visualEffectView>
             </subviews>
