@@ -29,6 +29,9 @@
 		847C8C7120D2AA26000C2854 /* MailUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C7020D2AA26000C2854 /* MailUtil.swift */; };
 		847C8C7320D2ACFA000C2854 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C7220D2ACFA000C2854 /* TitleViewController.swift */; };
 		847C8C7620D2B8D2000C2854 /* NSView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */; };
+		847CA69E20D39276000C2854 /* EngineerRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CA69D20D39276000C2854 /* EngineerRealm.swift */; };
+		847CA6A020D3932E000C2854 /* IssueRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CA69F20D3932E000C2854 /* IssueRealm.swift */; };
+		847CA6A220D393F7000C2854 /* SprintReportRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CA6A120D393F7000C2854 /* SprintReportRealm.swift */; };
 		849478B520D0C95600FC9853 /* EngineersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478B420D0C95600FC9853 /* EngineersListViewController.swift */; };
 		849478B720D0CC3E00FC9853 /* EngineerCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478B620D0CC3E00FC9853 /* EngineerCellView.swift */; };
 		849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478BA20D0D0A400FC9853 /* Engineer.swift */; };
@@ -68,6 +71,9 @@
 		847C8C7020D2AA26000C2854 /* MailUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailUtil.swift; sourceTree = "<group>"; };
 		847C8C7220D2ACFA000C2854 /* TitleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extension.swift"; sourceTree = "<group>"; };
+		847CA69D20D39276000C2854 /* EngineerRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineerRealm.swift; sourceTree = "<group>"; };
+		847CA69F20D3932E000C2854 /* IssueRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueRealm.swift; sourceTree = "<group>"; };
+		847CA6A120D393F7000C2854 /* SprintReportRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintReportRealm.swift; sourceTree = "<group>"; };
 		849478B420D0C95600FC9853 /* EngineersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineersListViewController.swift; sourceTree = "<group>"; };
 		849478B620D0CC3E00FC9853 /* EngineerCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineerCellView.swift; sourceTree = "<group>"; };
 		849478BA20D0D0A400FC9853 /* Engineer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engineer.swift; sourceTree = "<group>"; };
@@ -168,6 +174,16 @@
 			path = Window;
 			sourceTree = "<group>";
 		};
+		847CA69C20D390B1000C2854 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				847CA69D20D39276000C2854 /* EngineerRealm.swift */,
+				847CA69F20D3932E000C2854 /* IssueRealm.swift */,
+				847CA6A120D393F7000C2854 /* SprintReportRealm.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 		849478B820D0CC4200FC9853 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +200,7 @@
 		849478B920D0D09700FC9853 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				847CA69C20D390B1000C2854 /* Realm */,
 				849478BA20D0D0A400FC9853 /* Engineer.swift */,
 				8426D4E020D194D70007F180 /* SprintQuery.swift */,
 				8426D4E420D197E60007F180 /* RapidViews.swift */,
@@ -304,15 +321,21 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Jirara/Pods-Jirara-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/ChartsRealm/ChartsRealm.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Mappable/Mappable.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChartsRealm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mappable.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -344,6 +367,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				847CA6A220D393F7000C2854 /* SprintReportRealm.swift in Sources */,
 				849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */,
 				843973D020CFF64A00B14AB7 /* ViewController.swift in Sources */,
 				847C8C7120D2AA26000C2854 /* MailUtil.swift in Sources */,
@@ -357,6 +381,7 @@
 				849478CC20D152DE00FC9853 /* NSAlert+Extension.swift in Sources */,
 				8426D4E720D1A2670007F180 /* SprintReport.swift in Sources */,
 				847C8C2320D2702F000C2854 /* IssueCollectionViewItem.swift in Sources */,
+				847CA6A020D3932E000C2854 /* IssueRealm.swift in Sources */,
 				8426D4DF20D18F350007F180 /* MainViewModel.swift in Sources */,
 				849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */,
 				847C8C2820D29A76000C2854 /* IssuesStatusHeaderView.swift in Sources */,
@@ -364,6 +389,7 @@
 				843973DE20D0149800B14AB7 /* MainWindowController.swift in Sources */,
 				849478B520D0C95600FC9853 /* EngineersListViewController.swift in Sources */,
 				8426D4EB20D213300007F180 /* DetailsViewController.swift in Sources */,
+				847CA69E20D39276000C2854 /* EngineerRealm.swift in Sources */,
 				8426D4E120D194D70007F180 /* SprintQuery.swift in Sources */,
 				847C8C1E20D25338000C2854 /* Constants.swift in Sources */,
 				843973EA20D024EC00B14AB7 /* LoginViewController.swift in Sources */,

@@ -17,4 +17,8 @@ target 'Jirara' do
 
   # Charts Lib
   pod 'Charts'
+  pod 'ChartsRealm'
+  
+  # Persistence
+  pod 'Realm'
 end
