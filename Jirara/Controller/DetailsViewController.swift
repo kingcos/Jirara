@@ -82,7 +82,7 @@ extension DetailsViewController {
                 guard let userInfo = notification.userInfo,
                     let selectedIndex = userInfo[Constants.NotificationInfoKey.engineer] as? Int else { return }
                 if selectedIndex >= 0 {
-                    let engineerName = self.viewModel.engneers[selectedIndex].name
+                    let engineerName = self.viewModel.engineers[selectedIndex].name
                     let engineerCompletedIssues = (self.viewModel.sprintReport?.completedIssues ?? []).filter {
                         $0.assignee == engineerName
                     }

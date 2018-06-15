@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 class MainViewModel {
-    var engneers: [Engineer] = []
+    var engineers: [Engineer] = []
     var sprintReport: SprintReport?
     
     func rapidView() {
@@ -88,7 +88,7 @@ class MainViewModel {
                     }
                     let engineerUsernames = Array(Set((sprintReport.completedIssues + sprintReport.incompletedIssues).map { $0.assignee }))
                     
-                    if engineerUsernames.count == self.engneers.count {
+                    if engineerUsernames.count == self.engineers.count {
                         completion()
                         return
                     }
@@ -105,10 +105,10 @@ class MainViewModel {
                                     return
                                 }
                                 
-                                self.engneers.append(engineer)
+                                self.engineers.append(engineer)
                                 
-                                if self.engneers.count == engineerUsernames.count {
-                                    self.engneers.sort { $0.name < $1.name }
+                                if self.engineers.count == engineerUsernames.count {
+                                    self.engineers.sort { $0.name < $1.name }
                                     completion()
                                 }
                             case .failure(let error):

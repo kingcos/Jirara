@@ -45,7 +45,7 @@ extension EngineersListViewController: NSOutlineViewDataSource {
                      numberOfChildrenOfItem item: Any?) -> Int {
         guard item != nil else { return 1 }
         
-        return viewModel.engneers.count
+        return viewModel.engineers.count
     }
     
     func outlineView(_ outlineView: NSOutlineView,
@@ -58,7 +58,7 @@ extension EngineersListViewController: NSOutlineViewDataSource {
                      ofItem item: Any?) -> Any {
         guard item != nil else { return "ENGINEERS" }
         
-        return viewModel.engneers[index]
+        return viewModel.engineers[index]
     }
     
     func outlineView(_ outlineView: NSOutlineView,

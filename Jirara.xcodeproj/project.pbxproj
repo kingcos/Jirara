@@ -32,6 +32,7 @@
 		847CA69E20D39276000C2854 /* EngineerRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CA69D20D39276000C2854 /* EngineerRealm.swift */; };
 		847CA6A020D3932E000C2854 /* IssueRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CA69F20D3932E000C2854 /* IssueRealm.swift */; };
 		847CA6A220D393F7000C2854 /* SprintReportRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CA6A120D393F7000C2854 /* SprintReportRealm.swift */; };
+		847CA6A420D396C5000C2854 /* DataUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CA6A320D396C5000C2854 /* DataUtil.swift */; };
 		849478B520D0C95600FC9853 /* EngineersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478B420D0C95600FC9853 /* EngineersListViewController.swift */; };
 		849478B720D0CC3E00FC9853 /* EngineerCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478B620D0CC3E00FC9853 /* EngineerCellView.swift */; };
 		849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478BA20D0D0A400FC9853 /* Engineer.swift */; };
@@ -74,6 +75,7 @@
 		847CA69D20D39276000C2854 /* EngineerRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineerRealm.swift; sourceTree = "<group>"; };
 		847CA69F20D3932E000C2854 /* IssueRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueRealm.swift; sourceTree = "<group>"; };
 		847CA6A120D393F7000C2854 /* SprintReportRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintReportRealm.swift; sourceTree = "<group>"; };
+		847CA6A320D396C5000C2854 /* DataUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUtil.swift; sourceTree = "<group>"; };
 		849478B420D0C95600FC9853 /* EngineersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineersListViewController.swift; sourceTree = "<group>"; };
 		849478B620D0CC3E00FC9853 /* EngineerCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineerCellView.swift; sourceTree = "<group>"; };
 		849478BA20D0D0A400FC9853 /* Engineer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engineer.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				849478C720D13FFC00FC9853 /* JiraAPI.swift */,
 				847C8C1D20D25338000C2854 /* Constants.swift */,
 				847C8C7020D2AA26000C2854 /* MailUtil.swift */,
+				847CA6A320D396C5000C2854 /* DataUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */,
 				847C8C2820D29A76000C2854 /* IssuesStatusHeaderView.swift in Sources */,
 				847C8C2020D2630F000C2854 /* IssuesTableHeaderView.swift in Sources */,
+				847CA6A420D396C5000C2854 /* DataUtil.swift in Sources */,
 				843973DE20D0149800B14AB7 /* MainWindowController.swift in Sources */,
 				849478B520D0C95600FC9853 /* EngineersListViewController.swift in Sources */,
 				8426D4EB20D213300007F180 /* DetailsViewController.swift in Sources */,

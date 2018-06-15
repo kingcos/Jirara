@@ -15,6 +15,5 @@ class EngineerRealm: Object {
     @objc dynamic var avatarURL = ""
     @objc dynamic var displayName = ""
     
-    let completedIssues = List<IssueRealm>()
-    let incompletedIssues = List<IssueRealm>()
+    let issues = List<IssueRealm>()
 }

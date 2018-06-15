@@ -13,6 +13,5 @@ class SprintReportRealm: Object {
     @objc dynamic var startDate = ""
     @objc dynamic var endDate = ""
     
-    let compeletedIssues = List<IssueRealm>()
-    let incompletedIssues = List<IssueRealm>()
+    let issues = List<IssueRealm>()
 }
