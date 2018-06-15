@@ -21,6 +21,8 @@ class DetailsViewController: NSViewController {
         // Do view setup here.
         setupUI()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(selectedEngineer(_:)), name: .SelectedEngineer, object: nil)
+        
         viewModel.fetchSprintReport {
             self.updateSummaryChart()
             self.issuesCollectionView.reloadData()
@@ -72,6 +74,31 @@ extension DetailsViewController {
     func setupSummaryChartView() {
         summaryChartView.holeColor = .clear
         summaryChartView.chartDescription = nil
+    }
+    
+    @objc func selectedEngineer(_ notification: NSNotification) {
+        viewModel.fetchEngineers {
+            self.viewModel.fetchSprintReport {
+                guard let userInfo = notification.userInfo,
+                    let selectedIndex = userInfo[Constants.NotificationInfoKey.engineer] as? Int else { return }
+                if selectedIndex >= 0 {
+                    let engineerName = self.viewModel.engneers[selectedIndex].name
+                    let engineerCompletedIssues = (self.viewModel.sprintReport?.completedIssues ?? []).filter {
+                        $0.assignee == engineerName
+                    }
+                    
+                    let engineerIncompletedIssus = (self.viewModel.sprintReport?.incompletedIssues ?? []).filter {
+                        $0.assignee == engineerName
+                    }
+                    
+                    self.viewModel.sprintReport?.completedIssues = engineerCompletedIssues
+                    self.viewModel.sprintReport?.incompletedIssues = engineerIncompletedIssus
+                }
+                
+                self.updateSummaryChart()
+                self.issuesCollectionView.reloadData()
+            }
+        }
     }
 }
 

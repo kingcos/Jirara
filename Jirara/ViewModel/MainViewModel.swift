@@ -87,6 +87,12 @@ class MainViewModel {
                         fatalError("\(url) may be broken.")
                     }
                     let engineerUsernames = Array(Set((sprintReport.completedIssues + sprintReport.incompletedIssues).map { $0.assignee }))
+                    
+                    if engineerUsernames.count == self.engneers.count {
+                        completion()
+                        return
+                    }
+                    
                     let requests = engineerUsernames.map {
                         Alamofire.request("https://jira.mobike.com/rest/api/2/user?username=\($0)", headers: headers)
                     }
