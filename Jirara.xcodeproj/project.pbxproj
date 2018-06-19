@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		840AB50220D8AADD0038D329 /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AB50120D8AADD0038D329 /* RealmHelper.swift */; };
+		840AB50420D8B0100038D329 /* Realmable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AB50320D8B0100038D329 /* Realmable.swift */; };
 		8426D4DF20D18F350007F180 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4DE20D18F350007F180 /* MainViewModel.swift */; };
 		8426D4E120D194D70007F180 /* SprintQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E020D194D70007F180 /* SprintQuery.swift */; };
 		8426D4E520D197E60007F180 /* RapidViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E420D197E60007F180 /* RapidViews.swift */; };
@@ -47,6 +49,8 @@
 
 /* Begin PBXFileReference section */
 		5BF3BB22542F69B284DE1644 /* Pods-Jirara.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jirara.release.xcconfig"; path = "Pods/Target Support Files/Pods-Jirara/Pods-Jirara.release.xcconfig"; sourceTree = "<group>"; };
+		840AB50120D8AADD0038D329 /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
+		840AB50320D8B0100038D329 /* Realmable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realmable.swift; sourceTree = "<group>"; };
 		8426D4DE20D18F350007F180 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		8426D4E020D194D70007F180 /* SprintQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintQuery.swift; sourceTree = "<group>"; };
 		8426D4E420D197E60007F180 /* RapidViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidViews.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 				847CA69D20D39276000C2854 /* EngineerRealm.swift */,
 				847CA69F20D3932E000C2854 /* IssueRealm.swift */,
 				847CA6A120D393F7000C2854 /* SprintReportRealm.swift */,
+				840AB50320D8B0100038D329 /* Realmable.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -219,6 +224,7 @@
 				847C8C1D20D25338000C2854 /* Constants.swift */,
 				847C8C7020D2AA26000C2854 /* MailUtil.swift */,
 				847CA6A320D396C5000C2854 /* RealmUtil.swift */,
+				840AB50120D8AADD0038D329 /* RealmHelper.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -385,6 +391,7 @@
 				8426D4E720D1A2670007F180 /* SprintReport.swift in Sources */,
 				847C8C2320D2702F000C2854 /* IssueCollectionViewItem.swift in Sources */,
 				847CA6A020D3932E000C2854 /* IssueRealm.swift in Sources */,
+				840AB50420D8B0100038D329 /* Realmable.swift in Sources */,
 				8426D4DF20D18F350007F180 /* MainViewModel.swift in Sources */,
 				849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */,
 				847C8C2820D29A76000C2854 /* IssuesStatusHeaderView.swift in Sources */,
@@ -394,6 +401,7 @@
 				849478B520D0C95600FC9853 /* EngineersListViewController.swift in Sources */,
 				8426D4EB20D213300007F180 /* DetailsViewController.swift in Sources */,
 				847CA69E20D39276000C2854 /* EngineerRealm.swift in Sources */,
+				840AB50220D8AADD0038D329 /* RealmHelper.swift in Sources */,
 				8426D4E120D194D70007F180 /* SprintQuery.swift in Sources */,
 				847C8C1E20D25338000C2854 /* Constants.swift in Sources */,
 				843973EA20D024EC00B14AB7 /* LoginViewController.swift in Sources */,

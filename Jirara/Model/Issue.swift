@@ -27,3 +27,16 @@ struct Issue: Mappable {
         statusName = try map.from("statusName")
     }
 }
+
+extension Issue: Realmable {
+    func toRealmObject() -> IssueRealm {
+        let object = IssueRealm()
+        object.id = id
+        object.summary = summary
+        object.priorityName = priorityName
+        object.assignee = assignee
+        object.statusName = statusName
+        
+        return object
+    }
+}

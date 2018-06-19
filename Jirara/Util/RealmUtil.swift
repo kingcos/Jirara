@@ -8,7 +8,6 @@
 
 import Alamofire
 import Foundation
-import RealmSwift
 
 class RealmUtil {
     
@@ -54,47 +53,16 @@ class RealmUtil {
                                 if engineers.count == engineerUsernames.count {
                                     engineers.sort { $0.name < $1.name }
                                     
-                                    // 完成检索
-//                                    completion()
-                                    
-                                    // 存储 Realm
-                                    let realm = try! Realm()
-//                                    let folderPath = realm.configuration.fileURL!.deletingLastPathComponent().path
-                                    
                                     let engineersRealm = engineers.map { engineer -> EngineerRealm in
-                                        let eng = EngineerRealm()
-                                        eng.name = engineer.name
-                                        eng.emailAddress = engineer.emailAddress
-                                        eng.avatarURL = engineer.avatarURL
-                                        eng.displayName = engineer.displayName
-                                        
-                                        let issues = (sprintReport.completedIssues + sprintReport.incompletedIssues).map { issue -> IssueRealm? in
-                                            if issue.assignee == eng.name {
-                                                let iss = IssueRealm()
-                                                iss.id = issue.id
-                                                iss.summary = issue.summary
-                                                iss.priorityName = issue.priorityName
-                                                iss.assignee = issue.assignee
-                                                iss.statusName = issue.statusName
-                                                
-                                                return iss
-                                            } else {
-                                                return nil
-                                            }
+                                        var engineer = engineer
+                                        let allIssues = (sprintReport.completedIssues + sprintReport.incompletedIssues).filter { issue in
+                                            issue.assignee == engineer.name
                                         }
                                         
-                                        _ = issues.map { issue in
-                                            if let iss = issue {
-                                                eng.issues.append(iss)
-                                            }
-                                        }
-                                        
-                                        return eng
+                                        engineer.issues = allIssues
+                                        return engineer.toRealmObject()
                                     }
-                                    
-                                    try! realm.write {
-                                        realm.add(engineersRealm, update: true)
-                                    }
+                                    EngineerRealmDAO.add(engineersRealm)
                                 }
                             case .failure(let error):
                                 print((error as NSError).description)
@@ -107,9 +75,9 @@ class RealmUtil {
         }
     }
     
-    class func read() {
-        
-    }
+//    class func search(_ object: Object) {
+//
+//    }
     
     
 }

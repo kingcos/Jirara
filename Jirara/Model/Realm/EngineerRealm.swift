@@ -21,3 +21,11 @@ class EngineerRealm: Object {
         return "name"
     }
 }
+
+class EngineerRealmDAO {
+    static let dao = RealmHelper<EngineerRealm>()
+    
+    static func add(_ objects: [EngineerRealm]) {
+        dao.add(objects)
+    }
+}

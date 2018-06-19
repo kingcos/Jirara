@@ -8,6 +8,7 @@
 
 import Foundation
 import Mappable
+import RealmSwift
 
 /**
  API: https://jira.mobike.com/rest/api/2/user?username=i-maiming
@@ -17,11 +18,27 @@ struct Engineer: Mappable {
     var emailAddress: String
     var avatarURL: String
     var displayName: String
+    var issues: [Issue] = []
     
     init(map: Mapper) throws {
         name = try map.from("name")
         emailAddress = try map.from("emailAddress")
         avatarURL = try map.from("avatarUrls.48x48")
         displayName = try map.from("displayName")
+    }
+}
+
+extension Engineer: Realmable {
+    func toRealmObject() -> EngineerRealm {
+        let object = EngineerRealm()
+        object.name = name
+        object.emailAddress = emailAddress
+        object.avatarURL = avatarURL
+        object.displayName = displayName
+        
+        let allIssues = issues.map { $0.toRealmObject() }
+        object.issues.append(objectsIn: allIssues)
+        
+        return object
     }
 }
