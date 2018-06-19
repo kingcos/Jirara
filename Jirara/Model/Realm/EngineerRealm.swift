@@ -28,4 +28,8 @@ class EngineerRealmDAO {
     static func add(_ objects: [EngineerRealm]) {
         dao.add(objects)
     }
+    
+    static func findAll() -> [EngineerRealm] {
+        return dao.findAll().map { EngineerRealm(value: $0) }
+    }
 }

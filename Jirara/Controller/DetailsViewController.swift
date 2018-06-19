@@ -15,43 +15,43 @@ class DetailsViewController: NSViewController {
     @IBOutlet weak var issuesCollectionView: NSCollectionView!
     
     var viewModel = MainViewModel()
+    var currentEngineerName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
         setupUI()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(selectedEngineer(_:)), name: .SelectedEngineer, object: nil)
-        
-        viewModel.fetchSprintReport {
-            self.updateSummaryChart()
-            self.issuesCollectionView.reloadData()
-        }
-        
-        RealmUtil.saveEngineers {
-            print("----")
-        }
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(selectedEngineer(_:)),
+                                               name: .SelectedEngineer,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updatedRemoteData),
+                                               name: .UpdatedRemoteData,
+                                               object: nil)
     }
 }
 
 extension DetailsViewController {
-    func updateSummaryChart () {
-        let completeIssuesCount = viewModel.sprintReport?.completedIssues.count ?? 0
-        let completeIssueStatus = viewModel.sprintReport?.completedIssues.first?.statusName
-        let completedIssuesEntry = PieChartDataEntry(value: Double(completeIssuesCount),
-                                                     label: completeIssueStatus)
+    func updateSummaryChart() {
+        let todoIssuesCount = viewModel.issues(currentEngineerName).filter { $0.statusName == "Start" }.count
+        let doingIssuesCount = viewModel.issues(currentEngineerName).filter { $0.statusName != "Start" && $0.statusName != "Done" }.count
+        let doneIssuesCount = viewModel.issues(currentEngineerName).filter { $0.statusName == "Done" }.count
         
-        let incompleteIssuesCount = viewModel.sprintReport?.incompletedIssues.count ?? 0
-        let incompleteIssueStatus = "未完成"
-        let incompletedIssuesEntry = PieChartDataEntry(value: Double(incompleteIssuesCount),
-                                                       label: incompleteIssueStatus)
+        let todoIssuesEntry = PieChartDataEntry(value: Double(todoIssuesCount),
+                                                label: "To Do")
+        let doingIssuesEntry = PieChartDataEntry(value: Double(doingIssuesCount),
+                                                label: "Doing")
+        let doneIssuesEntry = PieChartDataEntry(value: Double(doneIssuesCount),
+                                                label: "Done")
         
-        let dataSet = PieChartDataSet(values: [completedIssuesEntry, incompletedIssuesEntry],
+        let dataSet = PieChartDataSet(values: [todoIssuesEntry, doingIssuesEntry, doneIssuesEntry],
                                       label: nil)
         
         dataSet.colors = ChartColorTemplates.joyful()
         summaryChartView.data = PieChartData(dataSet: dataSet)
-        summaryChartView.centerAttributedText = NSAttributedString(string: "iOS Scrum",
+        summaryChartView.centerAttributedText = NSAttributedString(string: "Mobike iOS Scrum",
                                                                    attributes: [.foregroundColor : NSColor.highlightColor])
     }
 }
@@ -81,43 +81,31 @@ extension DetailsViewController {
     }
     
     @objc func selectedEngineer(_ notification: NSNotification) {
-        viewModel.fetchEngineers {
-            self.viewModel.fetchSprintReport {
-                guard let userInfo = notification.userInfo,
-                    let selectedIndex = userInfo[Constants.NotificationInfoKey.engineer] as? Int else { return }
-                if selectedIndex >= 0 {
-                    let engineerName = self.viewModel.engineers[selectedIndex].name
-                    let engineerCompletedIssues = (self.viewModel.sprintReport?.completedIssues ?? []).filter {
-                        $0.assignee == engineerName
-                    }
-                    
-                    let engineerIncompletedIssus = (self.viewModel.sprintReport?.incompletedIssues ?? []).filter {
-                        $0.assignee == engineerName
-                    }
-                    
-                    self.viewModel.sprintReport?.completedIssues = engineerCompletedIssues
-                    self.viewModel.sprintReport?.incompletedIssues = engineerIncompletedIssus
-                }
-                
-                self.updateSummaryChart()
-                self.issuesCollectionView.reloadData()
-            }
+        guard let userInfo = notification.userInfo,
+            let selectedIndex = userInfo[Constants.NotificationInfoKey.engineer] as? Int else { return }
+        if selectedIndex >= 0 {
+            currentEngineerName = viewModel.engineers[selectedIndex].name
+        } else {
+            currentEngineerName = nil
         }
+        updatedRemoteData()
     }
 }
 
 extension DetailsViewController: NSCollectionViewDataSource {
     func numberOfSections(in collectionView: NSCollectionView) -> Int {
-        return 2
+        return 3
     }
     
     func collectionView(_ collectionView: NSCollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return (viewModel.sprintReport?.completedIssues ?? []).count
+            return viewModel.issues(currentEngineerName).filter { $0.statusName == "Start" }.count
         case 1:
-            return (viewModel.sprintReport?.incompletedIssues ?? []).count
+            return viewModel.issues(currentEngineerName).filter { $0.statusName != "Start" && $0.statusName != "Done" }.count
+        case 2:
+            return viewModel.issues(currentEngineerName).filter { $0.statusName == "Done" }.count
         default:
             return 0
         }
@@ -130,9 +118,11 @@ extension DetailsViewController: NSCollectionViewDataSource {
         
         switch indexPath.section {
         case 0:
-            issueCollectionViewItem.issue = (viewModel.sprintReport?.completedIssues ?? [])[indexPath.item]
+            issueCollectionViewItem.issue = viewModel.issues(currentEngineerName).filter { $0.statusName == "Start" }[indexPath.item]
         case 1:
-            issueCollectionViewItem.issue = (viewModel.sprintReport?.incompletedIssues ?? [])[indexPath.item]
+            issueCollectionViewItem.issue = viewModel.issues(currentEngineerName).filter { $0.statusName != "Start" && $0.statusName != "Done" }[indexPath.item]
+        case 2:
+            issueCollectionViewItem.issue = viewModel.issues(currentEngineerName).filter { $0.statusName == "Done" }[indexPath.item]
         default:
             break
         }
@@ -149,9 +139,11 @@ extension DetailsViewController: NSCollectionViewDataSource {
                                                             for: indexPath) as? IssuesStatusHeaderView {
                 switch indexPath.section {
                 case 0:
-                    view.status = "已完成"
+                    view.status = "To Do"
                 case 1:
-                    view.status = "进行中"
+                    view.status = "Doing"
+                case 2:
+                    view.status = "Done"
                 default:
                     break
                 }
@@ -175,5 +167,12 @@ extension DetailsViewController: NSCollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: NSCollectionViewLayout,
                         referenceSizeForFooterInSection section: Int) -> NSSize {
         return NSSize.zero
+    }
+}
+
+extension DetailsViewController {
+    @objc func updatedRemoteData() {
+        updateSummaryChart()
+        issuesCollectionView.reloadData()
     }
 }

@@ -12,7 +12,7 @@ class IssueCollectionViewItem: NSCollectionViewItem {
 
     @IBOutlet weak var summaryTextField: NSTextField!
     
-    var issue: Issue? {
+    var issue: IssueRealm? {
         didSet {
             guard let issue = issue else { return }
             summaryTextField.stringValue = issue.summary

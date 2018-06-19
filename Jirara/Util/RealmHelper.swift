@@ -29,4 +29,8 @@ class RealmHelper <T: Object> {
             print((error as NSError).description)
         }
     }
+    
+    func findAll() -> Results<T> {
+        return realm.objects(T.self)
+    }
 }

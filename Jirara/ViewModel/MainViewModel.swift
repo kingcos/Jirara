@@ -10,10 +10,44 @@ import Foundation
 import Alamofire
 
 class MainViewModel {
-    var engineers: [Engineer] = []
-    var sprintReport: SprintReport?
+    var engineers: [EngineerRealm] {
+        get {
+            return EngineerRealmDAO.findAll()
+        }
+    }
     
-    func rapidView() {
+    var sprintReport: SprintReportRealm {
+        get {
+            return SprintReportRealmDAO.findLatest() ?? SprintReportRealm()
+        }
+    }
+    
+    func issues(_ assignee: String?) -> [IssueRealm] {
+        let issues: [IssueRealm] = sprintReport.issues.map { $0 }
+        
+        if let assignee = assignee {
+            return issues.filter { $0.assignee == assignee }
+        }
+        
+        return issues
+    }
+}
+
+extension MainViewModel {
+    func reload(_ rapidViewName: String = "Mobike iOS Scrum") {
+        fetchRapidView(rapidViewName) { rapidViewID in
+            self.fetchSprintQuery(rapidViewID) { sprintID in
+                self.fetchSprintReport(rapidViewID, sprintID) { engineerNames in
+                    self.fetchEngineers(engineerNames) {
+                        // Notify
+                        NotificationCenter.default.post(name: .UpdatedRemoteData, object: nil)
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchRapidView(_ name: String, completion: @escaping (Int) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.rapidView.rawValue
         let headers = ["Authorization" : UserDefaults.get(by: .userAuth)]
         
@@ -22,9 +56,17 @@ class MainViewModel {
                 switch response.result {
                 case .success(let data):
                     guard let rapidViews = try? RapidViews(JSONData: data) else {
-                            fatalError("\(url) may be broken.")
+                        fatalError("\(url) may be broken.")
                     }
-                    print(rapidViews)
+                    
+                    // print(rapidViews)
+                    
+                    for view in rapidViews.views {
+                        // "Mobike iOS Scrum"
+                        if view.name == name {
+                            completion(view.id)
+                        }
+                    }
                     
                 case .failure(let error):
                     print((error as NSError).description)
@@ -32,9 +74,8 @@ class MainViewModel {
         }
     }
     
-    func sprintQuery() {
-        let id = 80
-        let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.sprintQuery.rawValue + "\(id)"
+    func fetchSprintQuery(_ rapidViewID: Int, completion: @escaping (Int) -> Void) {
+        let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.sprintQuery.rawValue + "\(rapidViewID)"
         let headers = ["Authorization" : UserDefaults.get(by: .userAuth)]
         
         Alamofire.request(url, headers: headers)
@@ -44,7 +85,14 @@ class MainViewModel {
                     guard let sprintQuery = try? SprintQuery(JSONData: data) else {
                         fatalError("\(url) may be broken.")
                     }
-                    print(sprintQuery)
+                    
+                    //                    print(sprintQuery)
+                    
+                    for sprint in sprintQuery.sprints {
+                        if sprint.state == "ACTIVE" {
+                            completion(sprint.id)
+                        }
+                    }
                     
                 case .failure(let error):
                     print((error as NSError).description)
@@ -52,73 +100,59 @@ class MainViewModel {
         }
     }
     
-    func fetchSprintReport(_ completion: @escaping () -> Void) {
+    func fetchSprintReport(_ rapidViewID: Int, _ sprintID: Int, _ completion: @escaping ([String]) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.sprintReport.rawValue
-        let parameters = ["rapidViewId" : 80,
-                          "sprintId" : 1210]
+        let parameters = ["rapidViewId" : rapidViewID,
+                          "sprintId" : sprintID]
         let headers = ["Authorization" : UserDefaults.get(by: .userAuth)]
         
-        Alamofire.request(url, parameters: parameters,headers: headers)
+        Alamofire.request(url, parameters: parameters, headers: headers)
             .responseData { response in
                 switch response.result {
                 case .success(let data):
                     guard let sprintReport = try? SprintReport(JSONData: data) else {
                         fatalError("\(url) may be broken.")
                     }
-                    self.sprintReport = sprintReport
-                    completion()
+                    
+                    // Sprint Report
+                    SprintReportRealmDAO.add(sprintReport.toRealmObject())
+                    
+                    let engineerUsernames = Array(Set((sprintReport.completedIssues + sprintReport.incompletedIssues).map { $0.assignee }))
+                    completion(engineerUsernames)
+                    
                 case .failure(let error):
                     print((error as NSError).description)
                 }
         }
     }
     
-    func fetchEngineers(_ completion: @escaping () -> Void) {
-        let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.sprintReport.rawValue
-        let parameters = ["rapidViewId" : 80,
-                          "sprintId" : 1210]
+    func fetchEngineers(_ engineerNames: [String], _ completion: @escaping () -> Void) {
+        let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.user.rawValue
         let headers = ["Authorization" : UserDefaults.get(by: .userAuth)]
-        // https://jira.mobike.com/rest/api/2/user?username=
-        Alamofire.request(url, parameters: parameters,headers: headers)
-            .responseData { response in
+        let requests = engineerNames.map { Alamofire.request(url, parameters: ["username" : $0], headers: headers) }
+        
+        var engineers = [Engineer]()
+        
+        _ = requests.map {
+            $0.responseData { response in
                 switch response.result {
                 case .success(let data):
-                    guard let sprintReport = try? SprintReport(JSONData: data) else {
-                        fatalError("\(url) may be broken.")
-                    }
-                    let engineerUsernames = Array(Set((sprintReport.completedIssues + sprintReport.incompletedIssues).map { $0.assignee }))
-                    
-                    if engineerUsernames.count == self.engineers.count {
-                        completion()
+                    guard let engineer = try? Engineer(JSONData: data) else {
                         return
                     }
                     
-                    let requests = engineerUsernames.map {
-                        Alamofire.request("https://jira.mobike.com/rest/api/2/user?username=\($0)", headers: headers)
-                    }
+                    engineers.append(engineer)
                     
-                    _ = requests.map {
-                        $0.responseData { response in
-                            switch response.result {
-                            case .success(let data):
-                                guard let engineer = try? Engineer(JSONData: data) else {
-                                    return
-                                }
-                                
-                                self.engineers.append(engineer)
-                                
-                                if self.engineers.count == engineerUsernames.count {
-                                    self.engineers.sort { $0.name < $1.name }
-                                    completion()
-                                }
-                            case .failure(let error):
-                                print((error as NSError).description)
-                            }
-                        }
+                    if engineers.count == engineerNames.count {
+                        engineers.sort { $0.name < $1.name }
+                        
+                        EngineerRealmDAO.add(engineers.map { $0.toRealmObject() })
+                        completion()
                     }
                 case .failure(let error):
                     print((error as NSError).description)
                 }
+            }
         }
     }
 }

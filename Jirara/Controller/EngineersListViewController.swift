@@ -24,9 +24,10 @@ class EngineersListViewController: NSViewController {
         
         listOutlineView.expandItem(listOutlineView.item(atRow: 0))
         
-        viewModel.fetchEngineers {
-            self.listOutlineView.reloadData()
-        }
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updatedRemoteData),
+                                               name: .UpdatedRemoteData,
+                                               object: nil)
     }
     
     func isHeader(_ item: Any) -> Bool {
@@ -36,7 +37,6 @@ class EngineersListViewController: NSViewController {
             return false
         }
     }
-    
 }
 
 // MARK: DataSource
@@ -76,7 +76,7 @@ extension EngineersListViewController: NSOutlineViewDelegate {
             return outlineView.makeView(withIdentifier: .init(rawValue: "EngineerHeaderCell"), owner: self)
         } else {
             let view = outlineView.makeView(withIdentifier: .init(rawValue: "EngineerItemCell"), owner: self) as? EngineerCellView
-            guard let engineer = item as? Engineer else {
+            guard let engineer = item as? EngineerRealm else {
                 fatalError()
             }
             
@@ -119,5 +119,11 @@ extension EngineersListViewController: NSOutlineViewDelegate {
         NotificationCenter.default.post(name: .SelectedEngineer,
                                         object: self,
                                         userInfo: [Constants.NotificationInfoKey.engineer : selectedIndex])
+    }
+}
+
+extension EngineersListViewController {
+    @objc func updatedRemoteData() {
+        listOutlineView.reloadData()
     }
 }
