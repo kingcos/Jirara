@@ -34,11 +34,11 @@ class MainViewModel {
 }
 
 extension MainViewModel {
-    func reload(_ rapidViewName: String = "Mobike iOS Scrum") {
+    class func fetch(_ rapidViewName: String = "Mobike iOS Scrum") {
         fetchRapidView(rapidViewName) { rapidViewID in
-            self.fetchSprintQuery(rapidViewID) { sprintID in
-                self.fetchSprintReport(rapidViewID, sprintID) { engineerNames in
-                    self.fetchEngineers(engineerNames) {
+            fetchSprintQuery(rapidViewID) { sprintID in
+                fetchSprintReport(rapidViewID, sprintID) { engineerNames in
+                    fetchEngineers(engineerNames) {
                         // Notify
                         NotificationCenter.default.post(name: .UpdatedRemoteData, object: nil)
                     }
@@ -47,7 +47,7 @@ extension MainViewModel {
         }
     }
     
-    func fetchRapidView(_ name: String, completion: @escaping (Int) -> Void) {
+    class func fetchRapidView(_ name: String, completion: @escaping (Int) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.rapidView.rawValue
         let headers = ["Authorization" : UserDefaults.get(by: .userAuth)]
         
@@ -74,7 +74,7 @@ extension MainViewModel {
         }
     }
     
-    func fetchSprintQuery(_ rapidViewID: Int, completion: @escaping (Int) -> Void) {
+    class func fetchSprintQuery(_ rapidViewID: Int, completion: @escaping (Int) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.sprintQuery.rawValue + "\(rapidViewID)"
         let headers = ["Authorization" : UserDefaults.get(by: .userAuth)]
         
@@ -100,7 +100,7 @@ extension MainViewModel {
         }
     }
     
-    func fetchSprintReport(_ rapidViewID: Int, _ sprintID: Int, _ completion: @escaping ([String]) -> Void) {
+    class func fetchSprintReport(_ rapidViewID: Int, _ sprintID: Int, _ completion: @escaping ([String]) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.sprintReport.rawValue
         let parameters = ["rapidViewId" : rapidViewID,
                           "sprintId" : sprintID]
@@ -126,7 +126,7 @@ extension MainViewModel {
         }
     }
     
-    func fetchEngineers(_ engineerNames: [String], _ completion: @escaping () -> Void) {
+    class func fetchEngineers(_ engineerNames: [String], _ completion: @escaping () -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.user.rawValue
         let headers = ["Authorization" : UserDefaults.get(by: .userAuth)]
         let requests = engineerNames.map { Alamofire.request(url, parameters: ["username" : $0], headers: headers) }

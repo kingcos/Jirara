@@ -18,8 +18,6 @@ class LoginViewController: NSViewController {
     @IBOutlet weak var loginButton: NSButton!
     @IBOutlet weak var warningTextField: NSTextField!
     
-    var viewModel = MainViewModel()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -95,7 +93,7 @@ extension LoginViewController {
                         
                         UserDefaults.save(engineer.emailAddress, for: .userEmail)
                         
-                        self.viewModel.reload()
+                        MainViewModel.fetch()
                         
                         let storyboard = NSStoryboard(name: .init("Main"), bundle: nil)
                         let mainSplitWindowController = storyboard.instantiateController(withIdentifier: .init("MainWindowController")) as? NSWindowController

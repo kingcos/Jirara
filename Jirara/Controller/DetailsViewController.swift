@@ -53,6 +53,7 @@ extension DetailsViewController {
         summaryChartView.data = PieChartData(dataSet: dataSet)
         summaryChartView.centerAttributedText = NSAttributedString(string: "Mobike iOS Scrum",
                                                                    attributes: [.foregroundColor : NSColor.highlightColor])
+        summaryChartView.animate(xAxisDuration: 1.0, easingOption: .easeOutBack)
     }
 }
 
