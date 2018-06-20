@@ -86,7 +86,7 @@ extension MainViewModel {
                         fatalError("\(url) may be broken.")
                     }
                     
-                    //                    print(sprintQuery)
+                    // print(sprintQuery)
                     
                     for sprint in sprintQuery.sprints {
                         if sprint.state == "ACTIVE" {
@@ -110,9 +110,26 @@ extension MainViewModel {
             .responseData { response in
                 switch response.result {
                 case .success(let data):
-                    guard let sprintReport = try? SprintReport(JSONData: data) else {
+                    guard var sprintReport = try? SprintReport(JSONData: data) else {
                         fatalError("\(url) may be broken.")
                     }
+                    
+                    func formatDate(_ origin: String) -> String {
+                        // 15/06/18 dd/mm/yy
+                        let chineseMonth = origin.split(separator: "/")[1]
+                        let numberMonth = Constants.MonthNumberDict[String(chineseMonth)]
+                        let substrings = origin.replacingOccurrences(of: chineseMonth, with: numberMonth ?? "").split(separator: " ")
+                        
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "dd/mm/yy"
+                        let date = formatter.date(from: String(substrings[0])) ?? Date()
+                        
+                        formatter.dateFormat = "mmdd"
+                        return formatter.string(from: date)
+                    }
+                    
+                    sprintReport.startDate = formatDate(sprintReport.startDate)
+                    sprintReport.endDate = formatDate(sprintReport.endDate)
                     
                     // Sprint Report
                     SprintReportRealmDAO.add(sprintReport.toRealmObject())

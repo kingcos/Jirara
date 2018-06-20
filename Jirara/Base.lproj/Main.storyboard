@@ -48,9 +48,8 @@
                                     <action selector="clickOnSendEmailButton:" target="Itx-R0-fJh" id="Slw-FQ-b4V"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QBy-iJ-X4D">
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QBy-iJ-X4D">
                                 <rect key="frame" x="554" y="32" width="119" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Refresh Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LNI-49-YSm">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -61,8 +60,10 @@
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="iMm-gz-5LU" firstAttribute="leading" secondItem="QBy-iJ-X4D" secondAttribute="trailing" constant="12" symbolic="YES" id="1gA-Ha-KfS"/>
                             <constraint firstItem="iMm-gz-5LU" firstAttribute="centerY" secondItem="aC2-7i-c9j" secondAttribute="centerY" id="39W-ZI-bHR"/>
                             <constraint firstAttribute="trailing" secondItem="iMm-gz-5LU" secondAttribute="trailing" constant="20" symbolic="YES" id="Yqq-FY-3SM"/>
+                            <constraint firstItem="QBy-iJ-X4D" firstAttribute="centerY" secondItem="aC2-7i-c9j" secondAttribute="centerY" id="dFV-l7-Wym"/>
                         </constraints>
                     </view>
                 </viewController>
