@@ -21,3 +21,7 @@ enum JiraAPI: String {
     // https://jira.mobike.com/browse/MI-619
     case issueWeb = "/browse/"
 }
+
+//enum JiraIssueStatus {
+//    case 
+//}

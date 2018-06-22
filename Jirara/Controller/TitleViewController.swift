@@ -34,8 +34,8 @@ extension TitleViewController {
         let pieChartView = PieChartView(frame: frame)
         
         let todoIssuesCount = viewModel.issues(nil).filter { $0.statusName == "Start" }.count
-        let doingIssuesCount = viewModel.issues(nil).filter { $0.statusName != "Start" && $0.statusName != "Done" }.count
-        let doneIssuesCount = viewModel.issues(nil).filter { $0.statusName == "Done" }.count
+        let doingIssuesCount = viewModel.issues(nil).filter { $0.statusName != "Start" && $0.statusName != "完成" }.count
+        let doneIssuesCount = viewModel.issues(nil).filter { $0.statusName == "完成" }.count
 
         let todoIssuesEntry = PieChartDataEntry(value: Double(todoIssuesCount),
                                                 label: "To Do")
@@ -52,28 +52,6 @@ extension TitleViewController {
         pieChartView.holeColor = .clear
         pieChartView.chartDescription = nil
         pieChartView.data = PieChartData(dataSet: dataSet)
-        
-//        let todoIssuesCount = viewModel.issues(currentEngineerName).filter { $0.statusName == "Start" }.count
-//        let doingIssuesCount = viewModel.issues(currentEngineerName).filter { $0.statusName != "Start" && $0.statusName != "Done" }.count
-//        let doneIssuesCount = viewModel.issues(currentEngineerName).filter { $0.statusName == "Done" }.count
-//
-//        let todoIssuesEntry = PieChartDataEntry(value: Double(todoIssuesCount),
-//                                                label: "To Do")
-//        let doingIssuesEntry = PieChartDataEntry(value: Double(doingIssuesCount),
-//                                                 label: "Doing")
-//        let doneIssuesEntry = PieChartDataEntry(value: Double(doneIssuesCount),
-//                                                label: "Done")
-//
-//        let dataSet = PieChartDataSet(values: [todoIssuesEntry, doingIssuesEntry, doneIssuesEntry],
-//                                      label: nil)
-//
-//        dataSet.colors = ChartColorTemplates.joyful()
-//        summaryChartView.data = PieChartData(dataSet: dataSet)
-//        summaryChartView.centerAttributedText = NSAttributedString(string: "Mobike iOS Scrum",
-//                                                                   attributes: [.foregroundColor : NSColor.highlightColor])
-//        summaryChartView.animate(xAxisDuration: 1.0, easingOption: .easeOutBack)
-        
-        
         
         return pieChartView
     }

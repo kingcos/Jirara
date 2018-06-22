@@ -36,8 +36,8 @@ class DetailsViewController: NSViewController {
 extension DetailsViewController {
     func updateSummaryChart() {
         let todoIssuesCount = viewModel.issues(currentEngineerName).filter { $0.statusName == "Start" }.count
-        let doingIssuesCount = viewModel.issues(currentEngineerName).filter { $0.statusName != "Start" && $0.statusName != "Done" }.count
-        let doneIssuesCount = viewModel.issues(currentEngineerName).filter { $0.statusName == "Done" }.count
+        let doingIssuesCount = viewModel.issues(currentEngineerName).filter { $0.statusName != "Start" && $0.statusName != "完成" }.count
+        let doneIssuesCount = viewModel.issues(currentEngineerName).filter { $0.statusName == "完成" }.count
         
         let todoIssuesEntry = PieChartDataEntry(value: Double(todoIssuesCount),
                                                 label: "To Do")
@@ -104,9 +104,9 @@ extension DetailsViewController: NSCollectionViewDataSource {
         case 0:
             return viewModel.issues(currentEngineerName).filter { $0.statusName == "Start" }.count
         case 1:
-            return viewModel.issues(currentEngineerName).filter { $0.statusName != "Start" && $0.statusName != "Done" }.count
+            return viewModel.issues(currentEngineerName).filter { $0.statusName != "Start" && $0.statusName != "完成" }.count
         case 2:
-            return viewModel.issues(currentEngineerName).filter { $0.statusName == "Done" }.count
+            return viewModel.issues(currentEngineerName).filter { $0.statusName == "完成" }.count
         default:
             return 0
         }
@@ -121,9 +121,9 @@ extension DetailsViewController: NSCollectionViewDataSource {
         case 0:
             issueCollectionViewItem.issue = viewModel.issues(currentEngineerName).filter { $0.statusName == "Start" }[indexPath.item]
         case 1:
-            issueCollectionViewItem.issue = viewModel.issues(currentEngineerName).filter { $0.statusName != "Start" && $0.statusName != "Done" }[indexPath.item]
+            issueCollectionViewItem.issue = viewModel.issues(currentEngineerName).filter { $0.statusName != "Start" && $0.statusName != "完成" }[indexPath.item]
         case 2:
-            issueCollectionViewItem.issue = viewModel.issues(currentEngineerName).filter { $0.statusName == "Done" }[indexPath.item]
+            issueCollectionViewItem.issue = viewModel.issues(currentEngineerName).filter { $0.statusName == "完成" }[indexPath.item]
         default:
             break
         }
