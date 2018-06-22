@@ -19,11 +19,15 @@ class TitleViewController: NSViewController {
     }
     
     @IBAction func clickOnSendEmailButton(_ sender: NSButton) {
-        MailUtil.send(generateChart()?.screenshot())
+//        MailUtil.send(generateChart()?.screenshot())
+        MailUtil.send()
     }
     
     @IBAction func clickOnRefreshData(_ sender: NSButton) {
-        MainViewModel.fetch()
+        MainViewModel.fetch { _, _ in
+            // Notify
+            NotificationCenter.default.post(name: .UpdatedRemoteData, object: nil)
+        }
     }
 }
 

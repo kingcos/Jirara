@@ -93,7 +93,10 @@ extension LoginViewController {
                         
                         UserDefaults.save(engineer.emailAddress, for: .userEmail)
                         
-                        MainViewModel.fetch()
+                        MainViewModel.fetch { _, _ in
+                            // Notify
+                            NotificationCenter.default.post(name: .UpdatedRemoteData, object: nil)
+                        }
                         
                         let storyboard = NSStoryboard(name: .init("Main"), bundle: nil)
                         let mainSplitWindowController = storyboard.instantiateController(withIdentifier: .init("MainWindowController")) as? NSWindowController

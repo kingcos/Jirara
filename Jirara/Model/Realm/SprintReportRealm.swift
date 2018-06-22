@@ -29,6 +29,18 @@ class SprintReportRealmDAO {
     }
     
     static func findLatest() -> SprintReportRealm? {
-        return dao.findAll().sorted { $0.id < $1.id }.last
+        let all = dao.findAll().sorted { $0.id < $1.id }
+        if all.count > 0 {
+            return all[all.count - 1]
+        }
+        return nil
+    }
+    
+    static func findLastLatest() -> SprintReportRealm? {
+        let all = dao.findAll().sorted { $0.id < $1.id }
+        if all.count > 1 {
+            return all[all.count - 2]
+        }
+        return nil
     }
 }

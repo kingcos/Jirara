@@ -34,13 +34,24 @@ class MainViewModel {
 }
 
 extension MainViewModel {
-    class func fetch(_ rapidViewName: String = "Mobike iOS Scrum") {
+    class func fetch(_ rapidViewName: String = "Mobike iOS Scrum", completion: @escaping (SprintReport, [EngineerRealm]) -> Void) {
         fetchRapidView(rapidViewName) { rapidViewID in
             fetchSprintQuery(rapidViewID) { sprintID in
                 fetchSprintReport(rapidViewID, sprintID) { sprintReport in
-                    fetchEngineers(sprintReport) {
-                        // Notify
-                        NotificationCenter.default.post(name: .UpdatedRemoteData, object: nil)
+                    fetchEngineers(sprintReport) { sprintReport, engineersRealm in
+                        completion(sprintReport, engineersRealm)
+                    }
+                }
+            }
+        }
+    }
+    
+    class func fetchLast(_ rapidViewName: String = "Mobike iOS Scrum", completion: @escaping (SprintReport, [EngineerRealm]) -> Void) {
+        fetchRapidView(rapidViewName) { rapidViewID in
+            fetchSprintQuery(rapidViewID, false) { sprintID in
+                fetchSprintReport(rapidViewID, sprintID) { sprintReport in
+                    fetchEngineers(sprintReport) { sprintReport, engineersRealm in
+                        completion(sprintReport, engineersRealm)
                     }
                 }
             }
@@ -74,7 +85,7 @@ extension MainViewModel {
         }
     }
     
-    class func fetchSprintQuery(_ rapidViewID: Int, completion: @escaping (Int) -> Void) {
+    class func fetchSprintQuery(_ rapidViewID: Int, _ isLatest: Bool = true, completion: @escaping (Int) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.sprintQuery.rawValue + "\(rapidViewID)"
         let headers = ["Authorization" : UserDefaults.get(by: .userAuth)]
         
@@ -88,9 +99,16 @@ extension MainViewModel {
                     
                     // print(sprintQuery)
                     
-                    for sprint in sprintQuery.sprints {
-                        if sprint.state == "ACTIVE" {
-                            completion(sprint.id)
+                    if isLatest {
+                        for sprint in sprintQuery.sprints {
+                            if sprint.state == "ACTIVE" {
+                                completion(sprint.id)
+                            }
+                        }
+                    } else {
+                        let newSprints = sprintQuery.sprints.filter { $0.state != "ACTIVE" }.sorted { $0.id < $1.id }
+                        if let lastSprint = newSprints.last {
+                            completion(lastSprint.id)
                         }
                     }
                     
@@ -142,7 +160,7 @@ extension MainViewModel {
         }
     }
     
-    class func fetchEngineers(_ sprintReport: SprintReport, _ completion: @escaping () -> Void) {
+    class func fetchEngineers(_ sprintReport: SprintReport, _ completion: @escaping (SprintReport, [EngineerRealm]) -> Void) {
         let engineerNames = Array(Set((sprintReport.completedIssues + sprintReport.incompletedIssues).map { $0.assignee }))
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.user.rawValue
         let headers = ["Authorization" : UserDefaults.get(by: .userAuth)]
@@ -165,8 +183,9 @@ extension MainViewModel {
                     if engineers.count == engineerNames.count {
                         engineers.sort { $0.name < $1.name }
                         
-                        EngineerRealmDAO.add(engineers.map { $0.toRealmObject() })
-                        completion()
+                        let engineersRealm = engineers.map { $0.toRealmObject() }
+                        EngineerRealmDAO.add(engineersRealm)
+                        completion(sprintReport, engineersRealm)
                     }
                 case .failure(let error):
                     print((error as NSError).description)
