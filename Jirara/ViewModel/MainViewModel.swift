@@ -121,10 +121,10 @@ extension MainViewModel {
                         let substrings = origin.replacingOccurrences(of: chineseMonth, with: numberMonth ?? "").split(separator: " ")
                         
                         let formatter = DateFormatter()
-                        formatter.dateFormat = "dd/mm/yy"
+                        formatter.dateFormat = "dd/MM/yy"
                         let date = formatter.date(from: String(substrings[0])) ?? Date()
                         
-                        formatter.dateFormat = "mmdd"
+                        formatter.dateFormat = Constants.dateFormat
                         return formatter.string(from: date)
                     }
                     

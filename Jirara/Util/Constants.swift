@@ -27,4 +27,6 @@ struct Constants {
         "十一月" : "11",
         "十二月" : "12"
     ]
+    
+    static let dateFormat = "yyyy.MM.dd"
 }

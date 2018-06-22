@@ -14,6 +14,7 @@ import Mappable
  **/
 struct Issue: Mappable {
     var id: Int
+    var key: String
     var summary: String
     var priorityName: String
     var assignee: String
@@ -21,6 +22,7 @@ struct Issue: Mappable {
     
     init(map: Mapper) throws {
         id = try map.from("id")
+        key = try map.from("key")
         summary = try map.from("summary")
         priorityName = try map.from("priorityName")
         assignee = try map.from("assignee")
@@ -32,6 +34,7 @@ extension Issue: Realmable {
     func toRealmObject() -> IssueRealm {
         let object = IssueRealm()
         object.id = id
+        object.key = key
         object.summary = summary
         object.priorityName = priorityName
         object.assignee = assignee

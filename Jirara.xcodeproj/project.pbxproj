@@ -220,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				848A64F720DBA430002FBCE4 /* Mail.swift */,
+				847C8C7020D2AA26000C2854 /* MailUtil.swift */,
 			);
 			path = Smailer;
 			sourceTree = "<group>";
@@ -255,7 +256,6 @@
 			children = (
 				849478C720D13FFC00FC9853 /* JiraAPI.swift */,
 				847C8C1D20D25338000C2854 /* Constants.swift */,
-				847C8C7020D2AA26000C2854 /* MailUtil.swift */,
 				840AB50120D8AADD0038D329 /* RealmHelper.swift */,
 			);
 			path = Util;

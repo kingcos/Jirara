@@ -11,6 +11,7 @@ import RealmSwift
 
 class IssueRealm: Object {
     @objc dynamic var id = 0
+    @objc dynamic var key = ""
     @objc dynamic var summary = ""
     @objc dynamic var priorityName = ""
     @objc dynamic var assignee = ""
@@ -21,12 +22,28 @@ class IssueRealm: Object {
     }
     
     override var description: String {
+        var priority = ""
+        var status = ""
+        
+        switch priorityName {
+        case "低优先级", "最低优先级": priority = "💚"
+        case "默认优先级": priority = "💛"
+        case "最高优先级(立刻执行)", "高优先级": priority = "❤️"
+        default: priority = priorityName
+        }
+        
+        switch statusName {
+        case "Start": status = "🏁 (\(statusName))"
+        case "完成": status = "✅"
+        default: status = statusName
+        }
+        
         return
 """
 <tr>
-<td style="border:1px solid #B0B0B0">\(summary)</td>
-<td style="border:1px solid #B0B0B0">\(priorityName)</td>
-<td style="border:1px solid #B0B0B0">\(statusName)</td>
+<td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.issueWeb.rawValue + key)">\(summary)</a></td>
+<td style="border:1px solid #B0B0B0">\(priority)</td>
+<td style="border:1px solid #B0B0B0">\(status)</td>
 </tr>
 """
     }
