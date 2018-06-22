@@ -37,8 +37,8 @@ extension MainViewModel {
     class func fetch(_ rapidViewName: String = "Mobike iOS Scrum") {
         fetchRapidView(rapidViewName) { rapidViewID in
             fetchSprintQuery(rapidViewID) { sprintID in
-                fetchSprintReport(rapidViewID, sprintID) { engineerNames in
-                    fetchEngineers(engineerNames) {
+                fetchSprintReport(rapidViewID, sprintID) { sprintReport in
+                    fetchEngineers(sprintReport) {
                         // Notify
                         NotificationCenter.default.post(name: .UpdatedRemoteData, object: nil)
                     }
@@ -100,7 +100,7 @@ extension MainViewModel {
         }
     }
     
-    class func fetchSprintReport(_ rapidViewID: Int, _ sprintID: Int, _ completion: @escaping ([String]) -> Void) {
+    class func fetchSprintReport(_ rapidViewID: Int, _ sprintID: Int, _ completion: @escaping (SprintReport) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.sprintReport.rawValue
         let parameters = ["rapidViewId" : rapidViewID,
                           "sprintId" : sprintID]
@@ -134,8 +134,7 @@ extension MainViewModel {
                     // Sprint Report
                     SprintReportRealmDAO.add(sprintReport.toRealmObject())
                     
-                    let engineerUsernames = Array(Set((sprintReport.completedIssues + sprintReport.incompletedIssues).map { $0.assignee }))
-                    completion(engineerUsernames)
+                    completion(sprintReport)
                     
                 case .failure(let error):
                     print((error as NSError).description)
@@ -143,7 +142,8 @@ extension MainViewModel {
         }
     }
     
-    class func fetchEngineers(_ engineerNames: [String], _ completion: @escaping () -> Void) {
+    class func fetchEngineers(_ sprintReport: SprintReport, _ completion: @escaping () -> Void) {
+        let engineerNames = Array(Set((sprintReport.completedIssues + sprintReport.incompletedIssues).map { $0.assignee }))
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.user.rawValue
         let headers = ["Authorization" : UserDefaults.get(by: .userAuth)]
         let requests = engineerNames.map { Alamofire.request(url, parameters: ["username" : $0], headers: headers) }
@@ -154,9 +154,11 @@ extension MainViewModel {
             $0.responseData { response in
                 switch response.result {
                 case .success(let data):
-                    guard let engineer = try? Engineer(JSONData: data) else {
+                    guard var engineer = try? Engineer(JSONData: data) else {
                         return
                     }
+                    
+                    engineer.issues = (sprintReport.completedIssues + sprintReport.incompletedIssues).filter { $0.assignee == engineer.name }
                     
                     engineers.append(engineer)
                     

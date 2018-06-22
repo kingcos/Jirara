@@ -19,4 +19,15 @@ class IssueRealm: Object {
     override static func primaryKey() -> String? {
         return "id"
     }
+    
+    override var description: String {
+        return
+"""
+<tr>
+<td style="border:1px solid #B0B0B0">\(summary)</td>
+<td style="border:1px solid #B0B0B0">\(priorityName)</td>
+<td style="border:1px solid #B0B0B0">\(statusName)</td>
+</tr>
+"""
+    }
 }

@@ -34,6 +34,7 @@
 		847CA69E20D39276000C2854 /* EngineerRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CA69D20D39276000C2854 /* EngineerRealm.swift */; };
 		847CA6A020D3932E000C2854 /* IssueRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CA69F20D3932E000C2854 /* IssueRealm.swift */; };
 		847CA6A220D393F7000C2854 /* SprintReportRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CA6A120D393F7000C2854 /* SprintReportRealm.swift */; };
+		848A64F820DBA430002FBCE4 /* Mail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A64F720DBA430002FBCE4 /* Mail.swift */; };
 		849478B520D0C95600FC9853 /* EngineersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478B420D0C95600FC9853 /* EngineersListViewController.swift */; };
 		849478B720D0CC3E00FC9853 /* EngineerCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478B620D0CC3E00FC9853 /* EngineerCellView.swift */; };
 		849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478BA20D0D0A400FC9853 /* Engineer.swift */; };
@@ -50,6 +51,15 @@
 		5BF3BB22542F69B284DE1644 /* Pods-Jirara.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jirara.release.xcconfig"; path = "Pods/Target Support Files/Pods-Jirara/Pods-Jirara.release.xcconfig"; sourceTree = "<group>"; };
 		840AB50120D8AADD0038D329 /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		840AB50320D8B0100038D329 /* Realmable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realmable.swift; sourceTree = "<group>"; };
+		840AB50620DA5CD70038D329 /* libcorecrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcorecrypto.tbd; path = usr/lib/system/libcorecrypto.tbd; sourceTree = SDKROOT; };
+		840AB50820DA5CEA0038D329 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = usr/lib/system/libcommonCrypto.tbd; sourceTree = SDKROOT; };
+		840AB50A20DA5CF30038D329 /* CryptoTokenKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoTokenKit.framework; path = System/Library/Frameworks/CryptoTokenKit.framework; sourceTree = SDKROOT; };
+		840AB50B20DA5CF40038D329 /* libcorecrypto_trace.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcorecrypto_trace.tbd; path = usr/lib/system/libcorecrypto_trace.tbd; sourceTree = SDKROOT; };
+		840AB50C20DA5CF40038D329 /* libapple_crypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libapple_crypto.tbd; path = usr/lib/libapple_crypto.tbd; sourceTree = SDKROOT; };
+		840AB50D20DA5CF40038D329 /* libk5crypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libk5crypto.tbd; path = usr/lib/libk5crypto.tbd; sourceTree = SDKROOT; };
+		840AB50E20DA5CF40038D329 /* libswiftCryptoTokenKit.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftCryptoTokenKit.tbd; path = System/Library/PrivateFrameworks/Swift/libswiftCryptoTokenKit.tbd; sourceTree = SDKROOT; };
+		840AB51420DA5D6A0038D329 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../Desktop/libcrypto.a; sourceTree = "<group>"; };
+		840AB51620DA5F490038D329 /* libcrypto.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.0.0.dylib; path = ../../../Desktop/libcrypto.1.0.0.dylib; sourceTree = "<group>"; };
 		8426D4DE20D18F350007F180 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		8426D4E020D194D70007F180 /* SprintQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintQuery.swift; sourceTree = "<group>"; };
 		8426D4E420D197E60007F180 /* RapidViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidViews.swift; sourceTree = "<group>"; };
@@ -78,6 +88,10 @@
 		847CA69D20D39276000C2854 /* EngineerRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineerRealm.swift; sourceTree = "<group>"; };
 		847CA69F20D3932E000C2854 /* IssueRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueRealm.swift; sourceTree = "<group>"; };
 		847CA6A120D393F7000C2854 /* SprintReportRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintReportRealm.swift; sourceTree = "<group>"; };
+		848A64F720DBA430002FBCE4 /* Mail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mail.swift; sourceTree = "<group>"; };
+		848A64FD20DBA6ED002FBCE4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		848A64FF20DBA86B002FBCE4 /* libMailCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMailCore.a; path = "../../../Downloads/mailcore2-osx-12/lib/libMailCore.a"; sourceTree = "<group>"; };
+		848A650120DBAE14002FBCE4 /* Jirara-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Jirara-Bridging-Header.h"; sourceTree = "<group>"; };
 		849478B420D0C95600FC9853 /* EngineersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineersListViewController.swift; sourceTree = "<group>"; };
 		849478B620D0CC3E00FC9853 /* EngineerCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineerCellView.swift; sourceTree = "<group>"; };
 		849478BA20D0D0A400FC9853 /* Engineer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engineer.swift; sourceTree = "<group>"; };
@@ -106,6 +120,17 @@
 		63B49DAEB5DC44FD9C119E09 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				848A64FF20DBA86B002FBCE4 /* libMailCore.a */,
+				848A64FD20DBA6ED002FBCE4 /* Security.framework */,
+				840AB51620DA5F490038D329 /* libcrypto.1.0.0.dylib */,
+				840AB51420DA5D6A0038D329 /* libcrypto.a */,
+				840AB50A20DA5CF30038D329 /* CryptoTokenKit.framework */,
+				840AB50C20DA5CF40038D329 /* libapple_crypto.tbd */,
+				840AB50B20DA5CF40038D329 /* libcorecrypto_trace.tbd */,
+				840AB50D20DA5CF40038D329 /* libk5crypto.tbd */,
+				840AB50E20DA5CF40038D329 /* libswiftCryptoTokenKit.tbd */,
+				840AB50820DA5CEA0038D329 /* libcommonCrypto.tbd */,
+				840AB50620DA5CD70038D329 /* libcorecrypto.tbd */,
 				A62425EE78D72A54CDC1894A /* Pods_Jirara.framework */,
 			);
 			name = Frameworks;
@@ -140,6 +165,7 @@
 		843973CC20CFF64A00B14AB7 /* Jirara */ = {
 			isa = PBXGroup;
 			children = (
+				848A64F620DBA412002FBCE4 /* Smailer */,
 				8426D4DD20D18F190007F180 /* ViewModel */,
 				849478C420D13EFA00FC9853 /* Util */,
 				849478B920D0D09700FC9853 /* Model */,
@@ -152,6 +178,7 @@
 				849478C120D13DAA00FC9853 /* Main.storyboard */,
 				843973D620CFF64C00B14AB7 /* Info.plist */,
 				843973D720CFF64C00B14AB7 /* Jirara.entitlements */,
+				848A650120DBAE14002FBCE4 /* Jirara-Bridging-Header.h */,
 			);
 			path = Jirara;
 			sourceTree = "<group>";
@@ -187,6 +214,14 @@
 				840AB50320D8B0100038D329 /* Realmable.swift */,
 			);
 			path = Realm;
+			sourceTree = "<group>";
+		};
+		848A64F620DBA412002FBCE4 /* Smailer */ = {
+			isa = PBXGroup;
+			children = (
+				848A64F720DBA430002FBCE4 /* Mail.swift */,
+			);
+			path = Smailer;
 			sourceTree = "<group>";
 		};
 		849478B820D0CC4200FC9853 /* View */ = {
@@ -281,6 +316,7 @@
 				TargetAttributes = {
 					843973C920CFF64A00B14AB7 = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -381,6 +417,7 @@
 				847C8C7320D2ACFA000C2854 /* TitleViewController.swift in Sources */,
 				847C8C7620D2B8D2000C2854 /* NSView+Extension.swift in Sources */,
 				843973CE20CFF64A00B14AB7 /* AppDelegate.swift in Sources */,
+				848A64F820DBA430002FBCE4 /* Mail.swift in Sources */,
 				849478CA20D143EB00FC9853 /* String+Extension.swift in Sources */,
 				8426D4E520D197E60007F180 /* RapidViews.swift in Sources */,
 				84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */,
@@ -435,7 +472,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -495,7 +532,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -547,6 +584,8 @@
 			baseConfigurationReference = A2FE8ACC31D85D047A85C605 /* Pods-Jirara.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jirara/Jirara.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -556,9 +595,42 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks/Swift",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lMailCore",
+					"-lc++",
+					"-liconv",
+					"-lresolv",
+					"-lsasl2",
+					"-ltidy",
+					"-lxml2",
+					"-lz",
+					"-ObjC",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"Charts\"",
+					"-framework",
+					"\"ChartsRealm\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"Mappable\"",
+					"-framework",
+					"\"Realm\"",
+					"-framework",
+					"\"RealmSwift\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.maimieng.Jirara;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Jirara/Jirara-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -568,6 +640,8 @@
 			baseConfigurationReference = 5BF3BB22542F69B284DE1644 /* Pods-Jirara.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jirara/Jirara.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -577,9 +651,41 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks/Swift",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lMailCore",
+					"-lc++",
+					"-liconv",
+					"-lresolv",
+					"-lsasl2",
+					"-ltidy",
+					"-lxml2",
+					"-lz",
+					"-ObjC",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"Charts\"",
+					"-framework",
+					"\"ChartsRealm\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"Mappable\"",
+					"-framework",
+					"\"Realm\"",
+					"-framework",
+					"\"RealmSwift\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.maimieng.Jirara;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Jirara/Jirara-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

@@ -21,4 +21,8 @@ target 'Jirara' do
   
   # Persistence
   pod 'Realm'
+
+  # E-mail
+  pod 'mailcore2-osx'
+
 end

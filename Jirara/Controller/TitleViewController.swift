@@ -16,7 +16,8 @@ class TitleViewController: NSViewController {
     }
     
     @IBAction func clickOnSendEmailButton(_ sender: NSButton) {
-        MailUtil.send(["ajgahjsgf"], to: ["cc:i-maiming@mobike.com"])
+//        MailUtil.send(["ajgahjsgf"], to: ["i-maiming@mobike.com"])
+        MailUtil.send()
     }
     
     @IBAction func clickOnRefreshData(_ sender: NSButton) {

@@ -9,40 +9,69 @@
 import Cocoa
 
 struct MailUtil {
-    static func send(_ contents: [Any],
-                     to recipients: [String],
-                     with subject: String = "Weekly Summary") {
-        let service = NSSharingService(named: .composeEmail)
-        service?.recipients = recipients
-        service?.subject = subject
-        
-        service?.perform(withItems: contents)
+    
+    var session: MCOSMTPSession
+
+    init() {
+        session = MCOSMTPSession.init()
+
+        session.hostname = "smtp.partner.outlook.cn"
+        session.username = "critic@mobike.com"
+        session.password = "M@bike20150127"
+        session.connectionType = .startTLS
+        session.port = 587
+    }
+
+    func send(_ from: String,
+              _ to: [String],
+              _ cc: [String],
+              _ subject: String,
+              _ content: String,
+              completion: @escaping () -> Void) {
+        let builder = MCOMessageBuilder.init()
+        let fromAddress = MCOAddress.init(displayName: "Critic", mailbox: from)
+        let toAddresses = to.map { address -> MCOAddress in
+            return MCOAddress.init(displayName: "", mailbox: address)
+        }
+        let ccAddresses = cc.map { address -> MCOAddress in
+            return MCOAddress.init(displayName: "", mailbox: address)
+        }
+
+        builder.header.from = fromAddress
+        builder.header.to = toAddresses
+        builder.header.cc = ccAddresses
+
+        builder.header.subject = subject
+        builder.htmlBody = content
+
+        session.sendOperation(with: builder.data())?.start { error in
+            if let error = error {
+                print((error as NSError).description)
+            }
+
+            completion()
+        }
     }
     
-    static func send(_ content: String,
-                     to recipients: [String],
-                     with subject: String = "Weekly Summary") {
-        guard let service = NSSharingService(named: .composeEmail) else {
+    static func send() {
+        guard let sprintReport = SprintReportRealmDAO.findLatest() else {
             fatalError()
         }
         
-        var items = [Any]()
+        let engineers = EngineerRealmDAO.findAll()
         
-        let options = [NSAttributedString.DocumentReadingOptionKey.documentType : NSAttributedString.DocumentType.html]
-        let data = content.data(using: .utf8) ?? Data()
-        let html = NSAttributedString(html: data, options: options, documentAttributes: nil)
-        
-        items.append(html)
-        
-        service.recipients = recipients
-        service.subject = subject
-        
-        service.perform(withItems: items)
+        let subject = "iOS Eng 周报 \(sprintReport.startDate) ~ \(sprintReport.endDate)"
+        var content =
+"""
+<h3>本周工作 \(sprintReport.startDate) ~ \(sprintReport.endDate)</h3>
+"""
+//        content.append(<#T##other: String##String#>)
+        let engs = engineers.reduce("") { result, engineer -> String in
+            result + engineer.description
+        }
+        content.append(engs)
+        MailUtil().send("critic@mobike.com", ["i-maiming@mobike.com"], [], subject, content) {
+            
+        }
     }
-    
-//    static func send() {
-//        let urlString = ""
-//        NSURL(string: <#T##String#>)
-//        NSWorkspace.shared.
-//    }
 }
