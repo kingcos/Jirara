@@ -10,4 +10,5 @@ import Cocoa
 
 extension NSNib.Name {
     static let PreferencesWindowController = NSNib.Name.init("PreferencesWindowController")
+    static let SendPreviewWindowController = NSNib.Name.init("SendPreviewWindowController")
 }

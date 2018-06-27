@@ -60,7 +60,14 @@ extension PreferencesWindowController {
 
 // MARK: Send
 extension PreferencesWindowController {
-    
+    @IBAction func clickOnSendSaveButton(_ sender: NSButton) {
+        let toArray = sendToTextField.stringValue.split(separator: " ").map { String($0) }
+        let ccArray = sendCCTextField.stringValue.split(separator: " ").map { String($0) }
+        
+        // Save to UserDefaults
+        UserDefaults.save(toArray, for: .emailTo)
+        UserDefaults.save(ccArray, for: .emailCC)
+    }
 }
 
 // MARK: Others

@@ -41,9 +41,9 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vdm-0z-EiG">
-                                            <rect key="frame" x="10" y="107" width="125" height="32"/>
+                                            <rect key="frame" x="38" y="107" width="70" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="push" title="Test and Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JYW-02-CNt">
+                                            <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JYW-02-CNt">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -229,9 +229,9 @@
                                             </gridCells>
                                         </gridView>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cZs-8L-vAp">
-                                            <rect key="frame" x="249" y="107" width="125" height="32"/>
+                                            <rect key="frame" x="277" y="107" width="70" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="push" title="Test and Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="M5Q-1t-XYd">
+                                            <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="M5Q-1t-XYd">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -254,6 +254,9 @@
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="clickOnSendSaveButton:" target="-2" id="DgZ-7A-DsO"/>
+                                            </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mbY-Ma-ehp">
                                             <rect key="frame" x="35" y="249" width="17" height="17"/>
@@ -265,7 +268,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DGz-Hp-CPC">
-                                            <rect key="frame" x="70" y="247" width="96" height="22"/>
+                                            <rect key="frame" x="70" y="247" width="376" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Uox-zN-qI2">
                                                 <font key="font" metaFont="system"/>
@@ -283,7 +286,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3fO-1j-E6q">
-                                            <rect key="frame" x="70" y="203" width="96" height="22"/>
+                                            <rect key="frame" x="70" y="203" width="376" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="B7U-qp-Mte">
                                                 <font key="font" metaFont="system"/>

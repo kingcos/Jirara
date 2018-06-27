@@ -13,6 +13,7 @@ class StatusMenuController: NSObject {
     @IBOutlet weak var statusMenu: NSMenu!
     
     var preferencesWindowController: PreferencesWindowController!
+    var sendPreviewWindowController: SendPreviewWindowController!
     
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     
@@ -20,11 +21,16 @@ class StatusMenuController: NSObject {
         setupStatusItem()
         
         preferencesWindowController = PreferencesWindowController()
+        sendPreviewWindowController = SendPreviewWindowController()
     }
 }
 
 // MARK: IBAction
 extension StatusMenuController {
+    @IBAction func clickOnSend(_ sender: NSMenuItem) {
+        sendPreviewWindowController.showWindow(nil)
+    }
+    
     @IBAction func clickOnPreferences(_ sender: NSMenuItem) {
         preferencesWindowController.showWindow(nil)
     }

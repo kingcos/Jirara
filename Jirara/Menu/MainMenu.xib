@@ -21,6 +21,13 @@
         </customObject>
         <menu id="diz-yd-MSS">
             <items>
+                <menuItem title="Send" id="DxJ-Od-sld">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="clickOnSend:" target="tJB-Mf-sbR" id="zZU-eq-OXg"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="Ceb-6X-lxU"/>
                 <menuItem title="Preferences..." id="Ei4-87-19I">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -38,7 +45,7 @@
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="169" y="151"/>
+            <point key="canvasLocation" x="169" y="150.5"/>
         </menu>
     </objects>
 </document>
