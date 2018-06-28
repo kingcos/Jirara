@@ -21,6 +21,19 @@
         </customObject>
         <menu id="diz-yd-MSS">
             <items>
+                <menuItem title="Send" id="A10-4q-FoX">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Send" id="dNn-jV-eH6">
+                        <items>
+                            <menuItem title="with Catorgories" id="C7x-Aa-oMt">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="ClickOnSendWithCategories:" target="tJB-Mf-sbR" id="1qb-wk-y81"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Send with Preview" id="DxJ-Od-sld">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -45,7 +58,7 @@
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="169" y="150.5"/>
+            <point key="canvasLocation" x="56" y="159"/>
         </menu>
     </objects>
 </document>

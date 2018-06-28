@@ -23,10 +23,16 @@ class StatusMenuController: NSObject {
         preferencesWindowController = PreferencesWindowController()
         sendPreviewWindowController = SendPreviewWindowController()
     }
+    
 }
 
 // MARK: IBAction
 extension StatusMenuController {
+    @IBAction func ClickOnSendWithCategories(_ sender: NSMenuItem) {
+        sendPreviewWindowController.type = .categories
+        sendPreviewWindowController.showWindow(nil)
+    }
+    
     @IBAction func clickOnSend(_ sender: NSMenuItem) {
         sendPreviewWindowController.showWindow(nil)
     }
