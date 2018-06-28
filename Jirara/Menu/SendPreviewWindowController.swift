@@ -87,6 +87,8 @@ class SendPreviewWindowController: NSWindowController {
         progressIndicator.isHidden = false
         progressIndicator.startAnimation(nil)
         
+        emailSendButton.isEnabled = false
+        
         let from = emailFromTextField.stringValue
         let to = emailToTextField.stringValue.split(separator: " ").map { String($0) }
         let cc = emailCcTextField.stringValue.split(separator: " ").map { String($0) }
@@ -95,7 +97,12 @@ class SendPreviewWindowController: NSWindowController {
         
         MailUtil().send(from, to, cc, subject, content) {
             self.progressIndicator.stopAnimation(nil)
+            self.subjectTextField.isEditable = true
+            self.emailToTextField.isEditable = true
+            self.emailCcTextField.isEditable = true
             self.progressIndicator.isHidden = true
+            self.emailSendButton.isEnabled = true
+            
             NSAlert.show("Send successfully!", ["OK"])
         }
     }
