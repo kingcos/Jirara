@@ -37,6 +37,10 @@ class SendPreviewWindowController: NSWindowController {
         
         window?.center()
         window?.makeKeyAndOrderFront(nil)
+    }
+    
+    override func showWindow(_ sender: Any?) {
+        super.showWindow(sender)
         
         setupUI()
     }

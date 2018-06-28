@@ -30,6 +30,7 @@ class StatusMenuController: NSObject {
 extension StatusMenuController {
     @IBAction func ClickOnSendWithCategories(_ sender: NSMenuItem) {
         sendPreviewWindowController.type = .categories
+        sendPreviewWindowController.contentViewController = nil
         sendPreviewWindowController.showWindow(nil)
     }
     
