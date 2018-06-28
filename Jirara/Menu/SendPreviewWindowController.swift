@@ -7,9 +7,21 @@
 //
 
 import Cocoa
+import WebKit
 
 class SendPreviewWindowController: NSWindowController {
 
+    @IBOutlet weak var webView: WKWebView!
+    
+    @IBOutlet weak var subjectTextField: NSTextField!
+    @IBOutlet weak var emailToTextField: NSTextField!
+    @IBOutlet weak var emailCcTextField: NSTextField!
+    @IBOutlet weak var emailFromTextField: NSTextField!
+    @IBOutlet weak var progressIndicator: NSProgressIndicator!
+    
+    var subject: String?
+    var contentHTML: String?
+    
     override var windowNibName: NSNib.Name? {
         return .SendPreviewWindowController
     }
@@ -19,6 +31,43 @@ class SendPreviewWindowController: NSWindowController {
         
         window?.center()
         window?.makeKeyAndOrderFront(nil)
+        
+        setupUI()
+        
+        if let contentHTML = contentHTML {
+            webView.loadHTMLString(contentHTML, baseURL: nil)
+        }
     }
     
+    func setupUI() {
+        subjectTextField.stringValue = subject ?? ""
+        
+        emailToTextField.stringValue = UserDefaults.get(by: .emailTo)
+        emailCcTextField.stringValue = UserDefaults.get(by: .emailCc)
+        emailFromTextField.stringValue = UserDefaults.get(by: .emailAddress)
+        emailFromTextField.isEditable = false
+        
+        progressIndicator.isHidden = true
+    }
+    
+    @IBAction func clickOnSendButton(_ sender: NSButton) {
+        subjectTextField.isEditable = false
+        emailToTextField.isEditable = false
+        emailCcTextField.isEditable = false
+        
+        progressIndicator.isHidden = false
+        progressIndicator.startAnimation(nil)
+        
+        let from = emailFromTextField.stringValue
+        let to = emailToTextField.stringValue.split(separator: " ").map { String($0) }
+        let cc = emailCcTextField.stringValue.split(separator: " ").map { String($0) }
+        let subject = subjectTextField.stringValue
+        let content = contentHTML ?? ""
+        
+        MailUtil().send(from, to, cc, subject, content) {
+            self.progressIndicator.stopAnimation(nil)
+            self.progressIndicator.isHidden = true
+            NSAlert.show("Send successfully!", ["OK"])
+        }
+    }
 }

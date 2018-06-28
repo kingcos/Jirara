@@ -28,7 +28,11 @@ class StatusMenuController: NSObject {
 // MARK: IBAction
 extension StatusMenuController {
     @IBAction func clickOnSend(_ sender: NSMenuItem) {
-        sendPreviewWindowController.showWindow(nil)
+        MailUtil.send { subject, contentHTML in
+            self.sendPreviewWindowController.subject = subject
+            self.sendPreviewWindowController.contentHTML = contentHTML
+            self.sendPreviewWindowController.showWindow(nil)
+        }
     }
     
     @IBAction func clickOnPreferences(_ sender: NSMenuItem) {
