@@ -21,7 +21,7 @@
         </customObject>
         <menu id="diz-yd-MSS">
             <items>
-                <menuItem title="Send" id="DxJ-Od-sld">
+                <menuItem title="Send with Preview" id="DxJ-Od-sld">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="clickOnSend:" target="tJB-Mf-sbR" id="zZU-eq-OXg"/>
