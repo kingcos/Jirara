@@ -14,6 +14,7 @@ class PreferencesWindowController: NSWindowController {
     @IBOutlet weak var accJiraDomainTextField: NSTextField!
     @IBOutlet weak var accUsernameTextField: NSTextField!
     @IBOutlet weak var accPasswordTextField: NSSecureTextField!
+    
     @IBOutlet weak var accEmailSMTPTextField: NSTextField!
     @IBOutlet weak var accEmailAddressTextField: NSTextField!
     @IBOutlet weak var accEmailPasswordTextField: NSSecureTextField!
@@ -21,8 +22,7 @@ class PreferencesWindowController: NSWindowController {
     
     // Send
     @IBOutlet weak var sendToTextField: NSTextField!
-    @IBOutlet weak var sendCCTextField: NSTextField!
-    
+    @IBOutlet weak var sendCcTextField: NSTextField!
     // Others
     
     
@@ -36,6 +36,24 @@ class PreferencesWindowController: NSWindowController {
 
         window?.center()
         window?.makeKeyAndOrderFront(nil)
+        
+        setupUI()
+    }
+    
+    func setupUI() {
+        // Account
+        accJiraDomainTextField.stringValue = UserDefaults.get(by: .accountJiraDomain)
+        accUsernameTextField.stringValue = UserDefaults.get(by: .accountUsername)
+        accPasswordTextField.stringValue = UserDefaults.get(by: .accountPassword)
+        
+        accEmailSMTPTextField.stringValue = UserDefaults.get(by: .emailSMTP)
+        accEmailAddressTextField.stringValue = UserDefaults.get(by: .emailAddress)
+        accEmailPasswordTextField.stringValue = UserDefaults.get(by: .emailPassword)
+        accEmailPortTextField.stringValue = UserDefaults.get(by: .emailPort)
+        
+        // Send
+        sendToTextField.stringValue = UserDefaults.get(by: .emailTo)
+        sendCcTextField.stringValue = UserDefaults.get(by: .emailCc)
     }
     
 }
@@ -45,6 +63,9 @@ extension PreferencesWindowController {
     @IBAction func clickOnAccTestAndSaveButton(_ sender: NSButton) {
         // Save to UserDefaults
         UserDefaults.save(accJiraDomainTextField.stringValue, for: .accountJiraDomain)
+        UserDefaults.save(accUsernameTextField.stringValue, for: .accountUsername)
+        UserDefaults.save(accPasswordTextField.stringValue, for: .accountPassword)
+        
         UserDefaults.save("Basic " + "\(accUsernameTextField.stringValue):\(accPasswordTextField.stringValue)".base64Encoded,
                           for: .userAuth)
     }
@@ -61,12 +82,9 @@ extension PreferencesWindowController {
 // MARK: Send
 extension PreferencesWindowController {
     @IBAction func clickOnSendSaveButton(_ sender: NSButton) {
-        let toArray = sendToTextField.stringValue.split(separator: " ").map { String($0) }
-        let ccArray = sendCCTextField.stringValue.split(separator: " ").map { String($0) }
-        
         // Save to UserDefaults
-        UserDefaults.save(toArray, for: .emailTo)
-        UserDefaults.save(ccArray, for: .emailCC)
+        UserDefaults.save(sendToTextField.stringValue, for: .emailTo)
+        UserDefaults.save(sendCcTextField.stringValue, for: .emailCc)
     }
 }
 
