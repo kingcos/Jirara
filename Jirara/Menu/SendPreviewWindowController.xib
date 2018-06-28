@@ -21,7 +21,7 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Preview" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="687" height="500"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
@@ -30,17 +30,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XtN-19-tTg">
-                        <rect key="frame" x="0.0" y="0.0" width="687" height="350"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1642" height="350"/>
                         <wkWebViewConfiguration key="configuration">
                             <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                             <wkPreferences key="preferences"/>
                         </wkWebViewConfiguration>
                     </wkWebView>
-                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xhv-i8-UxH">
-                        <rect key="frame" x="20" y="368" width="647" height="112"/>
+                    <stackView distribution="equalSpacing" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xhv-i8-UxH">
+                        <rect key="frame" x="20" y="368" width="1602" height="112"/>
                         <subviews>
-                            <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ia3-Ay-Qfd">
-                                <rect key="frame" x="0.0" y="90" width="645" height="22"/>
+                            <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ia3-Ay-Qfd">
+                                <rect key="frame" x="0.0" y="90" width="1602" height="22"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="R17-6Y-uQt">
                                         <rect key="frame" x="-2" y="3" width="51" height="17"/>
@@ -51,7 +51,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TBY-aQ-Sat">
-                                        <rect key="frame" x="67" y="0.0" width="578" height="22"/>
+                                        <rect key="frame" x="69" y="0.0" width="1533" height="22"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="1Er-ao-iBk">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -59,9 +59,6 @@
                                         </textFieldCell>
                                     </textField>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="TBY-aQ-Sat" firstAttribute="leading" secondItem="R17-6Y-uQt" secondAttribute="trailing" constant="20" id="7DA-dt-djQ"/>
-                                </constraints>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
@@ -71,11 +68,11 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                            <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cRP-WJ-FTD">
-                                <rect key="frame" x="0.0" y="60" width="647" height="22"/>
+                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cRP-WJ-FTD">
+                                <rect key="frame" x="0.0" y="60" width="1602" height="22"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d63-2g-pod">
-                                        <rect key="frame" x="-2" y="3" width="19" height="17"/>
+                                        <rect key="frame" x="-2" y="3" width="63" height="17"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="To" id="jGj-YD-xrJ">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -83,7 +80,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PhI-aA-qOt">
-                                        <rect key="frame" x="69" y="0.0" width="578" height="22"/>
+                                        <rect key="frame" x="69" y="0.0" width="1533" height="22"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="9qs-Ga-rrc">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -100,11 +97,11 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                            <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9wy-Tb-cuY">
-                                <rect key="frame" x="0.0" y="30" width="647" height="22"/>
+                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9wy-Tb-cuY">
+                                <rect key="frame" x="0.0" y="30" width="1602" height="22"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xKI-bb-ESL">
-                                        <rect key="frame" x="-2" y="3" width="21" height="17"/>
+                                        <rect key="frame" x="-2" y="3" width="63" height="17"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Cc" id="1EG-LZ-xkj">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -112,7 +109,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RHe-JP-Za5">
-                                        <rect key="frame" x="69" y="0.0" width="578" height="22"/>
+                                        <rect key="frame" x="69" y="0.0" width="1533" height="22"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="dVs-gx-o7s">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -130,10 +127,10 @@
                                 </customSpacing>
                             </stackView>
                             <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" spacing="24" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AjM-qy-cVS">
-                                <rect key="frame" x="0.0" y="0.0" width="647" height="22"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1602" height="22"/>
                                 <subviews>
                                     <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" spacing="38" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AJd-wz-RD0">
-                                        <rect key="frame" x="0.0" y="0.0" width="420" height="22"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="269" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xxd-vD-v4s">
                                                 <rect key="frame" x="-2" y="3" width="35" height="17"/>
@@ -144,9 +141,9 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8lx-Ge-nUu">
-                                                <rect key="frame" x="69" y="0.0" width="351" height="22"/>
+                                                <rect key="frame" x="69" y="0.0" width="200" height="22"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="351" id="9qv-iz-lZd"/>
+                                                    <constraint firstAttribute="width" constant="200" id="GSN-Jv-UVD"/>
                                                 </constraints>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="oOR-ar-9wf">
                                                     <font key="font" metaFont="system"/>
@@ -165,13 +162,10 @@
                                         </customSpacing>
                                     </stackView>
                                     <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="jsf-Vg-xLH">
-                                        <rect key="frame" x="444" y="1" width="120" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="zZN-GU-oil"/>
-                                        </constraints>
+                                        <rect key="frame" x="846" y="1" width="120" height="20"/>
                                     </progressIndicator>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rYE-mf-hxw">
-                                        <rect key="frame" x="582" y="-6" width="71" height="32"/>
+                                        <rect key="frame" x="1537" y="-6" width="71" height="32"/>
                                         <buttonCell key="cell" type="push" title="Send" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uVF-98-UQb">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -193,6 +187,13 @@
                                 </customSpacing>
                             </stackView>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="RHe-JP-Za5" firstAttribute="trailing" secondItem="TBY-aQ-Sat" secondAttribute="trailing" id="9rO-k0-oNx"/>
+                            <constraint firstItem="RHe-JP-Za5" firstAttribute="leading" secondItem="TBY-aQ-Sat" secondAttribute="leading" id="Ytf-wW-FXZ"/>
+                            <constraint firstItem="8lx-Ge-nUu" firstAttribute="leading" secondItem="TBY-aQ-Sat" secondAttribute="leading" id="bCs-R1-JDq"/>
+                            <constraint firstItem="PhI-aA-qOt" firstAttribute="leading" secondItem="TBY-aQ-Sat" secondAttribute="leading" id="fGP-k8-mB3"/>
+                            <constraint firstItem="PhI-aA-qOt" firstAttribute="trailing" secondItem="TBY-aQ-Sat" secondAttribute="trailing" id="saY-Tg-Yfn"/>
+                        </constraints>
                         <visibilityPriorities>
                             <integer value="1000"/>
                             <integer value="1000"/>
