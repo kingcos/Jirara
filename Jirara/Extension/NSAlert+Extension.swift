@@ -19,6 +19,7 @@ extension NSAlert {
         _ = buttonTitles.map {
             alert.addButton(withTitle: $0)
         }
+        
         alert.runModal()
     }
 }

@@ -18,8 +18,8 @@ class SendPreviewWindowController: NSWindowController {
     @IBOutlet weak var emailCcTextField: NSTextField!
     @IBOutlet weak var emailFromTextField: NSTextField!
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
+    @IBOutlet weak var emailSendButton: NSButton!
     
-    var subject: String?
     var contentHTML: String?
     
     override var windowNibName: NSNib.Name? {
@@ -33,21 +33,27 @@ class SendPreviewWindowController: NSWindowController {
         window?.makeKeyAndOrderFront(nil)
         
         setupUI()
-        
-        if let contentHTML = contentHTML {
-            webView.loadHTMLString(contentHTML, baseURL: nil)
-        }
     }
     
     func setupUI() {
-        subjectTextField.stringValue = subject ?? ""
-        
         emailToTextField.stringValue = UserDefaults.get(by: .emailTo)
         emailCcTextField.stringValue = UserDefaults.get(by: .emailCc)
         emailFromTextField.stringValue = UserDefaults.get(by: .emailAddress)
         emailFromTextField.isEditable = false
         
-        progressIndicator.isHidden = true
+        emailSendButton.isEnabled = false
+        progressIndicator.startAnimation(nil)
+        
+        MailUtil.send { subject, contentHTML in
+            self.contentHTML = contentHTML
+            
+            self.subjectTextField.stringValue = subject
+            self.webView.loadHTMLString(contentHTML, baseURL: nil)
+            
+            self.progressIndicator.stopAnimation(nil)
+            self.progressIndicator.isHidden = true
+            self.emailSendButton.isEnabled = true
+        }
     }
     
     @IBAction func clickOnSendButton(_ sender: NSButton) {

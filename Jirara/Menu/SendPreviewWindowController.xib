@@ -11,6 +11,7 @@
             <connections>
                 <outlet property="emailCcTextField" destination="RHe-JP-Za5" id="hV5-bl-sY7"/>
                 <outlet property="emailFromTextField" destination="8lx-Ge-nUu" id="fed-8i-RbR"/>
+                <outlet property="emailSendButton" destination="rYE-mf-hxw" id="XV8-SB-cQu"/>
                 <outlet property="emailToTextField" destination="PhI-aA-qOt" id="3yc-hb-0zo"/>
                 <outlet property="progressIndicator" destination="jsf-Vg-xLH" id="xa7-YX-0Aw"/>
                 <outlet property="subjectTextField" destination="TBY-aQ-Sat" id="hP5-lJ-qHV"/>
