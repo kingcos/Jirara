@@ -18,6 +18,8 @@ extension UserDefaults {
         
         // Account
         case accountJiraDomain = "com.maimieng.jirara.account.jira-domain"
+        case accountUsername = "com.maimieng.jirara.account.username"
+        case accountPassword = "com.maimieng.jirara.account.password"
         case accountAuth = "com.maimieng.jirara.account.auth"
         
         // E-mail
@@ -26,7 +28,7 @@ extension UserDefaults {
         case emailPassword = "com.maimieng.jirara.email.password"
         case emailPort = "com.maimieng.jirara.email.port"
         case emailTo = "com.maimieng.jirara.to"
-        case emailCC = "com.maimieng.jirara.cc"
+        case emailCc = "com.maimieng.jirara.cc"
     }
     
     /// Save to UserDefaults by key
