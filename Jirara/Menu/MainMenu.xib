@@ -25,20 +25,20 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Send" id="dNn-jV-eH6">
                         <items>
-                            <menuItem title="with Catorgories" id="C7x-Aa-oMt">
+                            <menuItem title="按类别" id="C7x-Aa-oMt">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="ClickOnSendWithCategories:" target="tJB-Mf-sbR" id="1qb-wk-y81"/>
+                                    <action selector="ClickOnSendWithCategories:" target="tJB-Mf-sbR" id="BC4-Di-uZC"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="按个人" id="ddf-Y6-Li8">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="clickOnSendWithEngineers:" target="tJB-Mf-sbR" id="fCs-M9-PhQ"/>
                                 </connections>
                             </menuItem>
                         </items>
                     </menu>
-                </menuItem>
-                <menuItem title="Send with Preview" id="DxJ-Od-sld">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="clickOnSend:" target="tJB-Mf-sbR" id="zZU-eq-OXg"/>
-                    </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="Ceb-6X-lxU"/>
                 <menuItem title="Preferences..." id="Ei4-87-19I">
@@ -50,6 +50,9 @@
                 <menuItem isSeparatorItem="YES" id="VOx-pn-fvw"/>
                 <menuItem title="About" id="vHS-rQ-j4L">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="clickOnAbout:" target="tJB-Mf-sbR" id="bQw-ai-gOO"/>
+                    </connections>
                 </menuItem>
                 <menuItem title="Quit" id="8KA-Sg-cmW">
                     <modifierMask key="keyEquivalentModifierMask"/>

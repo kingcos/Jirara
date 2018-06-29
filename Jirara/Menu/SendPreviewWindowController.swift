@@ -35,14 +35,14 @@ class SendPreviewWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         
-        window?.center()
-        window?.makeKeyAndOrderFront(nil)
-        
         webView.navigationDelegate = self
     }
     
     override func showWindow(_ sender: Any?) {
         super.showWindow(sender)
+        
+        window?.center()
+        window?.makeKeyAndOrderFront(nil)
         
         setupUI()
     }
@@ -84,6 +84,10 @@ class SendPreviewWindowController: NSWindowController {
                 
                 self.progressIndicator.stopAnimation(nil)
                 self.progressIndicator.isHidden = true
+                
+                self.subjectTextField.isEditable = true
+                self.emailToTextField.isEditable = true
+                self.emailCcTextField.isEditable = true
                 self.emailSendButton.isEnabled = true
             }
         }

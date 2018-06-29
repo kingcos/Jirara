@@ -166,7 +166,7 @@
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
-                                    <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="jsf-Vg-xLH">
+                                    <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="jsf-Vg-xLH">
                                         <rect key="frame" x="330" y="1" width="120" height="20"/>
                                     </progressIndicator>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rYE-mf-hxw">
