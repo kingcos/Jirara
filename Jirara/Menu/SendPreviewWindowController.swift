@@ -37,6 +37,8 @@ class SendPreviewWindowController: NSWindowController {
         
         window?.center()
         window?.makeKeyAndOrderFront(nil)
+        
+        webView.navigationDelegate = self
     }
     
     override func showWindow(_ sender: Any?) {
@@ -49,6 +51,10 @@ class SendPreviewWindowController: NSWindowController {
         emailToTextField.stringValue = UserDefaults.get(by: .emailTo)
         emailCcTextField.stringValue = UserDefaults.get(by: .emailCc)
         emailFromTextField.stringValue = UserDefaults.get(by: .emailAddress)
+        
+        subjectTextField.isEditable = false
+        emailToTextField.isEditable = false
+        emailCcTextField.isEditable = false
         emailFromTextField.isEditable = false
         
         emailSendButton.isEnabled = false
@@ -63,6 +69,10 @@ class SendPreviewWindowController: NSWindowController {
                 
                 self.progressIndicator.stopAnimation(nil)
                 self.progressIndicator.isHidden = true
+                
+                self.subjectTextField.isEditable = true
+                self.emailToTextField.isEditable = true
+                self.emailCcTextField.isEditable = true
                 self.emailSendButton.isEnabled = true
             }
         } else {
@@ -104,6 +114,21 @@ class SendPreviewWindowController: NSWindowController {
             self.emailSendButton.isEnabled = true
             
             NSAlert.show("Send successfully!", ["OK"])
+        }
+    }
+}
+
+extension SendPreviewWindowController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if navigationAction.navigationType == .linkActivated  {
+            if let url = navigationAction.request.url, url.host != nil {
+                NSWorkspace.shared.open(url)
+                decisionHandler(.cancel)
+            } else {
+                decisionHandler(.allow)
+            }
+        } else {
+            decisionHandler(.allow)
         }
     }
 }

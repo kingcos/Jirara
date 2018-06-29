@@ -55,7 +55,6 @@ class PreferencesWindowController: NSWindowController {
         sendToTextField.stringValue = UserDefaults.get(by: .emailTo)
         sendCcTextField.stringValue = UserDefaults.get(by: .emailCc)
     }
-    
 }
 
 // MARK: Account
