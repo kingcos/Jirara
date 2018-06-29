@@ -22,6 +22,8 @@
 		843973DE20D0149800B14AB7 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843973DD20D0149800B14AB7 /* MainWindowController.swift */; };
 		843973E720D022EB00B14AB7 /* LoginWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843973E520D022EB00B14AB7 /* LoginWindowController.swift */; };
 		843973EA20D024EC00B14AB7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843973E920D024EC00B14AB7 /* LoginViewController.swift */; };
+		8442048820E6007300DB9837 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442048620E6007300DB9837 /* AboutWindowController.swift */; };
+		8442048920E6007300DB9837 /* AboutWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8442048720E6007300DB9837 /* AboutWindowController.xib */; };
 		8450C33B20E3A25D009C0843 /* SendPreviewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8450C33920E3A25D009C0843 /* SendPreviewWindowController.swift */; };
 		8450C33C20E3A25D009C0843 /* SendPreviewWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8450C33A20E3A25D009C0843 /* SendPreviewWindowController.xib */; };
 		847C8C1E20D25338000C2854 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C1D20D25338000C2854 /* Constants.swift */; };
@@ -83,6 +85,8 @@
 		843973DD20D0149800B14AB7 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		843973E520D022EB00B14AB7 /* LoginWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWindowController.swift; sourceTree = "<group>"; };
 		843973E920D024EC00B14AB7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8442048620E6007300DB9837 /* AboutWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
+		8442048720E6007300DB9837 /* AboutWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutWindowController.xib; sourceTree = "<group>"; };
 		8450C33920E3A25D009C0843 /* SendPreviewWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPreviewWindowController.swift; sourceTree = "<group>"; };
 		8450C33A20E3A25D009C0843 /* SendPreviewWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendPreviewWindowController.xib; sourceTree = "<group>"; };
 		847C8C1D20D25338000C2854 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -285,6 +289,8 @@
 				84A06E8920E0F1110048798F /* PreferencesWindowController.xib */,
 				8450C33920E3A25D009C0843 /* SendPreviewWindowController.swift */,
 				8450C33A20E3A25D009C0843 /* SendPreviewWindowController.xib */,
+				8442048620E6007300DB9837 /* AboutWindowController.swift */,
+				8442048720E6007300DB9837 /* AboutWindowController.xib */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -378,6 +384,7 @@
 				843973D220CFF64C00B14AB7 /* Assets.xcassets in Resources */,
 				843973D520CFF64C00B14AB7 /* Login.storyboard in Resources */,
 				847C8C2A20D29AAC000C2854 /* IssuesStatusHeaderView.xib in Resources */,
+				8442048920E6007300DB9837 /* AboutWindowController.xib in Resources */,
 				847C8C2420D2702F000C2854 /* IssueCollectionViewItem.xib in Resources */,
 				84A06E8520E0EFDF0048798F /* MainMenu.xib in Resources */,
 			);
@@ -463,6 +470,7 @@
 				849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */,
 				8450C33B20E3A25D009C0843 /* SendPreviewWindowController.swift in Sources */,
 				84A06E8D20E0F69F0048798F /* NSNib+Extension.swift in Sources */,
+				8442048820E6007300DB9837 /* AboutWindowController.swift in Sources */,
 				847C8C2820D29A76000C2854 /* IssuesStatusHeaderView.swift in Sources */,
 				847C8C2020D2630F000C2854 /* IssuesTableHeaderView.swift in Sources */,
 				843973DE20D0149800B14AB7 /* MainWindowController.swift in Sources */,

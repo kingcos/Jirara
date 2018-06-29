@@ -14,6 +14,7 @@ class StatusMenuController: NSObject {
     
     var preferencesWindowController: PreferencesWindowController!
     var sendPreviewWindowController: SendPreviewWindowController!
+    var aboutWindowController: AboutWindowController!
     
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     
@@ -22,6 +23,7 @@ class StatusMenuController: NSObject {
         
         preferencesWindowController = PreferencesWindowController()
         sendPreviewWindowController = SendPreviewWindowController()
+        aboutWindowController = AboutWindowController()
     }
     
 }
@@ -43,7 +45,7 @@ extension StatusMenuController {
     }
     
     @IBAction func clickOnAbout(_ sender: NSMenuItem) {
-//        aboutWindowController.showWindow(nil)
+        aboutWindowController.showWindow(nil)
     }
     
     @IBAction func clickOnQuit(_ sender: NSMenuItem) {

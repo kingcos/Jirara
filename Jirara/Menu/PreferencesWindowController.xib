@@ -297,12 +297,6 @@
                                     </subviews>
                                 </view>
                             </tabViewItem>
-                            <tabViewItem label="Item 2" identifier="" id="aIq-2g-UsA">
-                                <view key="view" id="aMJ-I0-N1g">
-                                    <rect key="frame" x="10" y="33" width="504" height="288"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                            </tabViewItem>
                         </tabViewItems>
                     </tabView>
                 </subviews>

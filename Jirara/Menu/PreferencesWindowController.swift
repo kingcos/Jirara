@@ -67,6 +67,8 @@ extension PreferencesWindowController {
         
         UserDefaults.save("Basic " + "\(accUsernameTextField.stringValue):\(accPasswordTextField.stringValue)".base64Encoded,
                           for: .userAuth)
+        
+        NSAlert.show("Saved", ["OK"])
     }
     
     @IBAction func clickOnEmailTestAndSaveButton(_ sender: NSButton) {
@@ -75,6 +77,8 @@ extension PreferencesWindowController {
         UserDefaults.save(accEmailAddressTextField.stringValue, for: .emailAddress)
         UserDefaults.save(accEmailPasswordTextField.stringValue, for: .emailPassword)
         UserDefaults.save(accEmailPortTextField.stringValue, for: .emailPort)
+        
+        NSAlert.show("Saved", ["OK"])
     }
 }
 
@@ -84,6 +88,8 @@ extension PreferencesWindowController {
         // Save to UserDefaults
         UserDefaults.save(sendToTextField.stringValue, for: .emailTo)
         UserDefaults.save(sendCcTextField.stringValue, for: .emailCc)
+        
+        NSAlert.show("Saved", ["OK"])
     }
 }
 
