@@ -58,6 +58,7 @@ class SendPreviewWindowController: NSWindowController {
         emailFromTextField.isEditable = false
         
         emailSendButton.isEnabled = false
+        progressIndicator.isHidden = false
         progressIndicator.startAnimation(nil)
         
         if type == .default {
