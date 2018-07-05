@@ -82,7 +82,7 @@ extension EngineersListViewController: NSOutlineViewDelegate {
             
             let modifier = AnyModifier { urlRequest in
                 var request = urlRequest
-                request.setValue(UserDefaults.get(by: .userAuth), forHTTPHeaderField: "Authorization")
+                request.setValue(UserDefaults.get(by: .accountAuth), forHTTPHeaderField: "Authorization")
                 return request
             }
             

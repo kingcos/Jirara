@@ -10,8 +10,8 @@ import Cocoa
 import WebKit
 
 enum SummaryType {
-    case `default`
-    case categories
+    case team
+    case individual
 }
 
 class SendPreviewWindowController: NSWindowController {
@@ -25,7 +25,7 @@ class SendPreviewWindowController: NSWindowController {
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
     @IBOutlet weak var emailSendButton: NSButton!
     
-    var type: SummaryType = .default
+    var type: SummaryType = .team
     var contentHTML: String?
     
     override var windowNibName: NSNib.Name? {
@@ -61,36 +61,19 @@ class SendPreviewWindowController: NSWindowController {
         progressIndicator.isHidden = false
         progressIndicator.startAnimation(nil)
         
-        if type == .default {
-            MailUtil.send { subject, contentHTML in
-                self.contentHTML = contentHTML
-                
-                self.subjectTextField.stringValue = subject
-                self.webView.loadHTMLString(contentHTML, baseURL: nil)
-                
-                self.progressIndicator.stopAnimation(nil)
-                self.progressIndicator.isHidden = true
-                
-                self.subjectTextField.isEditable = true
-                self.emailToTextField.isEditable = true
-                self.emailCcTextField.isEditable = true
-                self.emailSendButton.isEnabled = true
-            }
-        } else {
-            MailUtil.send(type) { subject, contentHTML in
-                self.contentHTML = contentHTML
-                
-                self.subjectTextField.stringValue = subject
-                self.webView.loadHTMLString(contentHTML, baseURL: nil)
-                
-                self.progressIndicator.stopAnimation(nil)
-                self.progressIndicator.isHidden = true
-                
-                self.subjectTextField.isEditable = true
-                self.emailToTextField.isEditable = true
-                self.emailCcTextField.isEditable = true
-                self.emailSendButton.isEnabled = true
-            }
+        MailUtil.send(type) { subject, contentHTML in
+            self.contentHTML = contentHTML
+            
+            self.subjectTextField.stringValue = subject
+            self.webView.loadHTMLString(contentHTML, baseURL: nil)
+            
+            self.progressIndicator.stopAnimation(nil)
+            self.progressIndicator.isHidden = true
+            
+            self.subjectTextField.isEditable = true
+            self.emailToTextField.isEditable = true
+            self.emailCcTextField.isEditable = true
+            self.emailSendButton.isEnabled = true
         }
     }
     

@@ -11,10 +11,10 @@ import Foundation
 extension UserDefaults {
     /// UserDefaults key enum for safety
     enum UserDefaultsKey: String {
-        case jiraDomain = "com.maimieng.jirara.jiraDomain"
-        case username = "con.maimieng.jirara.username"
-        case userAuth = "com.maimieng.jirara.userAuth"
-        case userEmail = "com.maimieng.jirara.userEmail"
+//        case jiraDomain = "com.maimieng.jirara.jiraDomain"
+//        case username = "con.maimieng.jirara.username"
+//        case userAuth = "com.maimieng.jirara.userAuth"
+//        case userEmail = "com.maimieng.jirara.userEmail"
         
         // Account
         case accountJiraDomain = "com.maimieng.jirara.account.jira-domain"

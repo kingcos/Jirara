@@ -61,24 +61,32 @@ struct MailUtil {
         }
     }
     
-    static func send(_ completion: @escaping (String, String) -> Void) {
+    static func send(_ type: SummaryType, _ completion: @escaping (String, String) -> Void) {
+        if type == .team {
+            sendTeam(completion)
+        } else {
+            sendIndividual(completion)
+        }
+    }
+    
+    static func sendIndividual(_ completion: @escaping (String, String) -> Void) {
         let formatter = DateFormatter()
         formatter.dateFormat = Constants.dateFormat
-        
+
         // 上周数据
         MainViewModel.fetchLast { lastSprintReport, engineersRealm in
-            let subject = "iOS Engineers 周报 \(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)"
+            let subject = "iOS Engineers 个人周报 \(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)"
             let today = formatter.string(from: Date())
             var content =
 """
-<h2>Mobike - iOS Engineers 本周工作报告</h2>
+<h2>Mobike - iOS Engineers 本周个人工作报告</h2>
 <h3>周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)   统计日期：\(today)</h3>
 """
             let engineers = engineersRealm.reduce("") { result, engineer -> String in
                 result + engineer.description
             }
             content.append(engineers)
-            
+
             // 最新数据
             MainViewModel.fetch { nextSprintReport, engineersRealm in
                 content.append(
@@ -87,32 +95,32 @@ struct MailUtil {
 <h3>周期：\(nextSprintReport.startDate) ~ \(nextSprintReport.endDate)</h3>
 """
                 )
-                
+
                 let engineers = engineersRealm.reduce("") { result, engineer -> String in
                     result + engineer.description
                 }
-                
+
                 content.append(engineers)
-                
+
                 content.append("<br><br><b>注：优先级顺序：高 -> 低 ❤️💛💚；状态：完成 ✅，开始 🏁，进行中为相应文字表述</b>")
                 content.append("<br><hr><center><b>Powered by <a href=\"https://github.com/kingcos/Jirara\">Jirara</a> with ❤️</b></center>")
-                
+
                 completion(subject, content)
             }
         }
     }
+
     
-    
-    static func send(_ type: SummaryType, _ completion: @escaping (String, String) -> Void) {
+    static func sendTeam(_ completion: @escaping (String, String) -> Void) {
         let formatter = DateFormatter()
         formatter.dateFormat = Constants.dateFormat
         
         MainViewModel.fetchLast { lastSprintReport, _ in
-            let subject = "iOS Engineers 周报 \(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)"
+            let subject = "iOS Engineers 团队周报 \(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)"
             let today = formatter.string(from: Date())
             var content =
 """
-<h2>Mobike - iOS Engineers 本周工作报告</h2>
+<h2>Mobike - iOS Engineers 本周团队工作报告</h2>
 <h3>周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)   统计日期：\(today)</h3>
 """
             var issueTags = (lastSprintReport.completedIssues + lastSprintReport.incompletedIssues).map {
@@ -162,7 +170,7 @@ struct MailUtil {
                     table.append(
 """
 <tr>
-<td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.summary)</a></td>
+<td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.summary)</a></td>
 <td style="border:1px solid #B0B0B0">\(issue.assignee)</td>
 <td style="border:1px solid #B0B0B0">\(priority)</td>
 <td style="border:1px solid #B0B0B0">\(status)</td>
@@ -228,7 +236,7 @@ struct MailUtil {
                         table.append(
 """
 <tr>
-<td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.summary)</a></td>
+<td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.summary)</a></td>
 <td style="border:1px solid #B0B0B0">\(issue.assignee)</td>
 <td style="border:1px solid #B0B0B0">\(priority)</td>
 <td style="border:1px solid #B0B0B0">\(status)</td>

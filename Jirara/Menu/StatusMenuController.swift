@@ -30,13 +30,13 @@ class StatusMenuController: NSObject {
 
 // MARK: IBAction
 extension StatusMenuController {
-    @IBAction func ClickOnSendWithCategories(_ sender: NSMenuItem) {
-        sendPreviewWindowController.type = .categories
+    @IBAction func clickOnSendTeamSummary(_ sender: NSMenuItem) {
+        sendPreviewWindowController.type = .team
         sendPreviewWindowController.showWindow(nil)
     }
     
-    @IBAction func clickOnSendWithEngineers(_ sender: NSMenuItem) {
-        sendPreviewWindowController.type = .default
+    @IBAction func clickOnSendIndividualSummary(_ sender: NSMenuItem) {
+        sendPreviewWindowController.type = .individual
         sendPreviewWindowController.showWindow(nil)
     }
     

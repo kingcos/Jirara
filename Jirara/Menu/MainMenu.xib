@@ -25,16 +25,16 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Send" id="dNn-jV-eH6">
                         <items>
-                            <menuItem title="按类别" id="C7x-Aa-oMt">
+                            <menuItem title="团队周报" id="C7x-Aa-oMt">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="ClickOnSendWithCategories:" target="tJB-Mf-sbR" id="BC4-Di-uZC"/>
+                                    <action selector="clickOnSendTeamSummary:" target="tJB-Mf-sbR" id="bWY-SZ-vSn"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="按个人" id="ddf-Y6-Li8">
+                            <menuItem title="个人周报" id="ddf-Y6-Li8">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="clickOnSendWithEngineers:" target="tJB-Mf-sbR" id="fCs-M9-PhQ"/>
+                                    <action selector="clickOnSendIndividualSummary:" target="tJB-Mf-sbR" id="JxG-6f-isy"/>
                                 </connections>
                             </menuItem>
                         </items>

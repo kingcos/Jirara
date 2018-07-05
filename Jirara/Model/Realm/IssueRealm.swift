@@ -41,7 +41,7 @@ class IssueRealm: Object {
         return
 """
 <tr>
-<td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .jiraDomain) + JiraAPI.issueWeb.rawValue + key)">\(summary)</a></td>
+<td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issueWeb.rawValue + key)">\(summary)</a></td>
 <td style="border:1px solid #B0B0B0">\(priority)</td>
 <td style="border:1px solid #B0B0B0">\(status)</td>
 </tr>

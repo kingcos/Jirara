@@ -39,8 +39,8 @@ class LoginViewController: NSViewController {
         usernameTextField.isEditable = true
         passwordTextField.isEditable = true
         
-        jiraDomainTextField.stringValue = UserDefaults.get(by: .jiraDomain)
-        usernameTextField.stringValue = UserDefaults.get(by: .username)
+        jiraDomainTextField.stringValue = UserDefaults.get(by: .accountJiraDomain)
+        usernameTextField.stringValue = UserDefaults.get(by: .accountUsername)
         
         loginButton.isEnabled = !jiraDomainTextField.stringValue.isEmpty
                              && !usernameTextField.stringValue.isEmpty
@@ -67,12 +67,12 @@ extension LoginViewController {
         warningTextField.isHidden = true
         
         // Logic releated
-        UserDefaults.save(jiraDomain, for: .jiraDomain)
-        UserDefaults.save(username, for: .username)
-        UserDefaults.save("Basic " + "\(username):\(password)".base64Encoded, for: .userAuth)
+        UserDefaults.save(jiraDomain, for: .accountJiraDomain)
+        UserDefaults.save(username, for: .accountUsername)
+        UserDefaults.save("Basic " + "\(username):\(password)".base64Encoded, for: .accountAuth)
         
         let url = JiraAPI.prefix.rawValue + jiraDomain + JiraAPI.myself.rawValue
-        let headers = ["Authorization" : UserDefaults.get(by: .userAuth)]
+        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
         
         Alamofire.request(url, headers: headers)
                  .responseData { response in
@@ -91,7 +91,7 @@ extension LoginViewController {
                                 fatalError("\(url) may be broken.")
                         }
                         
-                        UserDefaults.save(engineer.emailAddress, for: .userEmail)
+//                        UserDefaults.save(engineer.emailAddress, for: .email)
                         
                         MainViewModel.fetch { _, _ in
                             // Notify

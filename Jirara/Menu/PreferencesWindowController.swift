@@ -66,7 +66,7 @@ extension PreferencesWindowController {
         UserDefaults.save(accPasswordTextField.stringValue, for: .accountPassword)
         
         UserDefaults.save("Basic " + "\(accUsernameTextField.stringValue):\(accPasswordTextField.stringValue)".base64Encoded,
-                          for: .userAuth)
+                          for: .accountAuth)
         
         NSAlert.show("Saved", ["OK"])
     }
