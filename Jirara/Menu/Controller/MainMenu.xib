@@ -58,6 +58,9 @@
                             <menuItem isSeparatorItem="YES" id="VOx-pn-fvw"/>
                             <menuItem title="New Issue..." id="1E1-gf-wpm">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="clickOnNewIssue:" target="tJB-Mf-sbR" id="vcw-Bq-kyo"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>

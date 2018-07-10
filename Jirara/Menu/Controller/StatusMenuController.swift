@@ -28,6 +28,7 @@ class StatusMenuController: NSObject {
         aboutWindowController = AboutWindowController()
     }
     
+    
 }
 
 // MARK: IBAction
@@ -54,6 +55,14 @@ extension StatusMenuController {
         NSApplication.shared.terminate(self)
     }
     
+    @IBAction func clickOnNewIssue(_ sender: NSMenuItem) {
+        let createIssueURL = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + "/secure/CreateIssue!default.jspa"
+        guard let url = URL.init(string: createIssueURL) else {
+            fatalError()
+        }
+        
+        NSWorkspace.shared.open(url)
+    }
 }
 
 extension StatusMenuController {
