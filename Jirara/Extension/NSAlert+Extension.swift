@@ -23,8 +23,3 @@ extension NSAlert {
         alert.runModal()
     }
 }
-
-extension NSNotification.Name {
-    public static let SelectedEngineer = NSNotification.Name.init("com.maimieng.SelectedEngineer")
-    public static let UpdatedRemoteData = NSNotification.Name.init("com.maimieng.UpdatedRemoteData")
-}

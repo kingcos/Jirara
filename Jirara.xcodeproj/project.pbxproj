@@ -152,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				84A06E8320E0EFD00048798F /* Menu */,
-				848A64F620DBA412002FBCE4 /* Smailer */,
 				8426D4DD20D18F190007F180 /* ViewModel */,
 				849478C420D13EFA00FC9853 /* Util */,
 				849478B920D0D09700FC9853 /* Model */,
@@ -177,14 +176,6 @@
 			path = Realm;
 			sourceTree = "<group>";
 		};
-		848A64F620DBA412002FBCE4 /* Smailer */ = {
-			isa = PBXGroup;
-			children = (
-				847C8C7020D2AA26000C2854 /* MailUtil.swift */,
-			);
-			path = Smailer;
-			sourceTree = "<group>";
-		};
 		849478B920D0D09700FC9853 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +195,7 @@
 				849478C720D13FFC00FC9853 /* JiraAPI.swift */,
 				847C8C1D20D25338000C2854 /* Constants.swift */,
 				840AB50120D8AADD0038D329 /* RealmHelper.swift */,
+				847C8C7020D2AA26000C2854 /* MailUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
