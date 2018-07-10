@@ -11,6 +11,7 @@ import Cocoa
 class StatusMenuController: NSObject {
     
     @IBOutlet weak var statusMenu: NSMenu!
+    @IBOutlet weak var issuesMenu: NSMenu!
     
     var preferencesWindowController: PreferencesWindowController!
     var sendPreviewWindowController: SendPreviewWindowController!
@@ -20,6 +21,7 @@ class StatusMenuController: NSObject {
     
     override func awakeFromNib() {
         setupStatusItem()
+        setupMenuItems()
         
         preferencesWindowController = PreferencesWindowController()
         sendPreviewWindowController = SendPreviewWindowController()
@@ -60,4 +62,11 @@ extension StatusMenuController {
         statusItem.button?.title = "Jirara"
     }
     
+    func setupMenuItems() {
+        // Setup My Issues submenu view
+        guard let issuesSubmenu = statusMenu.item(at: 1)?.submenu else {
+            return
+        }
+        
+    }
 }

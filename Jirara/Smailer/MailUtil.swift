@@ -110,7 +110,6 @@ struct MailUtil {
         }
     }
 
-    
     static func sendTeam(_ completion: @escaping (String, String) -> Void) {
         let formatter = DateFormatter()
         formatter.dateFormat = Constants.dateFormat
@@ -254,9 +253,5 @@ struct MailUtil {
                 completion(subject, content)
             }
         }
-    }
-    
-    static func send() {
-        
     }
 }
