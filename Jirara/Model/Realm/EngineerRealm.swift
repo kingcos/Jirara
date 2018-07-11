@@ -15,7 +15,7 @@ class EngineerRealm: Object {
     @objc dynamic var avatarURL = ""
     @objc dynamic var displayName = ""
     
-    let issues = List<IssueRealm>()
+    let issues = List<ReportIssueRealm>()
     
     override static func primaryKey() -> String? {
         return "name"

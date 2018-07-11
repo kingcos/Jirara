@@ -18,7 +18,7 @@ class StatusMenuController: NSObject {
     var aboutWindowController: AboutWindowController!
     
     var selectedIssueIndex: Int?
-    var issues: [IssueRealm] = []
+    var issues: [ReportIssueRealm] = []
     
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     
@@ -114,7 +114,7 @@ extension StatusMenuController: NSMenuDelegate {
 //            }
 //        }
         
-        guard let sprintReport = SprintReportRealmDAO.findLatest() else { fatalError() }
+        guard let sprintReport = SprintReportRealmDAO.findLatest() else { return }
         issues = sprintReport.issues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
         
         for issue in issues.reversed() {

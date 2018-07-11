@@ -14,8 +14,8 @@ import Mappable
  **/
 struct SprintReport: Mappable {
     var id: Int
-    var completedIssues: [Issue]
-    var incompletedIssues: [Issue]
+    var completedIssues: [ReportIssue]
+    var incompletedIssues: [ReportIssue]
     var startDate: String
     var endDate: String
     
@@ -33,7 +33,7 @@ extension SprintReport: Realmable {
         let object = SprintReportRealm()
         object.id = id
         
-        let issuesRealm = (completedIssues + incompletedIssues).map { issue -> IssueRealm in
+        let issuesRealm = (completedIssues + incompletedIssues).map { issue -> ReportIssueRealm in
             return issue.toRealmObject()
         }
         

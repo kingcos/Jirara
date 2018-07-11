@@ -22,8 +22,8 @@ class MainViewModel {
         }
     }
     
-    func issues(_ assignee: String?) -> [IssueRealm] {
-        let issues: [IssueRealm] = sprintReport.issues.map { $0 }
+    func issues(_ assignee: String?) -> [ReportIssueRealm] {
+        let issues: [ReportIssueRealm] = sprintReport.issues.map { $0 }
         
         if let assignee = assignee {
             return issues.filter { $0.assignee == assignee }
@@ -176,8 +176,7 @@ extension MainViewModel {
                         return
                     }
                     
-                    engineer.issues = (sprintReport.completedIssues + sprintReport.incompletedIssues).filter { $0.assignee == engineer.name }
-                    
+                    engineer.reportIssues = (sprintReport.completedIssues + sprintReport.incompletedIssues).filter { $0.assignee == engineer.name }
                     engineers.append(engineer)
                     
                     if engineers.count == engineerNames.count {

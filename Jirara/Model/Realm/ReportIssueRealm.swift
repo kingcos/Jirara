@@ -1,5 +1,5 @@
 //
-//  IssueRealm.swift
+//  ReportIssueRealm.swift
 //  Jirara
 //
 //  Created by kingcos on 2018/6/15.
@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class IssueRealm: Object {
+class ReportIssueRealm: Object {
     @objc dynamic var id = 0
     @objc dynamic var key = ""
     @objc dynamic var summary = ""

@@ -1,5 +1,5 @@
 //
-//  Issue.swift
+//  ReportIssue.swift
 //  Jirara
 //
 //  Created by kingcos on 2018/6/14.
@@ -12,7 +12,7 @@ import Mappable
 /**
  API: https://jira.mobike.com/rest/greenhopper/1.0/rapid/charts/sprintreport?rapidViewId=80&sprintId=1210
  **/
-struct Issue: Mappable {
+struct ReportIssue: Mappable {
     var id: Int
     var key: String
     var summary: String
@@ -30,9 +30,9 @@ struct Issue: Mappable {
     }
 }
 
-extension Issue: Realmable {
-    func toRealmObject() -> IssueRealm {
-        let object = IssueRealm()
+extension ReportIssue: Realmable {
+    func toRealmObject() -> ReportIssueRealm {
+        let object = ReportIssueRealm()
         object.id = id
         object.key = key
         object.summary = summary
