@@ -1,0 +1,50 @@
+PODS:
+  - Alamofire (4.7.2)
+  - Charts (3.1.1):
+    - Charts/Core (= 3.1.1)
+  - Charts/Core (3.1.1)
+  - ChartsRealm (3.1.1):
+    - Charts (~> 3.1.1)
+    - RealmSwift (~> 3.7.1)
+  - Kingfisher (4.8.0)
+  - mailcore2-osx (0.6.4)
+  - Mappable (1.2.1)
+  - Realm (3.7.1):
+    - Realm/Headers (= 3.7.1)
+  - Realm/Headers (3.7.1)
+  - RealmSwift (3.7.1):
+    - Realm (= 3.7.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - Charts
+  - ChartsRealm
+  - Kingfisher
+  - mailcore2-osx
+  - Mappable
+  - Realm
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - Charts
+    - ChartsRealm
+    - Kingfisher
+    - mailcore2-osx
+    - Mappable
+    - Realm
+    - RealmSwift
+
+SPEC CHECKSUMS:
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
+  ChartsRealm: 35728e98e8d365a45c54fa7a1fa47663d2539887
+  Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
+  mailcore2-osx: 56890045e50f3b09b6530f5bd008eda67e1f6b82
+  Mappable: 3b0ee951fae981fe387a5bbfb835aa4644f3f8b7
+  Realm: 906be37d52f17f25484ac01643a7f26a9d3bfbd5
+  RealmSwift: 1c2b6bae3dc55bb87e080ffa96537d71442f6dce
+
+PODFILE CHECKSUM: 7b2ae7b5e2745f02ddd5ce8c4e8a1edc8025cf90
+
+COCOAPODS: 1.5.0

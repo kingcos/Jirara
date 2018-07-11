@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14295.6"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
+            <connections>
+                <outlet property="delegate" destination="4e3-z2-FTG" id="hZW-Ra-nbE"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customObject id="4e3-z2-FTG" customClass="AppDelegate" customModule="Jirara" customModuleProvider="target"/>
+        <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+        <customObject id="tJB-Mf-sbR" customClass="StatusMenuController" customModule="Jirara" customModuleProvider="target">
+            <connections>
+                <outlet property="issuesMenu" destination="kk9-XX-Bvb" id="rnw-XM-Ies"/>
+                <outlet property="statusMenu" destination="diz-yd-MSS" id="JZ7-P8-170"/>
+            </connections>
+        </customObject>
+        <menu id="diz-yd-MSS">
+            <items>
+                <menuItem title="Send" id="A10-4q-FoX">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Send" id="dNn-jV-eH6">
+                        <items>
+                            <menuItem title="团队周报" id="C7x-Aa-oMt">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="clickOnSendTeamSummary:" target="tJB-Mf-sbR" id="bWY-SZ-vSn"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="个人周报" id="ddf-Y6-Li8">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="clickOnSendIndividualSummary:" target="tJB-Mf-sbR" id="JxG-6f-isy"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="My Issues" id="MOz-ln-npt">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="My Issues" id="kk9-XX-Bvb">
+                        <items>
+                            <menuItem title="New Issue..." id="1E1-gf-wpm">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="clickOnNewIssue:" target="tJB-Mf-sbR" id="vcw-Bq-kyo"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Vxc-Ym-IR9"/>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="tP2-JI-ym0"/>
+                <menuItem title="Preferences..." id="Ei4-87-19I">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="clickOnPreferences:" target="tJB-Mf-sbR" id="Juq-gF-HEg"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="About" id="vHS-rQ-j4L">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="clickOnAbout:" target="tJB-Mf-sbR" id="bQw-ai-gOO"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Quit" id="8KA-Sg-cmW">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="clickOnQuit:" target="tJB-Mf-sbR" id="jQ0-io-l7w"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="-272" y="41"/>
+        </menu>
+    </objects>
+</document>

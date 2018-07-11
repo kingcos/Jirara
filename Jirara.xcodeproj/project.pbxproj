@@ -1,0 +1,662 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		840AB50220D8AADD0038D329 /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AB50120D8AADD0038D329 /* RealmHelper.swift */; };
+		840AB50420D8B0100038D329 /* Realmable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AB50320D8B0100038D329 /* Realmable.swift */; };
+		8426D4DF20D18F350007F180 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4DE20D18F350007F180 /* MainViewModel.swift */; };
+		8426D4E120D194D70007F180 /* SprintQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E020D194D70007F180 /* SprintQuery.swift */; };
+		8426D4E520D197E60007F180 /* RapidViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E420D197E60007F180 /* RapidViews.swift */; };
+		8426D4E720D1A2670007F180 /* SprintReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E620D1A2670007F180 /* SprintReport.swift */; };
+		8426D4E920D1A3070007F180 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E820D1A3070007F180 /* Issue.swift */; };
+		843973CE20CFF64A00B14AB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843973CD20CFF64A00B14AB7 /* AppDelegate.swift */; };
+		843973D220CFF64C00B14AB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843973D120CFF64C00B14AB7 /* Assets.xcassets */; };
+		8442048820E6007300DB9837 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442048620E6007300DB9837 /* AboutWindowController.swift */; };
+		8442048920E6007300DB9837 /* AboutWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8442048720E6007300DB9837 /* AboutWindowController.xib */; };
+		8450C33B20E3A25D009C0843 /* SendPreviewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8450C33920E3A25D009C0843 /* SendPreviewWindowController.swift */; };
+		8450C33C20E3A25D009C0843 /* SendPreviewWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8450C33A20E3A25D009C0843 /* SendPreviewWindowController.xib */; };
+		847C8C1E20D25338000C2854 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C1D20D25338000C2854 /* Constants.swift */; };
+		847C8C7120D2AA26000C2854 /* MailUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C7020D2AA26000C2854 /* MailUtil.swift */; };
+		847C8C7620D2B8D2000C2854 /* NSView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */; };
+		847CA69E20D39276000C2854 /* EngineerRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CA69D20D39276000C2854 /* EngineerRealm.swift */; };
+		847CA6A020D3932E000C2854 /* IssueRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CA69F20D3932E000C2854 /* IssueRealm.swift */; };
+		847CA6A220D393F7000C2854 /* SprintReportRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CA6A120D393F7000C2854 /* SprintReportRealm.swift */; };
+		849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478BA20D0D0A400FC9853 /* Engineer.swift */; };
+		849478BD20D112C500FC9853 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478BC20D112C500FC9853 /* UserDefaults+Extension.swift */; };
+		849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478C720D13FFC00FC9853 /* JiraAPI.swift */; };
+		849478CA20D143EB00FC9853 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478C920D143EB00FC9853 /* String+Extension.swift */; };
+		849478CC20D152DE00FC9853 /* NSAlert+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478CB20D152DE00FC9853 /* NSAlert+Extension.swift */; };
+		84A06E8520E0EFDF0048798F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A06E8420E0EFDF0048798F /* MainMenu.xib */; };
+		84A06E8720E0F0960048798F /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E8620E0F0960048798F /* StatusMenuController.swift */; };
+		84A06E8A20E0F1110048798F /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E8820E0F1110048798F /* PreferencesWindowController.swift */; };
+		84A06E8B20E0F1110048798F /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A06E8920E0F1110048798F /* PreferencesWindowController.xib */; };
+		84A06E8D20E0F69F0048798F /* NSNib+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E8C20E0F69F0048798F /* NSNib+Extension.swift */; };
+		84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FCBFF320D0BDFF00FFDA73 /* NSColor+Extension.swift */; };
+		CACFDF2552D85F070858118D /* Pods_Jirara.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A62425EE78D72A54CDC1894A /* Pods_Jirara.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5BF3BB22542F69B284DE1644 /* Pods-Jirara.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jirara.release.xcconfig"; path = "Pods/Target Support Files/Pods-Jirara/Pods-Jirara.release.xcconfig"; sourceTree = "<group>"; };
+		840AB50120D8AADD0038D329 /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
+		840AB50320D8B0100038D329 /* Realmable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realmable.swift; sourceTree = "<group>"; };
+		840AB50620DA5CD70038D329 /* libcorecrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcorecrypto.tbd; path = usr/lib/system/libcorecrypto.tbd; sourceTree = SDKROOT; };
+		840AB50820DA5CEA0038D329 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = usr/lib/system/libcommonCrypto.tbd; sourceTree = SDKROOT; };
+		840AB50A20DA5CF30038D329 /* CryptoTokenKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoTokenKit.framework; path = System/Library/Frameworks/CryptoTokenKit.framework; sourceTree = SDKROOT; };
+		840AB50B20DA5CF40038D329 /* libcorecrypto_trace.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcorecrypto_trace.tbd; path = usr/lib/system/libcorecrypto_trace.tbd; sourceTree = SDKROOT; };
+		840AB50C20DA5CF40038D329 /* libapple_crypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libapple_crypto.tbd; path = usr/lib/libapple_crypto.tbd; sourceTree = SDKROOT; };
+		840AB50D20DA5CF40038D329 /* libk5crypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libk5crypto.tbd; path = usr/lib/libk5crypto.tbd; sourceTree = SDKROOT; };
+		840AB50E20DA5CF40038D329 /* libswiftCryptoTokenKit.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftCryptoTokenKit.tbd; path = System/Library/PrivateFrameworks/Swift/libswiftCryptoTokenKit.tbd; sourceTree = SDKROOT; };
+		840AB51420DA5D6A0038D329 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../Desktop/libcrypto.a; sourceTree = "<group>"; };
+		840AB51620DA5F490038D329 /* libcrypto.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.0.0.dylib; path = ../../../Desktop/libcrypto.1.0.0.dylib; sourceTree = "<group>"; };
+		8426D4DE20D18F350007F180 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		8426D4E020D194D70007F180 /* SprintQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintQuery.swift; sourceTree = "<group>"; };
+		8426D4E420D197E60007F180 /* RapidViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidViews.swift; sourceTree = "<group>"; };
+		8426D4E620D1A2670007F180 /* SprintReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintReport.swift; sourceTree = "<group>"; };
+		8426D4E820D1A3070007F180 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		843973CA20CFF64A00B14AB7 /* Jirara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jirara.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		843973CD20CFF64A00B14AB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		843973D120CFF64C00B14AB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		843973D620CFF64C00B14AB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		843973D720CFF64C00B14AB7 /* Jirara.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jirara.entitlements; sourceTree = "<group>"; };
+		8442048620E6007300DB9837 /* AboutWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
+		8442048720E6007300DB9837 /* AboutWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutWindowController.xib; sourceTree = "<group>"; };
+		8450C33920E3A25D009C0843 /* SendPreviewWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPreviewWindowController.swift; sourceTree = "<group>"; };
+		8450C33A20E3A25D009C0843 /* SendPreviewWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendPreviewWindowController.xib; sourceTree = "<group>"; };
+		847C8C1D20D25338000C2854 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		847C8C7020D2AA26000C2854 /* MailUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailUtil.swift; sourceTree = "<group>"; };
+		847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extension.swift"; sourceTree = "<group>"; };
+		847CA69D20D39276000C2854 /* EngineerRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineerRealm.swift; sourceTree = "<group>"; };
+		847CA69F20D3932E000C2854 /* IssueRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueRealm.swift; sourceTree = "<group>"; };
+		847CA6A120D393F7000C2854 /* SprintReportRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintReportRealm.swift; sourceTree = "<group>"; };
+		848A64FD20DBA6ED002FBCE4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		848A64FF20DBA86B002FBCE4 /* libMailCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMailCore.a; path = "../../../Downloads/mailcore2-osx-12/lib/libMailCore.a"; sourceTree = "<group>"; };
+		848A650120DBAE14002FBCE4 /* Jirara-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Jirara-Bridging-Header.h"; sourceTree = "<group>"; };
+		849478BA20D0D0A400FC9853 /* Engineer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engineer.swift; sourceTree = "<group>"; };
+		849478BC20D112C500FC9853 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
+		849478C720D13FFC00FC9853 /* JiraAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraAPI.swift; sourceTree = "<group>"; };
+		849478C920D143EB00FC9853 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		849478CB20D152DE00FC9853 /* NSAlert+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAlert+Extension.swift"; sourceTree = "<group>"; };
+		84A06E8420E0EFDF0048798F /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		84A06E8620E0F0960048798F /* StatusMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
+		84A06E8820E0F1110048798F /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		84A06E8920E0F1110048798F /* PreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
+		84A06E8C20E0F69F0048798F /* NSNib+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNib+Extension.swift"; sourceTree = "<group>"; };
+		84FCBFF320D0BDFF00FFDA73 /* NSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extension.swift"; sourceTree = "<group>"; };
+		A2FE8ACC31D85D047A85C605 /* Pods-Jirara.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jirara.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Jirara/Pods-Jirara.debug.xcconfig"; sourceTree = "<group>"; };
+		A62425EE78D72A54CDC1894A /* Pods_Jirara.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jirara.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		843973C720CFF64A00B14AB7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CACFDF2552D85F070858118D /* Pods_Jirara.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		63B49DAEB5DC44FD9C119E09 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				848A64FF20DBA86B002FBCE4 /* libMailCore.a */,
+				848A64FD20DBA6ED002FBCE4 /* Security.framework */,
+				840AB51620DA5F490038D329 /* libcrypto.1.0.0.dylib */,
+				840AB51420DA5D6A0038D329 /* libcrypto.a */,
+				840AB50A20DA5CF30038D329 /* CryptoTokenKit.framework */,
+				840AB50C20DA5CF40038D329 /* libapple_crypto.tbd */,
+				840AB50B20DA5CF40038D329 /* libcorecrypto_trace.tbd */,
+				840AB50D20DA5CF40038D329 /* libk5crypto.tbd */,
+				840AB50E20DA5CF40038D329 /* libswiftCryptoTokenKit.tbd */,
+				840AB50820DA5CEA0038D329 /* libcommonCrypto.tbd */,
+				840AB50620DA5CD70038D329 /* libcorecrypto.tbd */,
+				A62425EE78D72A54CDC1894A /* Pods_Jirara.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8426D4DD20D18F190007F180 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8426D4DE20D18F350007F180 /* MainViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		843973C120CFF64A00B14AB7 = {
+			isa = PBXGroup;
+			children = (
+				843973CC20CFF64A00B14AB7 /* Jirara */,
+				843973CB20CFF64A00B14AB7 /* Products */,
+				881409385CB01FFB70904BA6 /* Pods */,
+				63B49DAEB5DC44FD9C119E09 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		843973CB20CFF64A00B14AB7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				843973CA20CFF64A00B14AB7 /* Jirara.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		843973CC20CFF64A00B14AB7 /* Jirara */ = {
+			isa = PBXGroup;
+			children = (
+				84A06E8320E0EFD00048798F /* Menu */,
+				8426D4DD20D18F190007F180 /* ViewModel */,
+				849478C420D13EFA00FC9853 /* Util */,
+				849478B920D0D09700FC9853 /* Model */,
+				84FCBFF220D0BDED00FFDA73 /* Extension */,
+				843973CD20CFF64A00B14AB7 /* AppDelegate.swift */,
+				843973D120CFF64C00B14AB7 /* Assets.xcassets */,
+				843973D620CFF64C00B14AB7 /* Info.plist */,
+				843973D720CFF64C00B14AB7 /* Jirara.entitlements */,
+				848A650120DBAE14002FBCE4 /* Jirara-Bridging-Header.h */,
+			);
+			path = Jirara;
+			sourceTree = "<group>";
+		};
+		847CA69C20D390B1000C2854 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				847CA69D20D39276000C2854 /* EngineerRealm.swift */,
+				847CA69F20D3932E000C2854 /* IssueRealm.swift */,
+				847CA6A120D393F7000C2854 /* SprintReportRealm.swift */,
+				840AB50320D8B0100038D329 /* Realmable.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		849478B920D0D09700FC9853 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				847CA69C20D390B1000C2854 /* Realm */,
+				849478BA20D0D0A400FC9853 /* Engineer.swift */,
+				8426D4E020D194D70007F180 /* SprintQuery.swift */,
+				8426D4E420D197E60007F180 /* RapidViews.swift */,
+				8426D4E620D1A2670007F180 /* SprintReport.swift */,
+				8426D4E820D1A3070007F180 /* Issue.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		849478C420D13EFA00FC9853 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				849478C720D13FFC00FC9853 /* JiraAPI.swift */,
+				847C8C1D20D25338000C2854 /* Constants.swift */,
+				840AB50120D8AADD0038D329 /* RealmHelper.swift */,
+				847C8C7020D2AA26000C2854 /* MailUtil.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		84A06E8320E0EFD00048798F /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				84E1815920F4B4960035E373 /* Controller */,
+				84E1815A20F4B4B30035E373 /* View */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		84E1815920F4B4960035E373 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				84A06E8420E0EFDF0048798F /* MainMenu.xib */,
+				84A06E8620E0F0960048798F /* StatusMenuController.swift */,
+				84A06E8820E0F1110048798F /* PreferencesWindowController.swift */,
+				84A06E8920E0F1110048798F /* PreferencesWindowController.xib */,
+				8450C33920E3A25D009C0843 /* SendPreviewWindowController.swift */,
+				8450C33A20E3A25D009C0843 /* SendPreviewWindowController.xib */,
+				8442048620E6007300DB9837 /* AboutWindowController.swift */,
+				8442048720E6007300DB9837 /* AboutWindowController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		84E1815A20F4B4B30035E373 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		84FCBFF220D0BDED00FFDA73 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				84FCBFF320D0BDFF00FFDA73 /* NSColor+Extension.swift */,
+				849478BC20D112C500FC9853 /* UserDefaults+Extension.swift */,
+				849478C920D143EB00FC9853 /* String+Extension.swift */,
+				849478CB20D152DE00FC9853 /* NSAlert+Extension.swift */,
+				847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */,
+				84A06E8C20E0F69F0048798F /* NSNib+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		881409385CB01FFB70904BA6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A2FE8ACC31D85D047A85C605 /* Pods-Jirara.debug.xcconfig */,
+				5BF3BB22542F69B284DE1644 /* Pods-Jirara.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		843973C920CFF64A00B14AB7 /* Jirara */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 843973DA20CFF64C00B14AB7 /* Build configuration list for PBXNativeTarget "Jirara" */;
+			buildPhases = (
+				545070D71D1C27E5C697792A /* [CP] Check Pods Manifest.lock */,
+				843973C620CFF64A00B14AB7 /* Sources */,
+				843973C720CFF64A00B14AB7 /* Frameworks */,
+				843973C820CFF64A00B14AB7 /* Resources */,
+				24010122696B1739D51D2277 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Jirara;
+			productName = Jirara;
+			productReference = 843973CA20CFF64A00B14AB7 /* Jirara.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		843973C220CFF64A00B14AB7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = kingcos;
+				TargetAttributes = {
+					843973C920CFF64A00B14AB7 = {
+						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1000;
+					};
+				};
+			};
+			buildConfigurationList = 843973C520CFF64A00B14AB7 /* Build configuration list for PBXProject "Jirara" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 843973C120CFF64A00B14AB7;
+			productRefGroup = 843973CB20CFF64A00B14AB7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				843973C920CFF64A00B14AB7 /* Jirara */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		843973C820CFF64A00B14AB7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8450C33C20E3A25D009C0843 /* SendPreviewWindowController.xib in Resources */,
+				84A06E8B20E0F1110048798F /* PreferencesWindowController.xib in Resources */,
+				843973D220CFF64C00B14AB7 /* Assets.xcassets in Resources */,
+				8442048920E6007300DB9837 /* AboutWindowController.xib in Resources */,
+				84A06E8520E0EFDF0048798F /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		24010122696B1739D51D2277 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Jirara/Pods-Jirara-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/ChartsRealm/ChartsRealm.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Mappable/Mappable.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChartsRealm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mappable.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Jirara/Pods-Jirara-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		545070D71D1C27E5C697792A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Jirara-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		843973C620CFF64A00B14AB7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				847CA6A220D393F7000C2854 /* SprintReportRealm.swift in Sources */,
+				849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */,
+				847C8C7120D2AA26000C2854 /* MailUtil.swift in Sources */,
+				847C8C7620D2B8D2000C2854 /* NSView+Extension.swift in Sources */,
+				843973CE20CFF64A00B14AB7 /* AppDelegate.swift in Sources */,
+				849478CA20D143EB00FC9853 /* String+Extension.swift in Sources */,
+				8426D4E520D197E60007F180 /* RapidViews.swift in Sources */,
+				84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */,
+				849478CC20D152DE00FC9853 /* NSAlert+Extension.swift in Sources */,
+				8426D4E720D1A2670007F180 /* SprintReport.swift in Sources */,
+				84A06E8A20E0F1110048798F /* PreferencesWindowController.swift in Sources */,
+				847CA6A020D3932E000C2854 /* IssueRealm.swift in Sources */,
+				840AB50420D8B0100038D329 /* Realmable.swift in Sources */,
+				8426D4DF20D18F350007F180 /* MainViewModel.swift in Sources */,
+				849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */,
+				8450C33B20E3A25D009C0843 /* SendPreviewWindowController.swift in Sources */,
+				84A06E8D20E0F69F0048798F /* NSNib+Extension.swift in Sources */,
+				8442048820E6007300DB9837 /* AboutWindowController.swift in Sources */,
+				847CA69E20D39276000C2854 /* EngineerRealm.swift in Sources */,
+				840AB50220D8AADD0038D329 /* RealmHelper.swift in Sources */,
+				8426D4E120D194D70007F180 /* SprintQuery.swift in Sources */,
+				847C8C1E20D25338000C2854 /* Constants.swift in Sources */,
+				849478BD20D112C500FC9853 /* UserDefaults+Extension.swift in Sources */,
+				84A06E8720E0F0960048798F /* StatusMenuController.swift in Sources */,
+				8426D4E920D1A3070007F180 /* Issue.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		843973D820CFF64C00B14AB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		843973D920CFF64C00B14AB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		843973DB20CFF64C00B14AB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2FE8ACC31D85D047A85C605 /* Pods-Jirara.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Jirara/Jirara.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = LEG7CXMPKJ;
+				INFOPLIST_FILE = Jirara/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks/Swift",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lMailCore",
+					"-lc++",
+					"-liconv",
+					"-lresolv",
+					"-lsasl2",
+					"-ltidy",
+					"-lxml2",
+					"-lz",
+					"-ObjC",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"Charts\"",
+					"-framework",
+					"\"ChartsRealm\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"Mappable\"",
+					"-framework",
+					"\"Realm\"",
+					"-framework",
+					"\"RealmSwift\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maimieng.Jirara;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Jirara/Jirara-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		843973DC20CFF64C00B14AB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5BF3BB22542F69B284DE1644 /* Pods-Jirara.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Jirara/Jirara.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = LEG7CXMPKJ;
+				INFOPLIST_FILE = Jirara/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks/Swift",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lMailCore",
+					"-lc++",
+					"-liconv",
+					"-lresolv",
+					"-lsasl2",
+					"-ltidy",
+					"-lxml2",
+					"-lz",
+					"-ObjC",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"Charts\"",
+					"-framework",
+					"\"ChartsRealm\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"Mappable\"",
+					"-framework",
+					"\"Realm\"",
+					"-framework",
+					"\"RealmSwift\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maimieng.Jirara;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Jirara/Jirara-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		843973C520CFF64A00B14AB7 /* Build configuration list for PBXProject "Jirara" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				843973D820CFF64C00B14AB7 /* Debug */,
+				843973D920CFF64C00B14AB7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		843973DA20CFF64C00B14AB7 /* Build configuration list for PBXNativeTarget "Jirara" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				843973DB20CFF64C00B14AB7 /* Debug */,
+				843973DC20CFF64C00B14AB7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 843973C220CFF64A00B14AB7 /* Project object */;
+}
