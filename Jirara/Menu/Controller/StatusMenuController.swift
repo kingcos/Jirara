@@ -17,6 +17,9 @@ class StatusMenuController: NSObject {
     var sendPreviewWindowController: SendPreviewWindowController!
     var aboutWindowController: AboutWindowController!
     
+    var selectedIssueIndex: Int?
+    var issues: [IssueRealm] = []
+    
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     
     override func awakeFromNib() {
@@ -72,10 +75,83 @@ extension StatusMenuController {
     }
     
     func setupMenuItems() {
-        // Setup My Issues submenu view
-        guard let issuesSubmenu = statusMenu.item(at: 1)?.submenu else {
-            return
-        }
+        issuesMenu.delegate = self
+//
+//        // Setup My Issues submenu view
+//        guard let issuesSubmenu = statusMenu.item(at: 1)?.submenu else {
+//            return
+//        }
         
+    }
+}
+
+extension StatusMenuController: NSMenuDelegate {
+    func menuWillOpen(_ menu: NSMenu) {
+//        let menuItem = NSMenuItem.init(title: "Test", action: nil, keyEquivalent: "")
+//        menu.insertItem(menuItem, at: 2)
+//        let submenu = NSMenu.init()
+//        menu.setSubmenu(submenu, for: menuItem)
+        
+
+        
+//        MainViewModel.fetch { _, engineers in
+//            let engineer = engineers.filter { $0.name == UserDefaults.get(by: .accountUsername) }
+//            for issue in engineer[0].issues {
+//                DispatchQueue.main.async {
+//                    let menuItem = NSMenuItem.init(title: issue.summary,
+//                                                   action: nil,
+//                                                   keyEquivalent: "")
+//                    menu.insertItem(menuItem, at: 2)
+//                    let submenu = NSMenu.init()
+//
+//                    let viewDetailsItem = NSMenuItem.init(title: "View Details...",
+//                                                      action: #selector(self.clickOnViewDetails(_:)),
+//                                                      keyEquivalent: "")
+//                    viewDetailsItem.target = self
+//                    submenu.addItem(viewDetailsItem)
+//                    menu.setSubmenu(submenu, for: menuItem)
+//                }
+//            }
+//        }
+        
+        guard let sprintReport = SprintReportRealmDAO.findLatest() else { fatalError() }
+        issues = sprintReport.issues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
+        
+        for issue in issues.reversed() {
+            let submenu = NSMenu.init()
+            let menuItem = NSMenuItem.init(title: issue.summary,
+                                           action: nil,
+                                           keyEquivalent: "")
+            let viewDetailsItem = NSMenuItem.init(title: "View Details...",
+                                                  action: #selector(self.clickOnViewDetails(_:)),
+                                                  keyEquivalent: "")
+            viewDetailsItem.target = self
+            submenu.addItem(viewDetailsItem)
+            menu.insertItem(menuItem, at: 2)
+            menu.setSubmenu(submenu, for: menuItem)
+        }
+    }
+    
+    func menuDidClose(_ menu: NSMenu) {
+        for item in menu.items {
+            if menu.index(of: item) != 0 && menu.index(of: item) != 1 {
+                menu.removeItem(item)
+            }
+        }
+    }
+    
+    func menu(_ menu: NSMenu, willHighlight item: NSMenuItem?) {
+        guard let item = item else { return }
+        selectedIssueIndex = issuesMenu.index(of: item)
+    }
+    
+    @objc func clickOnViewDetails(_ sender: NSMenuItem) {
+        guard let selectedIssueIndex = selectedIssueIndex else { fatalError() }
+        
+        print(issues[selectedIssueIndex - 2].summary)
+    }
+    
+    @objc func clickOnIssueItem(_ sender: NSMenuItem) {
+        selectedIssueIndex = issuesMenu.index(of: sender)
     }
 }

@@ -45,23 +45,13 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="My Issues" id="kk9-XX-Bvb">
                         <items>
-                            <menuItem title="Menu" id="WeO-fZ-DzZ">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Menu" id="si7-Xy-vU6">
-                                    <items>
-                                        <menuItem title="Item" id="wlF-kt-Dgz">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="VOx-pn-fvw"/>
                             <menuItem title="New Issue..." id="1E1-gf-wpm">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="clickOnNewIssue:" target="tJB-Mf-sbR" id="vcw-Bq-kyo"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Vxc-Ym-IR9"/>
                         </items>
                     </menu>
                 </menuItem>
