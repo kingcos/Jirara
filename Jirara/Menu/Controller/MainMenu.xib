@@ -51,6 +51,9 @@
                                     <action selector="clickOnNewIssue:" target="tJB-Mf-sbR" id="vcw-Bq-kyo"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Refresh" id="yzX-BC-C2i">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="Vxc-Ym-IR9"/>
                         </items>
                     </menu>

@@ -21,6 +21,7 @@ class StatusMenuController: NSObject {
     var issues: [ReportIssueRealm] = []
     
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+    let issueMenuStickItemsCount = 3
     
     override func awakeFromNib() {
         setupStatusItem()
@@ -127,14 +128,14 @@ extension StatusMenuController: NSMenuDelegate {
                                                   keyEquivalent: "")
             viewDetailsItem.target = self
             submenu.addItem(viewDetailsItem)
-            menu.insertItem(menuItem, at: 2)
+            menu.insertItem(menuItem, at: issueMenuStickItemsCount)
             menu.setSubmenu(submenu, for: menuItem)
         }
     }
     
     func menuDidClose(_ menu: NSMenu) {
         for item in menu.items {
-            if menu.index(of: item) != 0 && menu.index(of: item) != 1 {
+            if menu.index(of: item) >= issueMenuStickItemsCount {
                 menu.removeItem(item)
             }
         }
@@ -147,8 +148,7 @@ extension StatusMenuController: NSMenuDelegate {
     
     @objc func clickOnViewDetails(_ sender: NSMenuItem) {
         guard let selectedIssueIndex = selectedIssueIndex else { fatalError() }
-        
-        print(issues[selectedIssueIndex - 2].summary)
+        print(issues[selectedIssueIndex - issueMenuStickItemsCount].summary)
     }
     
     @objc func clickOnIssueItem(_ sender: NSMenuItem) {

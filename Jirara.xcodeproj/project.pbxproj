@@ -36,6 +36,8 @@
 		84A06E8A20E0F1110048798F /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E8820E0F1110048798F /* PreferencesWindowController.swift */; };
 		84A06E8B20E0F1110048798F /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A06E8920E0F1110048798F /* PreferencesWindowController.xib */; };
 		84A06E8D20E0F69F0048798F /* NSNib+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E8C20E0F69F0048798F /* NSNib+Extension.swift */; };
+		84E72F6420F640F9000347BC /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E72F6320F640F9000347BC /* Issue.swift */; };
+		84E72F6620F642C0000347BC /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E72F6520F642C0000347BC /* IssueViewModel.swift */; };
 		84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FCBFF320D0BDFF00FFDA73 /* NSColor+Extension.swift */; };
 		CACFDF2552D85F070858118D /* Pods_Jirara.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A62425EE78D72A54CDC1894A /* Pods_Jirara.framework */; };
 /* End PBXBuildFile section */
@@ -86,6 +88,8 @@
 		84A06E8820E0F1110048798F /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		84A06E8920E0F1110048798F /* PreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		84A06E8C20E0F69F0048798F /* NSNib+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNib+Extension.swift"; sourceTree = "<group>"; };
+		84E72F6320F640F9000347BC /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		84E72F6520F642C0000347BC /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
 		84FCBFF320D0BDFF00FFDA73 /* NSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extension.swift"; sourceTree = "<group>"; };
 		A2FE8ACC31D85D047A85C605 /* Pods-Jirara.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jirara.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Jirara/Pods-Jirara.debug.xcconfig"; sourceTree = "<group>"; };
 		A62425EE78D72A54CDC1894A /* Pods_Jirara.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jirara.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				8426D4DE20D18F350007F180 /* MainViewModel.swift */,
+				84E72F6520F642C0000347BC /* IssueViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 				8426D4E620D1A2670007F180 /* SprintReport.swift */,
 				8426D4E420D197E60007F180 /* RapidViews.swift */,
 				8426D4E820D1A3070007F180 /* ReportIssue.swift */,
+				84E72F6320F640F9000347BC /* Issue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -383,6 +389,7 @@
 				847CA6A220D393F7000C2854 /* SprintReportRealm.swift in Sources */,
 				849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */,
 				847C8C7120D2AA26000C2854 /* MailUtil.swift in Sources */,
+				84E72F6420F640F9000347BC /* Issue.swift in Sources */,
 				847C8C7620D2B8D2000C2854 /* NSView+Extension.swift in Sources */,
 				843973CE20CFF64A00B14AB7 /* AppDelegate.swift in Sources */,
 				849478CA20D143EB00FC9853 /* String+Extension.swift in Sources */,
@@ -392,6 +399,7 @@
 				8426D4E720D1A2670007F180 /* SprintReport.swift in Sources */,
 				84A06E8A20E0F1110048798F /* PreferencesWindowController.swift in Sources */,
 				847CA6A020D3932E000C2854 /* ReportIssueRealm.swift in Sources */,
+				84E72F6620F642C0000347BC /* IssueViewModel.swift in Sources */,
 				840AB50420D8B0100038D329 /* Realmable.swift in Sources */,
 				8426D4DF20D18F350007F180 /* MainViewModel.swift in Sources */,
 				849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */,
