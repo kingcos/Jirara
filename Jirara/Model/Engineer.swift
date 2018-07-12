@@ -18,7 +18,7 @@ struct Engineer: Mappable {
     var emailAddress: String
     var avatarURL: String
     var displayName: String
-    var reportIssues: [ReportIssue] = []
+    var issues: [Issue] = []
     
     init(map: Mapper) throws {
         name = try map.from("name")
@@ -31,13 +31,11 @@ struct Engineer: Mappable {
 extension Engineer: Realmable {
     func toRealmObject() -> EngineerRealm {
         let object = EngineerRealm()
+        
         object.name = name
         object.emailAddress = emailAddress
         object.avatarURL = avatarURL
         object.displayName = displayName
-        
-        let allReportIssues = reportIssues.map { $0.toRealmObject() }
-        object.issues.append(objectsIn: allReportIssues)
         
         return object
     }

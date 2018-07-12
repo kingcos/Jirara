@@ -22,8 +22,8 @@ class MainViewModel {
         }
     }
     
-    func issues(_ assignee: String?) -> [ReportIssueRealm] {
-        let issues: [ReportIssueRealm] = sprintReport.issues.map { $0 }
+    func issues(_ assignee: String?) -> [IssueRealm] {
+        let issues: [IssueRealm] = sprintReport.issues.map { $0 }
         
         if let assignee = assignee {
             return issues.filter { $0.assignee == assignee }
@@ -34,23 +34,40 @@ class MainViewModel {
 }
 
 extension MainViewModel {
-    class func fetch(_ rapidViewName: String = "Mobike iOS Scrum", completion: @escaping (SprintReport, [EngineerRealm]) -> Void) {
+//    class func fetch(_ rapidViewName: String = "Mobike iOS Scrum",
+//                     _ completion: @escaping (SprintReport, [EngineerRealm]) -> Void) {
+//        fetchRapidView(rapidViewName) { rapidViewID in
+//            fetchSprintQuery(rapidViewID) { sprintID in
+//                fetchSprintReport(rapidViewID, sprintID) { sprintReport in
+//                    fetchEngineers(sprintReport) { engineersRealm in
+//                        completion(sprintReport, engineersRealm)
+//                    }
+//                }
+//            }
+//        }
+//    }
+    
+    class func fetch(_ rapidViewName: String = "Mobike iOS Scrum",
+                     _ completion: @escaping (SprintReport, [EngineerRealm]) -> Void) {
         fetchRapidView(rapidViewName) { rapidViewID in
             fetchSprintQuery(rapidViewID) { sprintID in
                 fetchSprintReport(rapidViewID, sprintID) { sprintReport in
-                    fetchEngineers(sprintReport) { sprintReport, engineersRealm in
-                        completion(sprintReport, engineersRealm)
+                    fetchIssues(sprintReport) { _ in
+                        fetchEngineers(sprintReport) { engineersRealm in
+                            completion(sprintReport, engineersRealm)
+                        }
                     }
                 }
             }
         }
     }
     
-    class func fetchLast(_ rapidViewName: String = "Mobike iOS Scrum", completion: @escaping (SprintReport, [EngineerRealm]) -> Void) {
+    class func fetchLast(_ rapidViewName: String = "Mobike iOS Scrum",
+                         _ completion: @escaping (SprintReport, [EngineerRealm]) -> Void) {
         fetchRapidView(rapidViewName) { rapidViewID in
             fetchSprintQuery(rapidViewID, false) { sprintID in
                 fetchSprintReport(rapidViewID, sprintID) { sprintReport in
-                    fetchEngineers(sprintReport) { sprintReport, engineersRealm in
+                    fetchEngineers(sprintReport) { engineersRealm in
                         completion(sprintReport, engineersRealm)
                     }
                 }
@@ -58,7 +75,8 @@ extension MainViewModel {
         }
     }
     
-    class func fetchRapidView(_ name: String, completion: @escaping (Int) -> Void) {
+    class func fetchRapidView(_ name: String,
+                              _ completion: @escaping (Int) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.rapidView.rawValue
         let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
         
@@ -69,23 +87,21 @@ extension MainViewModel {
                     guard let rapidViews = try? RapidViews(JSONData: data) else {
                         fatalError("\(url) may be broken.")
                     }
-                    
-                    // print(rapidViews)
-                    
                     for view in rapidViews.views {
                         // "Mobike iOS Scrum"
                         if view.name == name {
                             completion(view.id)
                         }
                     }
-                    
                 case .failure(let error):
                     print((error as NSError).description)
                 }
         }
     }
     
-    class func fetchSprintQuery(_ rapidViewID: Int, _ isLatest: Bool = true, completion: @escaping (Int) -> Void) {
+    class func fetchSprintQuery(_ rapidViewID: Int,
+                                _ isLatest: Bool = true,
+                                _ completion: @escaping (Int) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.sprintQuery.rawValue + "\(rapidViewID)"
         let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
         
@@ -118,7 +134,9 @@ extension MainViewModel {
         }
     }
     
-    class func fetchSprintReport(_ rapidViewID: Int, _ sprintID: Int, _ completion: @escaping (SprintReport) -> Void) {
+    class func fetchSprintReport(_ rapidViewID: Int,
+                                 _ sprintID: Int,
+                                 _ completion: @escaping (SprintReport) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.sprintReport.rawValue
         let parameters = ["rapidViewId" : rapidViewID,
                           "sprintId" : sprintID]
@@ -128,68 +146,66 @@ extension MainViewModel {
             .responseData { response in
                 switch response.result {
                 case .success(let data):
-                    guard var sprintReport = try? SprintReport(JSONData: data) else {
+                    guard let sprintReport = try? SprintReport(JSONData: data) else {
                         fatalError("\(url) may be broken.")
                     }
-                    
-                    func formatDate(_ origin: String) -> String {
-                        // 15/06/18 dd/mm/yy
-                        let chineseMonth = origin.split(separator: "/")[1]
-                        let numberMonth = Constants.MonthNumberDict[String(chineseMonth)]
-                        let substrings = origin.replacingOccurrences(of: chineseMonth, with: numberMonth ?? "").split(separator: " ")
-                        
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "dd/MM/yy"
-                        let date = formatter.date(from: String(substrings[0])) ?? Date()
-                        
-                        formatter.dateFormat = Constants.dateFormat
-                        return formatter.string(from: date)
-                    }
-                    
-                    sprintReport.startDate = formatDate(sprintReport.startDate)
-                    sprintReport.endDate = formatDate(sprintReport.endDate)
-                    
-                    // Sprint Report
+                    // Saved Sprint Report
                     SprintReportRealmDAO.add(sprintReport.toRealmObject())
                     
                     completion(sprintReport)
-                    
                 case .failure(let error):
                     print((error as NSError).description)
                 }
         }
     }
     
-    class func fetchEngineers(_ sprintReport: SprintReport, _ completion: @escaping (SprintReport, [EngineerRealm]) -> Void) {
-        let engineerNames = Array(Set((sprintReport.completedIssues + sprintReport.incompletedIssues).map { $0.assignee }))
-        let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.user.rawValue
+    class func fetchIssues(_ sprintReport: SprintReport,
+                           _ completion: @escaping ([IssueRealm]) -> Void) {
+        let issues = sprintReport.completedIssues + sprintReport.incompletedIssues
+        let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issue.rawValue
         let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
-        let requests = engineerNames.map { Alamofire.request(url, parameters: ["username" : $0], headers: headers) }
+        let requests = issues.map { Alamofire.request(url + "\($0.id)", headers: headers) }
         
-        var engineers = [Engineer]()
-        
-        _ = requests.map {
-            $0.responseData { response in
+        var issueRealms = [IssueRealm]()
+        for request in requests {
+            request.responseData { response in
                 switch response.result {
                 case .success(let data):
-                    guard var engineer = try? Engineer(JSONData: data) else {
-                        return
-                    }
-                    
-                    engineer.reportIssues = (sprintReport.completedIssues + sprintReport.incompletedIssues).filter { $0.assignee == engineer.name }
-                    engineers.append(engineer)
-                    
-                    if engineers.count == engineerNames.count {
-                        engineers.sort { $0.name < $1.name }
-                        
-                        let engineersRealm = engineers.map { $0.toRealmObject() }
-                        EngineerRealmDAO.add(engineersRealm)
-                        completion(sprintReport, engineersRealm)
-                    }
+                    guard let issue = try? Issue(JSONData: data) else { return }
+                    // Saved Issue
+                    IssueRealm.add(issue.toRealmObject())
+                    issueRealms.append(issue.toRealmObject())
                 case .failure(let error):
                     print((error as NSError).description)
                 }
             }
         }
+        
+        completion(issueRealms)
+    }
+    
+    class func fetchEngineers(_ sprintReport: SprintReport,
+                              _ completion: @escaping ([EngineerRealm]) -> Void) {
+        let engineerNames = (sprintReport.completedIssues + sprintReport.incompletedIssues).map { $0.assignee }
+        let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.user.rawValue
+        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
+        let requests = engineerNames.map { Alamofire.request(url, parameters: ["username" : $0], headers: headers) }
+        
+        var engineerRealms = [EngineerRealm]()
+        for request in requests {
+            request.responseData { response in
+                switch response.result {
+                case .success(let data):
+                    guard let engineer = try? Engineer(JSONData: data) else {  return }
+                    
+                    EngineerRealmDAO.add(engineer.toRealmObject())
+                    engineerRealms.append(engineer.toRealmObject())
+                case .failure(let error):
+                    print((error as NSError).description)
+                }
+            }
+        }
+        
+        completion(engineerRealms)
     }
 }

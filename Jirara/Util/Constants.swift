@@ -29,4 +29,6 @@ struct Constants {
     ]
     
     static let dateFormat = "yyyy.MM.dd"
+    
+    static let JiraIssueProgressPrefix = "[Jirara-Progress]"
 }

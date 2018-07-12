@@ -18,7 +18,7 @@ class StatusMenuController: NSObject {
     var aboutWindowController: AboutWindowController!
     
     var selectedIssueIndex: Int?
-    var issues: [ReportIssueRealm] = []
+    var issues: [IssueRealm] = []
     
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     let issueMenuStickItemsCount = 3
@@ -120,7 +120,7 @@ extension StatusMenuController: NSMenuDelegate {
         
         for issue in issues.reversed() {
             let submenu = NSMenu.init()
-            let menuItem = NSMenuItem.init(title: issue.summary,
+            let menuItem = NSMenuItem.init(title: issue.title,
                                            action: nil,
                                            keyEquivalent: "")
             let viewDetailsItem = NSMenuItem.init(title: "View Details...",
@@ -148,7 +148,7 @@ extension StatusMenuController: NSMenuDelegate {
     
     @objc func clickOnViewDetails(_ sender: NSMenuItem) {
         guard let selectedIssueIndex = selectedIssueIndex else { fatalError() }
-        print(issues[selectedIssueIndex - issueMenuStickItemsCount].summary)
+        print(issues[selectedIssueIndex - issueMenuStickItemsCount].title)
     }
     
     @objc func clickOnIssueItem(_ sender: NSMenuItem) {

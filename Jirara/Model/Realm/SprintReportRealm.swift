@@ -14,7 +14,7 @@ class SprintReportRealm: Object {
     @objc dynamic var startDate = ""
     @objc dynamic var endDate = ""
     
-    let issues = List<ReportIssueRealm>()
+    let issues = List<IssueRealm>()
     
     override static func primaryKey() -> String? {
         return "id"

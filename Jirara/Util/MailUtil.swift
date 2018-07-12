@@ -153,23 +153,23 @@ struct MailUtil {
                     var priority = ""
                     var status = ""
                     
-                    switch issue.priorityName {
+                    switch issue.priority {
                     case "低优先级", "最低优先级": priority = "💚"
                     case "默认优先级": priority = "💛"
                     case "最高优先级(立刻执行)", "高优先级": priority = "❤️"
-                    default: priority = issue.priorityName
+                    default: priority = issue.priority
                     }
                     
-                    switch issue.statusName {
-                    case "Start": status = "🏁 (\(issue.statusName))"
+                    switch issue.status {
+                    case "Start": status = "🏁 (\(issue.status))"
                     case "完成": status = "✅"
-                    default: status = issue.statusName
+                    default: status = issue.status
                     }
                     
                     table.append(
 """
 <tr>
-<td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.summary)</a></td>
+<td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.title)</a></td>
 <td style="border:1px solid #B0B0B0">\(issue.assignee)</td>
 <td style="border:1px solid #B0B0B0">\(priority)</td>
 <td style="border:1px solid #B0B0B0">\(status)</td>
@@ -219,23 +219,23 @@ struct MailUtil {
                         var priority = ""
                         var status = ""
                         
-                        switch issue.priorityName {
+                        switch issue.priority {
                         case "低优先级", "最低优先级": priority = "💚"
                         case "默认优先级": priority = "💛"
                         case "最高优先级(立刻执行)", "高优先级": priority = "❤️"
-                        default: priority = issue.priorityName
+                        default: priority = issue.priority
                         }
                         
-                        switch issue.statusName {
-                        case "Start": status = "🏁 (\(issue.statusName))"
+                        switch issue.status {
+                        case "Start": status = "🏁 (\(issue.status))"
                         case "完成": status = "✅"
-                        default: status = issue.statusName
+                        default: status = issue.status
                         }
                         
                         table.append(
 """
 <tr>
-<td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.summary)</a></td>
+<td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.title)</a></td>
 <td style="border:1px solid #B0B0B0">\(issue.assignee)</td>
 <td style="border:1px solid #B0B0B0">\(priority)</td>
 <td style="border:1px solid #B0B0B0">\(status)</td>
