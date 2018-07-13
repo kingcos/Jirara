@@ -17,7 +17,12 @@ class IssueRealm: Object {
     @objc dynamic var priority = ""
     @objc dynamic var assignee = ""
     @objc dynamic var status = ""
-    @objc dynamic var progress = ""
+//    @objc dynamic var progress: String {
+//        get {
+//            let comment = comments.filter { $0.author == self.assignee && $0.content.hasPrefix(Constants.JiraIssueProgressPrefix) }.first
+//            return comment?.content ?? ""
+//        }
+//    }
     
     let comments = List<IssueCommentRealm>()
     

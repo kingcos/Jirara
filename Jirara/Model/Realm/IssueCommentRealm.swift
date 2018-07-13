@@ -18,3 +18,11 @@ class IssueCommentRealm: Object {
         return "id"
     }
 }
+
+extension IssueCommentRealm {
+    static let dao = RealmHelper<IssueCommentRealm>()
+    
+    static func add(_ object: IssueCommentRealm) {
+        dao.add([object])
+    }
+}

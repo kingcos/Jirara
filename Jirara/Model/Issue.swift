@@ -56,7 +56,7 @@ extension Issue: Realmable {
         object.assignee = assignee
         object.status = status
         // 取备注中 1. 自己的备注 2. 有进度前缀的备注
-        object.progress = comments.filter { $0.authorName == assignee && $0.body.hasPrefix(Constants.JiraIssueProgressPrefix) }.first?.body ?? ""
+//        object.progress = comments.filter { $0.authorName == assignee && $0.body.hasPrefix(Constants.JiraIssueProgressPrefix) }.first?.body ?? ""
         object.comments.append(objectsIn: comments.map { $0.toRealmObject() })
         
         return object

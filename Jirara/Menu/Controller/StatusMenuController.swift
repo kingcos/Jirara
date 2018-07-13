@@ -128,6 +128,21 @@ extension StatusMenuController: NSMenuDelegate {
                                                   keyEquivalent: "")
             viewDetailsItem.target = self
             submenu.addItem(viewDetailsItem)
+            submenu.addItem(NSMenuItem.separator())
+            
+            for progress in Constants.JiraIssueProgresses {
+                let item = NSMenuItem.init(title: progress,
+                                           action: #selector(self.clickOnProgress(_:)),
+                                           keyEquivalent: "")
+                item.target = self
+                let currentProgress = issue.comments.filter { $0.content.hasPrefix(Constants.JiraIssueProgressPrefix) }.first?.content ?? ""
+                if currentProgress == Constants.JiraIssueProgressPrefix + progress {
+                    item.state = .on
+                }
+                
+                submenu.addItem(item)
+            }
+            
             menu.insertItem(menuItem, at: issueMenuStickItemsCount)
             menu.setSubmenu(submenu, for: menuItem)
         }
@@ -153,5 +168,15 @@ extension StatusMenuController: NSMenuDelegate {
     
     @objc func clickOnIssueItem(_ sender: NSMenuItem) {
         selectedIssueIndex = issuesMenu.index(of: sender)
+    }
+    
+    @objc func clickOnProgress(_ sender: NSMenuItem) {
+        guard let selectedIssueIndex = selectedIssueIndex else { fatalError() }
+        
+        IssueViewModel.fetchIssueComments(issues[selectedIssueIndex - issueMenuStickItemsCount].id) { issueComments in
+            IssueViewModel.updateProgress(self.issues[selectedIssueIndex - self.issueMenuStickItemsCount].id, issueComments, sender.title) {
+//                MainViewModel.fetch { _, _ in }
+            }
+        }
     }
 }

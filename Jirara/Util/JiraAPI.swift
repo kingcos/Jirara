@@ -20,4 +20,6 @@ enum JiraAPI: String {
     case user = "/rest/api/2/user"
     case issueWeb = "/browse/"
     case issue = "/rest/api/2/issue/"
+    
+    case updateComment = "/comment/"
 }

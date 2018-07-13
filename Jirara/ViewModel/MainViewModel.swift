@@ -162,25 +162,13 @@ extension MainViewModel {
     class func fetchIssues(_ sprintReport: SprintReport,
                            _ completion: @escaping ([IssueRealm]) -> Void) {
         let issues = sprintReport.completedIssues + sprintReport.incompletedIssues
-        let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issue.rawValue
-        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
-        let requests = issues.map { Alamofire.request(url + "\($0.id)", headers: headers) }
         
         var issueRealms = [IssueRealm]()
-        for request in requests {
-            request.responseData { response in
-                switch response.result {
-                case .success(let data):
-                    guard let issue = try? Issue(JSONData: data) else { return }
-                    // Saved Issue
-                    IssueRealm.add(issue.toRealmObject())
-                    issueRealms.append(issue.toRealmObject())
-                case .failure(let error):
-                    print((error as NSError).description)
-                }
+        for issue in issues {
+            fetchIssue(String(issue.id)) { issueRealm in
+                issueRealms.append(issueRealm)
             }
         }
-        
         completion(issueRealms)
     }
     
@@ -207,5 +195,22 @@ extension MainViewModel {
         }
         
         completion(engineerRealms)
+    }
+    
+    class func fetchIssue(_ id: String,
+                          _ completion: @escaping (IssueRealm) -> Void) {
+        let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issue.rawValue
+        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
+        
+        Alamofire.request(url + id, headers: headers).responseData { response in
+            switch response.result {
+            case .success(let data):
+                guard let issue = try? Issue(JSONData: data) else { return }
+                // Saved Issue
+                IssueRealm.add(issue.toRealmObject())
+            case .failure(let error):
+                print((error as NSError).description)
+            }
+        }
     }
 }

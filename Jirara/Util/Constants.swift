@@ -31,4 +31,15 @@ struct Constants {
     static let dateFormat = "yyyy.MM.dd"
     
     static let JiraIssueProgressPrefix = "[Jirara-Progress]"
+    static let JiraIssueProgresses = [
+        "10%",
+        "20%",
+        "30%",
+        "40%",
+        "50%",
+        "60%",
+        "70%",
+        "80%",
+        "90%"
+    ]
 }
