@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8407BA1420F7D33700CE5DE7 /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407BA1320F7D33700CE5DE7 /* IssueViewModel.swift */; };
 		8407BA1620F86FF700CE5DE7 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407BA1520F86FF700CE5DE7 /* Transition.swift */; };
+		8407BA1820F877CC00CE5DE7 /* NSUserNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407BA1720F877CC00CE5DE7 /* NSUserNotification+Extension.swift */; };
 		840AB50220D8AADD0038D329 /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AB50120D8AADD0038D329 /* RealmHelper.swift */; };
 		840AB50420D8B0100038D329 /* Realmable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AB50320D8B0100038D329 /* Realmable.swift */; };
 		8426D4DF20D18F350007F180 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4DE20D18F350007F180 /* MainViewModel.swift */; };
@@ -48,6 +49,7 @@
 		5BF3BB22542F69B284DE1644 /* Pods-Jirara.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jirara.release.xcconfig"; path = "Pods/Target Support Files/Pods-Jirara/Pods-Jirara.release.xcconfig"; sourceTree = "<group>"; };
 		8407BA1320F7D33700CE5DE7 /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
 		8407BA1520F86FF700CE5DE7 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
+		8407BA1720F877CC00CE5DE7 /* NSUserNotification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSUserNotification+Extension.swift"; sourceTree = "<group>"; };
 		840AB50120D8AADD0038D329 /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		840AB50320D8B0100038D329 /* Realmable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realmable.swift; sourceTree = "<group>"; };
 		840AB50620DA5CD70038D329 /* libcorecrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcorecrypto.tbd; path = usr/lib/system/libcorecrypto.tbd; sourceTree = SDKROOT; };
@@ -252,6 +254,7 @@
 				849478CB20D152DE00FC9853 /* NSAlert+Extension.swift */,
 				847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */,
 				84A06E8C20E0F69F0048798F /* NSNib+Extension.swift */,
+				8407BA1720F877CC00CE5DE7 /* NSUserNotification+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				840AB50220D8AADD0038D329 /* RealmHelper.swift in Sources */,
 				8426D4E120D194D70007F180 /* SprintQuery.swift in Sources */,
 				847C8C1E20D25338000C2854 /* Constants.swift in Sources */,
+				8407BA1820F877CC00CE5DE7 /* NSUserNotification+Extension.swift in Sources */,
 				849478BD20D112C500FC9853 /* UserDefaults+Extension.swift in Sources */,
 				84A06E8720E0F0960048798F /* StatusMenuController.swift in Sources */,
 				8426D4E920D1A3070007F180 /* ReportIssue.swift in Sources */,

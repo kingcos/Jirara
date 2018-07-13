@@ -205,6 +205,8 @@ extension MainViewModel {
                 guard let issue = try? Issue(JSONData: data) else { return }
                 // Saved Issue
                 IssueRealm.add(issue.toRealmObject())
+                
+                completion(issue.toRealmObject())
             case .failure(let error):
                 print((error as NSError).description)
             }

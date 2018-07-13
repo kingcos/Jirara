@@ -98,6 +98,10 @@ extension StatusMenuController: NSMenuDelegate {
             let menuItem = NSMenuItem.init(title: issue.title,
                                            action: nil,
                                            keyEquivalent: "")
+            if issue.status == "完成" {
+                menuItem.state = .on
+            }
+            
             let viewDetailsItem = NSMenuItem.init(title: "View Details...",
                                                   action: #selector(self.clickOnViewDetails(_:)),
                                                   keyEquivalent: "")
@@ -110,7 +114,7 @@ extension StatusMenuController: NSMenuDelegate {
                                            action: #selector(self.clickOnProgress(_:)),
                                            keyEquivalent: "")
                 item.target = self
-                let currentProgress = issue.comments.filter { $0.content.hasPrefix(Constants.JiraIssueProgressPrefix) }.first?.content ?? ""
+                let currentProgress = issue.comments.filter { $0.content.hasPrefix(Constants.JiraIssueProgressPrefix) }.first?.content ?? Constants.JiraIssueProgressTodo
                 if currentProgress == Constants.JiraIssueProgressPrefix + progress {
                     item.state = .on
                 }
@@ -151,9 +155,21 @@ extension StatusMenuController: NSMenuDelegate {
     
     @objc func clickOnProgress(_ sender: NSMenuItem) {
         guard let selectedIssueIndex = selectedIssueIndex else { fatalError() }
-        
-        IssueViewModel.fetchIssueComments(issues[selectedIssueIndex - issueMenuStickItemsCount].id) { issueComments in
-            IssueViewModel.updateProgress(self.issues[selectedIssueIndex - self.issueMenuStickItemsCount].id, issueComments, sender.title) { }
+        let issue = issues[selectedIssueIndex - issueMenuStickItemsCount]
+        IssueViewModel.fetchIssueComments(issue.id) { issueComments in
+            IssueViewModel.updateProgress(issue.id, issueComments, sender.title) { newIssue in
+                let subtitleSuffix: String
+                switch sender.title {
+                case Constants.JiraIssueProgressTodo:
+                    subtitleSuffix = "，不要忘记开始哟～"
+                case Constants.JiraIssueProgressDone:
+                    subtitleSuffix = "，太棒啦！"
+                default:
+                    subtitleSuffix = "，要加油哟～"
+                }
+                
+                NSUserNotification.send("Jira Issue 进度更新", "已更新至 " + sender.title + subtitleSuffix)
+            }
         }
     }
 }

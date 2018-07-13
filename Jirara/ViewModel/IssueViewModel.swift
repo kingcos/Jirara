@@ -39,7 +39,7 @@ extension IssueViewModel {
     class func updateProgress(_ issueID: String,
                               _ comments: [IssueComment],
                               _ progress: String,
-                              _ completion: @escaping () -> Void) {
+                              _ completion: @escaping (IssueRealm) -> Void) {
         let progressComments = comments.filter { $0.body.hasPrefix(Constants.JiraIssueProgressPrefix) }
         
         let parameters: Parameters = [
@@ -53,10 +53,14 @@ extension IssueViewModel {
 
             Alamofire.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseData { response in
                 switch response.result {
-                case .success(let data):
-                    guard let comment = try? IssueComment(JSONData: data) else { return }
-                    
-                    IssueCommentRealm.add(comment.toRealmObject())
+                case .success:
+                    MainViewModel.fetchIssue(issueID) { issue in
+                        completion(issue)
+                    }
+//                    guard let comment = try? IssueComment(JSONData: data) else { return }
+//
+//                    IssueCommentRealm.add(comment.toRealmObject())
+////                    completion()
                 case .failure(let error):
                     print((error as NSError).description)
                 }
@@ -68,7 +72,9 @@ extension IssueViewModel {
             Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseData { response in
                 switch response.result {
                 case .success:
-                    MainViewModel.fetchIssue(issueID) { _ in }
+                    MainViewModel.fetchIssue(issueID) { issue in
+                        completion(issue)
+                    }
                 case .failure(let error):
                     print((error as NSError).description)
                 }
