@@ -10,7 +10,7 @@ import Foundation
 import Mappable
 
 /**
- API: https://jira.mobike.com/rest/api/latest/issue/56848
+ API: /rest/api/latest/issue/56848
  **/
 struct Issue: Mappable {
     var id: String

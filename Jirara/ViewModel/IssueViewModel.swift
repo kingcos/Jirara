@@ -14,11 +14,11 @@ class IssueViewModel {
 }
 
 extension IssueViewModel {
+    static let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
     
     class func fetchIssueComments(_ id: String,
                                   _ completion: @escaping ([IssueComment]) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issue.rawValue
-        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
         
         Alamofire.request(url + id, headers: headers).responseData { response in
             switch response.result {
@@ -32,12 +32,16 @@ extension IssueViewModel {
         }
     }
     
+//    class func fetchTransitions(_ completion: @escaping ([IssueComment]) -> Void) {
+//
+//    }
+    
     class func updateProgress(_ issueID: String,
                               _ comments: [IssueComment],
                               _ progress: String,
                               _ completion: @escaping () -> Void) {
         let progressComments = comments.filter { $0.body.hasPrefix(Constants.JiraIssueProgressPrefix) }
-        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
+        
         let parameters: Parameters = [
             "author": [ "name": UserDefaults.get(by: .accountUsername) ],
             "body": Constants.JiraIssueProgressPrefix + progress
@@ -69,6 +73,36 @@ extension IssueViewModel {
                     print((error as NSError).description)
                 }
             }
+        }
+        // Workflow Status Update
+        let transitionID: String
+        switch progress {
+        case Constants.JiraIssueProgressTodo:
+            transitionID = Constants.JiraTransitionIDs[0]
+        case Constants.JiraIssueProgressDone:
+            transitionID = Constants.JiraTransitionIDs[2]
+        default:
+            transitionID = Constants.JiraTransitionIDs[1]
+        }
+        
+        updateTransition(issueID, transitionID) { }
+    }
+    
+    class func updateTransition(_ issueID: String,
+                                _ transitionID: String,
+                                _ completion: @escaping () -> Void) {
+        let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issue.rawValue + issueID + JiraAPI.updateTransition.rawValue
+        let parameters: Parameters = [
+            "transition": [ "id": transitionID ]
+        ]
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+                 .responseData { response in
+                    switch response.result {
+                    case .success:
+                        completion()
+                    case .failure(let error):
+                        print((error as NSError).description)
+                    }
         }
     }
 }

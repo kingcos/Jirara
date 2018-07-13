@@ -10,6 +10,8 @@ import Foundation
 import Alamofire
 
 class MainViewModel {
+    static let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
+    
     var engineers: [EngineerRealm] {
         get {
             return EngineerRealmDAO.findAll()
@@ -78,7 +80,6 @@ extension MainViewModel {
     class func fetchRapidView(_ name: String,
                               _ completion: @escaping (Int) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.rapidView.rawValue
-        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
         
         Alamofire.request(url, headers: headers)
             .responseData { response in
@@ -103,7 +104,6 @@ extension MainViewModel {
                                 _ isLatest: Bool = true,
                                 _ completion: @escaping (Int) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.sprintQuery.rawValue + "\(rapidViewID)"
-        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
         
         Alamofire.request(url, headers: headers)
             .responseData { response in
@@ -140,7 +140,6 @@ extension MainViewModel {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.sprintReport.rawValue
         let parameters = ["rapidViewId" : rapidViewID,
                           "sprintId" : sprintID]
-        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
         
         Alamofire.request(url, parameters: parameters, headers: headers)
             .responseData { response in
@@ -176,7 +175,6 @@ extension MainViewModel {
                               _ completion: @escaping ([EngineerRealm]) -> Void) {
         let engineerNames = (sprintReport.completedIssues + sprintReport.incompletedIssues).map { $0.assignee }
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.user.rawValue
-        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
         let requests = engineerNames.map { Alamofire.request(url, parameters: ["username" : $0], headers: headers) }
         
         var engineerRealms = [EngineerRealm]()
@@ -200,7 +198,6 @@ extension MainViewModel {
     class func fetchIssue(_ id: String,
                           _ completion: @escaping (IssueRealm) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issue.rawValue
-        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
         
         Alamofire.request(url + id, headers: headers).responseData { response in
             switch response.result {

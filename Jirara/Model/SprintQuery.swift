@@ -10,7 +10,7 @@ import Foundation
 import Mappable
 
 /**
- API: https://jira.mobike.com/rest/greenhopper/1.0/sprintquery/80
+ API: /rest/greenhopper/1.0/sprintquery/80
  **/
 struct Sprint: Mappable {
     var id: Int

@@ -11,7 +11,7 @@ import Mappable
 import RealmSwift
 
 /**
- API: https://jira.mobike.com/rest/api/2/user?username=i-maiming
+ API: /rest/api/2/user?username=i-maiming
  **/
 struct Engineer: Mappable {
     var name: String
