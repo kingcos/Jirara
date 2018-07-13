@@ -31,8 +31,6 @@ class StatusMenuController: NSObject {
         sendPreviewWindowController = SendPreviewWindowController()
         aboutWindowController = AboutWindowController()
     }
-    
-    
 }
 
 // MARK: IBAction
@@ -66,6 +64,10 @@ extension StatusMenuController {
         }
         
         NSWorkspace.shared.open(url)
+    }
+    
+    @IBAction func clickOnRefresh(_ sender: NSMenuItem) {
+        MainViewModel.fetch { _, _ in }
     }
 }
 
