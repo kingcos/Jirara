@@ -36,41 +36,16 @@ class MainViewModel {
 }
 
 extension MainViewModel {
-//    class func fetch(_ rapidViewName: String = "Mobike iOS Scrum",
-//                     _ completion: @escaping (SprintReport, [EngineerRealm]) -> Void) {
-//        fetchRapidView(rapidViewName) { rapidViewID in
-//            fetchSprintQuery(rapidViewID) { sprintID in
-//                fetchSprintReport(rapidViewID, sprintID) { sprintReport in
-//                    fetchEngineers(sprintReport) { engineersRealm in
-//                        completion(sprintReport, engineersRealm)
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
-    class func fetch(_ rapidViewName: String = "Mobike iOS Scrum",
-                     _ completion: @escaping (SprintReport, [EngineerRealm]) -> Void) {
+    class func fetch(_ rapidViewName: String,
+                     _ isLast: Bool = false,
+                     _ completion: @escaping (SprintReportRealm, [IssueRealm], [EngineerRealm]) -> Void) {
         fetchRapidView(rapidViewName) { rapidViewID in
-            fetchSprintQuery(rapidViewID) { sprintID in
+            fetchSprintQuery(rapidViewID, isLast) { sprintID in
                 fetchSprintReport(rapidViewID, sprintID) { sprintReport in
-                    fetchIssues(sprintReport) { _ in
+                    fetchIssues(sprintReport) { issues in
                         fetchEngineers(sprintReport) { engineersRealm in
-                            completion(sprintReport, engineersRealm)
+                            completion(sprintReport, issues, engineersRealm)
                         }
-                    }
-                }
-            }
-        }
-    }
-    
-    class func fetchLast(_ rapidViewName: String = "Mobike iOS Scrum",
-                         _ completion: @escaping (SprintReport, [EngineerRealm]) -> Void) {
-        fetchRapidView(rapidViewName) { rapidViewID in
-            fetchSprintQuery(rapidViewID, false) { sprintID in
-                fetchSprintReport(rapidViewID, sprintID) { sprintReport in
-                    fetchEngineers(sprintReport) { engineersRealm in
-                        completion(sprintReport, engineersRealm)
                     }
                 }
             }
@@ -89,7 +64,6 @@ extension MainViewModel {
                         fatalError("\(url) may be broken.")
                     }
                     for view in rapidViews.views {
-                        // "Mobike iOS Scrum"
                         if view.name == name {
                             completion(view.id)
                         }
@@ -112,9 +86,6 @@ extension MainViewModel {
                     guard let sprintQuery = try? SprintQuery(JSONData: data) else {
                         fatalError("\(url) may be broken.")
                     }
-                    
-                    // print(sprintQuery)
-                    
                     if isLatest {
                         for sprint in sprintQuery.sprints {
                             if sprint.state == "ACTIVE" {
@@ -136,7 +107,7 @@ extension MainViewModel {
     
     class func fetchSprintReport(_ rapidViewID: Int,
                                  _ sprintID: Int,
-                                 _ completion: @escaping (SprintReport) -> Void) {
+                                 _ completion: @escaping (SprintReportRealm) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.sprintReport.rawValue
         let parameters = ["rapidViewId" : rapidViewID,
                           "sprintId" : sprintID]
@@ -151,29 +122,29 @@ extension MainViewModel {
                     // Saved Sprint Report
                     SprintReportRealmDAO.add(sprintReport.toRealmObject())
                     
-                    completion(sprintReport)
+                    completion(sprintReport.toRealmObject())
                 case .failure(let error):
                     print((error as NSError).description)
                 }
         }
     }
     
-    class func fetchIssues(_ sprintReport: SprintReport,
+    class func fetchIssues(_ sprintReport: SprintReportRealm,
                            _ completion: @escaping ([IssueRealm]) -> Void) {
-        let issues = sprintReport.completedIssues + sprintReport.incompletedIssues
-        
         var issueRealms = [IssueRealm]()
-        for issue in issues {
+        for issue in sprintReport.issues {
             fetchIssue(String(issue.id)) { issueRealm in
                 issueRealms.append(issueRealm)
+                if sprintReport.issues.count == issueRealms.count {
+                    completion(issueRealms)
+                }
             }
         }
-        completion(issueRealms)
     }
     
-    class func fetchEngineers(_ sprintReport: SprintReport,
+    class func fetchEngineers(_ sprintReport: SprintReportRealm,
                               _ completion: @escaping ([EngineerRealm]) -> Void) {
-        let engineerNames = (sprintReport.completedIssues + sprintReport.incompletedIssues).map { $0.assignee }
+        let engineerNames = sprintReport.issues.map { $0.assignee }
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.user.rawValue
         let requests = engineerNames.map { Alamofire.request(url, parameters: ["username" : $0], headers: headers) }
         
@@ -186,13 +157,15 @@ extension MainViewModel {
                     
                     EngineerRealmDAO.add(engineer.toRealmObject())
                     engineerRealms.append(engineer.toRealmObject())
+                    
+                    if engineerRealms.count == engineerNames.count {
+                        completion(engineerRealms)
+                    }
                 case .failure(let error):
                     print((error as NSError).description)
                 }
             }
         }
-        
-        completion(engineerRealms)
     }
     
     class func fetchIssue(_ id: String,

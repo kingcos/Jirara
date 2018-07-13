@@ -63,7 +63,7 @@ class SendPreviewWindowController: NSWindowController {
         
         MailUtil.send(type) { subject, contentHTML in
             self.contentHTML = contentHTML
-            
+
             self.subjectTextField.stringValue = subject
             self.webView.loadHTMLString(contentHTML, baseURL: nil)
             

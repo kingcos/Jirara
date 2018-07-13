@@ -74,37 +74,34 @@ struct MailUtil {
         formatter.dateFormat = Constants.dateFormat
 
         // 上周数据
-        MainViewModel.fetchLast { lastSprintReport, engineersRealm in
-            let subject = "iOS Engineers 个人周报 \(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)"
+        MainViewModel.fetch(Constants.RapidViewName, true) { lastSprintReport, issueRealms, engineerRealms in
+            let engineerRealm = engineerRealms.filter { $0.name == UserDefaults.get(by: .accountUsername) }.first
+            guard let engineer = engineerRealm else {
+                return
+            }
+            let subject = "iOS - \(engineer.displayName)个人周报 \(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)"
             let today = formatter.string(from: Date())
             var content =
 """
-<h2>Mobike - iOS Engineers 本周个人工作报告</h2>
-<h3>周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)   统计日期：\(today)</h3>
+<h2>Mobike - iOS - \(engineer.displayName)本周个人工作报告</h2>
+<h3>周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)\t统计日期：\(today)</h3>
+\(engineer.html)
 """
-            let engineers = engineersRealm.reduce("") { result, engineer -> String in
-                result + engineer.description
-            }
-            content.append(engineers)
-
-            // 最新数据
-            MainViewModel.fetch { nextSprintReport, engineersRealm in
+            // 本周数据
+            MainViewModel.fetch(Constants.RapidViewName) { nextSprintReport, issueRealms, engineerRealms in
+                let engineerRealm = engineerRealms.filter { $0.name == UserDefaults.get(by: .accountUsername) }.first
+                guard let engineer = engineerRealm else {
+                    return
+                }
+                
                 content.append(
 """
 <h2>下周工作预告</h2>
 <h3>周期：\(nextSprintReport.startDate) ~ \(nextSprintReport.endDate)</h3>
+\(engineer.html)
 """
                 )
-
-                let engineers = engineersRealm.reduce("") { result, engineer -> String in
-                    result + engineer.description
-                }
-
-                content.append(engineers)
-
                 content.append("<br><br><b>注：优先级顺序：高 -> 低 ❤️💛💚；状态：完成 ✅，开始 🏁，进行中为相应文字表述</b>")
-                content.append("<br><hr><center><b>Powered by <a href=\"https://github.com/kingcos/Jirara\">Jirara</a> with ❤️</b></center>")
-
                 completion(subject, content)
             }
         }
@@ -114,30 +111,20 @@ struct MailUtil {
         let formatter = DateFormatter()
         formatter.dateFormat = Constants.dateFormat
         
-        MainViewModel.fetchLast { lastSprintReport, _ in
+        MainViewModel.fetch(Constants.RapidViewName, true) { lastSprintReport, issueRealms, engineerRealms in
             let subject = "iOS Engineers 团队周报 \(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)"
             let today = formatter.string(from: Date())
             var content =
 """
 <h2>Mobike - iOS Engineers 本周团队工作报告</h2>
-<h3>周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)   统计日期：\(today)</h3>
+<h3>周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)\t统计日期：\(today)</h3>
 """
-            var issueTags = (lastSprintReport.completedIssues + lastSprintReport.incompletedIssues).map {
-                String($0.summary.split(separator: "】")[0] + "】")
-            }
-            
-            issueTags = Array(Set(issueTags))
-            
-            for issueTag in issueTags {
+            let issueTypes = Array(Set(lastSprintReport.issues.map { $0.type }))
+            for type in issueTypes {
                 var table =
-                """
-                <ul><li>\(issueTag)</li></ul>
-                """
-                
-                let issues = (lastSprintReport.completedIssues + lastSprintReport.incompletedIssues).filter {
-                    $0.summary.hasPrefix(issueTag)
-                    }.map { $0.toRealmObject() }
-                
+"""
+<ul><li>\(type)</li></ul>
+"""
                 table.append(
 """
 <table style="border-collapse:collapse">
@@ -146,26 +133,30 @@ struct MailUtil {
 <td style="border:1px solid #B0B0B0" width=50>负责人</td>
 <td style="border:1px solid #B0B0B0" width=50>优先级</td>
 <td style="border:1px solid #B0B0B0" width=80>状态</td>
+<td style="border:1px solid #B0B0B0" width=80>进度</td>
 </tr>
-"""
-                )
+""")
+                let issues = issueRealms.filter { $0.type == type }
                 for issue in issues {
+                    let progress = issue.comments.filter {
+                        $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
+                        }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
                     var priority = ""
                     var status = ""
-                    
+
                     switch issue.priority {
                     case "低优先级", "最低优先级": priority = "💚"
                     case "默认优先级": priority = "💛"
                     case "最高优先级(立刻执行)", "高优先级": priority = "❤️"
                     default: priority = issue.priority
                     }
-                    
+
                     switch issue.status {
                     case "Start": status = "🏁 (\(issue.status))"
                     case "完成": status = "✅"
                     default: status = issue.status
                     }
-                    
+
                     table.append(
 """
 <tr>
@@ -173,6 +164,7 @@ struct MailUtil {
 <td style="border:1px solid #B0B0B0">\(issue.assignee)</td>
 <td style="border:1px solid #B0B0B0">\(priority)</td>
 <td style="border:1px solid #B0B0B0">\(status)</td>
+<td style="border:1px solid #B0B0B0">\(progress)</td>
 </tr>
 """
                     )
@@ -180,42 +172,36 @@ struct MailUtil {
                 table.append("</table><br><br>")
                 content.append(table)
             }
-            
+
             // 下周数据
-            MainViewModel.fetch { nextSprintReport, _ in
+            MainViewModel.fetch(Constants.RapidViewName) { nextSprintReport, issueRealms, _ in
                 content.append(
 """
 <h2>下周工作预告</h2>
 <h3>周期：\(nextSprintReport.startDate) ~ \(nextSprintReport.endDate)</h3>
 """
                 )
-                
-                var issueTags = (nextSprintReport.completedIssues + nextSprintReport.incompletedIssues).map {
-                    String($0.summary.split(separator: "】")[0] + "】")
-                }
-                
-                issueTags = Array(Set(issueTags))
-                
-                for issueTag in issueTags {
+
+                let issueTypes = Array(Set(lastSprintReport.issues.map { $0.type }))
+                for type in issueTypes {
                     var table =
                     """
-                    <ul><li>\(issueTag)</li></ul>
+                    <ul><li>\(type)</li></ul>
                     """
-                    
-                    let issues = (nextSprintReport.completedIssues + nextSprintReport.incompletedIssues).filter {
-                        $0.summary.hasPrefix(issueTag)
-                        }.map { $0.toRealmObject() }
-                    
-                    table.append("""
+                    table.append(
+                        """
 <table style="border-collapse:collapse">
 <tr>
 <td style="border:1px solid #B0B0B0" width=450>任务</td>
 <td style="border:1px solid #B0B0B0" width=50>负责人</td>
 <td style="border:1px solid #B0B0B0" width=50>优先级</td>
 <td style="border:1px solid #B0B0B0" width=80>状态</td>
+<td style="border:1px solid #B0B0B0" width=80>进度</td>
 </tr>
 """)
+                    let issues = nextSprintReport.issues.filter { $0.type == type }
                     for issue in issues {
+                        let progress = issue.comments.filter { $0.content.hasPrefix(Constants.JiraIssueProgressPrefix) }.first?.content ?? "-"
                         var priority = ""
                         var status = ""
                         
@@ -233,23 +219,22 @@ struct MailUtil {
                         }
                         
                         table.append(
-"""
-<tr>
-<td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.title)</a></td>
-<td style="border:1px solid #B0B0B0">\(issue.assignee)</td>
-<td style="border:1px solid #B0B0B0">\(priority)</td>
-<td style="border:1px solid #B0B0B0">\(status)</td>
-</tr>
-"""
+                            """
+                            <tr>
+                            <td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.title)</a></td>
+                            <td style="border:1px solid #B0B0B0">\(issue.assignee)</td>
+                            <td style="border:1px solid #B0B0B0">\(priority)</td>
+                            <td style="border:1px solid #B0B0B0">\(status)</td>
+                            <td style="border:1px solid #B0B0B0">\(progress)</td>
+                            </tr>
+                            """
                         )
                     }
                     table.append("</table><br><br>")
                     content.append(table)
                 }
-                
                 content.append("<br><br><b>注：优先级顺序：高 -> 低 ❤️💛💚；状态：完成 ✅，开始 🏁，进行中为相应文字表述</b>")
-                content.append("<br><hr><center><b>Powered by <a href=\"https://github.com/kingcos/Jirara\">Jirara</a> with ❤️</b></center>")
-                
+
                 completion(subject, content)
             }
         }

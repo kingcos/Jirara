@@ -297,6 +297,12 @@
                                     </subviews>
                                 </view>
                             </tabViewItem>
+                            <tabViewItem label="Item 2" identifier="" id="E5Y-wI-Pko">
+                                <view key="view" id="eOT-sD-dwh">
+                                    <rect key="frame" x="10" y="33" width="504" height="288"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                            </tabViewItem>
                         </tabViewItems>
                     </tabView>
                 </subviews>

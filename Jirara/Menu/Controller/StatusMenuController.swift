@@ -67,7 +67,7 @@ extension StatusMenuController {
     }
     
     @IBAction func clickOnRefresh(_ sender: NSMenuItem) {
-        MainViewModel.fetch { _, _ in }
+        MainViewModel.fetch(Constants.RapidViewName) { _, _, _ in }
     }
 }
 
@@ -168,7 +168,7 @@ extension StatusMenuController: NSMenuDelegate {
                     subtitleSuffix = "，要加油哟～"
                 }
                 
-                NSUserNotification.send("Jira Issue 进度更新", "已更新至 " + sender.title + subtitleSuffix)
+                NSUserNotification.send(newIssue.title, "进度已更新至 " + sender.title + subtitleSuffix)
             }
         }
     }
