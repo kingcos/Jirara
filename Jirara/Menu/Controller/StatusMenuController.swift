@@ -88,33 +88,6 @@ extension StatusMenuController {
 
 extension StatusMenuController: NSMenuDelegate {
     func menuWillOpen(_ menu: NSMenu) {
-//        let menuItem = NSMenuItem.init(title: "Test", action: nil, keyEquivalent: "")
-//        menu.insertItem(menuItem, at: 2)
-//        let submenu = NSMenu.init()
-//        menu.setSubmenu(submenu, for: menuItem)
-        
-
-        
-//        MainViewModel.fetch { _, engineers in
-//            let engineer = engineers.filter { $0.name == UserDefaults.get(by: .accountUsername) }
-//            for issue in engineer[0].issues {
-//                DispatchQueue.main.async {
-//                    let menuItem = NSMenuItem.init(title: issue.summary,
-//                                                   action: nil,
-//                                                   keyEquivalent: "")
-//                    menu.insertItem(menuItem, at: 2)
-//                    let submenu = NSMenu.init()
-//
-//                    let viewDetailsItem = NSMenuItem.init(title: "View Details...",
-//                                                      action: #selector(self.clickOnViewDetails(_:)),
-//                                                      keyEquivalent: "")
-//                    viewDetailsItem.target = self
-//                    submenu.addItem(viewDetailsItem)
-//                    menu.setSubmenu(submenu, for: menuItem)
-//                }
-//            }
-//        }
-        
         guard let sprintReport = SprintReportRealmDAO.findLatest() else { return }
         issues = sprintReport.issues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
         
@@ -162,8 +135,12 @@ extension StatusMenuController: NSMenuDelegate {
     }
     
     @objc func clickOnViewDetails(_ sender: NSMenuItem) {
-        guard let selectedIssueIndex = selectedIssueIndex else { fatalError() }
-        print(issues[selectedIssueIndex - issueMenuStickItemsCount].title)
+        guard let selectedIssueIndex = selectedIssueIndex,
+              let url = URL.init(string: JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + "/browse/" + issues[selectedIssueIndex - issueMenuStickItemsCount].key) else {
+            fatalError()
+        }
+        
+        NSWorkspace.shared.open(url)
     }
     
     @objc func clickOnIssueItem(_ sender: NSMenuItem) {
@@ -174,9 +151,7 @@ extension StatusMenuController: NSMenuDelegate {
         guard let selectedIssueIndex = selectedIssueIndex else { fatalError() }
         
         IssueViewModel.fetchIssueComments(issues[selectedIssueIndex - issueMenuStickItemsCount].id) { issueComments in
-            IssueViewModel.updateProgress(self.issues[selectedIssueIndex - self.issueMenuStickItemsCount].id, issueComments, sender.title) {
-//                MainViewModel.fetch { _, _ in }
-            }
+            IssueViewModel.updateProgress(self.issues[selectedIssueIndex - self.issueMenuStickItemsCount].id, issueComments, sender.title) { }
         }
     }
 }
