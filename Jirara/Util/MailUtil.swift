@@ -81,27 +81,99 @@ struct MailUtil {
             }
             let subject = "iOS - \(engineer.displayName)个人周报 \(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)"
             let today = formatter.string(from: Date())
+            
             var content =
 """
 <h2>Mobike - iOS - \(engineer.displayName)本周个人工作报告</h2>
 <h3>周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)\t统计日期：\(today)</h3>
-\(engineer.html)
+<table style="border-collapse:collapse">
+<tr>
+<td style="border:1px solid #B0B0B0" width=450>任务</td>
+<td style="border:1px solid #B0B0B0" width=50>优先级</td>
+<td style="border:1px solid #B0B0B0" width=80>状态</td>
+<td style="border:1px solid #B0B0B0" width=80>进度</td>
+</tr>
 """
-            // 本周数据
-            MainViewModel.fetch(Constants.RapidViewName) { nextSprintReport, issueRealms, engineerRealms in
-                let engineerRealm = engineerRealms.filter { $0.name == UserDefaults.get(by: .accountUsername) }.first
-                guard let engineer = engineerRealm else {
-                    return
+            let issues = lastSprintReport.issues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
+            for issue in issues {
+                let progress = issue.comments.filter {
+                    $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
+                    }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
+                var priority = ""
+                var status = ""
+                
+                switch issue.priority {
+                case "低优先级", "最低优先级": priority = "💚"
+                case "默认优先级": priority = "💛"
+                case "最高优先级(立刻执行)", "高优先级": priority = "❤️"
+                default: priority = issue.priority
+                }
+                
+                switch issue.status {
+                case "Start": status = "🏁 (\(issue.status))"
+                case "完成": status = "✅"
+                default: status = issue.status
                 }
                 
                 content.append(
 """
+<tr>
+<td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.title)</a></td>
+<td style="border:1px solid #B0B0B0">\(priority)</td>
+<td style="border:1px solid #B0B0B0">\(status)</td>
+<td style="border:1px solid #B0B0B0">\(progress)</td>
+</tr>
+</table>
+""")
+            }
+            
+            // 本周数据
+            MainViewModel.fetch(Constants.RapidViewName) { nextSprintReport, issueRealms, _ in
+                content.append(
+"""
 <h2>下周工作预告</h2>
 <h3>周期：\(nextSprintReport.startDate) ~ \(nextSprintReport.endDate)</h3>
-\(engineer.html)
-"""
-                )
-                content.append("<br><br><b>注：优先级顺序：高 -> 低 ❤️💛💚；状态：完成 ✅，开始 🏁，进行中为相应文字表述</b>")
+<table style="border-collapse:collapse">
+<tr>
+<td style="border:1px solid #B0B0B0" width=450>任务</td>
+<td style="border:1px solid #B0B0B0" width=50>优先级</td>
+<td style="border:1px solid #B0B0B0" width=80>状态</td>
+<td style="border:1px solid #B0B0B0" width=80>进度</td>
+</tr>
+""")
+//                let issues = nextSprintReport.issues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
+//                for issue in issues {
+//                    let progress = issue.comments.filter {
+//                        $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
+//                        }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
+//                    var priority = ""
+//                    var status = ""
+//
+//                    switch issue.priority {
+//                    case "低优先级", "最低优先级": priority = "💚"
+//                    case "默认优先级": priority = "💛"
+//                    case "最高优先级(立刻执行)", "高优先级": priority = "❤️"
+//                    default: priority = issue.priority
+//                    }
+//
+//                    switch issue.status {
+//                    case "Start": status = "🏁 (\(issue.status))"
+//                    case "完成": status = "✅"
+//                    default: status = issue.status
+//                    }
+//
+//                    content.append(
+//"""
+//<tr>
+//<td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.title)</a></td>
+//<td style="border:1px solid #B0B0B0">\(priority)</td>
+//<td style="border:1px solid #B0B0B0">\(status)</td>
+//<td style="border:1px solid #B0B0B0">\(progress)</td>
+//</tr>
+//""")
+//                }
+//
+//                content.append("<br><br><b>注：优先级顺序：高 -> 低 ❤️💛💚；状态：完成 ✅，开始 🏁，进行中为相应文字表述</b>")
                 completion(subject, content)
             }
         }
@@ -166,8 +238,7 @@ struct MailUtil {
 <td style="border:1px solid #B0B0B0">\(status)</td>
 <td style="border:1px solid #B0B0B0">\(progress)</td>
 </tr>
-"""
-                    )
+""")
                 }
                 table.append("</table><br><br>")
                 content.append(table)
@@ -182,7 +253,7 @@ struct MailUtil {
 """
                 )
 
-                let issueTypes = Array(Set(lastSprintReport.issues.map { $0.type }))
+                let issueTypes = Array(Set(nextSprintReport.issues.map { $0.type }))
                 for type in issueTypes {
                     var table =
                     """
@@ -199,9 +270,11 @@ struct MailUtil {
 <td style="border:1px solid #B0B0B0" width=80>进度</td>
 </tr>
 """)
-                    let issues = nextSprintReport.issues.filter { $0.type == type }
+                    let issues = issueRealms.filter { $0.type == type }
                     for issue in issues {
-                        let progress = issue.comments.filter { $0.content.hasPrefix(Constants.JiraIssueProgressPrefix) }.first?.content ?? "-"
+                        let progress = issue.comments.filter {
+                            $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
+                            }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
                         var priority = ""
                         var status = ""
                         
