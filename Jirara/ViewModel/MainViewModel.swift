@@ -37,10 +37,10 @@ class MainViewModel {
 
 extension MainViewModel {
     class func fetch(_ rapidViewName: String,
-                     _ isLast: Bool = false,
+                     _ isLatest: Bool = true,
                      _ completion: @escaping (SprintReportRealm, [IssueRealm], [EngineerRealm]) -> Void) {
         fetchRapidView(rapidViewName) { rapidViewID in
-            fetchSprintQuery(rapidViewID, isLast) { sprintID in
+            fetchSprintQuery(rapidViewID, isLatest) { sprintID in
                 fetchSprintReport(rapidViewID, sprintID) { sprintReport in
                     fetchIssues(sprintReport) { issues in
                         fetchEngineers(sprintReport) { engineersRealm in
@@ -75,7 +75,7 @@ extension MainViewModel {
     }
     
     class func fetchSprintQuery(_ rapidViewID: Int,
-                                _ isLatest: Bool = true,
+                                _ isLatest: Bool,
                                 _ completion: @escaping (Int) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.sprintQuery.rawValue + "\(rapidViewID)"
         
