@@ -99,28 +99,12 @@ struct MailUtil {
                 let progress = issue.comments.filter {
                     $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
                     }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
-                var priority = ""
-                var status = ""
-                
-                switch issue.priority {
-                case "低优先级", "最低优先级": priority = "💚"
-                case "默认优先级": priority = "💛"
-                case "最高优先级(立刻执行)", "高优先级": priority = "❤️"
-                default: priority = issue.priority
-                }
-                
-                switch issue.status {
-                case "Start": status = "🏁 (\(issue.status))"
-                case "完成": status = "✅"
-                default: status = issue.status
-                }
-                
                 content.append(
 """
 <tr>
 <td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.title)</a></td>
-<td style="border:1px solid #B0B0B0">\(priority)</td>
-<td style="border:1px solid #B0B0B0">\(status)</td>
+<td style="border:1px solid #B0B0B0">\(emojiIssuePrioriy(issue.priority))</td>
+<td style="border:1px solid #B0B0B0">\(emojiIssueStatus(issue.status))</td>
 <td style="border:1px solid #B0B0B0">\(progress)</td>
 </tr>
 """)
@@ -147,28 +131,12 @@ struct MailUtil {
                     let progress = issue.comments.filter {
                         $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
                         }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
-                    var priority = ""
-                    var status = ""
-
-                    switch issue.priority {
-                    case "低优先级", "最低优先级": priority = "💚"
-                    case "默认优先级": priority = "💛"
-                    case "最高优先级(立刻执行)", "高优先级": priority = "❤️"
-                    default: priority = issue.priority
-                    }
-
-                    switch issue.status {
-                    case "Start": status = "🏁 (\(issue.status))"
-                    case "完成": status = "✅"
-                    default: status = issue.status
-                    }
-
                     content.append(
 """
 <tr>
 <td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.title)</a></td>
-<td style="border:1px solid #B0B0B0">\(priority)</td>
-<td style="border:1px solid #B0B0B0">\(status)</td>
+<td style="border:1px solid #B0B0B0">\(emojiIssuePrioriy(issue.priority))</td>
+<td style="border:1px solid #B0B0B0">\(emojiIssueStatus(issue.status))</td>
 <td style="border:1px solid #B0B0B0">\(progress)</td>
 </tr>
 """)
@@ -214,29 +182,14 @@ struct MailUtil {
                     let progress = issue.comments.filter {
                         $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
                         }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
-                    var priority = ""
-                    var status = ""
-
-                    switch issue.priority {
-                    case "低优先级", "最低优先级": priority = "💚"
-                    case "默认优先级": priority = "💛"
-                    case "最高优先级(立刻执行)", "高优先级": priority = "❤️"
-                    default: priority = issue.priority
-                    }
-
-                    switch issue.status {
-                    case "Start": status = "🏁 (\(issue.status))"
-                    case "完成": status = "✅"
-                    default: status = issue.status
-                    }
 
                     table.append(
 """
 <tr>
 <td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.title)</a></td>
 <td style="border:1px solid #B0B0B0">\(issue.assignee)</td>
-<td style="border:1px solid #B0B0B0">\(priority)</td>
-<td style="border:1px solid #B0B0B0">\(status)</td>
+<td style="border:1px solid #B0B0B0">\(emojiIssuePrioriy(issue.priority))</td>
+<td style="border:1px solid #B0B0B0">\(emojiIssueStatus(issue.status))</td>
 <td style="border:1px solid #B0B0B0">\(progress)</td>
 </tr>
 """)
@@ -261,7 +214,7 @@ struct MailUtil {
                     <ul><li>\(type)</li></ul>
                     """
                     table.append(
-                        """
+"""
 <table style="border-collapse:collapse">
 <tr>
 <td style="border:1px solid #B0B0B0" width=450>任务</td>
@@ -276,41 +229,48 @@ struct MailUtil {
                         let progress = issue.comments.filter {
                             $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
                             }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
-                        var priority = ""
-                        var status = ""
-                        
-                        switch issue.priority {
-                        case "低优先级", "最低优先级": priority = "💚"
-                        case "默认优先级": priority = "💛"
-                        case "最高优先级(立刻执行)", "高优先级": priority = "❤️"
-                        default: priority = issue.priority
-                        }
-                        
-                        switch issue.status {
-                        case "Start": status = "🏁 (\(issue.status))"
-                        case "完成": status = "✅"
-                        default: status = issue.status
-                        }
-                        
                         table.append(
-                            """
-                            <tr>
-                            <td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.title)</a></td>
-                            <td style="border:1px solid #B0B0B0">\(issue.assignee)</td>
-                            <td style="border:1px solid #B0B0B0">\(priority)</td>
-                            <td style="border:1px solid #B0B0B0">\(status)</td>
-                            <td style="border:1px solid #B0B0B0">\(progress)</td>
-                            </tr>
-                            """
-                        )
+"""
+<tr>
+<td style="border:1px solid #B0B0B0"><a href="\(JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issueWeb.rawValue + issue.key)">\(issue.title)</a></td>
+<td style="border:1px solid #B0B0B0">\(issue.assignee)</td>
+<td style="border:1px solid #B0B0B0">\(emojiIssuePrioriy(issue.priority))</td>
+<td style="border:1px solid #B0B0B0">\(emojiIssueStatus(issue.status))</td>
+<td style="border:1px solid #B0B0B0">\(progress)</td>
+</tr>
+""")
                     }
-                    table.append("</table><br><br>")
+                    table.append("</table>")
                     content.append(table)
                 }
                 content.append("<br><br><b>注：优先级顺序：高 -> 低 ❤️💛💚；状态：完成 ✅，开始 🏁，进行中为相应文字表述</b>")
 
                 completion(subject, content)
             }
+        }
+    }
+    
+    static func emojiIssuePrioriy(_ priority: String) -> String {
+        switch priority {
+        case "低优先级", "最低优先级":
+            return "💚"
+        case "默认优先级":
+            return "💛"
+        case "最高优先级(立刻执行)", "高优先级":
+            return "❤️"
+        default:
+            return priority
+        }
+    }
+    
+    static func emojiIssueStatus(_ status: String) -> String {
+        switch status {
+        case "Start":
+            return "🏁 (\(status))"
+        case "完成":
+            return "✅"
+        default:
+            return status
         }
     }
 }
