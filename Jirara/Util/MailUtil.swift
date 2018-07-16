@@ -94,7 +94,7 @@ struct MailUtil {
 <td style="border:1px solid #B0B0B0" width=80>进度</td>
 </tr>
 """
-            let issues = lastSprintReport.issues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
+            let issues = issueRealms.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
             for issue in issues {
                 let progress = issue.comments.filter {
                     $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
@@ -142,7 +142,7 @@ struct MailUtil {
 <td style="border:1px solid #B0B0B0" width=80>进度</td>
 </tr>
 """)
-                let issues = nextSprintReport.issues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
+                let issues = issueRealms.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
                 for issue in issues {
                     let progress = issue.comments.filter {
                         $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
