@@ -19,6 +19,8 @@ struct Issue: Mappable {
     var priority: String
     var assignee: String
     var status: String
+    var parentSummary: String?
+    var subtasks: [Subtask]
     var comments: [IssueComment]
     
     init(map: Mapper) throws {
@@ -28,6 +30,8 @@ struct Issue: Mappable {
         priority = try map.from("fields.priority.name")
         assignee = try map.from("fields.assignee.name")
         status = try map.from("fields.status.name")
+        parentSummary = try map.from("fields.parent.fields.summary")
+        subtasks = try map.from("fields.subtasks")
         comments = try map.from("fields.comment.comments")
     }
 }
@@ -50,7 +54,7 @@ extension Issue: Realmable {
         
         object.id = id
         object.key = key
-        object.type = String(summary.split(separator: "】")[0] + "】")
+        object.type = summary.contains("】") ? String(summary.split(separator: "】")[0] + "】") : "-"
         object.title = summary.replacingOccurrences(of: object.type, with: "")
         object.priority = priority
         object.assignee = assignee

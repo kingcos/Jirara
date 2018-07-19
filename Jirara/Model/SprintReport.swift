@@ -50,7 +50,7 @@ struct ReportIssue: Mappable, Realmable {
         
         object.id = String(id)
         object.key = key
-        object.type = String(summary.split(separator: "】")[0] + "】")
+        object.type = summary.contains("】") ? String(summary.split(separator: "】")[0] + "】") : "-"
         object.title = summary.replacingOccurrences(of: object.type, with: "")
         object.priority = priorityName
         object.assignee = assignee
