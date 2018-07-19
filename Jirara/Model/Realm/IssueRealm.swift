@@ -17,8 +17,10 @@ class IssueRealm: Object {
     @objc dynamic var priority = ""
     @objc dynamic var assignee = ""
     @objc dynamic var status = ""
+    @objc dynamic var parentSummary = ""
     
     let comments = List<IssueCommentRealm>()
+    let subtasks = List<IssueRealm>()
     
     override static func primaryKey() -> String? {
         return "id"
