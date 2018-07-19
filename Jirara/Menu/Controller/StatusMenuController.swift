@@ -93,9 +93,15 @@ extension StatusMenuController: NSMenuDelegate {
         guard let sprintReport = SprintReportRealmDAO.findLatest() else { return }
         issues = sprintReport.issues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
         
+        for issue in issues {
+            for subtask in issue.subtasks {
+                issues.append(subtask)
+            }
+        }
+        
         for issue in issues.reversed() {
             let submenu = NSMenu.init()
-            let menuItem = NSMenuItem.init(title: issue.title,
+            let menuItem = NSMenuItem.init(title: issue.parentSummary == "" ? issue.title : issue.parentSummary + " _ " + issue.title,
                                            action: nil,
                                            keyEquivalent: "")
             if issue.status == "完成" {
@@ -124,6 +130,41 @@ extension StatusMenuController: NSMenuDelegate {
             
             menu.insertItem(menuItem, at: issueMenuStickItemsCount)
             menu.setSubmenu(submenu, for: menuItem)
+            
+//            for subtask in issue.subtasks {
+//                issues.append(subtask)
+//                let subtaskMenu = NSMenu.init()
+//
+//                let subtaskItem = NSMenuItem.init(title: subtask.parentSummary + " - " + subtask.title,
+//                                                  action: nil,
+//                                                  keyEquivalent: "")
+//                if issue.status == "完成" {
+//                    subtaskItem.state = .on
+//                }
+//
+//                let viewDetailsItem = NSMenuItem.init(title: "View Details...",
+//                                                      action: #selector(self.clickOnViewDetails(_:)),
+//                                                      keyEquivalent: "")
+//                viewDetailsItem.target = self
+//                subtaskMenu.addItem(viewDetailsItem)
+//                subtaskMenu.addItem(NSMenuItem.separator())
+//
+//                for progress in Constants.JiraIssueProgresses {
+//                    let item = NSMenuItem.init(title: progress,
+//                                               action: #selector(self.clickOnProgress(_:)),
+//                                               keyEquivalent: "")
+//                    item.target = self
+//                    let currentProgress = issue.comments.filter { $0.content.hasPrefix(Constants.JiraIssueProgressPrefix) }.first?.content ?? Constants.JiraIssueProgressTodo
+//                    if currentProgress == Constants.JiraIssueProgressPrefix + progress {
+//                        item.state = .on
+//                    }
+//
+//                    subtaskMenu.addItem(item)
+//                }
+//
+//                menu.insertItem(subtaskItem, at: issueMenuStickItemsCount)
+//                menu.setSubmenu(subtaskMenu, for: subtaskItem)
+//            }
         }
     }
     

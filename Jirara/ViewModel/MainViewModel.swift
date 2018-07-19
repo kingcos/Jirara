@@ -138,6 +138,18 @@ extension MainViewModel {
                 if sprintReport.issues.count == issueRealms.count {
                     completion(issueRealms)
                 }
+//                for subtask in issue.subtasks {
+//                    fetchIssue(subtask.id) { subtaskRealm in
+//                        issueRealm.subtasks.append(subtaskRealm)
+//
+//                        issueRealms.append(issueRealm)
+//
+//                        if sprintReport.issues.count == issueRealms.count
+//                        && issue.subtasks.count == issueRealm.subtasks.count {
+//                            completion(issueRealms)
+//                        }
+//                    }
+//                }
             }
         }
     }
@@ -176,10 +188,30 @@ extension MainViewModel {
             switch response.result {
             case .success(let data):
                 guard let issue = try? Issue(JSONData: data) else { return }
-                // Saved Issue
-                IssueRealm.add(issue.toRealmObject())
                 
-                completion(issue.toRealmObject())
+                let issueRealm = issue.toRealmObject()
+                let subtasks = issue.subtasks ?? []
+
+                for subtask in subtasks {
+                    fetchIssue(subtask.id) { subtaskRealm in
+                        issueRealm.subtasks.append(subtaskRealm)
+                        
+                        if issueRealm.subtasks.count == subtasks.count {
+                            IssueRealm.add(issueRealm)
+                            completion(issueRealm)
+                        }
+                    }
+                }
+
+                if subtasks.count == 0 && issue.parentSummary != nil {
+                    IssueRealm.add(issueRealm)
+                    completion(issueRealm)
+                }
+                
+                // Saved Issue
+//                IssueRealm.add(issue.toRealmObject())
+//
+//                completion(issue.toRealmObject())
             case .failure(let error):
                 print((error as NSError).description)
             }

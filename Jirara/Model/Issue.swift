@@ -20,7 +20,7 @@ struct Issue: Mappable {
     var assignee: String
     var status: String
     var parentSummary: String?
-    var subtasks: [Subtask]
+    var subtasks: [IssueSubtask]?
     var comments: [IssueComment]
     
     init(map: Mapper) throws {
@@ -33,6 +33,14 @@ struct Issue: Mappable {
         parentSummary = try map.from("fields.parent.fields.summary")
         subtasks = try map.from("fields.subtasks")
         comments = try map.from("fields.comment.comments")
+    }
+}
+
+struct IssueSubtask: Mappable {
+    var id: String
+    
+    init(map: Mapper) throws {
+        id = try map.from("id")
     }
 }
 
@@ -59,6 +67,7 @@ extension Issue: Realmable {
         object.priority = priority
         object.assignee = assignee
         object.status = status
+        object.parentSummary = (parentSummary ?? "").replacingOccurrences(of: object.type, with: "")
         // 取备注中 1. 自己的备注 2. 有进度前缀的备注
 //        object.progress = comments.filter { $0.authorName == assignee && $0.body.hasPrefix(Constants.JiraIssueProgressPrefix) }.first?.body ?? ""
         object.comments.append(objectsIn: comments.map { $0.toRealmObject() })
