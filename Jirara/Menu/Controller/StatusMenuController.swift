@@ -101,7 +101,7 @@ extension StatusMenuController: NSMenuDelegate {
         
         for issue in issues.reversed() {
             let submenu = NSMenu.init()
-            let menuItem = NSMenuItem.init(title: issue.parentSummary == "" ? issue.title : issue.parentSummary + " _ " + issue.title,
+            let menuItem = NSMenuItem.init(title: issue.parentSummary == "" ? issue.title : issue.parentSummary + " - " + issue.title,
                                            action: nil,
                                            keyEquivalent: "")
             if issue.status == "完成" {
