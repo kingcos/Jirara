@@ -67,7 +67,13 @@ extension Issue: Realmable {
         object.priority = priority
         object.assignee = assignee
         object.status = status
-        object.parentSummary = (parentSummary ?? "").replacingOccurrences(of: object.type, with: "")
+        
+        object.parentSummary = ""
+        if let parentSummary = parentSummary {
+            if parentSummary.contains("】") {
+                object.parentSummary = String(parentSummary.split(separator: "】")[1])
+            }
+        }
         // 取备注中 1. 自己的备注 2. 有进度前缀的备注
 //        object.progress = comments.filter { $0.authorName == assignee && $0.body.hasPrefix(Constants.JiraIssueProgressPrefix) }.first?.body ?? ""
         object.comments.append(objectsIn: comments.map { $0.toRealmObject() })
