@@ -36,15 +36,31 @@ class MainViewModel {
 }
 
 extension MainViewModel {
+//    class func fetch(_ rapidViewName: String,
+//                     _ isLatest: Bool = true,
+//                     _ completion: @escaping (SprintReportRealm, [IssueRealm], [EngineerRealm]) -> Void) {
+//        fetchRapidView(rapidViewName) { rapidViewID in
+//            fetchSprintQuery(rapidViewID, isLatest) { sprintID in
+//                fetchSprintReport(rapidViewID, sprintID) { sprintReport in
+//                    fetchIssues(sprintReport) { issueRealms in
+//                        fetchEngineers(issueRealms) { engineersRealm in
+//                            completion(sprintReport, issueRealms, engineersRealm)
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+    
     class func fetch(_ rapidViewName: String,
                      _ isLatest: Bool = true,
-                     _ completion: @escaping (SprintReportRealm, [IssueRealm], [EngineerRealm]) -> Void) {
+                     _ completion: @escaping () -> Void) {
         fetchRapidView(rapidViewName) { rapidViewID in
             fetchSprintQuery(rapidViewID, isLatest) { sprintID in
                 fetchSprintReport(rapidViewID, sprintID) { sprintReport in
-                    fetchIssues(sprintReport) { issues in
-                        fetchEngineers(sprintReport) { engineersRealm in
-                            completion(sprintReport, issues, engineersRealm)
+                    fetchIssues(sprintReport) { issueRealms in
+                        fetchEngineers(issueRealms) { _ in
+                            completion()
                         }
                     }
                 }
@@ -135,28 +151,17 @@ extension MainViewModel {
         for issue in sprintReport.issues {
             fetchIssue(String(issue.id)) { issueRealm in
                 issueRealms.append(issueRealm)
-                if sprintReport.issues.count == issueRealms.count {
+                let issues = issueRealms.filter { $0.parentSummary == "" }
+                if sprintReport.issues.count == issues.count {
                     completion(issueRealms)
                 }
-//                for subtask in issue.subtasks {
-//                    fetchIssue(subtask.id) { subtaskRealm in
-//                        issueRealm.subtasks.append(subtaskRealm)
-//
-//                        issueRealms.append(issueRealm)
-//
-//                        if sprintReport.issues.count == issueRealms.count
-//                        && issue.subtasks.count == issueRealm.subtasks.count {
-//                            completion(issueRealms)
-//                        }
-//                    }
-//                }
             }
         }
     }
     
-    class func fetchEngineers(_ sprintReport: SprintReportRealm,
+    class func fetchEngineers(_ issues: [IssueRealm],
                               _ completion: @escaping ([EngineerRealm]) -> Void) {
-        let engineerNames = sprintReport.issues.map { $0.assignee }
+        let engineerNames = Array(Set(issues.map { $0.assignee })).sorted()
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.user.rawValue
         let requests = engineerNames.map { Alamofire.request(url, parameters: ["username" : $0], headers: headers) }
         
@@ -178,6 +183,10 @@ extension MainViewModel {
                 }
             }
         }
+        
+        if requests.isEmpty {
+            completion([])
+        }
     }
     
     class func fetchIssue(_ id: String,
@@ -191,27 +200,57 @@ extension MainViewModel {
                 
                 let issueRealm = issue.toRealmObject()
                 let subtasks = issue.subtasks ?? []
+                
+                if !subtasks.isEmpty {
+                    // 有子任务的父任务
+                    for subtask in subtasks {
+                        fetchSubtask(subtask.id) { subtaskRealm in
+                            issueRealm.subtasks.append(subtaskRealm)
 
-                for subtask in subtasks {
-                    fetchIssue(subtask.id) { subtaskRealm in
-                        issueRealm.subtasks.append(subtaskRealm)
-                        
-                        if issueRealm.subtasks.count == subtasks.count {
-                            IssueRealm.add(issueRealm)
-                            completion(issueRealm)
+                            if issueRealm.subtasks.count == subtasks.count {
+                                IssueRealmDAO.add(issueRealm)
+                                completion(issueRealm)
+                            }
                         }
                     }
-                }
-
-                if subtasks.count == 0 && issue.parentSummary != nil {
-                    IssueRealm.add(issueRealm)
+                } else {
+                    // 无子任务的父任务
+                    IssueRealmDAO.add(issueRealm)
                     completion(issueRealm)
                 }
                 
-                // Saved Issue
-//                IssueRealm.add(issue.toRealmObject())
-//
-//                completion(issue.toRealmObject())
+                //                for subtask in subtasks {
+                //                    fetchIssue(subtask.id) { subtaskRealm in
+                //                        issueRealm.subtasks.append(subtaskRealm)
+                //
+                ////                        if issueRealm.subtasks.count == subtasks.count {
+                ////                            IssueRealm.add(issueRealm)
+                ////                            completion(issueRealm)
+                ////                        }
+                //                    }
+                //                }
+                //                IssueRealm.add(issueRealm)
+                //
+                ////                if subtasks.count == 0 && issue.parentSummary != nil {
+                //////                    IssueRealm.add(issueRealm)
+                ////                    completion(issueRealm)
+                ////                }
+            //                completion(issueRealm)
+            case .failure(let error):
+                print((error as NSError).description)
+            }
+        }
+    }
+    
+    class func fetchSubtask(_ id: String,
+                            _ completion: @escaping (IssueRealm) -> Void) {
+        let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issue.rawValue
+        
+        Alamofire.request(url + id, headers: headers).responseData { response in
+            switch response.result {
+            case .success(let data):
+                guard let issue = try? Issue(JSONData: data) else { return }
+                completion(issue.toRealmObject())
             case .failure(let error):
                 print((error as NSError).description)
             }
