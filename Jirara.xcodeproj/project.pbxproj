@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8407BA1420F7D33700CE5DE7 /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407BA1320F7D33700CE5DE7 /* IssueViewModel.swift */; };
+		8407BA1620F86FF700CE5DE7 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407BA1520F86FF700CE5DE7 /* Transition.swift */; };
+		8407BA1820F877CC00CE5DE7 /* NSUserNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407BA1720F877CC00CE5DE7 /* NSUserNotification+Extension.swift */; };
 		840AB50220D8AADD0038D329 /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AB50120D8AADD0038D329 /* RealmHelper.swift */; };
 		840AB50420D8B0100038D329 /* Realmable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AB50320D8B0100038D329 /* Realmable.swift */; };
 		8426D4DF20D18F350007F180 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4DE20D18F350007F180 /* MainViewModel.swift */; };
 		8426D4E120D194D70007F180 /* SprintQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E020D194D70007F180 /* SprintQuery.swift */; };
 		8426D4E520D197E60007F180 /* RapidViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E420D197E60007F180 /* RapidViews.swift */; };
 		8426D4E720D1A2670007F180 /* SprintReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E620D1A2670007F180 /* SprintReport.swift */; };
-		8426D4E920D1A3070007F180 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E820D1A3070007F180 /* Issue.swift */; };
+		8426D4E920D1A3070007F180 /* ReportIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E820D1A3070007F180 /* ReportIssue.swift */; };
 		843973CE20CFF64A00B14AB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843973CD20CFF64A00B14AB7 /* AppDelegate.swift */; };
 		843973D220CFF64C00B14AB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843973D120CFF64C00B14AB7 /* Assets.xcassets */; };
 		8442048820E6007300DB9837 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442048620E6007300DB9837 /* AboutWindowController.swift */; };
@@ -36,12 +39,18 @@
 		84A06E8A20E0F1110048798F /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E8820E0F1110048798F /* PreferencesWindowController.swift */; };
 		84A06E8B20E0F1110048798F /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A06E8920E0F1110048798F /* PreferencesWindowController.xib */; };
 		84A06E8D20E0F69F0048798F /* NSNib+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E8C20E0F69F0048798F /* NSNib+Extension.swift */; };
+		84BE22DE20F72E2A000744F6 /* IssueCommentRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE22DD20F72E2A000744F6 /* IssueCommentRealm.swift */; };
+		84C52FB22102F06400CBB156 /* JiraraApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C52FB12102F06400CBB156 /* JiraraApplication.swift */; };
+		84E72F6420F640F9000347BC /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E72F6320F640F9000347BC /* Issue.swift */; };
 		84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FCBFF320D0BDFF00FFDA73 /* NSColor+Extension.swift */; };
 		CACFDF2552D85F070858118D /* Pods_Jirara.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A62425EE78D72A54CDC1894A /* Pods_Jirara.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5BF3BB22542F69B284DE1644 /* Pods-Jirara.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jirara.release.xcconfig"; path = "Pods/Target Support Files/Pods-Jirara/Pods-Jirara.release.xcconfig"; sourceTree = "<group>"; };
+		8407BA1320F7D33700CE5DE7 /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
+		8407BA1520F86FF700CE5DE7 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
+		8407BA1720F877CC00CE5DE7 /* NSUserNotification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSUserNotification+Extension.swift"; sourceTree = "<group>"; };
 		840AB50120D8AADD0038D329 /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		840AB50320D8B0100038D329 /* Realmable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realmable.swift; sourceTree = "<group>"; };
 		840AB50620DA5CD70038D329 /* libcorecrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcorecrypto.tbd; path = usr/lib/system/libcorecrypto.tbd; sourceTree = SDKROOT; };
@@ -57,7 +66,7 @@
 		8426D4E020D194D70007F180 /* SprintQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintQuery.swift; sourceTree = "<group>"; };
 		8426D4E420D197E60007F180 /* RapidViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidViews.swift; sourceTree = "<group>"; };
 		8426D4E620D1A2670007F180 /* SprintReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintReport.swift; sourceTree = "<group>"; };
-		8426D4E820D1A3070007F180 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		8426D4E820D1A3070007F180 /* ReportIssue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportIssue.swift; sourceTree = "<group>"; };
 		843973CA20CFF64A00B14AB7 /* Jirara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jirara.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		843973CD20CFF64A00B14AB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		843973D120CFF64C00B14AB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,6 +95,9 @@
 		84A06E8820E0F1110048798F /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		84A06E8920E0F1110048798F /* PreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		84A06E8C20E0F69F0048798F /* NSNib+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNib+Extension.swift"; sourceTree = "<group>"; };
+		84BE22DD20F72E2A000744F6 /* IssueCommentRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCommentRealm.swift; sourceTree = "<group>"; };
+		84C52FB12102F06400CBB156 /* JiraraApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraraApplication.swift; sourceTree = "<group>"; };
+		84E72F6320F640F9000347BC /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		84FCBFF320D0BDFF00FFDA73 /* NSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extension.swift"; sourceTree = "<group>"; };
 		A2FE8ACC31D85D047A85C605 /* Pods-Jirara.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jirara.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Jirara/Pods-Jirara.debug.xcconfig"; sourceTree = "<group>"; };
 		A62425EE78D72A54CDC1894A /* Pods_Jirara.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jirara.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				8426D4DE20D18F350007F180 /* MainViewModel.swift */,
+				8407BA1320F7D33700CE5DE7 /* IssueViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -161,6 +174,7 @@
 				843973D620CFF64C00B14AB7 /* Info.plist */,
 				843973D720CFF64C00B14AB7 /* Jirara.entitlements */,
 				848A650120DBAE14002FBCE4 /* Jirara-Bridging-Header.h */,
+				84C52FB12102F06400CBB156 /* JiraraApplication.swift */,
 			);
 			path = Jirara;
 			sourceTree = "<group>";
@@ -168,9 +182,10 @@
 		847CA69C20D390B1000C2854 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
+				847CA6A120D393F7000C2854 /* SprintReportRealm.swift */,
 				847CA69D20D39276000C2854 /* EngineerRealm.swift */,
 				847CA69F20D3932E000C2854 /* IssueRealm.swift */,
-				847CA6A120D393F7000C2854 /* SprintReportRealm.swift */,
+				84BE22DD20F72E2A000744F6 /* IssueCommentRealm.swift */,
 				840AB50320D8B0100038D329 /* Realmable.swift */,
 			);
 			path = Realm;
@@ -182,9 +197,11 @@
 				847CA69C20D390B1000C2854 /* Realm */,
 				849478BA20D0D0A400FC9853 /* Engineer.swift */,
 				8426D4E020D194D70007F180 /* SprintQuery.swift */,
-				8426D4E420D197E60007F180 /* RapidViews.swift */,
 				8426D4E620D1A2670007F180 /* SprintReport.swift */,
-				8426D4E820D1A3070007F180 /* Issue.swift */,
+				8426D4E420D197E60007F180 /* RapidViews.swift */,
+				8426D4E820D1A3070007F180 /* ReportIssue.swift */,
+				84E72F6320F640F9000347BC /* Issue.swift */,
+				8407BA1520F86FF700CE5DE7 /* Transition.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -240,6 +257,7 @@
 				849478CB20D152DE00FC9853 /* NSAlert+Extension.swift */,
 				847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */,
 				84A06E8C20E0F69F0048798F /* NSNib+Extension.swift */,
+				8407BA1720F877CC00CE5DE7 /* NSUserNotification+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -382,18 +400,23 @@
 			files = (
 				847CA6A220D393F7000C2854 /* SprintReportRealm.swift in Sources */,
 				849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */,
+				84C52FB22102F06400CBB156 /* JiraraApplication.swift in Sources */,
 				847C8C7120D2AA26000C2854 /* MailUtil.swift in Sources */,
+				84E72F6420F640F9000347BC /* Issue.swift in Sources */,
 				847C8C7620D2B8D2000C2854 /* NSView+Extension.swift in Sources */,
 				843973CE20CFF64A00B14AB7 /* AppDelegate.swift in Sources */,
 				849478CA20D143EB00FC9853 /* String+Extension.swift in Sources */,
 				8426D4E520D197E60007F180 /* RapidViews.swift in Sources */,
 				84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */,
+				84BE22DE20F72E2A000744F6 /* IssueCommentRealm.swift in Sources */,
 				849478CC20D152DE00FC9853 /* NSAlert+Extension.swift in Sources */,
+				8407BA1620F86FF700CE5DE7 /* Transition.swift in Sources */,
 				8426D4E720D1A2670007F180 /* SprintReport.swift in Sources */,
 				84A06E8A20E0F1110048798F /* PreferencesWindowController.swift in Sources */,
 				847CA6A020D3932E000C2854 /* IssueRealm.swift in Sources */,
 				840AB50420D8B0100038D329 /* Realmable.swift in Sources */,
 				8426D4DF20D18F350007F180 /* MainViewModel.swift in Sources */,
+				8407BA1420F7D33700CE5DE7 /* IssueViewModel.swift in Sources */,
 				849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */,
 				8450C33B20E3A25D009C0843 /* SendPreviewWindowController.swift in Sources */,
 				84A06E8D20E0F69F0048798F /* NSNib+Extension.swift in Sources */,
@@ -402,9 +425,10 @@
 				840AB50220D8AADD0038D329 /* RealmHelper.swift in Sources */,
 				8426D4E120D194D70007F180 /* SprintQuery.swift in Sources */,
 				847C8C1E20D25338000C2854 /* Constants.swift in Sources */,
+				8407BA1820F877CC00CE5DE7 /* NSUserNotification+Extension.swift in Sources */,
 				849478BD20D112C500FC9853 /* UserDefaults+Extension.swift in Sources */,
 				84A06E8720E0F0960048798F /* StatusMenuController.swift in Sources */,
-				8426D4E920D1A3070007F180 /* Issue.swift in Sources */,
+				8426D4E920D1A3070007F180 /* ReportIssue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +492,7 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -521,6 +546,7 @@
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

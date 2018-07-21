@@ -10,7 +10,7 @@ import Foundation
 import Mappable
 
 /**
- API: https://jira.mobike.com/rest/greenhopper/1.0/rapidview
+ API: /rest/greenhopper/1.0/rapidview
  **/
 struct RapidView: Mappable {
     var id: Int

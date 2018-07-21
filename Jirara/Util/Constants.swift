@@ -9,6 +9,8 @@
 import Foundation
 
 struct Constants {
+    static let RapidViewName = "Mobike iOS Scrum"
+    
     enum NotificationInfoKey: String {
         case engineer
     }
@@ -29,4 +31,22 @@ struct Constants {
     ]
     
     static let dateFormat = "yyyy.MM.dd"
+    
+    static let JiraIssueProgressPrefix = "[Jirara-Progress]"
+    static let JiraIssueProgressTodo = "ToDo"
+    static let JiraIssueProgressDone = "Done"
+    static let JiraIssueProgresses = [
+        JiraIssueProgressTodo,
+        "10%",
+        "20%",
+        "30%",
+        "40%",
+        "50%",
+        "60%",
+        "70%",
+        "80%",
+        "90%",
+        JiraIssueProgressDone
+    ]
+    static let JiraTransitionIDs = ["11", "21", "31"]
 }

@@ -36,6 +36,7 @@ class PreferencesWindowController: NSWindowController {
 
         window?.center()
         window?.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
         
         setupUI()
     }
@@ -59,7 +60,7 @@ class PreferencesWindowController: NSWindowController {
 
 // MARK: Account
 extension PreferencesWindowController {
-    @IBAction func clickOnAccTestAndSaveButton(_ sender: NSButton) {
+    @IBAction func clickOnAccSaveButton(_ sender: NSButton) {
         // Save to UserDefaults
         UserDefaults.save(accJiraDomainTextField.stringValue, for: .accountJiraDomain)
         UserDefaults.save(accUsernameTextField.stringValue, for: .accountUsername)
@@ -68,10 +69,6 @@ extension PreferencesWindowController {
         UserDefaults.save("Basic " + "\(accUsernameTextField.stringValue):\(accPasswordTextField.stringValue)".base64Encoded,
                           for: .accountAuth)
         
-        NSAlert.show("Saved", ["OK"])
-    }
-    
-    @IBAction func clickOnEmailTestAndSaveButton(_ sender: NSButton) {
         // Save to UserDefaults
         UserDefaults.save(accEmailSMTPTextField.stringValue, for: .emailSMTP)
         UserDefaults.save(accEmailAddressTextField.stringValue, for: .emailAddress)
@@ -80,6 +77,10 @@ extension PreferencesWindowController {
         
         NSAlert.show("Saved", ["OK"])
     }
+    
+//    @IBAction func clickOnEmailTestAndSaveButton(_ sender: NSButton) {
+//
+//    }
 }
 
 // MARK: Send

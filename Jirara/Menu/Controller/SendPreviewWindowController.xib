@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14306.4" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.14"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14269.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14306.4"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14306.4"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,7 +25,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="610" height="500"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="610" height="500"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,7 +45,7 @@
                                 <rect key="frame" x="0.0" y="90" width="569" height="22"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="R17-6Y-uQt">
-                                        <rect key="frame" x="-2" y="3" width="51" height="17"/>
+                                        <rect key="frame" x="-2" y="2" width="51" height="18"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Subject" id="8N3-2t-fd8">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -77,7 +77,7 @@
                                 <rect key="frame" x="0.0" y="60" width="569" height="22"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d63-2g-pod">
-                                        <rect key="frame" x="-2" y="3" width="63" height="17"/>
+                                        <rect key="frame" x="-2" y="2" width="63" height="18"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="To" id="jGj-YD-xrJ">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -106,7 +106,7 @@
                                 <rect key="frame" x="0.0" y="30" width="569" height="22"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xKI-bb-ESL">
-                                        <rect key="frame" x="-2" y="3" width="63" height="17"/>
+                                        <rect key="frame" x="-2" y="2" width="63" height="18"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Cc" id="1EG-LZ-xkj">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -138,7 +138,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="269" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xxd-vD-v4s">
-                                                <rect key="frame" x="-2" y="3" width="35" height="17"/>
+                                                <rect key="frame" x="-2" y="2" width="35" height="18"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="From" id="SSj-ga-9HI">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>

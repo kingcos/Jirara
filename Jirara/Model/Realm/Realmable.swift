@@ -11,5 +11,6 @@ import RealmSwift
 
 protocol Realmable {
     associatedtype T: Object
+    
     func toRealmObject() -> T
 }

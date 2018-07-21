@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class RealmHelper <T: Object> {
+class RealmHelper<T: Object> {
     let realm: Realm
     
     init() {

@@ -17,7 +17,9 @@ enum JiraAPI: String {
     case sprintQuery = "/rest/greenhopper/1.0/sprintquery/"
     case sprintReport = "/rest/greenhopper/1.0/rapid/charts/sprintreport"
     case userAvatar = "/secure/useravatar?ownerId="
-    case user = "/rest/api/latest/user"
+    case user = "/rest/api/2/user"
     case issueWeb = "/browse/"
-    case issue = "/rest/api/latest/issue/"
+    case issue = "/rest/api/2/issue/"
+    case updateComment = "/comment/"
+    case updateTransition = "/transitions"
 }
