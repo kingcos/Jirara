@@ -43,6 +43,7 @@ class SendPreviewWindowController: NSWindowController {
         
         window?.center()
         window?.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
         
         setupUI()
     }

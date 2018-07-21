@@ -36,6 +36,7 @@ class PreferencesWindowController: NSWindowController {
 
         window?.center()
         window?.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
         
         setupUI()
     }
