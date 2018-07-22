@@ -36,22 +36,6 @@ class MainViewModel {
 }
 
 extension MainViewModel {
-//    class func fetch(_ rapidViewName: String,
-//                     _ isLatest: Bool = true,
-//                     _ completion: @escaping (SprintReportRealm, [IssueRealm], [EngineerRealm]) -> Void) {
-//        fetchRapidView(rapidViewName) { rapidViewID in
-//            fetchSprintQuery(rapidViewID, isLatest) { sprintID in
-//                fetchSprintReport(rapidViewID, sprintID) { sprintReport in
-//                    fetchIssues(sprintReport) { issueRealms in
-//                        fetchEngineers(issueRealms) { engineersRealm in
-//                            completion(sprintReport, issueRealms, engineersRealm)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
     class func fetch(_ rapidViewName: String,
                      _ isLatest: Bool = true,
                      _ completion: @escaping () -> Void) {
