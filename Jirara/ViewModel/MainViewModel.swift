@@ -202,24 +202,6 @@ extension MainViewModel {
                     IssueRealmDAO.add(issueRealm)
                     completion(issueRealm)
                 }
-                
-                //                for subtask in subtasks {
-                //                    fetchIssue(subtask.id) { subtaskRealm in
-                //                        issueRealm.subtasks.append(subtaskRealm)
-                //
-                ////                        if issueRealm.subtasks.count == subtasks.count {
-                ////                            IssueRealm.add(issueRealm)
-                ////                            completion(issueRealm)
-                ////                        }
-                //                    }
-                //                }
-                //                IssueRealm.add(issueRealm)
-                //
-                ////                if subtasks.count == 0 && issue.parentSummary != nil {
-                //////                    IssueRealm.add(issueRealm)
-                ////                    completion(issueRealm)
-                ////                }
-            //                completion(issueRealm)
             case .failure(let error):
                 print((error as NSError).description)
             }
