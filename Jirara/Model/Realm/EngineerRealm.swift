@@ -30,4 +30,8 @@ class EngineerRealmDAO {
     static func findAll() -> [EngineerRealm] {
         return dao.findAll().map { EngineerRealm(value: $0) }
     }
+    
+    static func find(_ name: String) -> [EngineerRealm] {
+        return dao.findAll().filter("name = '\(name)'").map { EngineerRealm(value: $0) }
+    }
 }
