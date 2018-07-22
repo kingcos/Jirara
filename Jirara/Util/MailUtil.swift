@@ -76,34 +76,16 @@ struct MailUtil {
     static func sendIndividual(_ completion: @escaping (String, String) -> Void) {
         func generateIndivitualList(_ content: inout String,
                                     _ issues: [IssueRealm]) {
-            content.append(
-"""
-<table style="border-collapse:collapse">
-<tr>
-<td style="border:1px solid #B0B0B0" width=450>任务</td>
-<td style="border:1px solid #B0B0B0" width=50>优先级</td>
-<td style="border:1px solid #B0B0B0" width=80>状态</td>
-<td style="border:1px solid #B0B0B0" width=80>进度</td>
-</tr>
-"""
-            )
-            
             issues.forEach { issue in
                 let progress = issue.comments.filter {
                     $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
                     }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
                 content.append(
 """
-<tr>
-<td style="border:1px solid #B0B0B0">\(issue.parentSummary == "" ? issue.title : "┗─ " + issue.title)</td>
-<td style="border:1px solid #B0B0B0">\(emojiIssuePrioriy(issue.priority))</td>
-<td style="border:1px solid #B0B0B0">\(emojiIssueStatus(issue.status))</td>
-<td style="border:1px solid #B0B0B0">\(progress)</td>
-</tr>
+- \(issue.parentSummary == "" ? issue.title : "┗─ " + issue.title) 【\(emojiIssueStatus(issue.status)) - \(progress)】<br>
 """
                 )
             }
-            content.append("</table><br>")
         }
         
         let formatter = DateFormatter()
@@ -122,13 +104,13 @@ struct MailUtil {
         }
         lastIssues = lastIssues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
 
-        let subject = "iOS - \(engineer.displayName)个人周报 \(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)"
+        let subject = "[周报] \(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)"
         let today = formatter.string(from: Date())
 
         // 上周数据
         var content =
 """
-<h2>Mobike - iOS - \(engineer.displayName)本周个人工作报告</h2>
+<h2>本周工作</h2>
 <h3>周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)\t统计日期：\(today)</h3>
 """
         generateIndivitualList(&content, lastIssues)
@@ -147,16 +129,12 @@ struct MailUtil {
         
         content.append(
 """
-</table>
-<br><br>
 <h2>下周工作预告</h2>
 <h3>周期：\(nextSprintReport.startDate) ~ \(nextSprintReport.endDate)</h3>
 """
         )
         
         generateIndivitualList(&content, nextIssues)
-        
-        content.append("<hr><b style=\"font-size:80%\">注：优先级顺序：高 -> 低 ❤️💛💚；状态：完成 ✅，开始 🏁，进行中为相应文字表述</b>")
         completion(subject, content)
     }
 
@@ -171,8 +149,8 @@ struct MailUtil {
 <ul><li>\(type)</li></ul>
 <table style="border-collapse:collapse">
 <tr>
-<td style="border:1px solid #B0B0B0" width=450>任务</td>
-<td style="border:1px solid #B0B0B0" width=50>负责人</td>
+<td style="border:1px solid #B0B0B0" width=600>任务</td>
+<td style="border:1px solid #B0B0B0" width=150>负责人</td>
 <td style="border:1px solid #B0B0B0" width=50>优先级</td>
 <td style="border:1px solid #B0B0B0" width=80>状态</td>
 <td style="border:1px solid #B0B0B0" width=80>进度</td>
@@ -186,12 +164,12 @@ struct MailUtil {
                     let progress = issue.comments.filter {
                         $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
                         }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
-
+                    let engineerName = EngineerRealmDAO.find(issue.assignee).first?.displayName
                     content.append(
 """
 <tr>
 <td style="border:1px solid #B0B0B0">\(issue.title)</td>
-<td style="border:1px solid #B0B0B0">\(issue.assignee)</td>
+<td style="border:1px solid #B0B0B0">\(engineerName ?? issue.assignee)</td>
 <td style="border:1px solid #B0B0B0">\(emojiIssuePrioriy(issue.priority))</td>
 <td style="border:1px solid #B0B0B0">\(emojiIssueStatus(issue.status))</td>
 <td style="border:1px solid #B0B0B0">\(progress)</td>
@@ -203,12 +181,12 @@ struct MailUtil {
                         let progress = subtask.comments.filter {
                             $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
                             }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
-                        
+                        let engineerName = EngineerRealmDAO.find(subtask.assignee).first?.displayName
                         content.append(
 """
 <tr>
 <td style="border:1px solid #B0B0B0">\("┗─ " + subtask.title)</td>
-<td style="border:1px solid #B0B0B0">\(subtask.assignee)</td>
+<td style="border:1px solid #B0B0B0">\(engineerName ?? subtask.assignee)</td>
 <td style="border:1px solid #B0B0B0">\(emojiIssuePrioriy(subtask.priority))</td>
 <td style="border:1px solid #B0B0B0">\(emojiIssueStatus(subtask.status))</td>
 <td style="border:1px solid #B0B0B0">\(progress)</td>
