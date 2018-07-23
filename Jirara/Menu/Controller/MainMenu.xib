@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14306.4" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14295.6"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14306.4"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -41,9 +41,9 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="My Issues" id="MOz-ln-npt">
+                <menuItem title="Jira Issues" id="MOz-ln-npt">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="My Issues" id="kk9-XX-Bvb">
+                    <menu key="submenu" title="Jira Issues" id="kk9-XX-Bvb">
                         <items>
                             <menuItem title="New Issue..." id="1E1-gf-wpm">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -58,6 +58,26 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Vxc-Ym-IR9"/>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="GitLab" id="l24-dL-Ro9">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="GitLab" id="miP-bJ-cIb">
+                        <items>
+                            <menuItem title="Item" id="fmZ-UM-w96">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Jenkins" id="88H-Ch-HNL">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Jenkins" id="utW-Ns-9dr">
+                        <items>
+                            <menuItem title="Item" id="d1Q-tX-MTJ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -83,5 +103,8 @@
             </items>
             <point key="canvasLocation" x="-272" y="41"/>
         </menu>
+        <menuItem title="Item" id="MCb-Nc-qrw">
+            <modifierMask key="keyEquivalentModifierMask"/>
+        </menuItem>
     </objects>
 </document>
