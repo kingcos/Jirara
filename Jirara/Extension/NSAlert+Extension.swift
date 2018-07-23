@@ -9,12 +9,15 @@
 import AppKit
 
 extension NSAlert {
-    class func show(_ message: String, _ buttonTitles: [String]) {
+    class func show(_ message: String, _ buttonTitles: [String], _ informativeText: String? = nil) {
         let alert = NSAlert()
         alert.window.backgroundColor = NSColor(hex: "#333333")
         alert.window.titleVisibility = .hidden
         alert.window.titlebarAppearsTransparent = true
         
+        if let informativeText = informativeText {
+            alert.informativeText = informativeText
+        }
         alert.messageText = message
         _ = buttonTitles.map {
             alert.addButton(withTitle: $0)
