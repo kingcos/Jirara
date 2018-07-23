@@ -94,7 +94,7 @@ class SendPreviewWindowController: NSWindowController {
         let subject = subjectTextField.stringValue
         let content = contentHTML ?? ""
         
-        MailUtil().send(from, to, cc, subject, content) {
+        MailUtil().send(from, to, cc, subject, content) { errorMessage in
             self.progressIndicator.stopAnimation(nil)
             self.subjectTextField.isEditable = true
             self.emailToTextField.isEditable = true
@@ -102,7 +102,11 @@ class SendPreviewWindowController: NSWindowController {
             self.progressIndicator.isHidden = true
             self.emailSendButton.isEnabled = true
             
-            NSAlert.show("Send successfully!", ["OK"])
+            if let errorMessage = errorMessage {
+                NSAlert.show("Send error!", ["OK"], errorMessage)
+            } else {
+                NSAlert.show("Send successfully", ["OK"])
+            }
         }
     }
 }
