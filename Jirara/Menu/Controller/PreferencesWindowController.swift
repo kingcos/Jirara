@@ -122,7 +122,7 @@ extension PreferencesWindowController {
                             [UserDefaults.get(by: .emailAddress)],
                             [UserDefaults.get(by: .emailAddress)],
                             "Jirara 测试邮件",
-                            "请确保您能收到该邮件，以保证您能使用 Jirara 的周报系统。") { emailErrorMessage in
+                            "请确保您能收到该邮件，以保证您能使用 Jirara 的周报系统。<br>by Jirara") { emailErrorMessage in
                                 let message = "Test Result "
                                 if let emailErrorMessage = emailErrorMessage {
                                     if let jiraErrorMessage = jiraErrorMessage {
@@ -143,6 +143,11 @@ extension PreferencesWindowController {
                                         NSAlert.show(message + "SUCCESS",
                                                      ["I got it."],
                                                      "Jira & E-mail SUCCESS!")
+                                        MainViewModel.fetch(Constants.RapidViewName, false) {
+                                            MainViewModel.fetch(Constants.RapidViewName) {
+                                                NSUserNotification.send("Data has been updated!")
+                                            }
+                                        }
                                     }
                                 }
                                 
@@ -170,18 +175,6 @@ extension PreferencesWindowController {
             accEmailAddressTextField.isEnabled = true
             accEmailPasswordTextField.isEnabled = true
         }
-    }
-    
-//    @IBAction func clickOnEmailTestAndSaveButton(_ sender: NSButton) {
-//
-//    }
-    
-    func testADAccount() {
-        
-    }
-    
-    func testEmailAccount() {
-        
     }
 }
 
