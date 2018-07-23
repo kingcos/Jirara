@@ -65,7 +65,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="GitLab" id="miP-bJ-cIb">
                         <items>
-                            <menuItem title="Item" id="fmZ-UM-w96">
+                            <menuItem title="None" id="fmZ-UM-w96">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
@@ -75,7 +75,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Jenkins" id="utW-Ns-9dr">
                         <items>
-                            <menuItem title="Item" id="d1Q-tX-MTJ">
+                            <menuItem title="None" id="d1Q-tX-MTJ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
