@@ -62,14 +62,10 @@ struct MailUtil {
     }
     
     static func send(_ type: SummaryType, _ completion: @escaping (String, String) -> Void) {
-        MainViewModel.fetch(Constants.RapidViewName, false) {
-            MainViewModel.fetch(Constants.RapidViewName) {
-                if type == .team {
-                    sendTeam(completion)
-                } else {
-                    sendIndividual(completion)
-                }
-            }
+        if type == .team {
+            sendTeam(completion)
+        } else {
+            sendIndividual(completion)
         }
     }
     
