@@ -22,6 +22,7 @@ extension UserDefaults {
         case emailSMTP = "com.maimieng.jirara.email.smtp"
         case emailAddress = "com.maimieng.jirara.email.address"
         case emailPassword = "com.maimieng.jirara.email.password"
+        case emailAccountUniversalState = "com.maimieng.jirara.email.account.universal.state"
         case emailPort = "com.maimieng.jirara.email.port"
         case emailTo = "com.maimieng.jirara.to"
         case emailCc = "com.maimieng.jirara.cc"
@@ -30,7 +31,7 @@ extension UserDefaults {
     /// Save to UserDefaults by key
     ///
     /// - Parameter value: Value to save, key: UserDefaults key enum
-    class func save(_ value: Any, for key: UserDefaultsKey) {
+    class func save(_ value: String, for key: UserDefaultsKey) {
         UserDefaults.standard.set(value, forKey: key.rawValue)
     }
     
