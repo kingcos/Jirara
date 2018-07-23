@@ -83,12 +83,6 @@ extension StatusMenuController {
     
     func setupMenuItems() {
         issuesMenu.delegate = self
-//
-//        // Setup My Issues submenu view
-//        guard let issuesSubmenu = statusMenu.item(at: 1)?.submenu else {
-//            return
-//        }
-        
     }
 }
 
@@ -147,11 +141,13 @@ extension StatusMenuController: NSMenuDelegate {
         guard let item = item else { return }
         selectedIssueIndex = issuesMenu.index(of: item)
     }
-    
+}
+
+extension StatusMenuController {
     @objc func clickOnViewDetails(_ sender: NSMenuItem) {
         guard let selectedIssueIndex = selectedIssueIndex,
-              let url = URL.init(string: JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + "/browse/" + issues[selectedIssueIndex - issueMenuStickItemsCount].key) else {
-            fatalError()
+            let url = URL.init(string: JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + "/browse/" + issues[selectedIssueIndex - issueMenuStickItemsCount].key) else {
+                fatalError()
         }
         
         NSWorkspace.shared.open(url)
