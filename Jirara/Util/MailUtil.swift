@@ -28,7 +28,7 @@ struct MailUtil {
               _ subject: String,
               _ content: String,
 //              _ attachment: Data?,
-              completion: @escaping () -> Void) {
+              completion: @escaping (String?) -> Void) {
         let builder = MCOMessageBuilder.init()
         let fromAddress = MCOAddress.init(displayName: from, mailbox: from)
         let toAddresses = to.map { address -> MCOAddress in
@@ -54,10 +54,10 @@ struct MailUtil {
         
         session.sendOperation(with: builder.data())?.start { error in
             if let error = error {
-                print((error as NSError).description)
+                completion((error as NSError).description)
+            } else {
+                completion(nil)
             }
-
-            completion()
         }
     }
     
