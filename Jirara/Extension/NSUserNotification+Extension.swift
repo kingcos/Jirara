@@ -17,8 +17,6 @@ extension NSUserNotification {
         notification.subtitle = subtitle
         notification.informativeText = informativeText
         
-        let center = NSUserNotificationCenter.default
-//        center.scheduleNotification(notification)
-        center.deliver(notification)
+        NSUserNotificationCenter.default.deliver(notification)
     }
 }
