@@ -7,7 +7,8 @@
 //
 
 import Cocoa
-import WebKit
+import Down
+import SnapKit
 
 enum SummaryType {
     case team
@@ -15,8 +16,6 @@ enum SummaryType {
 }
 
 class SendPreviewWindowController: NSWindowController {
-
-    @IBOutlet weak var webView: WKWebView!
     
     @IBOutlet weak var subjectTextField: NSTextField!
     @IBOutlet weak var emailToTextField: NSTextField!
@@ -25,17 +24,19 @@ class SendPreviewWindowController: NSWindowController {
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
     @IBOutlet weak var emailSendButton: NSButton!
     
+    @IBOutlet weak var markdownTextView: NSTextView!
+    @IBOutlet weak var markdownContainerView: NSView!
+    
+    @IBOutlet weak var downContainerView: NSView!
+    var downView: DownView!
+    
+    @IBOutlet weak var downContainerWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var markdownContainerWidthConstraint: NSLayoutConstraint!
+    
     var type: SummaryType = .team
-    var contentHTML: String?
     
     override var windowNibName: NSNib.Name? {
         return .SendPreviewWindowController
-    }
-    
-    override func windowDidLoad() {
-        super.windowDidLoad()
-        
-        webView.navigationDelegate = self
     }
     
     override func showWindow(_ sender: Any?) {
@@ -45,10 +46,47 @@ class SendPreviewWindowController: NSWindowController {
         window?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
         
-        setupUI()
+        setupConstraints()
+        setupDownView()
+        setupMarkdownView()
+        setupHeaderViews()
     }
     
-    func setupUI() {
+    func setupConstraints() {
+        if type == .individual {
+            markdownContainerView.isHidden = false
+            downContainerWidthConstraint = downContainerWidthConstraint.setMultiplier(0.5)
+        } else {
+            markdownContainerView.isHidden = true
+            downContainerWidthConstraint = downContainerWidthConstraint.setMultiplier(1.0)
+        }
+    }
+    
+    func setupDownView() {
+        try? downView = DownView(frame: downContainerView.bounds, markdownString: "")
+        downContainerView.addSubview(downView)
+        
+        downView.snp.makeConstraints { maker in
+            maker.top.equalTo(self.downContainerView.snp.top)
+            maker.bottom.equalTo(self.downContainerView.snp.bottom)
+            maker.left.equalTo(self.downContainerView.snp.left)
+            maker.right.equalTo(self.downContainerView.snp.right)
+        }
+    }
+    
+    func setupMarkdownView() {
+        markdownTextView.delegate = self
+
+        markdownTextView.snp.makeConstraints { maker in
+            maker.top.equalTo(self.markdownContainerView.snp.top)
+            maker.bottom.equalTo(self.markdownContainerView.snp.bottom)
+            maker.left.equalTo(self.markdownContainerView.snp.left)
+            maker.right.equalTo(self.markdownContainerView.snp.right)
+            maker.height.equalTo(self.markdownContainerView.snp.height)
+        }
+    }
+    
+    func setupHeaderViews() {
         emailToTextField.stringValue = UserDefaults.get(by: .emailTo)
         emailCcTextField.stringValue = UserDefaults.get(by: .emailCc)
         emailFromTextField.stringValue = UserDefaults.get(by: .emailAddress)
@@ -62,11 +100,13 @@ class SendPreviewWindowController: NSWindowController {
         progressIndicator.isHidden = false
         progressIndicator.startAnimation(nil)
         
-        MailUtil.send(type) { subject, contentHTML in
-            self.contentHTML = contentHTML
-
+        MailUtil.send(type) { subject, content in
             self.subjectTextField.stringValue = subject
-            self.webView.loadHTMLString(contentHTML, baseURL: nil)
+            
+            if self.type == .individual {
+                self.markdownTextView.string = content
+            }
+            try? self.downView.update(markdownString: content)
             
             self.progressIndicator.stopAnimation(nil)
             self.progressIndicator.isHidden = true
@@ -92,7 +132,11 @@ class SendPreviewWindowController: NSWindowController {
         let to = emailToTextField.stringValue.split(separator: " ").map { String($0) }
         let cc = emailCcTextField.stringValue.split(separator: " ").map { String($0) }
         let subject = subjectTextField.stringValue
-        let content = contentHTML ?? ""
+        guard let url = downView.url,
+            let content = try? String(contentsOf: url) else {
+                NSAlert.show("网页出现了点问题", ["OK, I will try."])
+                return
+        }
         
         MailUtil().send(from, to, cc, subject, content) { errorMessage in
             self.progressIndicator.stopAnimation(nil)
@@ -103,27 +147,16 @@ class SendPreviewWindowController: NSWindowController {
             self.emailSendButton.isEnabled = true
             
             if let errorMessage = errorMessage {
-                NSAlert.show("Send error!", ["OK"], errorMessage)
+                NSAlert.show("Send failed!", ["OK"], errorMessage)
             } else {
-                NSAlert.show("Send successfully", ["OK"])
+                NSAlert.show("Send successfully!", ["OK"])
             }
         }
     }
 }
 
-extension SendPreviewWindowController: WKNavigationDelegate {
-    func webView(_ webView: WKWebView,
-                 decidePolicyFor navigationAction: WKNavigationAction,
-                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if navigationAction.navigationType == .linkActivated  {
-            if let url = navigationAction.request.url, url.host != nil {
-                NSWorkspace.shared.open(url)
-                decisionHandler(.cancel)
-            } else {
-                decisionHandler(.allow)
-            }
-        } else {
-            decisionHandler(.allow)
-        }
+extension SendPreviewWindowController: NSTextViewDelegate {
+    func textDidChange(_ notification: Notification) {
+        try? downView.update(markdownString: markdownTextView.string)
     }
 }
