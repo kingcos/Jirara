@@ -75,10 +75,11 @@ struct MailUtil {
             issues.forEach { issue in
                 let progress = issue.comments.filter {
                     $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
-                    }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
+                    }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? ""
                 content.append(
 """
-- \(issue.parentSummary == "" ? issue.title : "┗─ " + issue.title) 【\(emojiIssueStatus(issue.status)) - \(progress)】<br>
+\(issue.parentSummary == "" ? "- " + issue.title : "    - " + issue.title) 【\(emojiIssueStatus(issue.status))\(progress == "" ? "" : " - \(progress)")】
+
 """
                 )
             }
@@ -106,8 +107,10 @@ struct MailUtil {
         // 上周数据
         var content =
 """
-<h2>本周工作</h2>
-<h3>周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)\t统计日期：\(today)</h3>
+## 本周工作
+
+> **周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate) 统计日期：\(today)**
+
 """
         generateIndivitualList(&content, lastIssues)
         
@@ -125,8 +128,11 @@ struct MailUtil {
         
         content.append(
 """
-<h2>下周工作预告</h2>
-<h3>周期：\(nextSprintReport.startDate) ~ \(nextSprintReport.endDate)</h3>
+
+## 下周工作预告
+
+> **周期：\(nextSprintReport.startDate) ~ \(nextSprintReport.endDate)**
+
 """
         )
         
