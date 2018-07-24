@@ -36,22 +36,6 @@ class MainViewModel {
 }
 
 extension MainViewModel {
-//    class func fetch(_ rapidViewName: String,
-//                     _ isLatest: Bool = true,
-//                     _ completion: @escaping (SprintReportRealm, [IssueRealm], [EngineerRealm]) -> Void) {
-//        fetchRapidView(rapidViewName) { rapidViewID in
-//            fetchSprintQuery(rapidViewID, isLatest) { sprintID in
-//                fetchSprintReport(rapidViewID, sprintID) { sprintReport in
-//                    fetchIssues(sprintReport) { issueRealms in
-//                        fetchEngineers(issueRealms) { engineersRealm in
-//                            completion(sprintReport, issueRealms, engineersRealm)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
     class func fetch(_ rapidViewName: String,
                      _ isLatest: Bool = true,
                      _ completion: @escaping () -> Void) {
@@ -147,6 +131,11 @@ extension MainViewModel {
     
     class func fetchIssues(_ sprintReport: SprintReportRealm,
                            _ completion: @escaping ([IssueRealm]) -> Void) {
+        guard !sprintReport.issues.isEmpty else {
+            completion([])
+            return
+        }
+        
         var issueRealms = [IssueRealm]()
         for issue in sprintReport.issues {
             fetchIssue(String(issue.id)) { issueRealm in
@@ -156,36 +145,6 @@ extension MainViewModel {
                     completion(issueRealms)
                 }
             }
-        }
-    }
-    
-    class func fetchEngineers(_ issues: [IssueRealm],
-                              _ completion: @escaping ([EngineerRealm]) -> Void) {
-        let engineerNames = Array(Set(issues.map { $0.assignee })).sorted()
-        let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.user.rawValue
-        let requests = engineerNames.map { Alamofire.request(url, parameters: ["username" : $0], headers: headers) }
-        
-        var engineerRealms = [EngineerRealm]()
-        for request in requests {
-            request.responseData { response in
-                switch response.result {
-                case .success(let data):
-                    guard let engineer = try? Engineer(JSONData: data) else {  return }
-                    
-                    EngineerRealmDAO.add(engineer.toRealmObject())
-                    engineerRealms.append(engineer.toRealmObject())
-                    
-                    if engineerRealms.count == engineerNames.count {
-                        completion(engineerRealms)
-                    }
-                case .failure(let error):
-                    print((error as NSError).description)
-                }
-            }
-        }
-        
-        if requests.isEmpty {
-            completion([])
         }
     }
     
@@ -218,24 +177,6 @@ extension MainViewModel {
                     IssueRealmDAO.add(issueRealm)
                     completion(issueRealm)
                 }
-                
-                //                for subtask in subtasks {
-                //                    fetchIssue(subtask.id) { subtaskRealm in
-                //                        issueRealm.subtasks.append(subtaskRealm)
-                //
-                ////                        if issueRealm.subtasks.count == subtasks.count {
-                ////                            IssueRealm.add(issueRealm)
-                ////                            completion(issueRealm)
-                ////                        }
-                //                    }
-                //                }
-                //                IssueRealm.add(issueRealm)
-                //
-                ////                if subtasks.count == 0 && issue.parentSummary != nil {
-                //////                    IssueRealm.add(issueRealm)
-                ////                    completion(issueRealm)
-                ////                }
-            //                completion(issueRealm)
             case .failure(let error):
                 print((error as NSError).description)
             }
@@ -253,6 +194,47 @@ extension MainViewModel {
                 completion(issue.toRealmObject())
             case .failure(let error):
                 print((error as NSError).description)
+            }
+        }
+    }
+    
+    class func fetchEngineers(_ issues: [IssueRealm],
+                              _ completion: @escaping ([EngineerRealm]) -> Void) {
+        let engineerNames = Array(Set(issues.map { $0.assignee })).sorted()
+        
+        guard !engineerNames.isEmpty else {
+            completion([])
+            return
+        }
+        
+        var engineerRealms = [EngineerRealm]()
+        for name in engineerNames {
+            fetchEngineer(name) { engineer, _ in
+                if let engineer = engineer {
+                    engineerRealms.append(engineer)
+                    
+                    if engineerRealms.count == engineerNames.count {
+                        completion(engineerRealms)
+                    }
+                }
+            }
+        }
+    }
+    
+    class func fetchEngineer(_ name: String,
+                             _ completion: @escaping (EngineerRealm?, String?) -> Void) {
+        let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.user.rawValue
+        Alamofire.request(url, parameters: ["username" : name], headers: headers).responseData { response in
+            switch response.result {
+            case .success(let data):
+                guard let engineer = try? Engineer(JSONData: data) else {
+                    completion(nil, "JSON 解析失败 - AD 用户名或密码不正确")
+                    return
+                }
+                
+                completion(engineer.toRealmObject(), nil)
+            case .failure(let error):
+                completion(nil, (error as NSError).description)
             }
         }
     }

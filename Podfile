@@ -25,4 +25,9 @@ target 'Jirara' do
   # E-mail
   pod 'mailcore2-osx'
 
+  # Markdown
+  pod 'Down'
+  
+  # Constraints
+  pod 'SnapKit'
 end
