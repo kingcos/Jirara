@@ -142,8 +142,8 @@ struct MailUtil {
 
     static func sendTeam(_ completion: @escaping (String, String) -> Void) {
         func generateTeamList(_ content: inout String,
-                              _ issues: [IssueRealm]) {
-            let issueTypes = Array(Set(issues.map { $0.type }))
+                              _ sprintReportRealm: SprintReportRealm) {
+            let issueTypes = Array(Set(sprintReportRealm.issues.map { $0.type }))
             
             for type in issueTypes {
                 content.append(
@@ -160,7 +160,7 @@ struct MailUtil {
 """
                 )
                 
-                let specifiedIssues = issues.filter { $0.type == type }
+                let specifiedIssues = sprintReportRealm.issues.filter { $0.type == type }
                 
                 for issue in specifiedIssues {
                     let progress = issue.comments.filter {
@@ -214,10 +214,10 @@ struct MailUtil {
         
         var content =
 """
-<h2>Mobike - iOS Engineers 本周团队工作报告</h2>
+<h2>iOS Engineers 本周团队工作报告</h2>
 <h3>周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)\t统计日期：\(today)</h3>
 """
-        generateTeamList(&content, lastSprintReport.issues.map { $0 })
+        generateTeamList(&content, lastSprintReport)
 
         // 下周数据
         guard let nextSprintReport = SprintReportRealmDAO.findLatest() else { return }
@@ -229,7 +229,7 @@ struct MailUtil {
 """
         )
         
-        generateTeamList(&content, nextSprintReport.issues.map { $0 })
+        generateTeamList(&content, nextSprintReport)
         
         content.append("<hr><b style=\"font-size:80%\">注：优先级顺序：高 -> 低 ❤️💛💚；状态：完成 ✅，开始 🏁，进行中为相应文字表述</b>")
         completion(subject, content)
