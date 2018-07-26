@@ -76,14 +76,6 @@ class SendPreviewWindowController: NSWindowController {
     
     func setupMarkdownView() {
         markdownTextView.delegate = self
-
-        markdownTextView.snp.makeConstraints { maker in
-            maker.top.equalTo(self.markdownContainerView.snp.top)
-            maker.bottom.equalTo(self.markdownContainerView.snp.bottom)
-            maker.left.equalTo(self.markdownContainerView.snp.left)
-            maker.right.equalTo(self.markdownContainerView.snp.right)
-            maker.height.equalTo(self.markdownContainerView.snp.height)
-        }
     }
     
     func setupHeaderViews() {
