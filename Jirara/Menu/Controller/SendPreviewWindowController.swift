@@ -10,9 +10,9 @@ import Cocoa
 import Down
 import SnapKit
 
-enum SummaryType {
-    case team
-    case individual
+enum SummaryType: String {
+    case team = "团队周报"
+    case individual = "个人周报"
 }
 
 class SendPreviewWindowController: NSWindowController {
@@ -75,6 +75,7 @@ class SendPreviewWindowController: NSWindowController {
     }
     
     func setupMarkdownView() {
+        markdownTextView.textContainerInset = NSSize.init(width: 10, height: 5)
         markdownTextView.delegate = self
     }
     
@@ -126,7 +127,7 @@ class SendPreviewWindowController: NSWindowController {
         let subject = subjectTextField.stringValue
         guard let url = downView.url,
             let content = try? String(contentsOf: url) else {
-                NSAlert.show("网页出现了点问题", ["OK, I will try."])
+                NSAlert.show("网页出现了点问题", ["OK, I will try agian."])
                 return
         }
         
