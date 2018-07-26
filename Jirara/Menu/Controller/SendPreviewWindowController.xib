@@ -28,7 +28,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="610" height="500"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="610" height="500"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -215,7 +215,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="305" height="348"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="lfe-Op-aVa">
+                                        <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" smartInsertDelete="YES" id="lfe-Op-aVa">
                                             <rect key="frame" x="0.0" y="0.0" width="305" height="348"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -233,10 +233,10 @@
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Dc7-Sv-vgP" firstAttribute="top" secondItem="cok-xp-Ncr" secondAttribute="top" id="Z0u-o1-JwC"/>
-                            <constraint firstAttribute="bottom" secondItem="Dc7-Sv-vgP" secondAttribute="bottom" id="llN-kn-IBP"/>
-                            <constraint firstItem="Dc7-Sv-vgP" firstAttribute="leading" secondItem="cok-xp-Ncr" secondAttribute="leading" id="w6Q-m1-iZx"/>
-                            <constraint firstAttribute="trailing" secondItem="Dc7-Sv-vgP" secondAttribute="trailing" id="zhI-tg-2gK"/>
+                            <constraint firstItem="Dc7-Sv-vgP" firstAttribute="leading" secondItem="cok-xp-Ncr" secondAttribute="leading" id="bM0-No-z7W"/>
+                            <constraint firstItem="Dc7-Sv-vgP" firstAttribute="top" secondItem="cok-xp-Ncr" secondAttribute="top" id="dUM-3K-flh"/>
+                            <constraint firstAttribute="bottom" secondItem="Dc7-Sv-vgP" secondAttribute="bottom" id="sMx-kr-ort"/>
+                            <constraint firstAttribute="trailing" secondItem="Dc7-Sv-vgP" secondAttribute="trailing" id="y1D-0b-tGH"/>
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="hZt-iJ-Qak">
