@@ -69,7 +69,7 @@ extension MainViewModel {
                         }
                     }
                 case .failure(let error):
-                    print((error as NSError).description)
+                    print(#function + (error as NSError).description)
                 }
         }
     }
@@ -100,7 +100,7 @@ extension MainViewModel {
                     }
                     
                 case .failure(let error):
-                    print((error as NSError).description)
+                    print(#function + (error as NSError).description)
                 }
         }
     }
@@ -124,7 +124,7 @@ extension MainViewModel {
                     
                     completion(sprintReport.toRealmObject())
                 case .failure(let error):
-                    print((error as NSError).description)
+                    print(#function + (error as NSError).description)
                 }
         }
     }
@@ -178,7 +178,7 @@ extension MainViewModel {
                     completion(issueRealm)
                 }
             case .failure(let error):
-                print((error as NSError).description)
+                print(#function + (error as NSError).description)
             }
         }
     }
@@ -193,7 +193,7 @@ extension MainViewModel {
                 guard let issue = try? Issue(JSONData: data) else { return }
                 completion(issue.toRealmObject())
             case .failure(let error):
-                print((error as NSError).description)
+                print(#function + (error as NSError).description)
             }
         }
     }
@@ -234,6 +234,7 @@ extension MainViewModel {
                 
                 completion(engineer.toRealmObject(), nil)
             case .failure(let error):
+                print(#function + (error as NSError).description)
                 completion(nil, (error as NSError).description)
             }
         }
