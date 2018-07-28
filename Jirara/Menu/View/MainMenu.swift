@@ -16,19 +16,28 @@ class MainMenu: NSMenu {
 
 extension MainMenu {
     func setupMainMenu() {
+        // Send
         let firstMenuItem = NSMenuItem.init(title: "Send", action: nil, keyEquivalent: "")
         let sendMenu = NSMenu.init()
-        sendMenu.addItem(NSMenuItem.init(title: SummaryType.team.rawValue,
+        let teamItem = NSMenuItem.init(title: SummaryType.team.rawValue,
+                                   action: #selector(sendWeeklySummary(_:)),
+                                   keyEquivalent: "")
+        let indivitualItem = NSMenuItem.init(title: SummaryType.individual.rawValue,
                                          action: #selector(sendWeeklySummary(_:)),
-                                         keyEquivalent: ""))
-        sendMenu.addItem(NSMenuItem.init(title: SummaryType.individual.rawValue,
-                                         action: #selector(sendWeeklySummary(_:)),
-                                         keyEquivalent: ""))
+                                         keyEquivalent: "")
+        [teamItem, indivitualItem].forEach { item in
+            item.target = self
+            sendMenu.addItem(item)
+        }
         addItem(firstMenuItem)
         setSubmenu(sendMenu, for: firstMenuItem)
         
+        // 
+        
+        // ---
         addItem(NSMenuItem.separator())
         
+        // Preferences... About Quit
         let preferenceItem = NSMenuItem.init(title: "Preferences...", action: #selector(clickOnPreference), keyEquivalent: "")
         let aboutItem = NSMenuItem.init(title: "About", action: #selector(clickOnAbout), keyEquivalent: "")
         let quitItem = NSMenuItem.init(title: "Quit", action: #selector(clickOnQuit), keyEquivalent: "")
