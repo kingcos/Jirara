@@ -33,27 +33,6 @@ class StatusMenuController: NSObject {
     }
 }
 
-// MARK: IBAction
-extension StatusMenuController {
-    
-    @IBAction func clickOnNewIssue(_ sender: NSMenuItem) {
-        let createIssueURL = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + "/secure/CreateIssue!default.jspa"
-        guard let url = URL.init(string: createIssueURL) else {
-            fatalError()
-        }
-        
-        NSWorkspace.shared.open(url)
-    }
-    
-    @IBAction func clickOnRefresh(_ sender: NSMenuItem) {
-        MainViewModel.fetch(Constants.RapidViewName, false) {
-            MainViewModel.fetch(Constants.RapidViewName) {
-                NSUserNotification.send("Finished refreshing!")
-            }
-        }
-    }
-}
-
 extension StatusMenuController {
     func setupStatusItem() {
         statusItem.menu = statusMenu
