@@ -35,27 +35,6 @@ class StatusMenuController: NSObject {
 
 // MARK: IBAction
 extension StatusMenuController {
-    @IBAction func clickOnSendTeamSummary(_ sender: NSMenuItem) {
-        sendPreviewWindowController.type = .team
-        sendPreviewWindowController.showWindow(nil)
-    }
-    
-    @IBAction func clickOnSendIndividualSummary(_ sender: NSMenuItem) {
-        sendPreviewWindowController.type = .individual
-        sendPreviewWindowController.showWindow(nil)
-    }
-    
-    @IBAction func clickOnPreferences(_ sender: NSMenuItem) {
-        preferencesWindowController.showWindow(nil)
-    }
-    
-    @IBAction func clickOnAbout(_ sender: NSMenuItem) {
-        aboutWindowController.showWindow(nil)
-    }
-    
-    @IBAction func clickOnQuit(_ sender: NSMenuItem) {
-        NSApplication.shared.terminate(self)
-    }
     
     @IBAction func clickOnNewIssue(_ sender: NSMenuItem) {
         let createIssueURL = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + "/secure/CreateIssue!default.jspa"
@@ -83,6 +62,10 @@ extension StatusMenuController {
     
     func setupMenuItems() {
         issuesMenu.delegate = self
+    }
+    
+    @objc func clickOnAbout() {
+        AboutWindowController().showWindow(nil)
     }
 }
 
