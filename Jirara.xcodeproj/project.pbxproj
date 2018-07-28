@@ -183,14 +183,14 @@
 			path = Jirara;
 			sourceTree = "<group>";
 		};
-		845A4EB52109D2B800E6E2A6 /* View */ = {
+		845A4EB52109D2B800E6E2A6 /* Submenu */ = {
 			isa = PBXGroup;
 			children = (
 				845A4EB32109D1F300E6E2A6 /* MainMenu.swift */,
 				84DF3A6B210AC1880053B71A /* JiraIssuesMenu.swift */,
 				84DF3A6D210AC1B20053B71A /* SendMenu.swift */,
 			);
-			path = View;
+			path = Submenu;
 			sourceTree = "<group>";
 		};
 		847CA69C20D390B1000C2854 /* Realm */ = {
@@ -234,7 +234,7 @@
 		84A06E8320E0EFD00048798F /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				845A4EB52109D2B800E6E2A6 /* View */,
+				845A4EB52109D2B800E6E2A6 /* Submenu */,
 				84E1815920F4B4960035E373 /* Controller */,
 			);
 			path = Menu;
