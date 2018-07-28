@@ -34,6 +34,7 @@ class SendPreviewWindowController: NSWindowController {
     @IBOutlet weak var markdownContainerWidthConstraint: NSLayoutConstraint!
     
     var type: SummaryType = .team
+    var content = ""
     
     override var windowNibName: NSNib.Name? {
         return .SendPreviewWindowController
@@ -94,6 +95,8 @@ class SendPreviewWindowController: NSWindowController {
         progressIndicator.startAnimation(nil)
         
         MailUtil.send(type) { subject, content in
+            self.content = content
+            
             self.subjectTextField.stringValue = subject
             
             if self.type == .individual {
@@ -125,10 +128,15 @@ class SendPreviewWindowController: NSWindowController {
         let to = emailToTextField.stringValue.split(separator: " ").map { String($0) }
         let cc = emailCcTextField.stringValue.split(separator: " ").map { String($0) }
         let subject = subjectTextField.stringValue
-        guard let url = downView.url,
-            let content = try? String(contentsOf: url) else {
-                NSAlert.show("网页出现了点问题", ["OK, I will try agian."])
+        
+        if type == .individual {
+            let down = Down(markdownString: markdownTextView.string)
+            if let markdown = try? down.toHTML() {
+                content = markdown
+            } else {
+                NSAlert.show("Parse ERROR", ["OK"])
                 return
+            }
         }
         
         MailUtil().send(from, to, cc, subject, content) { errorMessage in

@@ -111,6 +111,7 @@ struct MailUtil {
 
 > **周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate) 统计日期：\(today)**
 
+
 """
         generateIndivitualList(&content, lastIssues)
         
@@ -132,6 +133,7 @@ struct MailUtil {
 ## 下周工作预告
 
 > **周期：\(nextSprintReport.startDate) ~ \(nextSprintReport.endDate)**
+
 
 """
         )
