@@ -9,6 +9,8 @@
 import Cocoa
 
 class SendMenu: NSMenu {
+    let summaryController = SendPreviewWindowController()
+    
     override init(title: String) {
         super.init(title: title)
         
@@ -22,6 +24,24 @@ class SendMenu: NSMenu {
 
 extension SendMenu {
     func setup() {
-        
+        let teamItem = NSMenuItem.init(title: SummaryType.team.rawValue,
+                                       action: #selector(sendWeeklySummary(_:)),
+                                       keyEquivalent: "")
+        let indivitualItem = NSMenuItem.init(title: SummaryType.individual.rawValue,
+                                             action: #selector(sendWeeklySummary(_:)),
+                                             keyEquivalent: "")
+        [teamItem, indivitualItem].forEach { item in
+            item.target = self
+            addItem(item)
+        }
     }
+    
+    @objc func sendWeeklySummary(_ sender: NSMenuItem) {
+        guard let type = SummaryType(rawValue: sender.title) else {
+            fatalError()
+        }
+        summaryController.type = type
+        summaryController.showWindow(nil)
+    }
+    
 }

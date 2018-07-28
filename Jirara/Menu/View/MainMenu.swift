@@ -9,7 +9,6 @@
 import Cocoa
 
 class MainMenu: NSMenu {
-    let summaryController = SendPreviewWindowController()
     let aboutController = AboutWindowController()
     let preferenceController = PreferencesWindowController()
 }
@@ -18,19 +17,9 @@ extension MainMenu {
     func setupMainMenu() {
         // Send
         let firstMenuItem = NSMenuItem.init(title: "Send", action: nil, keyEquivalent: "")
-        let sendMenu = NSMenu.init()
-        let teamItem = NSMenuItem.init(title: SummaryType.team.rawValue,
-                                   action: #selector(sendWeeklySummary(_:)),
-                                   keyEquivalent: "")
-        let indivitualItem = NSMenuItem.init(title: SummaryType.individual.rawValue,
-                                         action: #selector(sendWeeklySummary(_:)),
-                                         keyEquivalent: "")
-        [teamItem, indivitualItem].forEach { item in
-            item.target = self
-            sendMenu.addItem(item)
-        }
         addItem(firstMenuItem)
-        setSubmenu(sendMenu, for: firstMenuItem)
+        setSubmenu(SendMenu.init(), for: firstMenuItem)
+        
         
         // 
         
@@ -50,14 +39,6 @@ extension MainMenu {
 }
 
 extension MainMenu {
-    @objc func sendWeeklySummary(_ sender: NSMenuItem) {
-        guard let type = SummaryType(rawValue: sender.title) else {
-            fatalError()
-        }
-        summaryController.type = type
-        summaryController.showWindow(nil)
-    }
-    
     @objc func clickOnPreference() {
         preferenceController.showWindow(nil)
     }
