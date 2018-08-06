@@ -233,7 +233,7 @@ struct MailUtil {
         
         generateTeamList(&content, nextSprintReport)
         
-        content.append("<hr><b style=\"font-size:80%\">注：优先级顺序：高 -> 低 ❤️💛💚；状态：完成 ✅，开始 🏁，进行中为相应文字表述</b>")
+        content.append("<hr><b style=\"font-size:80%\">注：优先级顺序：高 -> 低 ❤️💛💚；状态：完成 √，开始 🏁，进行中为相应文字表述</b>")
         completion(subject, content)
     }
     
@@ -255,7 +255,7 @@ struct MailUtil {
         case "Start":
             return "🏁 (\(status))"
         case "完成":
-            return "✅"
+            return "√"
         default:
             return status
         }
