@@ -27,10 +27,16 @@ class PreferencesWindowController: NSWindowController {
     // Send
     @IBOutlet weak var sendToTextField: NSTextField!
     @IBOutlet weak var sendCcTextField: NSTextField!
-    // Others
+    
+    // Timer
+    @IBOutlet weak var jiraRefreshTimerButton: NSButton!
+    @IBOutlet weak var jiraRefreshTimerTextField: NSTextField!
+    @IBOutlet weak var jiraRefreshTimerStepper: NSStepper!
     
     
-   
+    
+    
+    
     
     override var windowNibName: NSNib.Name? {
         return .PreferencesWindowController
@@ -76,6 +82,10 @@ class PreferencesWindowController: NSWindowController {
         sendCcTextField.stringValue = UserDefaults.get(by: .emailCc)
         
         accLoadingIndicator.isHidden = true
+        
+        // Timer
+        jiraRefreshTimerStepper.maxValue = Double((Constants.JiraRefresherDurationMax - Constants.JiraRefresherDurationStart) / Constants.JiraRefresherDurationIncrement)
+        jiraRefreshTimerStepper.minValue = -Double(Constants.JiraRefresherDurationStart / Constants.JiraRefresherDurationIncrement)
     }
 }
 
@@ -191,5 +201,7 @@ extension PreferencesWindowController {
 
 // MARK: Others
 extension PreferencesWindowController {
-    
+    @IBAction func jiraRefreshTimerStepper(_ sender: NSStepper) {
+        jiraRefreshTimerTextField.stringValue = "\(Constants.JiraRefresherDurationIncrement * sender.intValue + Constants.JiraRefresherDurationStart)"
+    }
 }
