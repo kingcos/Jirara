@@ -25,6 +25,7 @@
 		8450C33B20E3A25D009C0843 /* SendPreviewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8450C33920E3A25D009C0843 /* SendPreviewWindowController.swift */; };
 		8450C33C20E3A25D009C0843 /* SendPreviewWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8450C33A20E3A25D009C0843 /* SendPreviewWindowController.xib */; };
 		845A4EB42109D1F300E6E2A6 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845A4EB32109D1F300E6E2A6 /* MainMenu.swift */; };
+		847C53062118283100C0E58C /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C53052118283100C0E58C /* Timer.swift */; };
 		847C8C1E20D25338000C2854 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C1D20D25338000C2854 /* Constants.swift */; };
 		847C8C7120D2AA26000C2854 /* MailUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C7020D2AA26000C2854 /* MailUtil.swift */; };
 		847C8C7620D2B8D2000C2854 /* NSView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */; };
@@ -80,6 +81,7 @@
 		8450C33920E3A25D009C0843 /* SendPreviewWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPreviewWindowController.swift; sourceTree = "<group>"; };
 		8450C33A20E3A25D009C0843 /* SendPreviewWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendPreviewWindowController.xib; sourceTree = "<group>"; };
 		845A4EB32109D1F300E6E2A6 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		847C53052118283100C0E58C /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		847C8C1D20D25338000C2854 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		847C8C7020D2AA26000C2854 /* MailUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailUtil.swift; sourceTree = "<group>"; };
 		847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extension.swift"; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				847C8C1D20D25338000C2854 /* Constants.swift */,
 				840AB50120D8AADD0038D329 /* RealmHelper.swift */,
 				847C8C7020D2AA26000C2854 /* MailUtil.swift */,
+				847C53052118283100C0E58C /* Timer.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				8407BA1820F877CC00CE5DE7 /* NSUserNotification+Extension.swift in Sources */,
 				849478BD20D112C500FC9853 /* UserDefaults+Extension.swift in Sources */,
 				8426D4E920D1A3070007F180 /* ReportIssue.swift in Sources */,
+				847C53062118283100C0E58C /* Timer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

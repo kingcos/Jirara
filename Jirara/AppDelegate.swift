@@ -15,6 +15,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        Timer.shared.scheduled(.jiraRefresher,
+                               60,
+                               .global(),
+                               true) {
+                                MainViewModel.fetch(Constants.RapidViewName, false) {
+                                    MainViewModel.fetch(Constants.RapidViewName) {
+                                        NSUserNotification.send("Finished refreshing!")
+                                    }
+                                }
+        }
+        
         statusItem.button?.title = "Jirara"
         
         setupMenu()

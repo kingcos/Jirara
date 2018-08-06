@@ -198,8 +198,22 @@ extension PreferencesWindowController {
         // Save to UserDefaults
         UserDefaults.save(jiraRefreshTimerButton.state == .on ? "on" : "off", for: .jiraTimerSwitch)
         
-        // Start Timer
-        
+        // Start or cancel Timer
+        if jiraRefreshTimerButton.state == .on {
+            Timer.shared.cancle(.jiraRefresher)
+            Timer.shared.scheduled(.jiraRefresher,
+                                   60,
+                                   DispatchQueue.global(),
+                                   true) {
+                                                    MainViewModel.fetch(Constants.RapidViewName, false) {
+                                                        MainViewModel.fetch(Constants.RapidViewName) {
+                                                            NSUserNotification.send("Finished refreshing!")
+                                                        }
+                                                    }
+            }
+        } else {
+            Timer.shared.cancle(.jiraRefresher)
+        }
         
         NSAlert.show("Saved", ["OK"])
     }
