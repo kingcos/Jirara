@@ -30,21 +30,14 @@ class PreferencesWindowController: NSWindowController {
     
     // Timer
     @IBOutlet weak var jiraRefreshTimerButton: NSButton!
-    @IBOutlet weak var jiraRefreshTimerTextField: NSTextField!
-    @IBOutlet weak var jiraRefreshTimerStepper: NSStepper!
-    
-    
-    
-    
-    
     
     override var windowNibName: NSNib.Name? {
         return .PreferencesWindowController
     }
-
-    override func windowDidLoad() {
-        super.windowDidLoad()
-
+    
+    override func showWindow(_ sender: Any?) {
+        super.showWindow(sender)
+        
         window?.center()
         window?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
@@ -84,8 +77,8 @@ class PreferencesWindowController: NSWindowController {
         accLoadingIndicator.isHidden = true
         
         // Timer
-        jiraRefreshTimerStepper.maxValue = Double((Constants.JiraRefresherDurationMax - Constants.JiraRefresherDurationStart) / Constants.JiraRefresherDurationIncrement)
-        jiraRefreshTimerStepper.minValue = -Double(Constants.JiraRefresherDurationStart / Constants.JiraRefresherDurationIncrement)
+        UserDefaults.save(jiraRefreshTimerButton.state == .on ? "on" : "off", for: .jiraTimerSwitch)
+        jiraRefreshTimerButton.state = UserDefaults.get(by: .jiraTimerSwitch) == "on" ? .on : .off
     }
 }
 
@@ -201,7 +194,13 @@ extension PreferencesWindowController {
 
 // MARK: Others
 extension PreferencesWindowController {
-    @IBAction func jiraRefreshTimerStepper(_ sender: NSStepper) {
-        jiraRefreshTimerTextField.stringValue = "\(Constants.JiraRefresherDurationIncrement * sender.intValue + Constants.JiraRefresherDurationStart)"
+    @IBAction func clickOnTimerSaveButton(_ sender: NSButton) {
+        // Save to UserDefaults
+        UserDefaults.save(jiraRefreshTimerButton.state == .on ? "on" : "off", for: .jiraTimerSwitch)
+        
+        // Start Timer
+        
+        
+        NSAlert.show("Saved", ["OK"])
     }
 }

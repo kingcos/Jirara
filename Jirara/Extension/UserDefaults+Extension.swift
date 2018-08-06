@@ -26,6 +26,9 @@ extension UserDefaults {
         case emailPort = "com.maimieng.jirara.email.port"
         case emailTo = "com.maimieng.jirara.to"
         case emailCc = "com.maimieng.jirara.cc"
+        
+        // Timer
+        case jiraTimerSwitch = "com.maimieng.jirara.jira.timer.switch"
     }
     
     /// Save to UserDefaults by key

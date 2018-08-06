@@ -50,7 +50,5 @@ struct Constants {
     ]
     static let JiraTransitionIDs = ["11", "21", "31"]
     
-    static let JiraRefresherDurationStart: Int32 = 30
-    static let JiraRefresherDurationMax: Int32 = 300
-    static let JiraRefresherDurationIncrement: Int32 = 10
+    static let JiraRefresherDurationDefault: Int32 = 30
 }
