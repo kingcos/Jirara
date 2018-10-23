@@ -202,12 +202,12 @@ extension PreferencesWindowController {
         if jiraRefreshTimerButton.state == .on {
             Timer.shared.cancle(.jiraRefresher)
             Timer.shared.scheduled(.jiraRefresher,
-                                   60,
+                                   60 * 30,
                                    DispatchQueue.global(),
                                    true) {
                                                     MainViewModel.fetch(Constants.RapidViewName, false) {
                                                         MainViewModel.fetch(Constants.RapidViewName) {
-                                                            NSUserNotification.send("Finished refreshing!")
+//                                                            NSUserNotification.send("Finished refreshing!")
                                                         }
                                                     }
             }
