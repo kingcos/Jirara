@@ -19,7 +19,7 @@ struct MailUtil {
         session.username = UserDefaults.get(by: .emailAddress)
         session.password = UserDefaults.get(by: .emailPassword)
         session.connectionType = .startTLS
-        session.port = UInt32(UserDefaults.get(by: .emailPort)) ?? 587
+        session.port = UInt32(UserDefaults.get(by: .emailPort)) ?? 0
     }
 
     func send(_ from: String,
@@ -62,14 +62,15 @@ struct MailUtil {
     }
     
     static func send(_ type: SummaryType, _ completion: @escaping (String, String) -> Void) {
-        if type == .team {
-            sendTeam(completion)
-        } else {
+        switch type {
+        case .team:
             sendIndividual(completion)
+        case .individual:
+            sendTeam(completion)
         }
     }
     
-    static func sendIndividual(_ completion: @escaping (String, String) -> Void) {
+    static private func sendIndividual(_ completion: @escaping (String, String) -> Void) {
         func generateIndivitualList(_ content: inout String,
                                     _ issues: [IssueRealm]) {
             issues.forEach { issue in
@@ -142,6 +143,7 @@ struct MailUtil {
         completion(subject, content)
     }
 
+    /// 发送团队周报
     static func sendTeam(_ completion: @escaping (String, String) -> Void) {
         func generateTeamList(_ content: inout String,
                               _ sprintReportRealm: SprintReportRealm) {
@@ -237,7 +239,7 @@ struct MailUtil {
         completion(subject, content)
     }
     
-    static func emojiIssuePrioriy(_ priority: String) -> String {
+    static private func emojiIssuePrioriy(_ priority: String) -> String {
         switch priority {
         case "低优先级", "最低优先级":
             return "💚"
@@ -250,7 +252,7 @@ struct MailUtil {
         }
     }
     
-    static func emojiIssueStatus(_ status: String) -> String {
+    static private func emojiIssueStatus(_ status: String) -> String {
         switch status {
         case "Start":
             return "🏁 (\(status))"
