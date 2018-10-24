@@ -25,10 +25,10 @@ class SendMenu: NSMenu {
 extension SendMenu {
     func setup() {
         let teamItem = NSMenuItem.init(title: SummaryType.team.rawValue,
-                                       action: #selector(sendWeeklySummary(_:)),
+                                       action: #selector(sendSummary(_:)),
                                        keyEquivalent: "")
         let indivitualItem = NSMenuItem.init(title: SummaryType.individual.rawValue,
-                                             action: #selector(sendWeeklySummary(_:)),
+                                             action: #selector(sendSummary(_:)),
                                              keyEquivalent: "")
         [teamItem, indivitualItem].forEach { item in
             item.target = self
@@ -36,7 +36,7 @@ extension SendMenu {
         }
     }
     
-    @objc func sendWeeklySummary(_ sender: NSMenuItem) {
+    @objc func sendSummary(_ sender: NSMenuItem) {
         guard let type = SummaryType(rawValue: sender.title) else {
             fatalError()
         }

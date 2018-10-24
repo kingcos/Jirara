@@ -28,7 +28,7 @@ extension MainMenu {
         // ---
         addItem(NSMenuItem.separator())
         
-        // Preferences... About Quit
+        // Preferences... About Quit Items
         let preferenceItem = NSMenuItem.init(title: "Preferences...", action: #selector(clickOnPreference), keyEquivalent: "")
         let aboutItem = NSMenuItem.init(title: "About", action: #selector(clickOnAbout), keyEquivalent: "")
         let quitItem = NSMenuItem.init(title: "Quit", action: #selector(clickOnQuit), keyEquivalent: "")

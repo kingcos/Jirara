@@ -339,7 +339,7 @@
                                     </constraints>
                                 </view>
                             </tabViewItem>
-                            <tabViewItem label="Timer" identifier="" id="Yeb-Dx-LSq">
+                            <tabViewItem label="Others" identifier="" id="Yeb-Dx-LSq">
                                 <view key="view" id="kak-yx-caE">
                                     <rect key="frame" x="10" y="33" width="504" height="288"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
