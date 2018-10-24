@@ -14,8 +14,9 @@ class AboutWindowController: NSWindowController {
         return .AboutWindowController
     }
     
-    override func windowDidLoad() {
-        super.windowDidLoad()
+    // Show window at most front all the time
+    override func showWindow(_ sender: Any?) {
+        super.showWindow(sender)
         
         window?.center()
         window?.makeKeyAndOrderFront(nil)
