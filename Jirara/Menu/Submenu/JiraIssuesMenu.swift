@@ -87,20 +87,14 @@ extension JiraIssuesMenu: NSMenuDelegate {
             submenu.addItem(viewDetailsItem)
             submenu.addItem(NSMenuItem.separator())
             
-            
-            
-//            for progress in Constants.JiraIssueProgresses {
-//                let item = NSMenuItem.init(title: progress,
-//                                           action: #selector(self.clickOnProgress(_:)),
-//                                           keyEquivalent: "")
-//                item.target = self
-//                let currentProgress = issue.comments.filter { $0.content.hasPrefix(Constants.JiraIssueProgressPrefix) }.first?.content ?? Constants.JiraIssueProgressTodo
-//                if currentProgress == Constants.JiraIssueProgressPrefix + progress {
-//                    item.state = .on
-//                }
-//
-//                submenu.addItem(item)
-//            }
+            issue.transitions.forEach {
+                let item = NSMenuItem.init(title: $0.name,
+                                           action: #selector(self.clickOnTransition(_:)),
+                                           keyEquivalent: "")
+                item.target = self
+                
+                submenu.addItem(item)
+            }
             
             menu.insertItem(menuItem, at: issueMenuStickItemsCount)
             menu.setSubmenu(submenu, for: menuItem)
