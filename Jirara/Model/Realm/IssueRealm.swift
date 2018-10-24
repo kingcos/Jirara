@@ -21,6 +21,7 @@ class IssueRealm: Object {
     
     let comments = List<IssueCommentRealm>()
     let subtasks = List<IssueRealm>()
+    let transitions = List<IssueTransitionRealm>()
     
     override static func primaryKey() -> String? {
         return "id"

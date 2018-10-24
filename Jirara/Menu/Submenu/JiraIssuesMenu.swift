@@ -87,18 +87,20 @@ extension JiraIssuesMenu: NSMenuDelegate {
             submenu.addItem(viewDetailsItem)
             submenu.addItem(NSMenuItem.separator())
             
-            for progress in Constants.JiraIssueProgresses {
-                let item = NSMenuItem.init(title: progress,
-                                           action: #selector(self.clickOnProgress(_:)),
-                                           keyEquivalent: "")
-                item.target = self
-                let currentProgress = issue.comments.filter { $0.content.hasPrefix(Constants.JiraIssueProgressPrefix) }.first?.content ?? Constants.JiraIssueProgressTodo
-                if currentProgress == Constants.JiraIssueProgressPrefix + progress {
-                    item.state = .on
-                }
-                
-                submenu.addItem(item)
-            }
+            
+            
+//            for progress in Constants.JiraIssueProgresses {
+//                let item = NSMenuItem.init(title: progress,
+//                                           action: #selector(self.clickOnProgress(_:)),
+//                                           keyEquivalent: "")
+//                item.target = self
+//                let currentProgress = issue.comments.filter { $0.content.hasPrefix(Constants.JiraIssueProgressPrefix) }.first?.content ?? Constants.JiraIssueProgressTodo
+//                if currentProgress == Constants.JiraIssueProgressPrefix + progress {
+//                    item.state = .on
+//                }
+//
+//                submenu.addItem(item)
+//            }
             
             menu.insertItem(menuItem, at: issueMenuStickItemsCount)
             menu.setSubmenu(submenu, for: menuItem)
@@ -133,23 +135,24 @@ extension JiraIssuesMenu {
         selectedIssueIndex = index(of: sender)
     }
     
-    @objc func clickOnProgress(_ sender: NSMenuItem) {
+    @objc func clickOnTransition(_ sender: NSMenuItem) {
         guard let selectedIssueIndex = selectedIssueIndex else { fatalError() }
         let issue = issues[selectedIssueIndex - issueMenuStickItemsCount]
-        IssueViewModel.fetchIssueComments(issue.id) { issueComments in
-            IssueViewModel.updateProgress(issue.id, issueComments, sender.title) { newIssue in
-                let subtitleSuffix: String
-                switch sender.title {
-                case Constants.JiraIssueProgressTodo:
-                    subtitleSuffix = "，不要忘记开始哟～"
-                case Constants.JiraIssueProgressDone:
-                    subtitleSuffix = "，太棒啦！"
-                default:
-                    subtitleSuffix = "，要加油哟～"
-                }
-                
-                NSUserNotification.send(newIssue.title, "进度已更新至 " + sender.title + subtitleSuffix)
-            }
-        }
+        
+//        IssueViewModel.fetchIssueComments(issue.id) { issueComments in
+//            IssueViewModel.updateProgress(issue.id, issueComments, sender.title) { newIssue in
+//                let subtitleSuffix: String
+//                switch sender.title {
+//                case Constants.JiraIssueProgressTodo:
+//                    subtitleSuffix = "，不要忘记开始哟～"
+//                case Constants.JiraIssueProgressDone:
+//                    subtitleSuffix = "，太棒啦！"
+//                default:
+//                    subtitleSuffix = "，要加油哟～"
+//                }
+//
+//                NSUserNotification.send(newIssue.title, "进度已更新至 " + sender.title + subtitleSuffix)
+//            }
+//        }
     }
 }
