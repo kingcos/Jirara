@@ -64,9 +64,9 @@ struct MailUtil {
     static func send(_ type: SummaryType, _ completion: @escaping (String, String) -> Void) {
         switch type {
         case .team:
-            sendIndividual(completion)
-        case .individual:
             sendTeam(completion)
+        case .individual:
+            sendIndividual(completion)
         }
     }
     
