@@ -30,6 +30,20 @@ class RealmHelper<T: Object> {
         }
     }
     
+    func update(_ property: String, _ object: T, _ completion: (_ object: T) -> Void) {
+        let objects = realm.objects(T.self).filter("\(property) = %@", object)
+        
+        if let obj = objects.first {
+            do {
+                try realm.write {
+                    completion(obj)
+                }
+            } catch(let error) {
+                print((error as NSError).description)
+            }
+        }
+    }
+    
     func findAll() -> Results<T> {
         return realm.objects(T.self)
     }

@@ -28,21 +28,14 @@ class IssueRealm: Object {
     }
 }
 
-//extension IssueRealm {
-//    static let dao = RealmHelper<IssueRealm>()
-//
-//    static func add(_ object: IssueRealm) {
-//        dao.add([object])
-//    }
-//
-//    static func findAll() -> [IssueRealm] {
-//        return dao.findAll().map { IssueRealm(value: $0) }
-//    }
-//}
 class IssueRealmDAO {
     static let dao = RealmHelper<IssueRealm>()
     
     static func add(_ object: IssueRealm) {
         dao.add([object])
+    }
+    
+    static func update(_ property: String, _ object: IssueRealm, _ completion: (IssueRealm) -> Void) {
+        dao.update(property, object) { completion($0) }
     }
 }

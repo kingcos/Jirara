@@ -91,6 +91,9 @@ extension JiraIssuesMenu: NSMenuDelegate {
                 let item = NSMenuItem.init(title: $0.name,
                                            action: #selector(self.clickOnTransition(_:)),
                                            keyEquivalent: "")
+                if issue.status == $0.name {
+                    item.state = .on
+                }
                 item.target = self
                 
                 submenu.addItem(item)
@@ -133,20 +136,13 @@ extension JiraIssuesMenu {
         guard let selectedIssueIndex = selectedIssueIndex else { fatalError() }
         let issue = issues[selectedIssueIndex - issueMenuStickItemsCount]
         
-//        IssueViewModel.fetchIssueComments(issue.id) { issueComments in
-//            IssueViewModel.updateProgress(issue.id, issueComments, sender.title) { newIssue in
-//                let subtitleSuffix: String
-//                switch sender.title {
-//                case Constants.JiraIssueProgressTodo:
-//                    subtitleSuffix = "，不要忘记开始哟～"
-//                case Constants.JiraIssueProgressDone:
-//                    subtitleSuffix = "，太棒啦！"
-//                default:
-//                    subtitleSuffix = "，要加油哟～"
-//                }
-//
-//                NSUserNotification.send(newIssue.title, "进度已更新至 " + sender.title + subtitleSuffix)
-//            }
-//        }
+        guard let transitionID = IssueTransitionRealmDAO.findByName(sender.title)?.id else { return }
+        
+        IssueViewModel.updateTransition(issue.id, transitionID) {
+            IssueRealmDAO.update("status", issue) {
+                $0.status = sender.title
+            }
+            NSUserNotification.send(issue.title, "进度已更新至 " + sender.title)
+        }
     }
 }

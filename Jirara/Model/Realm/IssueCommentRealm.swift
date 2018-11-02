@@ -27,3 +27,11 @@ class IssueTransitionRealm: Object {
         return "id"
     }
 }
+
+class IssueTransitionRealmDAO {
+    static let dao = RealmHelper<IssueTransitionRealm>()
+    
+    static func findByName(_ name: String) -> IssueTransitionRealm? {
+        return dao.findAll().filter { $0.name == name }.first
+    }
+}

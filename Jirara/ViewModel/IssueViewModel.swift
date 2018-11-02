@@ -19,7 +19,11 @@ class IssueViewModel {
         let parameters: Parameters = [
             "transition": [ "id": transitionID ]
         ]
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+        Alamofire.request(url,
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default,
+                          headers: headers)
                  .responseData { response in
                     switch response.result {
                     case .success:
