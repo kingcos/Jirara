@@ -163,7 +163,7 @@ struct MailUtil {
 """
                 )
                 
-                let specifiedIssues = sprintReportRealm.issues.filter { $0.type == type }
+                let specifiedIssues = sprintReportRealm.issues.filter { $0.type == type }.sorted { $0.assignee < $1.assignee }
                 
                 for issue in specifiedIssues {
 //                    let progress = issue.comments.filter {
