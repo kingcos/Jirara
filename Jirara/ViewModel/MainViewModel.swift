@@ -248,6 +248,8 @@ extension MainViewModel {
                     return
                 }
                 
+                EngineerRealmDAO.add(engineer.toRealmObject())
+                
                 completion(engineer.toRealmObject(), nil)
             case .failure(let error):
                 print(#function + (error as NSError).description)
