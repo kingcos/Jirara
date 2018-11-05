@@ -12,18 +12,31 @@ import Mappable
 /**
  API: /rest/api/2/issue/56848/transitions
  **/
-//struct Transition {
-//    var id: String
-//    var name: String
-//    var statusCategoryID: String
-//    
-//    init(map: Mapper) throws {
-//        id = try map.from("id")
-//        name = try map.from("name")
-//        statusCategoryID = try map.from("to.statusCategory.id")
-//        priority = try map.from("fields.priority.name")
-//        assignee = try map.from("fields.assignee.name")
-//        status = try map.from("fields.status.name")
-//        comments = try map.from("fields.comment.comments")
-//    }
-//}
+struct Transitions: Mappable {
+    var transitions: [Transition]
+    
+    init(map: Mapper) throws {
+        transitions = try map.from("transitions")
+    }
+}
+
+struct Transition: Mappable {
+    var id: String
+    var name: String
+    
+    init(map: Mapper) throws {
+        id = try map.from("id")
+        name = try map.from("name")
+    }
+}
+
+extension Transition: Realmable {
+    func toRealmObject() -> IssueTransitionRealm {
+        let object = IssueTransitionRealm()
+        
+        object.id = id
+        object.name = name
+        
+        return object
+    }
+}

@@ -69,7 +69,7 @@ extension MainViewModel {
                         }
                     }
                 case .failure(let error):
-                    print((error as NSError).description)
+                    print(#function + (error as NSError).description)
                 }
         }
     }
@@ -100,7 +100,7 @@ extension MainViewModel {
                     }
                     
                 case .failure(let error):
-                    print((error as NSError).description)
+                    print(#function + (error as NSError).description)
                 }
         }
     }
@@ -124,7 +124,7 @@ extension MainViewModel {
                     
                     completion(sprintReport.toRealmObject())
                 case .failure(let error):
-                    print((error as NSError).description)
+                    print(#function + (error as NSError).description)
                 }
         }
     }
@@ -157,28 +157,36 @@ extension MainViewModel {
             case .success(let data):
                 guard let issue = try? Issue(JSONData: data) else { return }
                 
-                let issueRealm = issue.toRealmObject()
-                let subtasks = issue.subtasks ?? []
-                
-                if !subtasks.isEmpty {
-                    // 有子任务的父任务
-                    for subtask in subtasks {
-                        fetchSubtask(subtask.id) { subtaskRealm in
-                            issueRealm.subtasks.append(subtaskRealm)
-
-                            if issueRealm.subtasks.count == subtasks.count {
-                                IssueRealmDAO.add(issueRealm)
-                                completion(issueRealm)
+                fetchTransitions(issue.id) { transitions in
+                    let issueRealm = issue.toRealmObject()
+                    
+                    transitions.forEach { transition in
+                        issueRealm.transitions.append(transition.toRealmObject())
+                    }
+                    
+                    let subtasks = issue.subtasks ?? []
+                    
+                    if subtasks.isEmpty {
+                        // 无子任务的父任务
+                        IssueRealmDAO.add(issueRealm)
+                        completion(issueRealm)
+                    } else {
+                        // 有子任务的父任务
+                        subtasks.forEach { subtask in
+                            fetchSubtask(subtask.id) { subtaskRealm in
+                                issueRealm.subtasks.append(subtaskRealm)
+                                
+                                if issueRealm.subtasks.count == subtasks.count {
+                                    IssueRealmDAO.add(issueRealm)
+                                    completion(issueRealm)
+                                }
                             }
                         }
                     }
-                } else {
-                    // 无子任务的父任务
-                    IssueRealmDAO.add(issueRealm)
-                    completion(issueRealm)
                 }
             case .failure(let error):
-                print((error as NSError).description)
+                // TODO: ERROR HANDLING
+                print(#function + (error as NSError).description)
             }
         }
     }
@@ -191,9 +199,17 @@ extension MainViewModel {
             switch response.result {
             case .success(let data):
                 guard let issue = try? Issue(JSONData: data) else { return }
-                completion(issue.toRealmObject())
+                
+                let issueRealm = issue.toRealmObject()
+                fetchTransitions(issue.id) { transitions in
+                    transitions.forEach { transition in
+                        issueRealm.transitions.append(transition.toRealmObject())
+                    }
+                    
+                    completion(issueRealm)
+                }
             case .failure(let error):
-                print((error as NSError).description)
+                print(#function + (error as NSError).description)
             }
         }
     }
@@ -232,9 +248,29 @@ extension MainViewModel {
                     return
                 }
                 
+                EngineerRealmDAO.add(engineer.toRealmObject())
+                
                 completion(engineer.toRealmObject(), nil)
             case .failure(let error):
+                print(#function + (error as NSError).description)
                 completion(nil, (error as NSError).description)
+            }
+        }
+    }
+    
+    class func fetchTransitions(_ id: String,
+                                _ completion: @escaping ([Transition]) -> Void) {
+        let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issue.rawValue + id + JiraAPI.transitions.rawValue
+        
+        Alamofire.request(url, headers: headers).responseData { response in
+            switch response.result {
+            case .success(let data):
+                guard let transitions = try? Transitions(JSONData: data) else { return }
+                
+                completion(transitions.transitions)
+            case .failure(let error):
+                // TODO: ERROR HANDLING
+                print(#function + (error as NSError).description)
             }
         }
     }

@@ -27,18 +27,18 @@ class PreferencesWindowController: NSWindowController {
     // Send
     @IBOutlet weak var sendToTextField: NSTextField!
     @IBOutlet weak var sendCcTextField: NSTextField!
-    // Others
     
-    
-   
+    // Timer
+    @IBOutlet weak var jiraRefreshTimerButton: NSButton!
     
     override var windowNibName: NSNib.Name? {
         return .PreferencesWindowController
     }
-
-    override func windowDidLoad() {
-        super.windowDidLoad()
-
+    
+    override func showWindow(_ sender: Any?) {
+        super.showWindow(sender)
+        
+        // Show window at most front all the time
         window?.center()
         window?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
@@ -76,6 +76,10 @@ class PreferencesWindowController: NSWindowController {
         sendCcTextField.stringValue = UserDefaults.get(by: .emailCc)
         
         accLoadingIndicator.isHidden = true
+        
+        // Timer
+        UserDefaults.save(jiraRefreshTimerButton.state == .on ? "on" : "off", for: .jiraTimerSwitch)
+        jiraRefreshTimerButton.state = UserDefaults.get(by: .jiraTimerSwitch) == "on" ? .on : .off
     }
 }
 
@@ -191,5 +195,27 @@ extension PreferencesWindowController {
 
 // MARK: Others
 extension PreferencesWindowController {
-    
+    @IBAction func clickOnTimerSaveButton(_ sender: NSButton) {
+        // Save to UserDefaults
+        UserDefaults.save(jiraRefreshTimerButton.state == .on ? "on" : "off", for: .jiraTimerSwitch)
+        
+        // Start or cancel Timer
+        if jiraRefreshTimerButton.state == .on {
+            Timer.shared.cancle(.jiraRefresher)
+            Timer.shared.scheduled(.jiraRefresher,
+                                   60 * 30,
+                                   DispatchQueue.global(),
+                                   true) {
+                                                    MainViewModel.fetch(Constants.RapidViewName, false) {
+                                                        MainViewModel.fetch(Constants.RapidViewName) {
+//                                                            NSUserNotification.send("Finished refreshing!")
+                                                        }
+                                                    }
+            }
+        } else {
+            Timer.shared.cancle(.jiraRefresher)
+        }
+        
+        NSAlert.show("Saved", ["OK"])
+    }
 }

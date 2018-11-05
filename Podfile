@@ -12,15 +12,8 @@ target 'Jirara' do
   # JSON Parser
   pod 'Mappable'
   
-  # Images Cache
-  pod 'Kingfisher'
-
-  # Charts Lib
-  pod 'Charts'
-  pod 'ChartsRealm'
-  
   # Persistence
-  pod 'Realm'
+  pod 'RealmSwift'
 
   # E-mail
   pod 'mailcore2-osx'

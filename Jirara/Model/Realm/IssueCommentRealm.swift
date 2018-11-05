@@ -18,3 +18,20 @@ class IssueCommentRealm: Object {
         return "id"
     }
 }
+
+class IssueTransitionRealm: Object {
+    @objc dynamic var id = ""
+    @objc dynamic var name = ""
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+}
+
+class IssueTransitionRealmDAO {
+    static let dao = RealmHelper<IssueTransitionRealm>()
+    
+    static func findByName(_ name: String) -> IssueTransitionRealm? {
+        return dao.findAll().filter { $0.name == name }.first
+    }
+}

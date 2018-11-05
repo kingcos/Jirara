@@ -19,7 +19,7 @@ struct MailUtil {
         session.username = UserDefaults.get(by: .emailAddress)
         session.password = UserDefaults.get(by: .emailPassword)
         session.connectionType = .startTLS
-        session.port = UInt32(UserDefaults.get(by: .emailPort)) ?? 587
+        session.port = UInt32(UserDefaults.get(by: .emailPort)) ?? 0
     }
 
     func send(_ from: String,
@@ -62,23 +62,24 @@ struct MailUtil {
     }
     
     static func send(_ type: SummaryType, _ completion: @escaping (String, String) -> Void) {
-        if type == .team {
+        switch type {
+        case .team:
             sendTeam(completion)
-        } else {
+        case .individual:
             sendIndividual(completion)
         }
     }
     
-    static func sendIndividual(_ completion: @escaping (String, String) -> Void) {
+    static private func sendIndividual(_ completion: @escaping (String, String) -> Void) {
         func generateIndivitualList(_ content: inout String,
                                     _ issues: [IssueRealm]) {
             issues.forEach { issue in
-                let progress = issue.comments.filter {
-                    $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
-                    }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? ""
+//                let progress = issue.comments.filter {
+//                    $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
+//                    }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? ""
                 content.append(
 """
-\(issue.parentSummary == "" ? "- " + issue.title : "    - " + issue.title) 【\(emojiIssueStatus(issue.status))\(progress == "" ? "" : " - \(progress)")】
+\(issue.parentSummary == "" ? "- " + issue.title : "    - " + issue.title)
 
 """
                 )
@@ -111,6 +112,7 @@ struct MailUtil {
 
 > **周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate) 统计日期：\(today)**
 
+
 """
         generateIndivitualList(&content, lastIssues)
         
@@ -133,6 +135,7 @@ struct MailUtil {
 
 > **周期：\(nextSprintReport.startDate) ~ \(nextSprintReport.endDate)**
 
+
 """
         )
         
@@ -140,10 +143,11 @@ struct MailUtil {
         completion(subject, content)
     }
 
+    /// 发送团队周报
     static func sendTeam(_ completion: @escaping (String, String) -> Void) {
         func generateTeamList(_ content: inout String,
-                              _ issues: [IssueRealm]) {
-            let issueTypes = Array(Set(issues.map { $0.type }))
+                              _ sprintReportRealm: SprintReportRealm) {
+            let issueTypes = Array(Set(sprintReportRealm.issues.map { $0.type }))
             
             for type in issueTypes {
                 content.append(
@@ -155,17 +159,16 @@ struct MailUtil {
 <td style="border:1px solid #B0B0B0" width=150>负责人</td>
 <td style="border:1px solid #B0B0B0" width=50>优先级</td>
 <td style="border:1px solid #B0B0B0" width=80>状态</td>
-<td style="border:1px solid #B0B0B0" width=80>进度</td>
 </tr>
 """
                 )
                 
-                let specifiedIssues = issues.filter { $0.type == type }
+                let specifiedIssues = sprintReportRealm.issues.filter { $0.type == type }.sorted { $0.assignee < $1.assignee }
                 
                 for issue in specifiedIssues {
-                    let progress = issue.comments.filter {
-                        $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
-                        }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
+//                    let progress = issue.comments.filter {
+//                        $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
+//                        }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
                     let engineerName = EngineerRealmDAO.find(issue.assignee).first?.displayName
                     content.append(
 """
@@ -173,16 +176,15 @@ struct MailUtil {
 <td style="border:1px solid #B0B0B0">\(issue.title)</td>
 <td style="border:1px solid #B0B0B0">\(engineerName ?? issue.assignee)</td>
 <td style="border:1px solid #B0B0B0">\(emojiIssuePrioriy(issue.priority))</td>
-<td style="border:1px solid #B0B0B0">\(emojiIssueStatus(issue.status))</td>
-<td style="border:1px solid #B0B0B0">\(progress)</td>
+<td style="border:1px solid #B0B0B0">\(issue.status)</td>
 </tr>
 """
                     )
                     
                     for subtask in issue.subtasks {
-                        let progress = subtask.comments.filter {
-                            $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
-                            }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
+//                        let progress = subtask.comments.filter {
+//                            $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
+//                            }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
                         let engineerName = EngineerRealmDAO.find(subtask.assignee).first?.displayName
                         content.append(
 """
@@ -190,8 +192,7 @@ struct MailUtil {
 <td style="border:1px solid #B0B0B0">\("┗─ " + subtask.title)</td>
 <td style="border:1px solid #B0B0B0">\(engineerName ?? subtask.assignee)</td>
 <td style="border:1px solid #B0B0B0">\(emojiIssuePrioriy(subtask.priority))</td>
-<td style="border:1px solid #B0B0B0">\(emojiIssueStatus(subtask.status))</td>
-<td style="border:1px solid #B0B0B0">\(progress)</td>
+<td style="border:1px solid #B0B0B0">\(subtask.status)</td>
 </tr>
 """
                         )
@@ -214,10 +215,10 @@ struct MailUtil {
         
         var content =
 """
-<h2>Mobike - iOS Engineers 本周团队工作报告</h2>
+<h2>iOS Engineers 本周团队工作报告</h2>
 <h3>周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)\t统计日期：\(today)</h3>
 """
-        generateTeamList(&content, lastSprintReport.issues.map { $0 })
+        generateTeamList(&content, lastSprintReport)
 
         // 下周数据
         guard let nextSprintReport = SprintReportRealmDAO.findLatest() else { return }
@@ -229,13 +230,13 @@ struct MailUtil {
 """
         )
         
-        generateTeamList(&content, nextSprintReport.issues.map { $0 })
+        generateTeamList(&content, nextSprintReport)
         
-        content.append("<hr><b style=\"font-size:80%\">注：优先级顺序：高 -> 低 ❤️💛💚；状态：完成 ✅，开始 🏁，进行中为相应文字表述</b>")
+        content.append("<hr><b style=\"font-size:80%\">注：优先级顺序：高 -> 低 ❤️💛💚</b>")
         completion(subject, content)
     }
     
-    static func emojiIssuePrioriy(_ priority: String) -> String {
+    static private func emojiIssuePrioriy(_ priority: String) -> String {
         switch priority {
         case "低优先级", "最低优先级":
             return "💚"
@@ -248,14 +249,14 @@ struct MailUtil {
         }
     }
     
-    static func emojiIssueStatus(_ status: String) -> String {
-        switch status {
-        case "Start":
-            return "🏁 (\(status))"
-        case "完成":
-            return "✅"
-        default:
-            return status
-        }
-    }
+//    static private func emojiIssueStatus(_ status: String) -> String {
+//        switch status {
+//        case "Start":
+//            return "🏁 (\(status))"
+//        case "完成":
+//            return "√"
+//        default:
+//            return status
+//        }
+//    }
 }

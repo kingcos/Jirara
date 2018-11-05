@@ -24,6 +24,8 @@
 		8442048920E6007300DB9837 /* AboutWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8442048720E6007300DB9837 /* AboutWindowController.xib */; };
 		8450C33B20E3A25D009C0843 /* SendPreviewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8450C33920E3A25D009C0843 /* SendPreviewWindowController.swift */; };
 		8450C33C20E3A25D009C0843 /* SendPreviewWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8450C33A20E3A25D009C0843 /* SendPreviewWindowController.xib */; };
+		845A4EB42109D1F300E6E2A6 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845A4EB32109D1F300E6E2A6 /* MainMenu.swift */; };
+		847C53062118283100C0E58C /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C53052118283100C0E58C /* Timer.swift */; };
 		847C8C1E20D25338000C2854 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C1D20D25338000C2854 /* Constants.swift */; };
 		847C8C7120D2AA26000C2854 /* MailUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C7020D2AA26000C2854 /* MailUtil.swift */; };
 		847C8C7620D2B8D2000C2854 /* NSView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */; };
@@ -35,13 +37,13 @@
 		849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478C720D13FFC00FC9853 /* JiraAPI.swift */; };
 		849478CA20D143EB00FC9853 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478C920D143EB00FC9853 /* String+Extension.swift */; };
 		849478CC20D152DE00FC9853 /* NSAlert+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478CB20D152DE00FC9853 /* NSAlert+Extension.swift */; };
-		84A06E8520E0EFDF0048798F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A06E8420E0EFDF0048798F /* MainMenu.xib */; };
-		84A06E8720E0F0960048798F /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E8620E0F0960048798F /* StatusMenuController.swift */; };
 		84A06E8A20E0F1110048798F /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E8820E0F1110048798F /* PreferencesWindowController.swift */; };
 		84A06E8B20E0F1110048798F /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A06E8920E0F1110048798F /* PreferencesWindowController.xib */; };
 		84A06E8D20E0F69F0048798F /* NSNib+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E8C20E0F69F0048798F /* NSNib+Extension.swift */; };
 		84BE22DE20F72E2A000744F6 /* IssueCommentRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE22DD20F72E2A000744F6 /* IssueCommentRealm.swift */; };
-		84C52FB22102F06400CBB156 /* JiraraApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C52FB12102F06400CBB156 /* JiraraApplication.swift */; };
+		84D742C32109825C00242352 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D742C12109825B00242352 /* Main.storyboard */; };
+		84DF3A6C210AC1880053B71A /* JiraIssuesMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DF3A6B210AC1880053B71A /* JiraIssuesMenu.swift */; };
+		84DF3A6E210AC1B20053B71A /* SendMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DF3A6D210AC1B20053B71A /* SendMenu.swift */; };
 		84E72F6420F640F9000347BC /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E72F6320F640F9000347BC /* Issue.swift */; };
 		84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FCBFF320D0BDFF00FFDA73 /* NSColor+Extension.swift */; };
 		CACFDF2552D85F070858118D /* Pods_Jirara.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A62425EE78D72A54CDC1894A /* Pods_Jirara.framework */; };
@@ -78,6 +80,8 @@
 		8442048720E6007300DB9837 /* AboutWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutWindowController.xib; sourceTree = "<group>"; };
 		8450C33920E3A25D009C0843 /* SendPreviewWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPreviewWindowController.swift; sourceTree = "<group>"; };
 		8450C33A20E3A25D009C0843 /* SendPreviewWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendPreviewWindowController.xib; sourceTree = "<group>"; };
+		845A4EB32109D1F300E6E2A6 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		847C53052118283100C0E58C /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		847C8C1D20D25338000C2854 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		847C8C7020D2AA26000C2854 /* MailUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailUtil.swift; sourceTree = "<group>"; };
 		847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extension.swift"; sourceTree = "<group>"; };
@@ -92,13 +96,13 @@
 		849478C720D13FFC00FC9853 /* JiraAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraAPI.swift; sourceTree = "<group>"; };
 		849478C920D143EB00FC9853 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		849478CB20D152DE00FC9853 /* NSAlert+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAlert+Extension.swift"; sourceTree = "<group>"; };
-		84A06E8420E0EFDF0048798F /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
-		84A06E8620E0F0960048798F /* StatusMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
 		84A06E8820E0F1110048798F /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		84A06E8920E0F1110048798F /* PreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		84A06E8C20E0F69F0048798F /* NSNib+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNib+Extension.swift"; sourceTree = "<group>"; };
 		84BE22DD20F72E2A000744F6 /* IssueCommentRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCommentRealm.swift; sourceTree = "<group>"; };
-		84C52FB12102F06400CBB156 /* JiraraApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraraApplication.swift; sourceTree = "<group>"; };
+		84D742C22109825B00242352 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		84DF3A6B210AC1880053B71A /* JiraIssuesMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraIssuesMenu.swift; sourceTree = "<group>"; };
+		84DF3A6D210AC1B20053B71A /* SendMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMenu.swift; sourceTree = "<group>"; };
 		84E72F6320F640F9000347BC /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		84FCBFF320D0BDFF00FFDA73 /* NSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extension.swift"; sourceTree = "<group>"; };
 		A2FE8ACC31D85D047A85C605 /* Pods-Jirara.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jirara.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Jirara/Pods-Jirara.debug.xcconfig"; sourceTree = "<group>"; };
@@ -176,9 +180,19 @@
 				843973D620CFF64C00B14AB7 /* Info.plist */,
 				843973D720CFF64C00B14AB7 /* Jirara.entitlements */,
 				848A650120DBAE14002FBCE4 /* Jirara-Bridging-Header.h */,
-				84C52FB12102F06400CBB156 /* JiraraApplication.swift */,
+				84D742C12109825B00242352 /* Main.storyboard */,
 			);
 			path = Jirara;
+			sourceTree = "<group>";
+		};
+		845A4EB52109D2B800E6E2A6 /* Submenu */ = {
+			isa = PBXGroup;
+			children = (
+				845A4EB32109D1F300E6E2A6 /* MainMenu.swift */,
+				84DF3A6D210AC1B20053B71A /* SendMenu.swift */,
+				84DF3A6B210AC1880053B71A /* JiraIssuesMenu.swift */,
+			);
+			path = Submenu;
 			sourceTree = "<group>";
 		};
 		847CA69C20D390B1000C2854 /* Realm */ = {
@@ -215,6 +229,7 @@
 				847C8C1D20D25338000C2854 /* Constants.swift */,
 				840AB50120D8AADD0038D329 /* RealmHelper.swift */,
 				847C8C7020D2AA26000C2854 /* MailUtil.swift */,
+				847C53052118283100C0E58C /* Timer.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -222,6 +237,7 @@
 		84A06E8320E0EFD00048798F /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				845A4EB52109D2B800E6E2A6 /* Submenu */,
 				84E1815920F4B4960035E373 /* Controller */,
 			);
 			path = Menu;
@@ -230,8 +246,6 @@
 		84E1815920F4B4960035E373 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				84A06E8420E0EFDF0048798F /* MainMenu.xib */,
-				84A06E8620E0F0960048798F /* StatusMenuController.swift */,
 				84A06E8820E0F1110048798F /* PreferencesWindowController.swift */,
 				84A06E8920E0F1110048798F /* PreferencesWindowController.xib */,
 				8450C33920E3A25D009C0843 /* SendPreviewWindowController.swift */,
@@ -327,11 +341,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84D742C32109825C00242352 /* Main.storyboard in Resources */,
 				8450C33C20E3A25D009C0843 /* SendPreviewWindowController.xib in Resources */,
 				84A06E8B20E0F1110048798F /* PreferencesWindowController.xib in Resources */,
 				843973D220CFF64C00B14AB7 /* Assets.xcassets in Resources */,
 				8442048920E6007300DB9837 /* AboutWindowController.xib in Resources */,
-				84A06E8520E0EFDF0048798F /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,10 +360,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Jirara/Pods-Jirara-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/ChartsRealm/ChartsRealm.framework",
 				"${BUILT_PRODUCTS_DIR}/Down/Down.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Mappable/Mappable.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -358,10 +369,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChartsRealm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Down.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mappable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -397,9 +405,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84DF3A6E210AC1B20053B71A /* SendMenu.swift in Sources */,
 				847CA6A220D393F7000C2854 /* SprintReportRealm.swift in Sources */,
 				849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */,
-				84C52FB22102F06400CBB156 /* JiraraApplication.swift in Sources */,
 				847C8C7120D2AA26000C2854 /* MailUtil.swift in Sources */,
 				84E72F6420F640F9000347BC /* Issue.swift in Sources */,
 				847C8C7620D2B8D2000C2854 /* NSView+Extension.swift in Sources */,
@@ -408,6 +416,7 @@
 				8426D4E520D197E60007F180 /* RapidViews.swift in Sources */,
 				84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */,
 				84BE22DE20F72E2A000744F6 /* IssueCommentRealm.swift in Sources */,
+				84DF3A6C210AC1880053B71A /* JiraIssuesMenu.swift in Sources */,
 				849478CC20D152DE00FC9853 /* NSAlert+Extension.swift in Sources */,
 				8407BA1620F86FF700CE5DE7 /* Transition.swift in Sources */,
 				8426D4E720D1A2670007F180 /* SprintReport.swift in Sources */,
@@ -419,6 +428,7 @@
 				849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */,
 				8450C33B20E3A25D009C0843 /* SendPreviewWindowController.swift in Sources */,
 				84A06E8D20E0F69F0048798F /* NSNib+Extension.swift in Sources */,
+				845A4EB42109D1F300E6E2A6 /* MainMenu.swift in Sources */,
 				8442048820E6007300DB9837 /* AboutWindowController.swift in Sources */,
 				842B9B2A210734E60016B66F /* NSLayoutConstraint+Extension.swift in Sources */,
 				847CA69E20D39276000C2854 /* EngineerRealm.swift in Sources */,
@@ -427,12 +437,23 @@
 				847C8C1E20D25338000C2854 /* Constants.swift in Sources */,
 				8407BA1820F877CC00CE5DE7 /* NSUserNotification+Extension.swift in Sources */,
 				849478BD20D112C500FC9853 /* UserDefaults+Extension.swift in Sources */,
-				84A06E8720E0F0960048798F /* StatusMenuController.swift in Sources */,
 				8426D4E920D1A3070007F180 /* ReportIssue.swift in Sources */,
+				847C53062118283100C0E58C /* Timer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		84D742C12109825B00242352 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84D742C22109825B00242352 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		843973D820CFF64C00B14AB7 /* Debug */ = {
@@ -486,6 +507,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -541,6 +563,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
@@ -586,12 +609,6 @@
 					"-framework",
 					"\"Alamofire\"",
 					"-framework",
-					"\"Charts\"",
-					"-framework",
-					"\"ChartsRealm\"",
-					"-framework",
-					"\"Kingfisher\"",
-					"-framework",
 					"\"Mappable\"",
 					"-framework",
 					"\"Realm\"",
@@ -602,7 +619,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Jirara/Jirara-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -642,12 +659,6 @@
 					"-framework",
 					"\"Alamofire\"",
 					"-framework",
-					"\"Charts\"",
-					"-framework",
-					"\"ChartsRealm\"",
-					"-framework",
-					"\"Kingfisher\"",
-					"-framework",
 					"\"Mappable\"",
 					"-framework",
 					"\"Realm\"",
@@ -657,7 +668,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.maimieng.Jirara;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Jirara/Jirara-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

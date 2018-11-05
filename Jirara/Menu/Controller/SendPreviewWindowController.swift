@@ -10,9 +10,9 @@ import Cocoa
 import Down
 import SnapKit
 
-enum SummaryType {
-    case team
-    case individual
+enum SummaryType: String {
+    case team = "团队周报"
+    case individual = "个人周报"
 }
 
 class SendPreviewWindowController: NSWindowController {
@@ -34,6 +34,7 @@ class SendPreviewWindowController: NSWindowController {
     @IBOutlet weak var markdownContainerWidthConstraint: NSLayoutConstraint!
     
     var type: SummaryType = .team
+    var content = ""
     
     override var windowNibName: NSNib.Name? {
         return .SendPreviewWindowController
@@ -42,6 +43,7 @@ class SendPreviewWindowController: NSWindowController {
     override func showWindow(_ sender: Any?) {
         super.showWindow(sender)
         
+        // Show window at most front all the time
         window?.center()
         window?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
@@ -75,15 +77,8 @@ class SendPreviewWindowController: NSWindowController {
     }
     
     func setupMarkdownView() {
+        markdownTextView.textContainerInset = NSSize.init(width: 10, height: 5)
         markdownTextView.delegate = self
-
-        markdownTextView.snp.makeConstraints { maker in
-            maker.top.equalTo(self.markdownContainerView.snp.top)
-            maker.bottom.equalTo(self.markdownContainerView.snp.bottom)
-            maker.left.equalTo(self.markdownContainerView.snp.left)
-            maker.right.equalTo(self.markdownContainerView.snp.right)
-            maker.height.equalTo(self.markdownContainerView.snp.height)
-        }
     }
     
     func setupHeaderViews() {
@@ -101,6 +96,8 @@ class SendPreviewWindowController: NSWindowController {
         progressIndicator.startAnimation(nil)
         
         MailUtil.send(type) { subject, content in
+            self.content = content
+            
             self.subjectTextField.stringValue = subject
             
             if self.type == .individual {
@@ -132,10 +129,15 @@ class SendPreviewWindowController: NSWindowController {
         let to = emailToTextField.stringValue.split(separator: " ").map { String($0) }
         let cc = emailCcTextField.stringValue.split(separator: " ").map { String($0) }
         let subject = subjectTextField.stringValue
-        guard let url = downView.url,
-            let content = try? String(contentsOf: url) else {
-                NSAlert.show("网页出现了点问题", ["OK, I will try."])
+        
+        if type == .individual {
+            let down = Down(markdownString: markdownTextView.string)
+            if let markdown = try? down.toHTML() {
+                content = markdown
+            } else {
+                NSAlert.show("Parse ERROR", ["OK"])
                 return
+            }
         }
         
         MailUtil().send(from, to, cc, subject, content) { errorMessage in
