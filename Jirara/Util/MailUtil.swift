@@ -152,14 +152,12 @@ struct MailUtil {
             for type in issueTypes {
                 content.append(
                     """
-<ul><li>\(type)</li></ul>
+
+- \(type)
+
 <table style="border-collapse:collapse">
-<tr>
-<td style="border:1px solid #B0B0B0" width=600>任务</td>
-<td style="border:1px solid #B0B0B0" width=150>负责人</td>
-<td style="border:1px solid #B0B0B0" width=50>优先级</td>
-<td style="border:1px solid #B0B0B0" width=80>状态</td>
-</tr>
+<tr><td width=600>任务</td><td width=180>负责人</td><td width=50>优先级</td><td width=80>状态</td></tr>
+
 """
                 )
                 
@@ -172,12 +170,8 @@ struct MailUtil {
                     let engineerName = EngineerRealmDAO.find(issue.assignee).first?.displayName
                     content.append(
 """
-<tr>
-<td style="border:1px solid #B0B0B0">\(issue.title)</td>
-<td style="border:1px solid #B0B0B0">\(engineerName ?? issue.assignee)</td>
-<td style="border:1px solid #B0B0B0">\(emojiIssuePrioriy(issue.priority))</td>
-<td style="border:1px solid #B0B0B0">\(issue.status)</td>
-</tr>
+<tr><td>\(issue.title)</td><td>\(engineerName ?? issue.assignee)</td><td>\(emojiIssuePrioriy(issue.priority))</td><td>\(issue.status)</td></tr>
+
 """
                     )
                     
@@ -188,20 +182,16 @@ struct MailUtil {
                         let engineerName = EngineerRealmDAO.find(subtask.assignee).first?.displayName
                         content.append(
 """
-<tr>
-<td style="border:1px solid #B0B0B0">\("┗─ " + subtask.title)</td>
-<td style="border:1px solid #B0B0B0">\(engineerName ?? subtask.assignee)</td>
-<td style="border:1px solid #B0B0B0">\(emojiIssuePrioriy(subtask.priority))</td>
-<td style="border:1px solid #B0B0B0">\(subtask.status)</td>
-</tr>
+<tr><td>\("┗─ " + subtask.title)</td><td>\(engineerName ?? subtask.assignee)</td><td>\(emojiIssuePrioriy(subtask.priority))</td><td>\(subtask.status)</td></tr>
+
 """
                         )
                     }
                 }
                 
-                content.append("</table><br>")
+                content.append("</table><br>\n")
             }
-            content.append("<br>")
+            content.append("<br>\n")
         }
         
         let formatter = DateFormatter()
@@ -215,8 +205,14 @@ struct MailUtil {
         
         var content =
 """
+<style>
+td { border:1px solid #B0B0B0 }
+</style>
+
 <h2>iOS Engineers 本周团队工作报告</h2>
+
 <h3>周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)\t统计日期：\(today)</h3>
+
 """
         generateTeamList(&content, lastSprintReport)
 
@@ -225,14 +221,17 @@ struct MailUtil {
         
         content.append(
 """
+
 <h2>下周工作预告</h2>
+
 <h3>周期：\(nextSprintReport.startDate) ~ \(nextSprintReport.endDate)</h3>
+
 """
         )
         
         generateTeamList(&content, nextSprintReport)
         
-        content.append("<hr><b style=\"font-size:80%\">注：优先级顺序：高 -> 低 ❤️💛💚</b>")
+        content.append("\n<hr><b style=\"font-size:80%\">注：优先级顺序：高 -> 低 ❤️💛💚</b>")
         completion(subject, content)
     }
     
