@@ -5,22 +5,10 @@ target 'Jirara' do
   use_frameworks!
 
   # Pods for Jirara
-  
-  # Networking
   pod 'Alamofire'
-  
-  # JSON Parser
   pod 'Mappable'
-  
-  # Persistence
   pod 'RealmSwift'
-
-  # E-mail
   pod 'mailcore2-osx'
-
-  # Markdown
   pod 'Down'
-  
-  # Constraints
   pod 'SnapKit'
 end
