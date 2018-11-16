@@ -81,26 +81,22 @@ class SendPreviewWindowController: NSWindowController {
         progressIndicator.isHidden = false
         progressIndicator.startAnimation(nil)
         
-//        MainViewModel.fetch(Constants.RapidViewName) {
-            MailUtil.send(self.type) { subject, content in
-                self.content = content
-                
-                self.subjectTextField.stringValue = subject
-                
-                if self.type == .individual {
-                    self.markdownTextView.string = content
-                }
-                try? self.downView.update(markdownString: content)
-                
-                self.progressIndicator.stopAnimation(nil)
-                self.progressIndicator.isHidden = true
-                
-                self.subjectTextField.isEditable = true
-                self.emailToTextField.isEditable = true
-                self.emailCcTextField.isEditable = true
-                self.emailSendButton.isEnabled = true
-            }
-//        }
+        MailUtil.send(self.type) { subject, content in
+            self.content = content
+            
+            self.subjectTextField.stringValue = subject
+            self.markdownTextView.string = content
+            
+            try? self.downView.update(markdownString: content)
+            
+            self.progressIndicator.stopAnimation(nil)
+            self.progressIndicator.isHidden = true
+            
+            self.subjectTextField.isEditable = true
+            self.emailToTextField.isEditable = true
+            self.emailCcTextField.isEditable = true
+            self.emailSendButton.isEnabled = true
+        }
     }
     
     @IBAction func clickOnSendButton(_ sender: NSButton) {
@@ -118,16 +114,13 @@ class SendPreviewWindowController: NSWindowController {
         let cc = emailCcTextField.stringValue.split(separator: " ").map { String($0) }
         let subject = subjectTextField.stringValue
         
-        if type == .individual {
-            let down = Down(markdownString: markdownTextView.string)
-            if let markdown = try? down.toHTML() {
-                content = markdown
-            } else {
-                NSAlert.show("Parse ERROR", ["OK"])
-                return
-            }
+        let down = Down(markdownString: markdownTextView.string)
+        if let markdown = try? down.toHTML() {
+            content = markdown
+        } else {
+            NSAlert.show("Parse ERROR", ["OK"])
+            return
         }
-        
         MailUtil().send(from, to, cc, subject, content) { errorMessage in
             self.progressIndicator.stopAnimation(nil)
             self.subjectTextField.isEditable = true
