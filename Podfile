@@ -11,5 +11,4 @@ target 'Jirara' do
   pod 'mailcore2-osx'
   pod 'Down'
   pod 'SnapKit'
-  pod 'GRDB.swift'
 end
