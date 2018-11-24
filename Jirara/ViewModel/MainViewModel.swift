@@ -9,85 +9,52 @@
 import Foundation
 import Alamofire
 
-class MainViewModel {
-    static let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
-    
-    var engineers: [EngineerRealm] {
-        get {
-            return EngineerRealmDAO.findAll()
-        }
-    }
-    
-    var sprintReport: SprintReportRealm {
-        get {
-            return SprintReportRealmDAO.findLatest() ?? SprintReportRealm()
-        }
-    }
-    
-    func issues(_ assignee: String?) -> [IssueRealm] {
-        let issues: [IssueRealm] = sprintReport.issues.map { $0 }
-        
-        if let assignee = assignee {
-            return issues.filter { $0.assignee == assignee }
-        }
-        
-        return issues
-    }
+enum JiraraError: Error {
+    case notFound
 }
 
-extension MainViewModel {
-    class func fetch(_ rapidViewName: String,
-                     _ isLatest: Bool = true,
-                     _ completion: @escaping () -> Void) {
-        fetchRapidView(rapidViewName) { rapidViewID in
-            fetchSprintQuery(rapidViewID, isLatest) { sprintID in
-                fetchSprintReport(rapidViewID, sprintID) { sprintReport in
-                    fetchIssues(sprintReport) { issueRealms in
-                        fetchEngineers(issueRealms) { _ in
-                            completion()
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    class func fetchRapidView(_ name: String,
-                              _ completion: @escaping (Int) -> Void) {
+class MainViewModel {
+    class func fetchRapidViewID(_ name: String,
+                                _ completion: @escaping (Int?) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.rapidView.rawValue
+        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
         
         Alamofire.request(url, headers: headers)
             .responseData { response in
                 switch response.result {
                 case .success(let data):
                     guard let rapidViews = try? RapidViews(JSONData: data) else {
-                        fatalError("\(url) may be broken.")
+                        completion(nil)
+                        return
                     }
                     for view in rapidViews.views {
                         if view.name == name {
                             completion(view.id)
                         }
                     }
-                case .failure(let error):
-                    print(#function + (error as NSError).description)
+                case .failure:
+                    completion(nil)
                 }
         }
     }
     
-    class func fetchSprintQuery(_ rapidViewID: Int,
-                                _ isLatest: Bool,
-                                _ completion: @escaping (Int) -> Void) {
+    class func fetchLastestSprintID(_ rapidViewID: Int,
+                                    _ isActive: Bool,
+                                    _ completion: @escaping (Int?) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.sprintQuery.rawValue + "\(rapidViewID)"
+        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
         
         Alamofire.request(url, headers: headers)
             .responseData { response in
                 switch response.result {
                 case .success(let data):
                     guard let sprintQuery = try? SprintQuery(JSONData: data) else {
-                        fatalError("\(url) may be broken.")
+                        completion(nil)
+                        return
                     }
-                    if isLatest {
-                        for sprint in sprintQuery.sprints {
+                    
+                    if isActive {
+                        sprintQuery.sprints.forEach { sprint in
                             if sprint.state == "ACTIVE" {
                                 completion(sprint.id)
                             }
@@ -99,123 +66,126 @@ extension MainViewModel {
                         }
                     }
                     
-                case .failure(let error):
-                    print(#function + (error as NSError).description)
+                case .failure:
+                    completion(nil)
                 }
         }
     }
     
     class func fetchSprintReport(_ rapidViewID: Int,
                                  _ sprintID: Int,
-                                 _ completion: @escaping (SprintReportRealm) -> Void) {
+                                 _ completion: @escaping (SprintReport?) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.sprintReport.rawValue
         let parameters = ["rapidViewId" : rapidViewID,
                           "sprintId" : sprintID]
+        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
         
         Alamofire.request(url, parameters: parameters, headers: headers)
             .responseData { response in
                 switch response.result {
                 case .success(let data):
                     guard let sprintReport = try? SprintReport(JSONData: data) else {
-                        fatalError("\(url) may be broken.")
+                        completion(nil)
+                        return
                     }
-                    // Saved Sprint Report
-                    SprintReportRealmDAO.add(sprintReport.toRealmObject())
                     
-                    completion(sprintReport.toRealmObject())
-                case .failure(let error):
-                    print(#function + (error as NSError).description)
+                    completion(sprintReport)
+                case .failure:
+                    completion(nil)
                 }
         }
     }
     
-    class func fetchIssues(_ sprintReport: SprintReportRealm,
-                           _ completion: @escaping ([IssueRealm]) -> Void) {
-        guard !sprintReport.issues.isEmpty else {
+    class func fetchIssues(_ sprintReport: SprintReport,
+                           _ completion: @escaping ([Issue]) -> Void) {
+        let issueIDs = (sprintReport.completedIssues + sprintReport.incompletedIssues).map { $0.id }
+        guard !issueIDs.isEmpty else {
             completion([])
             return
         }
         
-        var issueRealms = [IssueRealm]()
-        for issue in sprintReport.issues {
-            fetchIssue(String(issue.id)) { issueRealm in
-                issueRealms.append(issueRealm)
-                let issues = issueRealms.filter { $0.parentSummary == "" }
-                if sprintReport.issues.count == issues.count {
-                    completion(issueRealms)
+        var issues = [Issue]()
+        issueIDs.forEach { id in
+            fetchIssue(id) { issue in
+                if let issue = issue {
+                    issues.append(issue)
+                }
+                
+                let parentIssues = issues.filter { ($0.parentSummary ?? "") == "" }
+                if issueIDs.count == parentIssues.count {
+                    completion(issues)
                 }
             }
         }
     }
     
-    class func fetchIssue(_ id: String,
-                          _ completion: @escaping (IssueRealm) -> Void) {
+    class func fetchIssue(_ id: Int,
+                          _ completion: @escaping (Issue?) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issue.rawValue
+        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
         
-        Alamofire.request(url + id, headers: headers).responseData { response in
+        Alamofire.request(url + "\(id)", headers: headers).responseData { response in
             switch response.result {
             case .success(let data):
-                guard let issue = try? Issue(JSONData: data) else { return }
+                guard var issue = try? Issue(JSONData: data) else {
+                    completion(nil)
+                    return
+                }
                 
                 fetchTransitions(issue.id) { transitions in
-                    let issueRealm = issue.toRealmObject()
+                    issue.transitions = transitions
                     
-                    transitions.forEach { transition in
-                        issueRealm.transitions.append(transition.toRealmObject())
-                    }
+                    let subtaskIDs = issue.subtasks.map { $0.id }
                     
-                    let subtasks = issue.subtasks ?? []
-                    
-                    if subtasks.isEmpty {
+                    if subtaskIDs.isEmpty {
                         // 无子任务的父任务
-                        IssueRealmDAO.add(issueRealm)
-                        completion(issueRealm)
+                        completion(issue)
                     } else {
                         // 有子任务的父任务
-                        subtasks.forEach { subtask in
-                            fetchSubtask(subtask.id) { subtaskRealm in
-                                issueRealm.subtasks.append(subtaskRealm)
-                                
-                                if issueRealm.subtasks.count == subtasks.count {
-                                    IssueRealmDAO.add(issueRealm)
-                                    completion(issueRealm)
-                                }
+                        subtaskIDs.forEach { id in
+                            fetchSubtask(id) { subtask in
+                                guard let subtask = subtask else { return }
+                                issue.subtasks.append(subtask)
+                            }
+                            
+                            if subtaskIDs.count == issue.subtasks.count {
+                                completion(issue)
                             }
                         }
                     }
                 }
-            case .failure(let error):
-                // TODO: ERROR HANDLING
-                print(#function + (error as NSError).description)
+            case .failure:
+                completion(nil)
             }
         }
     }
     
     class func fetchSubtask(_ id: String,
-                            _ completion: @escaping (IssueRealm) -> Void) {
+                            _ completion: @escaping (Issue?) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issue.rawValue
+        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
         
         Alamofire.request(url + id, headers: headers).responseData { response in
             switch response.result {
             case .success(let data):
-                guard let issue = try? Issue(JSONData: data) else { return }
+                guard var issue = try? Issue(JSONData: data) else {
+                    completion(nil)
+                    return
+                }
                 
-                let issueRealm = issue.toRealmObject()
                 fetchTransitions(issue.id) { transitions in
-                    transitions.forEach { transition in
-                        issueRealm.transitions.append(transition.toRealmObject())
-                    }
+                    issue.transitions = transitions
                     
-                    completion(issueRealm)
+                    completion(issue)
                 }
             case .failure(let error):
-                print(#function + (error as NSError).description)
+                completion(nil)
             }
         }
     }
     
-    class func fetchEngineers(_ issues: [IssueRealm],
-                              _ completion: @escaping ([EngineerRealm]) -> Void) {
+    class func fetchEngineers(_ issues: [Issue],
+                              _ completion: @escaping ([Engineer]) -> Void) {
         let engineerNames = Array(Set(issues.map { $0.assignee })).sorted()
         
         guard !engineerNames.isEmpty else {
@@ -223,37 +193,37 @@ extension MainViewModel {
             return
         }
         
-        var engineerRealms = [EngineerRealm]()
-        for name in engineerNames {
-            fetchEngineer(name) { engineer, _ in
+        var engineers = [Engineer]()
+        engineerNames.forEach { name in
+            fetchEngineer(name) { engineer in
                 if let engineer = engineer {
-                    engineerRealms.append(engineer)
+                    engineers.append(engineer)
                     
-                    if engineerRealms.count == engineerNames.count {
-                        completion(engineerRealms)
+                    if engineers.count == engineerNames.count {
+                        completion(engineers)
                     }
                 }
             }
+            
         }
     }
     
     class func fetchEngineer(_ name: String,
-                             _ completion: @escaping (EngineerRealm?, String?) -> Void) {
+                             _ completion: @escaping (Engineer?) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.user.rawValue
+        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
+        
         Alamofire.request(url, parameters: ["username" : name], headers: headers).responseData { response in
             switch response.result {
             case .success(let data):
                 guard let engineer = try? Engineer(JSONData: data) else {
-                    completion(nil, "JSON 解析失败 - AD 用户名或密码不正确")
+                    completion(nil)
                     return
                 }
                 
-                EngineerRealmDAO.add(engineer.toRealmObject())
-                
-                completion(engineer.toRealmObject(), nil)
-            case .failure(let error):
-                print(#function + (error as NSError).description)
-                completion(nil, (error as NSError).description)
+                completion(engineer)
+            case .failure:
+                completion(nil)
             }
         }
     }
@@ -261,17 +231,63 @@ extension MainViewModel {
     class func fetchTransitions(_ id: String,
                                 _ completion: @escaping ([Transition]) -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issue.rawValue + id + JiraAPI.transitions.rawValue
+        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
         
         Alamofire.request(url, headers: headers).responseData { response in
             switch response.result {
             case .success(let data):
-                guard let transitions = try? Transitions(JSONData: data) else { return }
+                guard let transitions = try? Transitions(JSONData: data) else {
+                    completion([])
+                    return
+                }
                 
                 completion(transitions.transitions)
-            case .failure(let error):
-                // TODO: ERROR HANDLING
-                print(#function + (error as NSError).description)
+            case .failure:
+                completion([])
             }
         }
     }
 }
+
+
+extension MainViewModel {
+    class func fetchMyIssuesInActiveSprintReport(_ completion: @escaping ([Issue]) -> Void) {
+        fetchRapidViewID(Constants.RapidViewName) { rapidViewID in
+            fetchLastestSprintID(rapidViewID ?? -1, true) { sprintID in
+                fetchSprintReport(rapidViewID ?? -1, sprintID ?? -1) { sprintReport in
+                    guard let sprintReport = sprintReport else {
+                        completion([])
+                        return
+                    }
+                    
+                    fetchIssues(sprintReport) { issues in
+                        let myIssues = issues.map { $0.subtasks }.flatMap { $0 }.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
+                        completion(myIssues)
+                    }
+                }
+            }
+        }
+    }
+    
+    class func fetch(_ rapidViewName: String,
+                     _ isActive: Bool = true,
+                     _ completion: @escaping () -> Void) {
+        fetchRapidViewID(rapidViewName) { rapidViewID in
+            fetchLastestSprintID(rapidViewID ?? -1, isActive) { sprintID in
+                fetchSprintReport(rapidViewID ?? -1, sprintID ?? -1) { sprintReport in
+                    guard let sprintReport = sprintReport else {
+                        completion()
+                        return
+                    }
+                    
+                    fetchIssues(sprintReport) { issues in
+                        fetchEngineers(issues) { _ in
+                            completion()
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

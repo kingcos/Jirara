@@ -16,7 +16,7 @@ class MainMenu: NSMenu {
 extension MainMenu {
     func setupMainMenu() {
         // Send
-        let firstMenuItem = NSMenuItem.init(title: "Send", action: nil, keyEquivalent: "")
+        let firstMenuItem = NSMenuItem.init(title: "Scrums", action: nil, keyEquivalent: "")
         addItem(firstMenuItem)
         setSubmenu(SendMenu.init(), for: firstMenuItem)
         

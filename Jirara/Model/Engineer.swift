@@ -27,16 +27,3 @@ struct Engineer: Mappable {
         displayName = try map.from("displayName")
     }
 }
-
-extension Engineer: Realmable {
-    func toRealmObject() -> EngineerRealm {
-        let object = EngineerRealm()
-        
-        object.name = name
-        object.emailAddress = emailAddress
-        object.avatarURL = avatarURL
-        object.displayName = displayName
-        
-        return object
-    }
-}

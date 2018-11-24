@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,7 +17,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -30,14 +30,37 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="895-Xr-VfM">
-                        <rect key="frame" x="54" y="127" width="372" height="17"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="For more, please visit my GitHub: https://github.com/kingcos" id="Ovn-fD-A6M">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
+                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H1K-pL-2Me">
+                        <rect key="frame" x="38" y="125" width="405" height="21"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="895-Xr-VfM">
+                                <rect key="frame" x="-2" y="2" width="209" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="For more, please visit my GitHub: " id="Ovn-fD-A6M">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c9c-he-cg4">
+                                <rect key="frame" x="207" y="-7" width="204" height="32"/>
+                                <buttonCell key="cell" type="push" title="https://github.com/kingcos" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Odp-RP-mFR">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showGitHubPage:" target="-2" id="7Ph-TQ-LRT"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <visibilityPriorities>
+                            <integer value="1000"/>
+                            <integer value="1000"/>
+                        </visibilityPriorities>
+                        <customSpacing>
+                            <real value="3.4028234663852886e+38"/>
+                            <real value="3.4028234663852886e+38"/>
+                        </customSpacing>
+                    </stackView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K4f-n8-ivR">
                         <rect key="frame" x="20" y="45" width="440" height="17"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Jirara is a tiny helper for Jira on macOS which wrote in Swift by kingcos." id="KgG-lO-zeB">
@@ -49,9 +72,9 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="K4f-n8-ivR" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="1np-9C-5YH"/>
+                    <constraint firstItem="H1K-pL-2Me" firstAttribute="centerY" secondItem="se5-gp-TjO" secondAttribute="centerY" id="2H0-0L-WnZ"/>
                     <constraint firstItem="i7L-E6-Umg" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="F3c-2X-DFQ"/>
-                    <constraint firstItem="895-Xr-VfM" firstAttribute="centerY" secondItem="se5-gp-TjO" secondAttribute="centerY" id="K8U-kY-ozs"/>
-                    <constraint firstItem="895-Xr-VfM" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="cjV-dZ-8WK"/>
+                    <constraint firstItem="H1K-pL-2Me" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="PWb-1g-GAt"/>
                     <constraint firstAttribute="bottom" secondItem="i7L-E6-Umg" secondAttribute="bottom" constant="20" id="fLE-PF-dVJ"/>
                     <constraint firstItem="i7L-E6-Umg" firstAttribute="top" secondItem="K4f-n8-ivR" secondAttribute="bottom" constant="8" id="j2h-S0-dSM"/>
                 </constraints>

@@ -32,14 +32,9 @@ extension JiraIssuesMenu {
         let newIssuesItem = NSMenuItem.init(title: "New Issue...",
                                             action: #selector(clickOnNewIssue),
                                             keyEquivalent: "")
-        let refreshItem = NSMenuItem.init(title: "Refresh",
-                                          action: #selector(clickOnRefresh),
-                                          keyEquivalent: "")
         
-        [newIssuesItem, refreshItem].forEach { item in
-            item.target = self
-            addItem(item)
-        }
+        newIssuesItem.target = self
+        addItem(newIssuesItem)
         
         addItem(NSMenuItem.separator())
     }
@@ -52,55 +47,39 @@ extension JiraIssuesMenu {
         
         NSWorkspace.shared.open(url)
     }
-    
-    @objc func clickOnRefresh() {
-        MainViewModel.fetch(Constants.RapidViewName, false) {
-            MainViewModel.fetch(Constants.RapidViewName) {
-                NSUserNotification.send("Finished refreshing!")
-            }
-        }
-    }
 }
 
 extension JiraIssuesMenu: NSMenuDelegate {
     func menuWillOpen(_ menu: NSMenu) {
-        guard let sprintReport = SprintReportRealmDAO.findLatest() else { return }
-        issues = sprintReport.issues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
-        
-        issues.forEach { issue in
-            issues.append(contentsOf: issue.subtasks.filter { $0.assignee == UserDefaults.get(by: .accountUsername) })
-        }
-        
-        for issue in issues.reversed() {
-            let submenu = NSMenu.init()
-            let menuItem = NSMenuItem.init(title: issue.parentSummary == "" ? issue.title : issue.parentSummary + " - " + issue.title,
-                                           action: nil,
-                                           keyEquivalent: "")
-            if issue.status == "完成" {
-                menuItem.state = .on
-            }
-            
-            let viewDetailsItem = NSMenuItem.init(title: "View Details...",
-                                                  action: #selector(self.clickOnViewDetails(_:)),
-                                                  keyEquivalent: "")
-            viewDetailsItem.target = self
-            submenu.addItem(viewDetailsItem)
-            submenu.addItem(NSMenuItem.separator())
-            
-            issue.transitions.forEach {
-                let item = NSMenuItem.init(title: $0.name,
-                                           action: #selector(self.clickOnTransition(_:)),
-                                           keyEquivalent: "")
-                if issue.status == $0.name {
-                    item.state = .on
-                }
-                item.target = self
+        MainViewModel.fetchMyIssuesInActiveSprintReport { issues in
+            issues.forEach { issue in
+                let submenu = NSMenu.init()
+                let menuItem = NSMenuItem(title: issue.summary,
+                                          action: nil,
+                                          keyEquivalent: "")
                 
-                submenu.addItem(item)
+                let viewDetailsItem = NSMenuItem.init(title: "View Details...",
+                                                      action: #selector(self.clickOnViewDetails(_:)),
+                                                      keyEquivalent: "")
+                viewDetailsItem.target = self
+                submenu.addItem(viewDetailsItem)
+                submenu.addItem(NSMenuItem.separator())
+                
+                issue.transitions.forEach {
+                    let item = NSMenuItem.init(title: $0.name,
+                                               action: #selector(self.clickOnTransition(_:)),
+                                               keyEquivalent: "")
+                    if issue.status == $0.name {
+                        item.state = .on
+                    }
+                    item.target = self
+                    
+                    submenu.addItem(item)
+                }
+                
+                menu.insertItem(menuItem, at: self.issueMenuStickItemsCount)
+                menu.setSubmenu(submenu, for: menuItem)
             }
-            
-            menu.insertItem(menuItem, at: issueMenuStickItemsCount)
-            menu.setSubmenu(submenu, for: menuItem)
         }
     }
     

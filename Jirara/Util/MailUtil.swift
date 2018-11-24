@@ -156,7 +156,7 @@ struct MailUtil {
 - \(type)
 
 <table style="border-collapse:collapse">
-<tr><td width=600>任务</td><td width=180>负责人</td><td width=50>优先级</td><td width=80>状态</td></tr>
+<tr><td width=600>任务</td><td width=180>负责人</td><td width=80>状态</td></tr>
 
 """
                 )
@@ -170,7 +170,7 @@ struct MailUtil {
                     let engineerName = EngineerRealmDAO.find(issue.assignee).first?.displayName
                     content.append(
 """
-<tr><td>\(issue.title)</td><td>\(engineerName ?? issue.assignee)</td><td>\(emojiIssuePrioriy(issue.priority))</td><td>\(issue.status)</td></tr>
+<tr><td>\(issue.title)</td><td>\(engineerName ?? issue.assignee)</td><td>\(issue.status)</td></tr>
 
 """
                     )
@@ -182,7 +182,7 @@ struct MailUtil {
                         let engineerName = EngineerRealmDAO.find(subtask.assignee).first?.displayName
                         content.append(
 """
-<tr><td>\("┗─ " + subtask.title)</td><td>\(engineerName ?? subtask.assignee)</td><td>\(emojiIssuePrioriy(subtask.priority))</td><td>\(subtask.status)</td></tr>
+<tr><td>\("┗─ " + subtask.title)</td><td>\(engineerName ?? subtask.assignee)</td><td>\(subtask.status)</td></tr>
 
 """
                         )
@@ -230,32 +230,6 @@ td { border:1px solid #B0B0B0 }
         )
         
         generateTeamList(&content, nextSprintReport)
-        
-        content.append("\n<hr><b style=\"font-size:80%\">注：优先级顺序：高 -> 低 ❤️💛💚</b>")
         completion(subject, content)
     }
-    
-    static private func emojiIssuePrioriy(_ priority: String) -> String {
-        switch priority {
-        case "低优先级", "最低优先级":
-            return "💚"
-        case "默认优先级":
-            return "💛"
-        case "最高优先级(立刻执行)", "高优先级":
-            return "❤️"
-        default:
-            return priority
-        }
-    }
-    
-//    static private func emojiIssueStatus(_ status: String) -> String {
-//        switch status {
-//        case "Start":
-//            return "🏁 (\(status))"
-//        case "完成":
-//            return "√"
-//        default:
-//            return status
-//        }
-//    }
 }

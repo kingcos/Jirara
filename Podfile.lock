@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (4.7.3)
   - Down (0.5.2)
+  - GRDB.swift (3.5.0)
   - mailcore2-osx (0.6.4)
   - Mappable (1.2.1)
   - Realm (3.11.1):
@@ -13,6 +14,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Down
+  - GRDB.swift
   - mailcore2-osx
   - Mappable
   - RealmSwift
@@ -22,6 +24,7 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - Down
+    - GRDB.swift
     - mailcore2-osx
     - Mappable
     - Realm
@@ -31,12 +34,13 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Down: 587371ad58002b06023d9c602519216862c3acbc
+  GRDB.swift: 225cf9c1354753e92e20c2a1fa2912b924c9da6e
   mailcore2-osx: 56890045e50f3b09b6530f5bd008eda67e1f6b82
   Mappable: 3b0ee951fae981fe387a5bbfb835aa4644f3f8b7
   Realm: 037c5919b9ceb59d6beed5d3b031096856b119b3
   RealmSwift: c9580133e73ef40ed340401af2dbc9a5790dfea7
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 8904d227cc8d52c10beaa5c80e37cac1ca2f3465
+PODFILE CHECKSUM: 69a4004342a2d7ed471d1345cc891af5f14d81b7
 
 COCOAPODS: 1.5.0
