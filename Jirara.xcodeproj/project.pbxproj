@@ -42,7 +42,7 @@
 		84A06E8D20E0F69F0048798F /* NSNib+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E8C20E0F69F0048798F /* NSNib+Extension.swift */; };
 		84BE22DE20F72E2A000744F6 /* IssueCommentRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE22DD20F72E2A000744F6 /* IssueCommentRealm.swift */; };
 		84D742C32109825C00242352 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D742C12109825B00242352 /* Main.storyboard */; };
-		84DF3A6C210AC1880053B71A /* JiraIssuesMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DF3A6B210AC1880053B71A /* JiraIssuesMenu.swift */; };
+		84DF3A6C210AC1880053B71A /* IssuesMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DF3A6B210AC1880053B71A /* IssuesMenu.swift */; };
 		84DF3A6E210AC1B20053B71A /* SendMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DF3A6D210AC1B20053B71A /* SendMenu.swift */; };
 		84E72F6420F640F9000347BC /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E72F6320F640F9000347BC /* Issue.swift */; };
 		84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FCBFF320D0BDFF00FFDA73 /* NSColor+Extension.swift */; };
@@ -101,7 +101,7 @@
 		84A06E8C20E0F69F0048798F /* NSNib+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNib+Extension.swift"; sourceTree = "<group>"; };
 		84BE22DD20F72E2A000744F6 /* IssueCommentRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCommentRealm.swift; sourceTree = "<group>"; };
 		84D742C22109825B00242352 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		84DF3A6B210AC1880053B71A /* JiraIssuesMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraIssuesMenu.swift; sourceTree = "<group>"; };
+		84DF3A6B210AC1880053B71A /* IssuesMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesMenu.swift; sourceTree = "<group>"; };
 		84DF3A6D210AC1B20053B71A /* SendMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMenu.swift; sourceTree = "<group>"; };
 		84E72F6320F640F9000347BC /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		84FCBFF320D0BDFF00FFDA73 /* NSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extension.swift"; sourceTree = "<group>"; };
@@ -190,7 +190,7 @@
 			children = (
 				845A4EB32109D1F300E6E2A6 /* MainMenu.swift */,
 				84DF3A6D210AC1B20053B71A /* SendMenu.swift */,
-				84DF3A6B210AC1880053B71A /* JiraIssuesMenu.swift */,
+				84DF3A6B210AC1880053B71A /* IssuesMenu.swift */,
 			);
 			path = Submenu;
 			sourceTree = "<group>";
@@ -416,7 +416,7 @@
 				8426D4E520D197E60007F180 /* RapidViews.swift in Sources */,
 				84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */,
 				84BE22DE20F72E2A000744F6 /* IssueCommentRealm.swift in Sources */,
-				84DF3A6C210AC1880053B71A /* JiraIssuesMenu.swift in Sources */,
+				84DF3A6C210AC1880053B71A /* IssuesMenu.swift in Sources */,
 				849478CC20D152DE00FC9853 /* NSAlert+Extension.swift in Sources */,
 				8407BA1620F86FF700CE5DE7 /* Transition.swift in Sources */,
 				8426D4E720D1A2670007F180 /* SprintReport.swift in Sources */,

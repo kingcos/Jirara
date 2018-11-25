@@ -21,9 +21,9 @@ extension MainMenu {
         setSubmenu(SendMenu.init(), for: firstMenuItem)
         
         // Jira Issues
-        let secondMenuItem = NSMenuItem.init(title: "Jira Issues", action: nil, keyEquivalent: "")
+        let secondMenuItem = NSMenuItem.init(title: "Issues", action: nil, keyEquivalent: "")
         addItem(secondMenuItem)
-        setSubmenu(JiraIssuesMenu.init(), for: secondMenuItem)
+        setSubmenu(IssuesMenu.init(), for: secondMenuItem)
         
         // ---
         addItem(NSMenuItem.separator())

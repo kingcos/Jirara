@@ -261,7 +261,7 @@ extension MainViewModel {
                     }
                     
                     fetchIssues(sprintReport) { issues in
-                        let myIssues = issues.map { $0.subtasks }.flatMap { $0 }.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
+                        let myIssues = (issues + issues.map { $0.subtasks }.flatMap { $0 }).filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
                         completion(myIssues)
                     }
                 }

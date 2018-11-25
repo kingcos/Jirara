@@ -1,5 +1,5 @@
 //
-//  JiraIssuesMenu.swift
+//  IssuesMenu.swift
 //  Jirara
 //
 //  Created by kingcos on 2018/7/27.
@@ -8,12 +8,12 @@
 
 import Cocoa
 
-class JiraIssuesMenu: NSMenu {
+class IssuesMenu: NSMenu {
     
     var selectedIssueIndex: Int?
     var issues: [IssueRealm] = []
     
-    let issueMenuStickItemsCount = 3
+    let issueMenuStickItemsCount = 2
     
     override init(title: String) {
         super.init(title: title)
@@ -27,7 +27,7 @@ class JiraIssuesMenu: NSMenu {
     }
 }
 
-extension JiraIssuesMenu {
+extension IssuesMenu {
     func setup() {
         let newIssuesItem = NSMenuItem.init(title: "New Issue...",
                                             action: #selector(clickOnNewIssue),
@@ -49,7 +49,7 @@ extension JiraIssuesMenu {
     }
 }
 
-extension JiraIssuesMenu: NSMenuDelegate {
+extension IssuesMenu: NSMenuDelegate {
     func menuWillOpen(_ menu: NSMenu) {
         MainViewModel.fetchMyIssuesInActiveSprintReport { issues in
             issues.forEach { issue in
@@ -77,8 +77,10 @@ extension JiraIssuesMenu: NSMenuDelegate {
                     submenu.addItem(item)
                 }
                 
-                menu.insertItem(menuItem, at: self.issueMenuStickItemsCount)
-                menu.setSubmenu(submenu, for: menuItem)
+                DispatchQueue.main.async {
+                    menu.insertItem(menuItem, at: self.issueMenuStickItemsCount)
+                    menu.setSubmenu(submenu, for: menuItem)
+                }
             }
         }
     }
@@ -97,7 +99,7 @@ extension JiraIssuesMenu: NSMenuDelegate {
     }
 }
 
-extension JiraIssuesMenu {
+extension IssuesMenu {
     @objc func clickOnViewDetails(_ sender: NSMenuItem) {
         guard let selectedIssueIndex = selectedIssueIndex,
             let url = URL.init(string: JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + "/browse/" + issues[selectedIssueIndex - issueMenuStickItemsCount].key) else {
