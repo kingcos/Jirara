@@ -30,7 +30,7 @@ struct Issue: Mappable {
         summary = try map.from("fields.summary")
         priority = try map.from("fields.priority.name")
         assignee = try map.from("fields.assignee.name")
-        status = try map.from("fields.status.statusCategory.name")
+        status = try map.from("fields.status.name")
         parentSummary = try map.from("fields.parent.fields.summary")
         subtasks = try map.from("fields.subtasks")
         comments = try map.from("fields.comment.comments")

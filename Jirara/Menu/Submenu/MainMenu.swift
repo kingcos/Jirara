@@ -20,7 +20,7 @@ extension MainMenu {
         addItem(firstMenuItem)
         setSubmenu(SendMenu.init(), for: firstMenuItem)
         
-        // Jira Issues
+        // Issues
         let secondMenuItem = NSMenuItem.init(title: "Issues", action: nil, keyEquivalent: "")
         addItem(secondMenuItem)
         setSubmenu(IssuesMenu.init(), for: secondMenuItem)
@@ -37,6 +37,10 @@ extension MainMenu {
             item.target = self
             addItem(item)
         }
+    }
+    
+    func setupIssuesMenu() {
+        
     }
 }
 

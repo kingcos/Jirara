@@ -11,7 +11,7 @@ import Cocoa
 class IssuesMenu: NSMenu {
     
     var selectedIssueIndex: Int?
-    var issues: [IssueRealm] = []
+    var issues: [Issue] = []
     
     let issueMenuStickItemsCount = 2
     
@@ -19,7 +19,6 @@ class IssuesMenu: NSMenu {
         super.init(title: title)
         
         delegate = self
-        setup()
     }
     
     required init(coder decoder: NSCoder) {
@@ -51,8 +50,12 @@ extension IssuesMenu {
 
 extension IssuesMenu: NSMenuDelegate {
     func menuWillOpen(_ menu: NSMenu) {
+        setup()
+        
         MainViewModel.fetchMyIssuesInActiveSprintReport { issues in
-            issues.forEach { issue in
+            self.issues = issues.sorted { $0.id > $1.id }
+            
+            self.issues.reversed().forEach { issue in
                 let submenu = NSMenu.init()
                 let menuItem = NSMenuItem(title: issue.summary,
                                           action: nil,
@@ -77,7 +80,7 @@ extension IssuesMenu: NSMenuDelegate {
                     submenu.addItem(item)
                 }
                 
-                DispatchQueue.main.async {
+                if menu.items.count >= self.issueMenuStickItemsCount {
                     menu.insertItem(menuItem, at: self.issueMenuStickItemsCount)
                     menu.setSubmenu(submenu, for: menuItem)
                 }
@@ -86,11 +89,7 @@ extension IssuesMenu: NSMenuDelegate {
     }
     
     func menuDidClose(_ menu: NSMenu) {
-        for item in menu.items {
-            if menu.index(of: item) >= issueMenuStickItemsCount {
-                menu.removeItem(item)
-            }
-        }
+        menu.removeAllItems()
     }
     
     func menu(_ menu: NSMenu, willHighlight item: NSMenuItem?) {
@@ -109,21 +108,18 @@ extension IssuesMenu {
         NSWorkspace.shared.open(url)
     }
     
-    @objc func clickOnIssueItem(_ sender: NSMenuItem) {
-        selectedIssueIndex = index(of: sender)
-    }
-    
     @objc func clickOnTransition(_ sender: NSMenuItem) {
         guard let selectedIssueIndex = selectedIssueIndex else { fatalError() }
         let issue = issues[selectedIssueIndex - issueMenuStickItemsCount]
         
-        guard let transitionID = IssueTransitionRealmDAO.findByName(sender.title)?.id else { return }
-        
-        IssueViewModel.updateTransition(issue.id, transitionID) {
-            IssueRealmDAO.update("status", issue) {
-                $0.status = sender.title
+        MainViewModel.fetchTransitions(issue.id) { transitions in
+            transitions.forEach { transition in
+                if transition.name == sender.title {
+                    IssueViewModel.updateTransition(issue.id, transition.id) {
+                        // Do sth...
+                    }
+                }
             }
-            NSUserNotification.send(issue.title, "进度已更新至 " + sender.title)
         }
     }
 }

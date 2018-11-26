@@ -178,7 +178,7 @@ class MainViewModel {
                     
                     completion(issue)
                 }
-            case .failure(let error):
+            case .failure:
                 completion(nil)
             }
         }
