@@ -20,9 +20,10 @@ struct Issue: Mappable {
     var assignee: String
     var status: String
     var parentSummary: String?
-    var subtasks: [Issue]
+    var subtasks: [IssueSubtask]
     var comments: [IssueComment]
     var transitions: [Transition] = []
+    var subissues: [Issue] = []
     
     init(map: Mapper) throws {
         id = try map.from("id")
@@ -37,13 +38,13 @@ struct Issue: Mappable {
     }
 }
 
-//struct IssueSubtask: Mappable {
-//    var id: String
-//
-//    init(map: Mapper) throws {
-//        id = try map.from("id")
-//    }
-//}
+struct IssueSubtask: Mappable {
+    var id: String
+
+    init(map: Mapper) throws {
+        id = try map.from("id")
+    }
+}
 
 struct IssueComment: Mappable {
     var id: String

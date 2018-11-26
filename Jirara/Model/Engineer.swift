@@ -8,7 +8,6 @@
 
 import Foundation
 import Mappable
-import RealmSwift
 
 /**
  API: /rest/api/2/user?username=i-maiming

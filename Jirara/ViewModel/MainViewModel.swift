@@ -135,7 +135,7 @@ class MainViewModel {
                 fetchTransitions(issue.id) { transitions in
                     issue.transitions = transitions
                     
-                    let subtaskIDs = issue.subtasks.map { $0.id }
+                    let subtaskIDs = issue.subtasks.map { Int($0.id)! }
                     
                     if subtaskIDs.isEmpty {
                         // 无子任务的父任务
@@ -143,13 +143,13 @@ class MainViewModel {
                     } else {
                         // 有子任务的父任务
                         subtaskIDs.forEach { id in
-                            fetchSubtask(id) { subtask in
-                                guard let subtask = subtask else { return }
-                                issue.subtasks.append(subtask)
-                            }
-                            
-                            if subtaskIDs.count == issue.subtasks.count {
-                                completion(issue)
+                            fetchIssue(id) { subissue in
+                                guard let subissue = subissue else { return }
+                                issue.subissues.append(subissue)
+                                
+                                if subtaskIDs.count == issue.subissues.count {
+                                    completion(issue)
+                                }
                             }
                         }
                     }
@@ -261,7 +261,7 @@ extension MainViewModel {
                     }
                     
                     fetchIssues(sprintReport) { issues in
-                        let myIssues = (issues + issues.map { $0.subtasks }.flatMap { $0 }).filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
+                        let myIssues = (issues + issues.map { $0.subissues }.flatMap { $0 }).filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
                         completion(myIssues)
                     }
                 }

@@ -28,7 +28,7 @@ struct SprintReport: Mappable {
     }
 }
 
-struct ReportIssue: Mappable, Realmable {
+struct ReportIssue: Mappable {
     var id: Int
     var key: String
     var summary: String
@@ -44,34 +44,9 @@ struct ReportIssue: Mappable, Realmable {
         assignee = try map.from("assignee")
         statusName = try map.from("statusName")
     }
-    
-    func toRealmObject() -> IssueRealm {
-        let object = IssueRealm()
-        
-        object.id = String(id)
-        object.key = key
-        object.type = summary.contains("】") ? String(summary.split(separator: "】")[0] + "】") : "-"
-        object.title = summary.replacingOccurrences(of: object.type, with: "")
-        object.priority = priorityName
-        object.assignee = assignee
-        object.status = statusName
-        
-        return object
-    }
 }
 
 extension SprintReport {
-//    func toRealmObject() -> SprintReportRealm {
-//        let object = SprintReportRealm()
-//
-//        object.id = id
-//        object.startDate = formatDate(startDate)
-//        object.endDate = formatDate(endDate)
-//        object.issues.append(objectsIn: (completedIssues + incompletedIssues).map { $0.toRealmObject() })
-//
-//        return object
-//    }
-    
     func formatDate(_ origin: String) -> String {
         // 15/06/18 dd/mm/yy
         let chineseMonth = origin.split(separator: "/")[1]
