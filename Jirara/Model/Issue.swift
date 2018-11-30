@@ -25,6 +25,7 @@ struct Issue: Mappable {
     var transitions: [Transition] = []
     var subissues: [Issue] = []
     var engineer: Engineer?
+    var type: String
     
     init(map: Mapper) throws {
         id = try map.from("id")
@@ -36,6 +37,8 @@ struct Issue: Mappable {
         parentSummary = try map.from("fields.parent.fields.summary")
         subtasks = try map.from("fields.subtasks")
         comments = try map.from("fields.comment.comments")
+        
+        type = summary.contains("】") ? String(summary.split(separator: "】")[0] + "】") : "-"
     }
 }
 
