@@ -23,4 +23,7 @@ class AboutWindowController: NSWindowController {
         NSApp.activate(ignoringOtherApps: true)
     }
     
+    @IBAction func showGitHubPage(_ sender: NSButton) {
+        NSWorkspace.shared.open(URL(string: "https://github.com/kingcos")!)
+    }
 }

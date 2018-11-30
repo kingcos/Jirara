@@ -32,10 +32,5 @@ struct Constants {
     
     static let dateFormat = "yyyy.MM.dd"
     
-//    static let JiraIssueProgressPrefix = "[Jirara-Progress]"
-//    static let JiraIssueProgressTodo = "ToDo"
-//    static let JiraIssueProgressDone = "Done"
-//    static let JiraTransitionIDs = ["11", "21", "31"]
-    
     static let JiraRefresherDurationDefault: Int32 = 30
 }

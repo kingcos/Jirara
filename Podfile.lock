@@ -3,11 +3,6 @@ PODS:
   - Down (0.5.2)
   - mailcore2-osx (0.6.4)
   - Mappable (1.2.1)
-  - Realm (3.11.1):
-    - Realm/Headers (= 3.11.1)
-  - Realm/Headers (3.11.1)
-  - RealmSwift (3.11.1):
-    - Realm (= 3.11.1)
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
@@ -15,17 +10,14 @@ DEPENDENCIES:
   - Down
   - mailcore2-osx
   - Mappable
-  - RealmSwift
   - SnapKit
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
     - Down
     - mailcore2-osx
     - Mappable
-    - Realm
-    - RealmSwift
     - SnapKit
 
 SPEC CHECKSUMS:
@@ -33,10 +25,8 @@ SPEC CHECKSUMS:
   Down: 587371ad58002b06023d9c602519216862c3acbc
   mailcore2-osx: 56890045e50f3b09b6530f5bd008eda67e1f6b82
   Mappable: 3b0ee951fae981fe387a5bbfb835aa4644f3f8b7
-  Realm: 037c5919b9ceb59d6beed5d3b031096856b119b3
-  RealmSwift: c9580133e73ef40ed340401af2dbc9a5790dfea7
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: f19785fd5c3b7a5444d4897d3551d17815c9845b
+PODFILE CHECKSUM: 88fcf1f4ceb1af11a68085b35377eccc80f6c15b
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

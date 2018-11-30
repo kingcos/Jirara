@@ -30,9 +30,6 @@ class SendPreviewWindowController: NSWindowController {
     @IBOutlet weak var downContainerView: NSView!
     var downView: DownView!
     
-    @IBOutlet weak var downContainerWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var markdownContainerWidthConstraint: NSLayoutConstraint!
-    
     var type: SummaryType = .team
     var content = ""
     
@@ -48,20 +45,9 @@ class SendPreviewWindowController: NSWindowController {
         window?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
         
-        setupConstraints()
         setupDownView()
         setupMarkdownView()
         setupHeaderViews()
-    }
-    
-    func setupConstraints() {
-        if type == .individual {
-            markdownContainerView.isHidden = false
-            downContainerWidthConstraint = downContainerWidthConstraint.setMultiplier(0.5)
-        } else {
-            markdownContainerView.isHidden = true
-            downContainerWidthConstraint = downContainerWidthConstraint.setMultiplier(1.0)
-        }
     }
     
     func setupDownView() {
@@ -95,14 +81,12 @@ class SendPreviewWindowController: NSWindowController {
         progressIndicator.isHidden = false
         progressIndicator.startAnimation(nil)
         
-        MailUtil.send(type) { subject, content in
+        MailUtil.send(self.type) { subject, content in
             self.content = content
             
             self.subjectTextField.stringValue = subject
+            self.markdownTextView.string = content
             
-            if self.type == .individual {
-                self.markdownTextView.string = content
-            }
             try? self.downView.update(markdownString: content)
             
             self.progressIndicator.stopAnimation(nil)
@@ -130,16 +114,13 @@ class SendPreviewWindowController: NSWindowController {
         let cc = emailCcTextField.stringValue.split(separator: " ").map { String($0) }
         let subject = subjectTextField.stringValue
         
-        if type == .individual {
-            let down = Down(markdownString: markdownTextView.string)
-            if let markdown = try? down.toHTML() {
-                content = markdown
-            } else {
-                NSAlert.show("Parse ERROR", ["OK"])
-                return
-            }
+        let down = Down(markdownString: markdownTextView.string)
+        if let markdown = try? down.toHTML() {
+            content = markdown
+        } else {
+            NSAlert.show("Parse ERROR", ["OK"])
+            return
         }
-        
         MailUtil().send(from, to, cc, subject, content) { errorMessage in
             self.progressIndicator.stopAnimation(nil)
             self.subjectTextField.isEditable = true

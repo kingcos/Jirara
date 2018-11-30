@@ -8,7 +8,6 @@
 
 import Foundation
 import Mappable
-import RealmSwift
 
 /**
  API: /rest/api/2/user?username=i-maiming
@@ -25,18 +24,5 @@ struct Engineer: Mappable {
         emailAddress = try map.from("emailAddress")
         avatarURL = try map.from("avatarUrls.48x48")
         displayName = try map.from("displayName")
-    }
-}
-
-extension Engineer: Realmable {
-    func toRealmObject() -> EngineerRealm {
-        let object = EngineerRealm()
-        
-        object.name = name
-        object.emailAddress = emailAddress
-        object.avatarURL = avatarURL
-        object.displayName = displayName
-        
-        return object
     }
 }

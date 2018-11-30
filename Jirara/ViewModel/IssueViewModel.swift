@@ -10,12 +10,11 @@ import Foundation
 import Alamofire
 
 class IssueViewModel {
-    static let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
-    
     class func updateTransition(_ issueID: String,
                                 _ transitionID: String,
                                 _ completion: @escaping () -> Void) {
         let url = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + JiraAPI.issue.rawValue + issueID + JiraAPI.transitions.rawValue
+        let headers = ["Authorization" : UserDefaults.get(by: .accountAuth)]
         let parameters: Parameters = [
             "transition": [ "id": transitionID ]
         ]

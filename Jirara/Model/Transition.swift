@@ -29,14 +29,3 @@ struct Transition: Mappable {
         name = try map.from("name")
     }
 }
-
-extension Transition: Realmable {
-    func toRealmObject() -> IssueTransitionRealm {
-        let object = IssueTransitionRealm()
-        
-        object.id = id
-        object.name = name
-        
-        return object
-    }
-}

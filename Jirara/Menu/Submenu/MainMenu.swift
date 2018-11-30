@@ -16,14 +16,14 @@ class MainMenu: NSMenu {
 extension MainMenu {
     func setupMainMenu() {
         // Send
-        let firstMenuItem = NSMenuItem.init(title: "Send", action: nil, keyEquivalent: "")
+        let firstMenuItem = NSMenuItem.init(title: "Scrums", action: nil, keyEquivalent: "")
         addItem(firstMenuItem)
         setSubmenu(SendMenu.init(), for: firstMenuItem)
         
-        // Jira Issues
-        let secondMenuItem = NSMenuItem.init(title: "Jira Issues", action: nil, keyEquivalent: "")
+        // Issues
+        let secondMenuItem = NSMenuItem.init(title: "Issues", action: nil, keyEquivalent: "")
         addItem(secondMenuItem)
-        setSubmenu(JiraIssuesMenu.init(), for: secondMenuItem)
+        setSubmenu(IssuesMenu.init(), for: secondMenuItem)
         
         // ---
         addItem(NSMenuItem.separator())
@@ -37,6 +37,10 @@ extension MainMenu {
             item.target = self
             addItem(item)
         }
+    }
+    
+    func setupIssuesMenu() {
+        
     }
 }
 

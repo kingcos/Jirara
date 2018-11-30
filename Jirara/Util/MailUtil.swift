@@ -72,14 +72,11 @@ struct MailUtil {
     
     static private func sendIndividual(_ completion: @escaping (String, String) -> Void) {
         func generateIndivitualList(_ content: inout String,
-                                    _ issues: [IssueRealm]) {
+                                    _ issues: [Issue]) {
             issues.forEach { issue in
-//                let progress = issue.comments.filter {
-//                    $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
-//                    }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? ""
                 content.append(
 """
-\(issue.parentSummary == "" ? "- " + issue.title : "    - " + issue.title)
+\(issue.parentSummary == "" ? "- " + issue.summary : "    - " + issue.summary)
 
 """
                 )
@@ -88,175 +85,121 @@ struct MailUtil {
         
         let formatter = DateFormatter()
         formatter.dateFormat = Constants.dateFormat
-
-        let engineers = EngineerRealmDAO.findAll().filter { $0.name == UserDefaults.get(by: .accountUsername) }
-        guard let lastSprintReport = SprintReportRealmDAO.findLastLatest(),
-              let engineer = engineers.first else { return }
-
-        var lastIssues = [IssueRealm]()
-        lastSprintReport.issues.forEach { issue in
-            lastIssues.append(issue)
-            issue.subtasks.forEach { subtask in
-                lastIssues.append(subtask)
+        
+        MainViewModel.fetch(Constants.RapidViewName, false) { sprintReport, issues in
+            guard let sprintReport = sprintReport else { fatalError() }
+            let subject = "[周报] \(sprintReport.startDate) ~ \(sprintReport.endDate)"
+            let today = formatter.string(from: Date())
+            
+            // 上周数据
+            var content =
+            """
+            ## 本周工作
+            
+            > **周期：\(sprintReport.startDate) ~ \(sprintReport.endDate) 统计日期：\(today)**
+            
+            
+            """
+            generateIndivitualList(&content, issues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) })
+            
+            MainViewModel.fetch(Constants.RapidViewName, true) { sprintReport, issues in
+                guard let sprintReport = sprintReport else { fatalError() }
+                content.append(
+                    """
+                    
+                    ## 下周工作预告
+                    
+                    > **周期：\(sprintReport.startDate) ~ \(sprintReport.endDate)**
+                    
+                    
+                    """
+                )
+                generateIndivitualList(&content, issues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) })
+                completion(subject, content)
             }
         }
-        lastIssues = lastIssues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
-
-        let subject = "[周报] \(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)"
-        let today = formatter.string(from: Date())
-
-        // 上周数据
-        var content =
-"""
-## 本周工作
-
-> **周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate) 统计日期：\(today)**
-
-
-"""
-        generateIndivitualList(&content, lastIssues)
-        
-        // 下周数据
-        guard let nextSprintReport = SprintReportRealmDAO.findLatest() else { return }
-        
-        var nextIssues = [IssueRealm]()
-        nextSprintReport.issues.forEach { issue in
-            nextIssues.append(issue)
-            issue.subtasks.forEach { subtask in
-                nextIssues.append(subtask)
-            }
-        }
-        nextIssues = nextIssues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
-        
-        content.append(
-"""
-
-## 下周工作预告
-
-> **周期：\(nextSprintReport.startDate) ~ \(nextSprintReport.endDate)**
-
-
-"""
-        )
-        
-        generateIndivitualList(&content, nextIssues)
-        completion(subject, content)
     }
 
     /// 发送团队周报
     static func sendTeam(_ completion: @escaping (String, String) -> Void) {
         func generateTeamList(_ content: inout String,
-                              _ sprintReportRealm: SprintReportRealm) {
-            let issueTypes = Array(Set(sprintReportRealm.issues.map { $0.type }))
-            
+                              _ issues: [Issue]) {
+            let issueTypes = Array(Set(issues.map { $0.type })).sorted()
             for type in issueTypes {
                 content.append(
                     """
-<ul><li>\(type)</li></ul>
+
+- \(type)
+
 <table style="border-collapse:collapse">
-<tr>
-<td style="border:1px solid #B0B0B0" width=600>任务</td>
-<td style="border:1px solid #B0B0B0" width=150>负责人</td>
-<td style="border:1px solid #B0B0B0" width=50>优先级</td>
-<td style="border:1px solid #B0B0B0" width=80>状态</td>
-</tr>
+<tr><td width=600>任务</td><td width=180>负责人</td><td width=80>状态</td></tr>
+
 """
                 )
                 
-                let specifiedIssues = sprintReportRealm.issues.filter { $0.type == type }.sorted { $0.assignee < $1.assignee }
-                
+                let specifiedIssues = issues.filter { $0.type == type }.sorted { $0.assignee < $1.assignee }
                 for issue in specifiedIssues {
-//                    let progress = issue.comments.filter {
-//                        $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
-//                        }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
-                    let engineerName = EngineerRealmDAO.find(issue.assignee).first?.displayName
                     content.append(
 """
-<tr>
-<td style="border:1px solid #B0B0B0">\(issue.title)</td>
-<td style="border:1px solid #B0B0B0">\(engineerName ?? issue.assignee)</td>
-<td style="border:1px solid #B0B0B0">\(emojiIssuePrioriy(issue.priority))</td>
-<td style="border:1px solid #B0B0B0">\(issue.status)</td>
-</tr>
+<tr><td>\(issue.summary.split(separator: "】")[1])</td><td>\(issue.engineer?.displayName ?? issue.assignee)</td><td>\(issue.status)</td></tr>
+
 """
                     )
                     
-                    for subtask in issue.subtasks {
-//                        let progress = subtask.comments.filter {
-//                            $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
-//                            }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? "-"
-                        let engineerName = EngineerRealmDAO.find(subtask.assignee).first?.displayName
-                        content.append(
-"""
-<tr>
-<td style="border:1px solid #B0B0B0">\("┗─ " + subtask.title)</td>
-<td style="border:1px solid #B0B0B0">\(engineerName ?? subtask.assignee)</td>
-<td style="border:1px solid #B0B0B0">\(emojiIssuePrioriy(subtask.priority))</td>
-<td style="border:1px solid #B0B0B0">\(subtask.status)</td>
-</tr>
-"""
-                        )
-                    }
+//                    for subtask in issue.subtasks {
+//                        let engineerName = EngineerRealmDAO.find(subtask.assignee).first?.displayName
+//                        content.append(
+//"""
+//<tr><td>\("┗─ " + subtask.title)</td><td>\(engineerName ?? subtask.assignee)</td><td>\(subtask.status)</td></tr>
+//
+//"""
+//                        )
+//                    }
                 }
                 
-                content.append("</table><br>")
+                content.append("</table><br>\n")
             }
-            content.append("<br>")
+            content.append("<br>\n")
         }
         
         let formatter = DateFormatter()
         formatter.dateFormat = Constants.dateFormat
         
         // 上周
-        guard let lastSprintReport = SprintReportRealmDAO.findLastLatest() else { return }
-        
-        let subject = "iOS Engineers 团队周报 \(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)"
-        let today = formatter.string(from: Date())
-        
-        var content =
-"""
-<h2>iOS Engineers 本周团队工作报告</h2>
-<h3>周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)\t统计日期：\(today)</h3>
-"""
-        generateTeamList(&content, lastSprintReport)
-
-        // 下周数据
-        guard let nextSprintReport = SprintReportRealmDAO.findLatest() else { return }
-        
-        content.append(
-"""
-<h2>下周工作预告</h2>
-<h3>周期：\(nextSprintReport.startDate) ~ \(nextSprintReport.endDate)</h3>
-"""
-        )
-        
-        generateTeamList(&content, nextSprintReport)
-        
-        content.append("<hr><b style=\"font-size:80%\">注：优先级顺序：高 -> 低 ❤️💛💚</b>")
-        completion(subject, content)
-    }
-    
-    static private func emojiIssuePrioriy(_ priority: String) -> String {
-        switch priority {
-        case "低优先级", "最低优先级":
-            return "💚"
-        case "默认优先级":
-            return "💛"
-        case "最高优先级(立刻执行)", "高优先级":
-            return "❤️"
-        default:
-            return priority
+        MainViewModel.fetch(Constants.RapidViewName,
+                            false) { sprintReport, issues in
+                                guard let sprintReport = sprintReport else { fatalError() }
+                                let subject = "iOS Engineers 团队周报 \(sprintReport.startDate) ~ \(sprintReport.endDate)"
+                                let today = formatter.string(from: Date())
+                                var content =
+                                """
+                                <style>
+                                td { border:1px solid #B0B0B0 }
+                                </style>
+                                
+                                <h2>iOS Engineers 本周团队工作报告</h2>
+                                
+                                <h3>周期：\(sprintReport.startDate) ~ \(sprintReport.endDate)\t统计日期：\(today)</h3>
+                                
+                                """
+                                generateTeamList(&content, issues)
+                                
+                                MainViewModel.fetch(Constants.RapidViewName,
+                                                    true) { sprintReport, issues in
+                                                        guard let sprintReport = sprintReport else { fatalError() }
+                                                        content.append(
+                                                            """
+                                                            
+                                                            <h2>下周工作预告</h2>
+                                                            
+                                                            <h3>周期：\(sprintReport.startDate) ~ \(sprintReport.endDate)</h3>
+                                                            
+                                                            """
+                                                        )
+                                                        generateTeamList(&content, issues)
+                                                        completion(subject, content)
+                                }
+                                
         }
     }
-    
-//    static private func emojiIssueStatus(_ status: String) -> String {
-//        switch status {
-//        case "Start":
-//            return "🏁 (\(status))"
-//        case "完成":
-//            return "√"
-//        default:
-//            return status
-//        }
-//    }
 }

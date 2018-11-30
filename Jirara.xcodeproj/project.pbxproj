@@ -10,13 +10,10 @@
 		8407BA1420F7D33700CE5DE7 /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407BA1320F7D33700CE5DE7 /* IssueViewModel.swift */; };
 		8407BA1620F86FF700CE5DE7 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407BA1520F86FF700CE5DE7 /* Transition.swift */; };
 		8407BA1820F877CC00CE5DE7 /* NSUserNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407BA1720F877CC00CE5DE7 /* NSUserNotification+Extension.swift */; };
-		840AB50220D8AADD0038D329 /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AB50120D8AADD0038D329 /* RealmHelper.swift */; };
-		840AB50420D8B0100038D329 /* Realmable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AB50320D8B0100038D329 /* Realmable.swift */; };
 		8426D4DF20D18F350007F180 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4DE20D18F350007F180 /* MainViewModel.swift */; };
 		8426D4E120D194D70007F180 /* SprintQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E020D194D70007F180 /* SprintQuery.swift */; };
 		8426D4E520D197E60007F180 /* RapidViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E420D197E60007F180 /* RapidViews.swift */; };
 		8426D4E720D1A2670007F180 /* SprintReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E620D1A2670007F180 /* SprintReport.swift */; };
-		8426D4E920D1A3070007F180 /* ReportIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E820D1A3070007F180 /* ReportIssue.swift */; };
 		842B9B2A210734E60016B66F /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842B9B29210734E60016B66F /* NSLayoutConstraint+Extension.swift */; };
 		843973CE20CFF64A00B14AB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843973CD20CFF64A00B14AB7 /* AppDelegate.swift */; };
 		843973D220CFF64C00B14AB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843973D120CFF64C00B14AB7 /* Assets.xcassets */; };
@@ -29,9 +26,6 @@
 		847C8C1E20D25338000C2854 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C1D20D25338000C2854 /* Constants.swift */; };
 		847C8C7120D2AA26000C2854 /* MailUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C7020D2AA26000C2854 /* MailUtil.swift */; };
 		847C8C7620D2B8D2000C2854 /* NSView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */; };
-		847CA69E20D39276000C2854 /* EngineerRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CA69D20D39276000C2854 /* EngineerRealm.swift */; };
-		847CA6A020D3932E000C2854 /* IssueRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CA69F20D3932E000C2854 /* IssueRealm.swift */; };
-		847CA6A220D393F7000C2854 /* SprintReportRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CA6A120D393F7000C2854 /* SprintReportRealm.swift */; };
 		849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478BA20D0D0A400FC9853 /* Engineer.swift */; };
 		849478BD20D112C500FC9853 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478BC20D112C500FC9853 /* UserDefaults+Extension.swift */; };
 		849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478C720D13FFC00FC9853 /* JiraAPI.swift */; };
@@ -40,9 +34,8 @@
 		84A06E8A20E0F1110048798F /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E8820E0F1110048798F /* PreferencesWindowController.swift */; };
 		84A06E8B20E0F1110048798F /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A06E8920E0F1110048798F /* PreferencesWindowController.xib */; };
 		84A06E8D20E0F69F0048798F /* NSNib+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E8C20E0F69F0048798F /* NSNib+Extension.swift */; };
-		84BE22DE20F72E2A000744F6 /* IssueCommentRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE22DD20F72E2A000744F6 /* IssueCommentRealm.swift */; };
 		84D742C32109825C00242352 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D742C12109825B00242352 /* Main.storyboard */; };
-		84DF3A6C210AC1880053B71A /* JiraIssuesMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DF3A6B210AC1880053B71A /* JiraIssuesMenu.swift */; };
+		84DF3A6C210AC1880053B71A /* IssuesMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DF3A6B210AC1880053B71A /* IssuesMenu.swift */; };
 		84DF3A6E210AC1B20053B71A /* SendMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DF3A6D210AC1B20053B71A /* SendMenu.swift */; };
 		84E72F6420F640F9000347BC /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E72F6320F640F9000347BC /* Issue.swift */; };
 		84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FCBFF320D0BDFF00FFDA73 /* NSColor+Extension.swift */; };
@@ -54,8 +47,6 @@
 		8407BA1320F7D33700CE5DE7 /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
 		8407BA1520F86FF700CE5DE7 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		8407BA1720F877CC00CE5DE7 /* NSUserNotification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSUserNotification+Extension.swift"; sourceTree = "<group>"; };
-		840AB50120D8AADD0038D329 /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
-		840AB50320D8B0100038D329 /* Realmable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realmable.swift; sourceTree = "<group>"; };
 		840AB50620DA5CD70038D329 /* libcorecrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcorecrypto.tbd; path = usr/lib/system/libcorecrypto.tbd; sourceTree = SDKROOT; };
 		840AB50820DA5CEA0038D329 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = usr/lib/system/libcommonCrypto.tbd; sourceTree = SDKROOT; };
 		840AB50A20DA5CF30038D329 /* CryptoTokenKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoTokenKit.framework; path = System/Library/Frameworks/CryptoTokenKit.framework; sourceTree = SDKROOT; };
@@ -69,7 +60,6 @@
 		8426D4E020D194D70007F180 /* SprintQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintQuery.swift; sourceTree = "<group>"; };
 		8426D4E420D197E60007F180 /* RapidViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidViews.swift; sourceTree = "<group>"; };
 		8426D4E620D1A2670007F180 /* SprintReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintReport.swift; sourceTree = "<group>"; };
-		8426D4E820D1A3070007F180 /* ReportIssue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportIssue.swift; sourceTree = "<group>"; };
 		842B9B29210734E60016B66F /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
 		843973CA20CFF64A00B14AB7 /* Jirara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jirara.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		843973CD20CFF64A00B14AB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,9 +75,6 @@
 		847C8C1D20D25338000C2854 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		847C8C7020D2AA26000C2854 /* MailUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailUtil.swift; sourceTree = "<group>"; };
 		847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extension.swift"; sourceTree = "<group>"; };
-		847CA69D20D39276000C2854 /* EngineerRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineerRealm.swift; sourceTree = "<group>"; };
-		847CA69F20D3932E000C2854 /* IssueRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueRealm.swift; sourceTree = "<group>"; };
-		847CA6A120D393F7000C2854 /* SprintReportRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintReportRealm.swift; sourceTree = "<group>"; };
 		848A64FD20DBA6ED002FBCE4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		848A64FF20DBA86B002FBCE4 /* libMailCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMailCore.a; path = "../../../Downloads/mailcore2-osx-12/lib/libMailCore.a"; sourceTree = "<group>"; };
 		848A650120DBAE14002FBCE4 /* Jirara-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Jirara-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -99,9 +86,8 @@
 		84A06E8820E0F1110048798F /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		84A06E8920E0F1110048798F /* PreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		84A06E8C20E0F69F0048798F /* NSNib+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNib+Extension.swift"; sourceTree = "<group>"; };
-		84BE22DD20F72E2A000744F6 /* IssueCommentRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCommentRealm.swift; sourceTree = "<group>"; };
 		84D742C22109825B00242352 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		84DF3A6B210AC1880053B71A /* JiraIssuesMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraIssuesMenu.swift; sourceTree = "<group>"; };
+		84DF3A6B210AC1880053B71A /* IssuesMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesMenu.swift; sourceTree = "<group>"; };
 		84DF3A6D210AC1B20053B71A /* SendMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMenu.swift; sourceTree = "<group>"; };
 		84E72F6320F640F9000347BC /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		84FCBFF320D0BDFF00FFDA73 /* NSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extension.swift"; sourceTree = "<group>"; };
@@ -190,32 +176,18 @@
 			children = (
 				845A4EB32109D1F300E6E2A6 /* MainMenu.swift */,
 				84DF3A6D210AC1B20053B71A /* SendMenu.swift */,
-				84DF3A6B210AC1880053B71A /* JiraIssuesMenu.swift */,
+				84DF3A6B210AC1880053B71A /* IssuesMenu.swift */,
 			);
 			path = Submenu;
-			sourceTree = "<group>";
-		};
-		847CA69C20D390B1000C2854 /* Realm */ = {
-			isa = PBXGroup;
-			children = (
-				847CA6A120D393F7000C2854 /* SprintReportRealm.swift */,
-				847CA69D20D39276000C2854 /* EngineerRealm.swift */,
-				847CA69F20D3932E000C2854 /* IssueRealm.swift */,
-				84BE22DD20F72E2A000744F6 /* IssueCommentRealm.swift */,
-				840AB50320D8B0100038D329 /* Realmable.swift */,
-			);
-			path = Realm;
 			sourceTree = "<group>";
 		};
 		849478B920D0D09700FC9853 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				847CA69C20D390B1000C2854 /* Realm */,
 				849478BA20D0D0A400FC9853 /* Engineer.swift */,
 				8426D4E020D194D70007F180 /* SprintQuery.swift */,
 				8426D4E620D1A2670007F180 /* SprintReport.swift */,
 				8426D4E420D197E60007F180 /* RapidViews.swift */,
-				8426D4E820D1A3070007F180 /* ReportIssue.swift */,
 				84E72F6320F640F9000347BC /* Issue.swift */,
 				8407BA1520F86FF700CE5DE7 /* Transition.swift */,
 			);
@@ -227,7 +199,6 @@
 			children = (
 				849478C720D13FFC00FC9853 /* JiraAPI.swift */,
 				847C8C1D20D25338000C2854 /* Constants.swift */,
-				840AB50120D8AADD0038D329 /* RealmHelper.swift */,
 				847C8C7020D2AA26000C2854 /* MailUtil.swift */,
 				847C53052118283100C0E58C /* Timer.swift */,
 			);
@@ -362,8 +333,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Down/Down.framework",
 				"${BUILT_PRODUCTS_DIR}/Mappable/Mappable.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -371,8 +340,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Down.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mappable.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -406,7 +373,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				84DF3A6E210AC1B20053B71A /* SendMenu.swift in Sources */,
-				847CA6A220D393F7000C2854 /* SprintReportRealm.swift in Sources */,
 				849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */,
 				847C8C7120D2AA26000C2854 /* MailUtil.swift in Sources */,
 				84E72F6420F640F9000347BC /* Issue.swift in Sources */,
@@ -415,14 +381,11 @@
 				849478CA20D143EB00FC9853 /* String+Extension.swift in Sources */,
 				8426D4E520D197E60007F180 /* RapidViews.swift in Sources */,
 				84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */,
-				84BE22DE20F72E2A000744F6 /* IssueCommentRealm.swift in Sources */,
-				84DF3A6C210AC1880053B71A /* JiraIssuesMenu.swift in Sources */,
+				84DF3A6C210AC1880053B71A /* IssuesMenu.swift in Sources */,
 				849478CC20D152DE00FC9853 /* NSAlert+Extension.swift in Sources */,
 				8407BA1620F86FF700CE5DE7 /* Transition.swift in Sources */,
 				8426D4E720D1A2670007F180 /* SprintReport.swift in Sources */,
 				84A06E8A20E0F1110048798F /* PreferencesWindowController.swift in Sources */,
-				847CA6A020D3932E000C2854 /* IssueRealm.swift in Sources */,
-				840AB50420D8B0100038D329 /* Realmable.swift in Sources */,
 				8426D4DF20D18F350007F180 /* MainViewModel.swift in Sources */,
 				8407BA1420F7D33700CE5DE7 /* IssueViewModel.swift in Sources */,
 				849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */,
@@ -431,13 +394,10 @@
 				845A4EB42109D1F300E6E2A6 /* MainMenu.swift in Sources */,
 				8442048820E6007300DB9837 /* AboutWindowController.swift in Sources */,
 				842B9B2A210734E60016B66F /* NSLayoutConstraint+Extension.swift in Sources */,
-				847CA69E20D39276000C2854 /* EngineerRealm.swift in Sources */,
-				840AB50220D8AADD0038D329 /* RealmHelper.swift in Sources */,
 				8426D4E120D194D70007F180 /* SprintQuery.swift in Sources */,
 				847C8C1E20D25338000C2854 /* Constants.swift in Sources */,
 				8407BA1820F877CC00CE5DE7 /* NSUserNotification+Extension.swift in Sources */,
 				849478BD20D112C500FC9853 /* UserDefaults+Extension.swift in Sources */,
-				8426D4E920D1A3070007F180 /* ReportIssue.swift in Sources */,
 				847C53062118283100C0E58C /* Timer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -610,10 +570,6 @@
 					"\"Alamofire\"",
 					"-framework",
 					"\"Mappable\"",
-					"-framework",
-					"\"Realm\"",
-					"-framework",
-					"\"RealmSwift\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.maimieng.Jirara;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -660,10 +616,6 @@
 					"\"Alamofire\"",
 					"-framework",
 					"\"Mappable\"",
-					"-framework",
-					"\"Realm\"",
-					"-framework",
-					"\"RealmSwift\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.maimieng.Jirara;
 				PRODUCT_NAME = "$(TARGET_NAME)";
