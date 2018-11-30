@@ -7,7 +7,6 @@ target 'Jirara' do
   # Pods for Jirara
   pod 'Alamofire'
   pod 'Mappable'
-  pod 'RealmSwift'
   pod 'mailcore2-osx'
   pod 'Down'
   pod 'SnapKit'
