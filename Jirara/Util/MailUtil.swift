@@ -72,14 +72,11 @@ struct MailUtil {
     
     static private func sendIndividual(_ completion: @escaping (String, String) -> Void) {
         func generateIndivitualList(_ content: inout String,
-                                    _ issues: [IssueRealm]) {
+                                    _ issues: [Issue]) {
             issues.forEach { issue in
-//                let progress = issue.comments.filter {
-//                    $0.content.hasPrefix(Constants.JiraIssueProgressPrefix)
-//                    }.first?.content.replacingOccurrences(of: Constants.JiraIssueProgressPrefix, with: "") ?? ""
                 content.append(
 """
-\(issue.parentSummary == "" ? "- " + issue.title : "    - " + issue.title)
+\(issue.parentSummary == "" ? "- " + issue.summary : "    - " + issue.summary)
 
 """
                 )
@@ -88,59 +85,39 @@ struct MailUtil {
         
         let formatter = DateFormatter()
         formatter.dateFormat = Constants.dateFormat
-
-        let engineers = EngineerRealmDAO.findAll().filter { $0.name == UserDefaults.get(by: .accountUsername) }
-        guard let lastSprintReport = SprintReportRealmDAO.findLastLatest(),
-              let engineer = engineers.first else { return }
-
-        var lastIssues = [IssueRealm]()
-        lastSprintReport.issues.forEach { issue in
-            lastIssues.append(issue)
-            issue.subtasks.forEach { subtask in
-                lastIssues.append(subtask)
+        
+        MainViewModel.fetch(Constants.RapidViewName, false) { sprintReport, issues in
+            guard let sprintReport = sprintReport else { fatalError() }
+            let subject = "[周报] \(sprintReport.startDate) ~ \(sprintReport.endDate)"
+            let today = formatter.string(from: Date())
+            
+            // 上周数据
+            var content =
+            """
+            ## 本周工作
+            
+            > **周期：\(sprintReport.startDate) ~ \(sprintReport.endDate) 统计日期：\(today)**
+            
+            
+            """
+            generateIndivitualList(&content, issues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) })
+            
+            MainViewModel.fetch(Constants.RapidViewName, true) { sprintReport, issues in
+                guard let sprintReport = sprintReport else { fatalError() }
+                content.append(
+                    """
+                    
+                    ## 下周工作预告
+                    
+                    > **周期：\(sprintReport.startDate) ~ \(sprintReport.endDate)**
+                    
+                    
+                    """
+                )
+                generateIndivitualList(&content, issues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) })
+                completion(subject, content)
             }
         }
-        lastIssues = lastIssues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
-
-        let subject = "[周报] \(lastSprintReport.startDate) ~ \(lastSprintReport.endDate)"
-        let today = formatter.string(from: Date())
-
-        // 上周数据
-        var content =
-"""
-## 本周工作
-
-> **周期：\(lastSprintReport.startDate) ~ \(lastSprintReport.endDate) 统计日期：\(today)**
-
-
-"""
-        generateIndivitualList(&content, lastIssues)
-        
-        // 下周数据
-        guard let nextSprintReport = SprintReportRealmDAO.findLatest() else { return }
-        
-        var nextIssues = [IssueRealm]()
-        nextSprintReport.issues.forEach { issue in
-            nextIssues.append(issue)
-            issue.subtasks.forEach { subtask in
-                nextIssues.append(subtask)
-            }
-        }
-        nextIssues = nextIssues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
-        
-        content.append(
-"""
-
-## 下周工作预告
-
-> **周期：\(nextSprintReport.startDate) ~ \(nextSprintReport.endDate)**
-
-
-"""
-        )
-        
-        generateIndivitualList(&content, nextIssues)
-        completion(subject, content)
     }
 
     /// 发送团队周报

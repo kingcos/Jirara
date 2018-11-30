@@ -32,7 +32,7 @@ struct ReportIssue: Mappable {
     var id: Int
     var key: String
     var summary: String
-    var priorityName: String
+    var priorityName: String?
     var assignee: String
     var statusName: String
     

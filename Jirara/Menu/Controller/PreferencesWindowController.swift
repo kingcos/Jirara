@@ -206,11 +206,11 @@ extension PreferencesWindowController {
                                    60 * 30,
                                    DispatchQueue.global(),
                                    true) {
-                                                    MainViewModel.fetch(Constants.RapidViewName, false) {
-                                                        MainViewModel.fetch(Constants.RapidViewName) {
-//                                                            NSUserNotification.send("Finished refreshing!")
-                                                        }
-                                                    }
+//                                                    MainViewModel.fetch(Constants.RapidViewName, false) { _ in
+//                                                        MainViewModel.fetch(Constants.RapidViewName) {
+////                                                            NSUserNotification.send("Finished refreshing!")
+//                                                        }
+//                                                    }
             }
         } else {
             Timer.shared.cancle(.jiraRefresher)

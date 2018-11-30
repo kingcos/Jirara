@@ -107,10 +107,10 @@ class MainViewModel {
         var issues = [Issue]()
         issueIDs.forEach { id in
             fetchIssue(id) { issue in
-                if let issue = issue {
-                    issues.append(issue)
+                guard let issue = issue else {
+                    fatalError()
                 }
-                
+                issues.append(issue)
                 let parentIssues = issues.filter { ($0.parentSummary ?? "") == "" }
                 if issueIDs.count == parentIssues.count {
                     completion(issues)
@@ -204,7 +204,6 @@ class MainViewModel {
                     }
                 }
             }
-            
         }
     }
     
@@ -271,18 +270,22 @@ extension MainViewModel {
     
     class func fetch(_ rapidViewName: String,
                      _ isActive: Bool = true,
-                     _ completion: @escaping () -> Void) {
+                     _ completion: @escaping (SprintReport?, [Issue]) -> Void) {
         fetchRapidViewID(rapidViewName) { rapidViewID in
             fetchLastestSprintID(rapidViewID ?? -1, isActive) { sprintID in
                 fetchSprintReport(rapidViewID ?? -1, sprintID ?? -1) { sprintReport in
                     guard let sprintReport = sprintReport else {
-                        completion()
+                        completion(nil, [])
                         return
                     }
                     
                     fetchIssues(sprintReport) { issues in
-                        fetchEngineers(issues) { _ in
-                            completion()
+                        fetchEngineers(issues) { engineers in
+                            var issues = issues + issues.flatMap { $0.subissues }
+                            for i in 0..<issues.count {
+                                issues[i].engineer = engineers.filter { $0.name == issues[i].assignee }.first
+                            }
+                            completion(sprintReport, issues)
                         }
                     }
                 }
