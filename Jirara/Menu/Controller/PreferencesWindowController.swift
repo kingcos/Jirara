@@ -111,7 +111,7 @@ extension PreferencesWindowController {
         if accIsUniversalAccountSwitch.state == .off {
             UserDefaults.save("off", for: .emailAccountUniversalState)
         } else {
-            accEmailAddressTextField.stringValue = accUsernameTextField.stringValue + "@mobike.com"
+            accEmailAddressTextField.stringValue = accUsernameTextField.stringValue
             accEmailPasswordTextField.stringValue = accPasswordTextField.stringValue
             UserDefaults.save("on", for: .emailAccountUniversalState)
         }
