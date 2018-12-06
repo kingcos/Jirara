@@ -18,7 +18,6 @@
                 <outlet property="accPasswordTextField" destination="cq2-w2-7cW" id="o7r-Ze-uBZ"/>
                 <outlet property="accTestAndSaveButton" destination="Vdm-0z-EiG" id="5ND-i7-8IE"/>
                 <outlet property="accUsernameTextField" destination="0fY-of-Tuq" id="UbJ-pN-yGL"/>
-                <outlet property="jiraRefreshTimerButton" destination="BbG-le-Hy6" id="qJW-Zm-EFv"/>
                 <outlet property="scrumNameTextField" destination="fgS-XO-kk1" id="6AR-BV-nil"/>
                 <outlet property="sendCcTextField" destination="3fO-1j-E6q" id="oOG-yp-niJ"/>
                 <outlet property="sendToTextField" destination="DGz-Hp-CPC" id="3xv-oh-Jym"/>
@@ -418,17 +417,6 @@
                                             <rect key="frame" x="217" y="13" width="70" height="32"/>
                                             <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v4r-Am-RJh">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="clickOnTimerSaveButton:" target="-2" id="gwO-kC-Xtj"/>
-                                            </connections>
-                                        </button>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BbG-le-Hy6">
-                                            <rect key="frame" x="15" y="255" width="231" height="18"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="check" title="Jira 刷新定时器 60（分钟）" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="S4L-Xo-Wc4">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>

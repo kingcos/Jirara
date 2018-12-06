@@ -29,9 +29,6 @@ class PreferencesWindowController: NSWindowController {
     @IBOutlet weak var sendCcTextField: NSTextField!
     @IBOutlet weak var scrumNameTextField: NSTextField!
     
-    // Timer
-    @IBOutlet weak var jiraRefreshTimerButton: NSButton!
-    
     override var windowNibName: NSNib.Name? {
         return .PreferencesWindowController
     }
@@ -78,10 +75,6 @@ class PreferencesWindowController: NSWindowController {
         scrumNameTextField.stringValue = UserDefaults.get(by: .scrumName)
         
         accLoadingIndicator.isHidden = true
-        
-        // Timer
-        UserDefaults.save(jiraRefreshTimerButton.state == .on ? "on" : "off", for: .jiraTimerSwitch)
-        jiraRefreshTimerButton.state = UserDefaults.get(by: .jiraTimerSwitch) == "on" ? .on : .off
     }
 }
 
@@ -198,27 +191,4 @@ extension PreferencesWindowController {
 
 // MARK: Others
 extension PreferencesWindowController {
-    @IBAction func clickOnTimerSaveButton(_ sender: NSButton) {
-        // Save to UserDefaults
-        UserDefaults.save(jiraRefreshTimerButton.state == .on ? "on" : "off", for: .jiraTimerSwitch)
-        
-        // Start or cancel Timer
-        if jiraRefreshTimerButton.state == .on {
-            Timer.shared.cancle(.jiraRefresher)
-            Timer.shared.scheduled(.jiraRefresher,
-                                   60 * 30,
-                                   DispatchQueue.global(),
-                                   true) {
-//                                                    MainViewModel.fetch(Constants.RapidViewName, false) { _ in
-//                                                        MainViewModel.fetch(Constants.RapidViewName) {
-////                                                            NSUserNotification.send("Finished refreshing!")
-//                                                        }
-//                                                    }
-            }
-        } else {
-            Timer.shared.cancle(.jiraRefresher)
-        }
-        
-        NSAlert.show("Saved", ["OK"])
-    }
 }
