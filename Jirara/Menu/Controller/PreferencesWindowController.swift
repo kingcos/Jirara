@@ -27,9 +27,7 @@ class PreferencesWindowController: NSWindowController {
     // Send
     @IBOutlet weak var sendToTextField: NSTextField!
     @IBOutlet weak var sendCcTextField: NSTextField!
-    
-    // Timer
-    @IBOutlet weak var jiraRefreshTimerButton: NSButton!
+    @IBOutlet weak var scrumNameTextField: NSTextField!
     
     override var windowNibName: NSNib.Name? {
         return .PreferencesWindowController
@@ -74,12 +72,9 @@ class PreferencesWindowController: NSWindowController {
         // Send
         sendToTextField.stringValue = UserDefaults.get(by: .emailTo)
         sendCcTextField.stringValue = UserDefaults.get(by: .emailCc)
+        scrumNameTextField.stringValue = UserDefaults.get(by: .scrumName)
         
         accLoadingIndicator.isHidden = true
-        
-        // Timer
-        UserDefaults.save(jiraRefreshTimerButton.state == .on ? "on" : "off", for: .jiraTimerSwitch)
-        jiraRefreshTimerButton.state = UserDefaults.get(by: .jiraTimerSwitch) == "on" ? .on : .off
     }
 }
 
@@ -116,7 +111,7 @@ extension PreferencesWindowController {
         if accIsUniversalAccountSwitch.state == .off {
             UserDefaults.save("off", for: .emailAccountUniversalState)
         } else {
-            accEmailAddressTextField.stringValue = accUsernameTextField.stringValue + "@mobike.com"
+            accEmailAddressTextField.stringValue = accUsernameTextField.stringValue
             accEmailPasswordTextField.stringValue = accPasswordTextField.stringValue
             UserDefaults.save("on", for: .emailAccountUniversalState)
         }
@@ -188,6 +183,7 @@ extension PreferencesWindowController {
         // Save to UserDefaults
         UserDefaults.save(sendToTextField.stringValue, for: .emailTo)
         UserDefaults.save(sendCcTextField.stringValue, for: .emailCc)
+        UserDefaults.save(scrumNameTextField.stringValue, for: .scrumName)
         
         NSAlert.show("Saved", ["OK"])
     }
@@ -195,27 +191,4 @@ extension PreferencesWindowController {
 
 // MARK: Others
 extension PreferencesWindowController {
-    @IBAction func clickOnTimerSaveButton(_ sender: NSButton) {
-        // Save to UserDefaults
-        UserDefaults.save(jiraRefreshTimerButton.state == .on ? "on" : "off", for: .jiraTimerSwitch)
-        
-        // Start or cancel Timer
-        if jiraRefreshTimerButton.state == .on {
-            Timer.shared.cancle(.jiraRefresher)
-            Timer.shared.scheduled(.jiraRefresher,
-                                   60 * 30,
-                                   DispatchQueue.global(),
-                                   true) {
-//                                                    MainViewModel.fetch(Constants.RapidViewName, false) { _ in
-//                                                        MainViewModel.fetch(Constants.RapidViewName) {
-////                                                            NSUserNotification.send("Finished refreshing!")
-//                                                        }
-//                                                    }
-            }
-        } else {
-            Timer.shared.cancle(.jiraRefresher)
-        }
-        
-        NSAlert.show("Saved", ["OK"])
-    }
 }

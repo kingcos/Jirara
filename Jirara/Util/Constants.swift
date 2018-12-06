@@ -9,8 +9,6 @@
 import Foundation
 
 struct Constants {
-    static let RapidViewName = "Mobike iOS Scrum"
-    
     enum NotificationInfoKey: String {
         case engineer
     }
