@@ -86,7 +86,7 @@ struct MailUtil {
         let formatter = DateFormatter()
         formatter.dateFormat = Constants.dateFormat
         
-        MainViewModel.fetch(Constants.RapidViewName, false) { sprintReport, issues in
+        MainViewModel.fetch(UserDefaults.get(by: .scrumName), false) { sprintReport, issues in
             guard let sprintReport = sprintReport else { fatalError() }
             let subject = "[周报] \(sprintReport.startDate) ~ \(sprintReport.endDate)"
             let today = formatter.string(from: Date())
@@ -102,7 +102,7 @@ struct MailUtil {
             """
             generateIndivitualList(&content, issues.filter { $0.assignee == UserDefaults.get(by: .accountUsername) })
             
-            MainViewModel.fetch(Constants.RapidViewName, true) { sprintReport, issues in
+            MainViewModel.fetch(UserDefaults.get(by: .scrumName), true) { sprintReport, issues in
                 guard let sprintReport = sprintReport else { fatalError() }
                 content.append(
                     """
@@ -166,7 +166,7 @@ struct MailUtil {
         formatter.dateFormat = Constants.dateFormat
         
         // 上周
-        MainViewModel.fetch(Constants.RapidViewName,
+        MainViewModel.fetch(UserDefaults.get(by: .scrumName),
                             false) { sprintReport, issues in
                                 guard let sprintReport = sprintReport else { fatalError() }
                                 let subject = "iOS Engineers 团队周报 \(sprintReport.startDate) ~ \(sprintReport.endDate)"
@@ -184,7 +184,7 @@ struct MailUtil {
                                 """
                                 generateTeamList(&content, issues)
                                 
-                                MainViewModel.fetch(Constants.RapidViewName,
+                                MainViewModel.fetch(UserDefaults.get(by: .scrumName),
                                                     true) { sprintReport, issues in
                                                         guard let sprintReport = sprintReport else { fatalError() }
                                                         content.append(

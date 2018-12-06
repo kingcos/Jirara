@@ -27,6 +27,8 @@ extension UserDefaults {
         case emailTo = "com.maimieng.jirara.to"
         case emailCc = "com.maimieng.jirara.cc"
         
+        case scrumName = "com.maimieng.scrum.name"
+        
         // Timer
         case jiraTimerSwitch = "com.maimieng.jirara.jira.timer.switch"
     }

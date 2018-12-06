@@ -19,6 +19,7 @@
                 <outlet property="accTestAndSaveButton" destination="Vdm-0z-EiG" id="5ND-i7-8IE"/>
                 <outlet property="accUsernameTextField" destination="0fY-of-Tuq" id="UbJ-pN-yGL"/>
                 <outlet property="jiraRefreshTimerButton" destination="BbG-le-Hy6" id="qJW-Zm-EFv"/>
+                <outlet property="scrumNameTextField" destination="fgS-XO-kk1" id="6AR-BV-nil"/>
                 <outlet property="sendCcTextField" destination="3fO-1j-E6q" id="oOG-yp-niJ"/>
                 <outlet property="sendToTextField" destination="DGz-Hp-CPC" id="3xv-oh-Jym"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>

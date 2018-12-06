@@ -27,6 +27,7 @@ class PreferencesWindowController: NSWindowController {
     // Send
     @IBOutlet weak var sendToTextField: NSTextField!
     @IBOutlet weak var sendCcTextField: NSTextField!
+    @IBOutlet weak var scrumNameTextField: NSTextField!
     
     // Timer
     @IBOutlet weak var jiraRefreshTimerButton: NSButton!
@@ -74,6 +75,7 @@ class PreferencesWindowController: NSWindowController {
         // Send
         sendToTextField.stringValue = UserDefaults.get(by: .emailTo)
         sendCcTextField.stringValue = UserDefaults.get(by: .emailCc)
+        scrumNameTextField.stringValue = UserDefaults.get(by: .scrumName)
         
         accLoadingIndicator.isHidden = true
         
@@ -188,6 +190,7 @@ extension PreferencesWindowController {
         // Save to UserDefaults
         UserDefaults.save(sendToTextField.stringValue, for: .emailTo)
         UserDefaults.save(sendCcTextField.stringValue, for: .emailCc)
+        UserDefaults.save(scrumNameTextField.stringValue, for: .scrumName)
         
         NSAlert.show("Saved", ["OK"])
     }

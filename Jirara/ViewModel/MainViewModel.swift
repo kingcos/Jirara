@@ -251,7 +251,7 @@ class MainViewModel {
 
 extension MainViewModel {
     class func fetchMyIssuesInActiveSprintReport(_ completion: @escaping ([Issue]) -> Void) {
-        fetchRapidViewID(Constants.RapidViewName) { rapidViewID in
+        fetchRapidViewID(UserDefaults.get(by: .scrumName)) { rapidViewID in
             fetchLastestSprintID(rapidViewID ?? -1, true) { sprintID in
                 fetchSprintReport(rapidViewID ?? -1, sprintID ?? -1) { sprintReport in
                     guard let sprintReport = sprintReport else {
