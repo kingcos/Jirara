@@ -9,13 +9,11 @@
         <customObject id="-2" userLabel="File's Owner" customClass="SendPreviewWindowController" customModule="Jirara" customModuleProvider="target">
             <connections>
                 <outlet property="downContainerView" destination="hZt-iJ-Qak" id="CFV-aA-51b"/>
-                <outlet property="downContainerWidthConstraint" destination="uJc-1E-FQr" id="fOh-nB-i4X"/>
                 <outlet property="emailCcTextField" destination="RHe-JP-Za5" id="hV5-bl-sY7"/>
                 <outlet property="emailFromTextField" destination="8lx-Ge-nUu" id="fed-8i-RbR"/>
                 <outlet property="emailSendButton" destination="rYE-mf-hxw" id="XV8-SB-cQu"/>
                 <outlet property="emailToTextField" destination="PhI-aA-qOt" id="3yc-hb-0zo"/>
                 <outlet property="markdownContainerView" destination="cok-xp-Ncr" id="J4X-Um-qbf"/>
-                <outlet property="markdownContainerWidthConstraint" destination="sw1-t5-tiW" id="7Gb-cH-6zt"/>
                 <outlet property="markdownTextView" destination="lfe-Op-aVa" id="ltP-uK-goB"/>
                 <outlet property="progressIndicator" destination="jsf-Vg-xLH" id="xa7-YX-0Aw"/>
                 <outlet property="subjectTextField" destination="TBY-aQ-Sat" id="hP5-lJ-qHV"/>
@@ -28,7 +26,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="858" height="541"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="858" height="541"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
