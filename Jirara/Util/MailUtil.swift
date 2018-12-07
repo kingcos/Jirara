@@ -107,7 +107,7 @@ struct MailUtil {
                 content.append(
                     """
                     
-                    ## 下周工作预告
+                    ## 下周工作
                     
                     > **周期：\(sprintReport.startDate) ~ \(sprintReport.endDate)**
                     
@@ -126,10 +126,15 @@ struct MailUtil {
                               _ issues: [Issue]) {
             let issueTypes = Array(Set(issues.map { $0.type })).sorted()
             for type in issueTypes {
-                content.append(
-                    """
+                if type != "" {
+                    content.append("""
 
 - \(type)
+
+""")
+                }
+                content.append(
+                    """
 
 <table style="border-collapse:collapse">
 <tr><td width=600>任务</td><td width=180>负责人</td><td width=80>状态</td></tr>
@@ -169,7 +174,7 @@ struct MailUtil {
         MainViewModel.fetch(UserDefaults.get(by: .scrumName),
                             false) { sprintReport, issues in
                                 guard let sprintReport = sprintReport else { fatalError() }
-                                let subject = "iOS Engineers 团队周报 \(sprintReport.startDate) ~ \(sprintReport.endDate)"
+                                let subject = UserDefaults.get(by: .mailSubject)
                                 let today = formatter.string(from: Date())
                                 var content =
                                 """
@@ -177,7 +182,7 @@ struct MailUtil {
                                 td { border:1px solid #B0B0B0 }
                                 </style>
                                 
-                                <h2>iOS Engineers 本周团队工作报告</h2>
+                                <h2>\(subject)</h2>
                                 
                                 <h3>周期：\(sprintReport.startDate) ~ \(sprintReport.endDate)\t统计日期：\(today)</h3>
                                 
@@ -190,7 +195,7 @@ struct MailUtil {
                                                         content.append(
                                                             """
                                                             
-                                                            <h2>下周工作预告</h2>
+                                                            <h2>下周工作</h2>
                                                             
                                                             <h3>周期：\(sprintReport.startDate) ~ \(sprintReport.endDate)</h3>
                                                             

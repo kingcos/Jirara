@@ -71,6 +71,7 @@ class SendPreviewWindowController: NSWindowController {
         emailToTextField.stringValue = UserDefaults.get(by: .emailTo)
         emailCcTextField.stringValue = UserDefaults.get(by: .emailCc)
         emailFromTextField.stringValue = UserDefaults.get(by: .emailAddress)
+        subjectTextField.stringValue = UserDefaults.get(by: .mailSubject)
         
         subjectTextField.isEditable = false
         emailToTextField.isEditable = false
