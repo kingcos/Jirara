@@ -16,19 +16,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         statusItem.button?.title = "Jirara"
         
-        setupMenu()
+        // Setup main menu
+        let menu = MainMenu.init()
+        menu.setupMainMenu()
+        statusItem.menu = menu
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
-    }
-}
-
-extension AppDelegate {
-    func setupMenu() {
-        let menu = MainMenu.init()
-        menu.setupMainMenu()
-        statusItem.menu = menu
     }
 }
 
