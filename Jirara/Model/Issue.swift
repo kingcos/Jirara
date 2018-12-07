@@ -38,7 +38,8 @@ struct Issue: Mappable {
         subtasks = try map.from("fields.subtasks")
         comments = try map.from("fields.comment.comments")
         
-        type = summary.contains("】") ? String(summary.split(separator: "】")[0] + "】") : "-"
+        type = summary.matchedByRegex(UserDefaults.get(by: .issueTypeRegex)) ?? ""
+        summary = summary.replacingOccurrences(of: type, with: "")
     }
 }
 

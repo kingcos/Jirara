@@ -141,7 +141,7 @@ struct MailUtil {
                 for issue in specifiedIssues {
                     content.append(
 """
-<tr><td>\(issue.summary.split(separator: "】")[1])</td><td>\(issue.engineer?.displayName ?? issue.assignee)</td><td>\(issue.status)</td></tr>
+<tr><td>\(issue.summary)</td><td>\(issue.engineer?.displayName ?? issue.assignee)</td><td>\(issue.status)</td></tr>
 
 """
                     )

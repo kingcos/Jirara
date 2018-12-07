@@ -21,4 +21,14 @@ extension String {
         }
     }
     
+    func matchedByRegex(_ regex: String) -> String? {
+        let content = self
+        guard let regex = try? NSRegularExpression(pattern: regex,
+                                                   options: .caseInsensitive) else { return nil }
+        let nsContent = self as NSString
+        return regex.matches(in: content, options: [], range: NSRange(location: 0, length: content.count)).map {
+            nsContent.substring(with: $0.range)
+        }.first
+    }
+    
 }
