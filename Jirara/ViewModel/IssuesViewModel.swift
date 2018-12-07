@@ -1,5 +1,5 @@
 //
-//  MainMenuViewModel.swift
+//  IssuesViewModel.swift
 //  Jirara
 //
 //  Created by kingcos on 2018/12/7.
@@ -9,9 +9,10 @@
 import Foundation
 import RxSwift
 
-struct MainMenuModel {
+struct IssuesViewModel {
     struct Input {
-        let fetchIssues = PublishSubject<Void>()
+        let startFetchIssues = PublishSubject<Void>()
+        let endFetchIssues = PublishSubject<Void>()
         let menuOpened = PublishSubject<Void>()
         let menuClosed = PublishSubject<Void>()
     }
@@ -26,5 +27,17 @@ struct MainMenuModel {
     private let bag = DisposeBag()
     
     init() {
+        let startFetchIssuesAction = inputs
+            .startFetchIssues
+            .do(onNext: {
+                self.outputs.issues.onNext([])
+            })
+            .flatMap()
+
+        let menuOpenAction = inputs
+            .menuOpen
+            .flatMapLatest { isMenuOpen in
+
+        }
     }
 }
