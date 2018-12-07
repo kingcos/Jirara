@@ -9,7 +9,6 @@
 import Cocoa
 
 class IssuesMenu: NSMenu {
-    
     var selectedIssueIndex: Int?
     var issues: [Issue] = []
     
@@ -22,13 +21,15 @@ class IssuesMenu: NSMenu {
     }
     
     required init(coder decoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: decoder)
+        
+        delegate = self
     }
 }
 
 extension IssuesMenu {
     func setup() {
-        let newIssuesItem = NSMenuItem.init(title: "New Issue...",
+        let newIssuesItem = NSMenuItem(title: "New Issue...",
                                             action: #selector(clickOnNewIssue),
                                             keyEquivalent: "")
         
@@ -40,7 +41,7 @@ extension IssuesMenu {
     
     @objc func clickOnNewIssue() {
         let createIssueURL = JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + "/secure/CreateIssue!default.jspa"
-        guard let url = URL.init(string: createIssueURL) else {
+        guard let url = URL(string: createIssueURL) else {
             fatalError()
         }
         
@@ -56,12 +57,12 @@ extension IssuesMenu: NSMenuDelegate {
             self.issues = issues.sorted { $0.id > $1.id }
             
             self.issues.reversed().forEach { issue in
-                let submenu = NSMenu.init()
+                let submenu = NSMenu()
                 let menuItem = NSMenuItem(title: issue.summary,
                                           action: nil,
                                           keyEquivalent: "")
                 
-                let viewDetailsItem = NSMenuItem.init(title: "View Details...",
+                let viewDetailsItem = NSMenuItem(title: "View Details...",
                                                       action: #selector(self.clickOnViewDetails(_:)),
                                                       keyEquivalent: "")
                 viewDetailsItem.target = self
@@ -69,7 +70,7 @@ extension IssuesMenu: NSMenuDelegate {
                 submenu.addItem(NSMenuItem.separator())
                 
                 issue.transitions.forEach {
-                    let item = NSMenuItem.init(title: $0.name,
+                    let item = NSMenuItem(title: $0.name,
                                                action: #selector(self.clickOnTransition(_:)),
                                                keyEquivalent: "")
                     if issue.status == $0.name {
@@ -101,7 +102,7 @@ extension IssuesMenu: NSMenuDelegate {
 extension IssuesMenu {
     @objc func clickOnViewDetails(_ sender: NSMenuItem) {
         guard let selectedIssueIndex = selectedIssueIndex,
-            let url = URL.init(string: JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + "/browse/" + issues[selectedIssueIndex - issueMenuStickItemsCount].key) else {
+            let url = URL(string: JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + "/browse/" + issues[selectedIssueIndex - issueMenuStickItemsCount].key) else {
                 fatalError()
         }
         
