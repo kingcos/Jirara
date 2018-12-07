@@ -28,6 +28,8 @@
 		847C8C7620D2B8D2000C2854 /* NSView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */; };
 		847E4F6221BA3E0300106E7F /* LoadingItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847E4F6121BA3E0300106E7F /* LoadingItemView.xib */; };
 		847E4F6421BA3F0000106E7F /* LoadingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E4F6321BA3F0000106E7F /* LoadingItemView.swift */; };
+		847E4F6621BA841E00106E7F /* MainMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E4F6521BA841E00106E7F /* MainMenuViewModel.swift */; };
+		847E4F6921BAAA8900106E7F /* NSMenu+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E4F6821BAAA8900106E7F /* NSMenu+Rx.swift */; };
 		849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478BA20D0D0A400FC9853 /* Engineer.swift */; };
 		849478BD20D112C500FC9853 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478BC20D112C500FC9853 /* UserDefaults+Extension.swift */; };
 		849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478C720D13FFC00FC9853 /* JiraAPI.swift */; };
@@ -79,6 +81,8 @@
 		847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extension.swift"; sourceTree = "<group>"; };
 		847E4F6121BA3E0300106E7F /* LoadingItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingItemView.xib; sourceTree = "<group>"; };
 		847E4F6321BA3F0000106E7F /* LoadingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingItemView.swift; sourceTree = "<group>"; };
+		847E4F6521BA841E00106E7F /* MainMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewModel.swift; sourceTree = "<group>"; };
+		847E4F6821BAAA8900106E7F /* NSMenu+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMenu+Rx.swift"; sourceTree = "<group>"; };
 		848A64FD20DBA6ED002FBCE4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		848A64FF20DBA86B002FBCE4 /* libMailCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMailCore.a; path = "../../../Downloads/mailcore2-osx-12/lib/libMailCore.a"; sourceTree = "<group>"; };
 		848A650120DBAE14002FBCE4 /* Jirara-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Jirara-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 			children = (
 				8426D4DE20D18F350007F180 /* MainViewModel.swift */,
 				8407BA1320F7D33700CE5DE7 /* IssueViewModel.swift */,
+				847E4F6521BA841E00106E7F /* MainMenuViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -187,6 +192,14 @@
 			path = Submenu;
 			sourceTree = "<group>";
 		};
+		847E4F6721BAAA7C00106E7F /* Rx */ = {
+			isa = PBXGroup;
+			children = (
+				847E4F6821BAAA8900106E7F /* NSMenu+Rx.swift */,
+			);
+			path = Rx;
+			sourceTree = "<group>";
+		};
 		849478B920D0D09700FC9853 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +227,7 @@
 		84A06E8320E0EFD00048798F /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				847E4F6721BAAA7C00106E7F /* Rx */,
 				845A4EB52109D2B800E6E2A6 /* Submenu */,
 				84E1815920F4B4960035E373 /* Controller */,
 			);
@@ -340,6 +354,9 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Down/Down.framework",
 				"${BUILT_PRODUCTS_DIR}/Mappable/Mappable.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -347,6 +364,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Down.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mappable.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -387,8 +407,10 @@
 				843973CE20CFF64A00B14AB7 /* AppDelegate.swift in Sources */,
 				849478CA20D143EB00FC9853 /* String+Extension.swift in Sources */,
 				8426D4E520D197E60007F180 /* RapidViews.swift in Sources */,
+				847E4F6621BA841E00106E7F /* MainMenuViewModel.swift in Sources */,
 				847E4F6421BA3F0000106E7F /* LoadingItemView.swift in Sources */,
 				84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */,
+				847E4F6921BAAA8900106E7F /* NSMenu+Rx.swift in Sources */,
 				84DF3A6C210AC1880053B71A /* IssuesMenu.swift in Sources */,
 				849478CC20D152DE00FC9853 /* NSAlert+Extension.swift in Sources */,
 				8407BA1620F86FF700CE5DE7 /* Transition.swift in Sources */,
