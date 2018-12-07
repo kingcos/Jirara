@@ -38,10 +38,6 @@ extension MainMenu {
             addItem(item)
         }
     }
-    
-    func setupIssuesMenu() {
-        
-    }
 }
 
 extension MainMenu {

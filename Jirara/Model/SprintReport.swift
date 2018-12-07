@@ -25,6 +25,9 @@ struct SprintReport: Mappable {
         incompletedIssues = try map.from("contents.issuesNotCompletedInCurrentSprint")
         startDate = try map.from("sprint.startDate")
         endDate = try map.from("sprint.endDate")
+        
+        startDate = formatDate(startDate)
+        endDate = formatDate(endDate)
     }
 }
 
@@ -49,6 +52,7 @@ struct ReportIssue: Mappable {
 extension SprintReport {
     func formatDate(_ origin: String) -> String {
         // 15/06/18 dd/mm/yy
+        // 26/十一月/18 9:00 上午
         let chineseMonth = origin.split(separator: "/")[1]
         let numberMonth = Constants.MonthNumberDict[String(chineseMonth)]
         let substrings = origin.replacingOccurrences(of: chineseMonth, with: numberMonth ?? "").split(separator: " ")
