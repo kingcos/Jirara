@@ -24,10 +24,12 @@ class PreferencesWindowController: NSWindowController {
     @IBOutlet weak var accTestAndSaveButton: NSButton!
     @IBOutlet weak var accLoadingIndicator: NSProgressIndicator!
     
-    // Send
+    // E-mail
     @IBOutlet weak var sendToTextField: NSTextField!
     @IBOutlet weak var sendCcTextField: NSTextField!
     @IBOutlet weak var scrumNameTextField: NSTextField!
+    @IBOutlet weak var issueTypeRegexTextField: NSTextField!
+    @IBOutlet weak var mailSubjectTextField: NSTextField!
     
     override var windowNibName: NSNib.Name? {
         return .PreferencesWindowController
@@ -73,6 +75,8 @@ class PreferencesWindowController: NSWindowController {
         sendToTextField.stringValue = UserDefaults.get(by: .emailTo)
         sendCcTextField.stringValue = UserDefaults.get(by: .emailCc)
         scrumNameTextField.stringValue = UserDefaults.get(by: .scrumName)
+        issueTypeRegexTextField.stringValue = UserDefaults.get(by: .issueTypeRegex)
+        mailSubjectTextField.stringValue = UserDefaults.get(by: .mailSubject)
         
         accLoadingIndicator.isHidden = true
     }
@@ -184,6 +188,8 @@ extension PreferencesWindowController {
         UserDefaults.save(sendToTextField.stringValue, for: .emailTo)
         UserDefaults.save(sendCcTextField.stringValue, for: .emailCc)
         UserDefaults.save(scrumNameTextField.stringValue, for: .scrumName)
+        UserDefaults.save(issueTypeRegexTextField.stringValue, for: .issueTypeRegex)
+        UserDefaults.save(mailSubjectTextField.stringValue, for: .mailSubject)
         
         NSAlert.show("Saved", ["OK"])
     }

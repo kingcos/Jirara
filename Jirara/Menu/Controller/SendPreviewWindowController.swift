@@ -11,8 +11,8 @@ import Down
 import SnapKit
 
 enum SummaryType: String {
-    case team = "团队周报"
-    case individual = "个人周报"
+    case team = "Team"
+    case individual = "Individual"
 }
 
 class SendPreviewWindowController: NSWindowController {
@@ -71,6 +71,7 @@ class SendPreviewWindowController: NSWindowController {
         emailToTextField.stringValue = UserDefaults.get(by: .emailTo)
         emailCcTextField.stringValue = UserDefaults.get(by: .emailCc)
         emailFromTextField.stringValue = UserDefaults.get(by: .emailAddress)
+        subjectTextField.stringValue = UserDefaults.get(by: .mailSubject)
         
         subjectTextField.isEditable = false
         emailToTextField.isEditable = false

@@ -27,7 +27,9 @@ extension UserDefaults {
         case emailTo = "com.maimieng.jirara.to"
         case emailCc = "com.maimieng.jirara.cc"
         
-        case scrumName = "com.maimieng.scrum.name"
+        case scrumName = "com.maimieng.jirara.scrum.name"
+        case issueTypeRegex = "com.maimieng.jirara.issue.type.regex"
+        case mailSubject = "com.maimieng.jirara.mail.subject"
     }
     
     /// Save to UserDefaults by key

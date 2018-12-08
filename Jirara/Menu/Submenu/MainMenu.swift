@@ -15,23 +15,25 @@ class MainMenu: NSMenu {
 
 extension MainMenu {
     func setupMainMenu() {
+        delegate = self
+        
         // Send
-        let firstMenuItem = NSMenuItem.init(title: "Scrums", action: nil, keyEquivalent: "")
+        let firstMenuItem = NSMenuItem(title: "Scrums", action: nil, keyEquivalent: "")
         addItem(firstMenuItem)
-        setSubmenu(SendMenu.init(), for: firstMenuItem)
+        setSubmenu(SendMenu(), for: firstMenuItem)
         
         // Issues
-        let secondMenuItem = NSMenuItem.init(title: "Issues", action: nil, keyEquivalent: "")
+        let secondMenuItem = NSMenuItem(title: "Issues", action: nil, keyEquivalent: "")
         addItem(secondMenuItem)
-        setSubmenu(IssuesMenu.init(), for: secondMenuItem)
+        setSubmenu(IssuesMenu(), for: secondMenuItem)
         
         // ---
         addItem(NSMenuItem.separator())
         
         // Preferences... About Quit Items
-        let preferenceItem = NSMenuItem.init(title: "Preferences...", action: #selector(clickOnPreference), keyEquivalent: "")
-        let aboutItem = NSMenuItem.init(title: "About", action: #selector(clickOnAbout), keyEquivalent: "")
-        let quitItem = NSMenuItem.init(title: "Quit", action: #selector(clickOnQuit), keyEquivalent: "")
+        let preferenceItem = NSMenuItem(title: "Preferences...", action: #selector(clickOnPreference), keyEquivalent: "")
+        let aboutItem = NSMenuItem(title: "About", action: #selector(clickOnAbout), keyEquivalent: "")
+        let quitItem = NSMenuItem(title: "Quit", action: #selector(clickOnQuit), keyEquivalent: "")
         
         [preferenceItem, aboutItem, quitItem].forEach { item in
             item.target = self
@@ -39,12 +41,6 @@ extension MainMenu {
         }
     }
     
-    func setupIssuesMenu() {
-        
-    }
-}
-
-extension MainMenu {
     @objc func clickOnPreference() {
         preferenceController.showWindow(nil)
     }
@@ -55,5 +51,19 @@ extension MainMenu {
     
     @objc func clickOnQuit() {
         NSApplication.shared.terminate(self)
+    }
+}
+
+extension MainMenu {
+    
+}
+
+extension MainMenu: NSMenuDelegate {
+    func menuWillOpen(_ menu: NSMenu) {
+        
+    }
+    
+    func menuDidClose(_ menu: NSMenu) {
+        
     }
 }

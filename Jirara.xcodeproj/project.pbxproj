@@ -26,6 +26,8 @@
 		847C8C1E20D25338000C2854 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C1D20D25338000C2854 /* Constants.swift */; };
 		847C8C7120D2AA26000C2854 /* MailUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C7020D2AA26000C2854 /* MailUtil.swift */; };
 		847C8C7620D2B8D2000C2854 /* NSView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */; };
+		847E4F6221BA3E0300106E7F /* LoadingItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847E4F6121BA3E0300106E7F /* LoadingItemView.xib */; };
+		847E4F6421BA3F0000106E7F /* LoadingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E4F6321BA3F0000106E7F /* LoadingItemView.swift */; };
 		849478BB20D0D0A400FC9853 /* Engineer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478BA20D0D0A400FC9853 /* Engineer.swift */; };
 		849478BD20D112C500FC9853 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478BC20D112C500FC9853 /* UserDefaults+Extension.swift */; };
 		849478C820D13FFC00FC9853 /* JiraAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849478C720D13FFC00FC9853 /* JiraAPI.swift */; };
@@ -75,6 +77,8 @@
 		847C8C1D20D25338000C2854 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		847C8C7020D2AA26000C2854 /* MailUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailUtil.swift; sourceTree = "<group>"; };
 		847C8C7520D2B8D2000C2854 /* NSView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extension.swift"; sourceTree = "<group>"; };
+		847E4F6121BA3E0300106E7F /* LoadingItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingItemView.xib; sourceTree = "<group>"; };
+		847E4F6321BA3F0000106E7F /* LoadingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingItemView.swift; sourceTree = "<group>"; };
 		848A64FD20DBA6ED002FBCE4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		848A64FF20DBA86B002FBCE4 /* libMailCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMailCore.a; path = "../../../Downloads/mailcore2-osx-12/lib/libMailCore.a"; sourceTree = "<group>"; };
 		848A650120DBAE14002FBCE4 /* Jirara-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Jirara-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -177,6 +181,8 @@
 				845A4EB32109D1F300E6E2A6 /* MainMenu.swift */,
 				84DF3A6D210AC1B20053B71A /* SendMenu.swift */,
 				84DF3A6B210AC1880053B71A /* IssuesMenu.swift */,
+				847E4F6121BA3E0300106E7F /* LoadingItemView.xib */,
+				847E4F6321BA3F0000106E7F /* LoadingItemView.swift */,
 			);
 			path = Submenu;
 			sourceTree = "<group>";
@@ -316,6 +322,7 @@
 				8450C33C20E3A25D009C0843 /* SendPreviewWindowController.xib in Resources */,
 				84A06E8B20E0F1110048798F /* PreferencesWindowController.xib in Resources */,
 				843973D220CFF64C00B14AB7 /* Assets.xcassets in Resources */,
+				847E4F6221BA3E0300106E7F /* LoadingItemView.xib in Resources */,
 				8442048920E6007300DB9837 /* AboutWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,6 +387,7 @@
 				843973CE20CFF64A00B14AB7 /* AppDelegate.swift in Sources */,
 				849478CA20D143EB00FC9853 /* String+Extension.swift in Sources */,
 				8426D4E520D197E60007F180 /* RapidViews.swift in Sources */,
+				847E4F6421BA3F0000106E7F /* LoadingItemView.swift in Sources */,
 				84FCBFF420D0BDFF00FFDA73 /* NSColor+Extension.swift in Sources */,
 				84DF3A6C210AC1880053B71A /* IssuesMenu.swift in Sources */,
 				849478CC20D152DE00FC9853 /* NSAlert+Extension.swift in Sources */,

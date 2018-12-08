@@ -12,4 +12,6 @@ extension NSNib.Name {
     static let PreferencesWindowController = "PreferencesWindowController"
     static let SendPreviewWindowController = "SendPreviewWindowController"
     static let AboutWindowController = "AboutWindowController"
+    
+    static let LoadingItemView = "LoadingItemView"
 }
