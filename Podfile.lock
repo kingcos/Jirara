@@ -3,6 +3,13 @@ PODS:
   - Down (0.5.2)
   - mailcore2-osx (0.6.4)
   - Mappable (1.2.1)
+  - Moya/Core (12.0.1):
+    - Alamofire (~> 4.1)
+    - Result (~> 4.0)
+  - Moya/RxSwift (12.0.1):
+    - Moya/Core
+    - RxSwift (~> 4.0)
+  - Result (4.0.0)
   - RxAtomic (4.4.0)
   - RxCocoa (4.4.0):
     - RxSwift (~> 4.0)
@@ -15,6 +22,7 @@ DEPENDENCIES:
   - Down
   - mailcore2-osx
   - Mappable
+  - Moya/RxSwift (~> 12.0)
   - RxCocoa
   - RxSwift
   - SnapKit
@@ -25,6 +33,8 @@ SPEC REPOS:
     - Down
     - mailcore2-osx
     - Mappable
+    - Moya
+    - Result
     - RxAtomic
     - RxCocoa
     - RxSwift
@@ -35,11 +45,13 @@ SPEC CHECKSUMS:
   Down: 587371ad58002b06023d9c602519216862c3acbc
   mailcore2-osx: 56890045e50f3b09b6530f5bd008eda67e1f6b82
   Mappable: 3b0ee951fae981fe387a5bbfb835aa4644f3f8b7
+  Moya: cf730b3cd9e005401ef37a85143aa141a12fd38f
+  Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 2bdfe0740301e5a2a63e26dd3f51bb10fbec6b48
+PODFILE CHECKSUM: 3c39c9926c300b24f0d6114033ba6e9fde91c0ad
 
 COCOAPODS: 1.5.3

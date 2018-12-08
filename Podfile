@@ -13,4 +13,5 @@ target 'Jirara' do
   
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'Moya/RxSwift', '~> 12.0'
 end
