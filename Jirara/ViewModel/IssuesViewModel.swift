@@ -8,13 +8,11 @@
 
 import Foundation
 import RxSwift
+import Moya
 
 struct IssuesViewModel {
     struct Input {
-        let startFetchIssues = PublishSubject<Void>()
-        let endFetchIssues = PublishSubject<Void>()
         let menuOpened = PublishSubject<Void>()
-        let menuClosed = PublishSubject<Void>()
     }
     
     struct Output {
@@ -27,17 +25,71 @@ struct IssuesViewModel {
     private let bag = DisposeBag()
     
     init() {
-        let startFetchIssuesAction = inputs
-            .startFetchIssues
-            .do(onNext: {
-                self.outputs.issues.onNext([])
-            })
-            .flatMap()
-
-        let menuOpenAction = inputs
-            .menuOpen
-            .flatMapLatest { isMenuOpen in
-
-        }
+        binding()
+    }
+    
+    func binding() {
+        let fetchRapidViewAction = inputs
+            .menuOpened
+            .flatMap {
+                JiraAPIService
+                    .provider
+                    .rx
+                    .request(.fetchRapidViewID)
+                    .asObservable()
+                    .mapModel(RapidViews.self)
+                    .map { $0.views }
+            }
+            .flatMap {
+                $0
+                    .filter({ $0.name == UserDefaults.get(by: .scrumName) })
+                    .first
+                    .map(Observable.just) ?? Observable.empty()
+            }
+            .share()
+        
+        let fetchSprintAction = fetchRapidViewAction
+            .flatMap {
+                JiraAPIService
+                    .provider
+                    .rx
+                    .request(.fetchSprintID(rapidViewID: $0.id))
+                    .asObservable()
+                    .mapModel(SprintQuery.self)
+                    .map { $0.sprints }
+            }
+            .flatMap {
+                $0
+                    .filter { $0.state == "ACTIVE" }
+                    .first
+                    .map(Observable.just) ?? Observable.empty()
+            }
+            .share()
+        
+        Observable
+            .zip(fetchRapidViewAction, fetchSprintAction)
+            .flatMap {
+                JiraAPIService
+                    .provider
+                    .rx
+                    .request(.fetchSprintReport(rapidViewID: $0.0.id, sprintID: $0.1.id))
+                    .asObservable()
+                    .mapModel(SprintReport.self)
+                    .map { $0.completedIssues + $0.incompletedIssues }
+            }
+            .flatMap {
+                Observable
+                    .zip($0.map {
+                            JiraAPIService
+                            .provider
+                            .rx
+                            .request(.fetchIssue(id: $0.id))
+                            .asObservable()
+                            .mapModel(Issue.self)
+                            .asObservable()
+                    })
+            }
+            .bind(to: outputs.issues)
+            .disposed(by: bag)
     }
 }
