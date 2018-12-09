@@ -22,14 +22,16 @@ struct JiraAPI {
 }
 
 enum JiraAPIService {
-    case fetchRapidViewID(name: String)
-    case fetchSprintID(rapidViewID: Int, isActive: Bool)
+    case fetchRapidViewID
+    case fetchSprintID(rapidViewID: Int)
     case fetchSprintReport(rapidViewID: Int, sprintID: Int)
-    case fetchIssue(id: String)
-    case fetchSubtask(id: String)
+    case fetchIssue(id: Int)
+    case fetchSubtask(id: Int)
     case fetchEngineer(name: String)
-    case fetchTransitions(id: String)
-    case updateIssueTransition(issueID: String, transitionID: String)
+    case fetchTransitions(id: Int)
+    case updateIssueTransition(issueID: Int, transitionID: Int)
+    
+    static let provider = MoyaProvider<JiraAPIService>()
 }
 
 extension JiraAPIService: TargetType {
@@ -46,7 +48,7 @@ extension JiraAPIService: TargetType {
         case .fetchSprintReport:
             return "/rest/greenhopper/1.0/rapid/charts/sprintreport"
         case .fetchIssue(let id), .fetchSubtask(let id):
-            return "/rest/api/2/issue/" + id
+            return "/rest/api/2/issue/\(id)"
         case .fetchEngineer:
             return "/rest/api/2/user"
         case .fetchTransitions(let id), .updateIssueTransition(let id, _):
