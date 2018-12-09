@@ -41,10 +41,10 @@ struct IssuesViewModel {
                     .map { $0.views }
             }
             .flatMap {
-                $0
-                    .filter({ $0.name == UserDefaults.get(by: .scrumName) })
-                    .first
-                    .map(Observable.just) ?? Observable.empty()
+                Observable
+                    .from(optional: $0
+                        .filter({ $0.name == UserDefaults.get(by: .scrumName) })
+                        .first)
             }
             .share()
         
@@ -59,14 +59,14 @@ struct IssuesViewModel {
                     .map { $0.sprints }
             }
             .flatMap {
-                $0
-                    .filter { $0.state == "ACTIVE" }
-                    .first
-                    .map(Observable.just) ?? Observable.empty()
+                Observable
+                    .from(optional: $0
+                        .filter { $0.state == "ACTIVE" }
+                        .first)
             }
             .share()
         
-        Observable
+        let fetchIssuesAction = Observable
             .zip(fetchRapidViewAction, fetchSprintAction)
             .flatMap {
                 JiraAPIService
@@ -86,8 +86,60 @@ struct IssuesViewModel {
                             .request(.fetchIssue(id: $0.id))
                             .asObservable()
                             .mapModel(Issue.self)
-                            .asObservable()
                     })
+            }
+            .share()
+
+        let fetchFullIssuesActions = Observable
+            .merge(
+                fetchIssuesAction, fetchIssuesAction
+                    .map {
+                        $0.compactMap { Int($0.id) }
+                    }
+                    .flatMap {
+                        Observable
+                            .zip($0.map {
+                                JiraAPIService
+                                    .provider
+                                    .rx
+                                    .request(.fetchIssue(id: $0))
+                                    .asObservable()
+                                    .mapModel(Issue.self)
+                            })
+                    }
+            ).share()
+        
+        let fetchTransitionsAction = fetchFullIssuesActions
+            .map {
+                $0.compactMap { Int($0.id) }
+            }
+            .flatMap {
+                Observable
+                    .zip(
+                        $0.map {
+                            JiraAPIService
+                                .provider
+                                .rx
+                                .request(.fetchTransitions(id: $0))
+                                .asObservable()
+                                .mapModel(Transitions.self)
+                        }
+                    )
+                    .catchErrorJustReturn([])
+            }
+            .share()
+        
+        Observable
+            .zip(fetchFullIssuesActions, fetchTransitionsAction)
+            .flatMap { tuple -> Observable<[Issue]> in
+                var issues = [Issue]()
+                for i in 0..<tuple.0.count {
+                    var issue = issues[i]
+                    issue.transitions = tuple.1[i].transitions
+                    issues.append(issue)
+                }
+                
+                return Observable.from(optional: issues)
             }
             .bind(to: outputs.issues)
             .disposed(by: bag)
