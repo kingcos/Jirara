@@ -131,11 +131,11 @@ struct IssuesViewModel {
         
         Observable
             .zip(fetchFullIssuesActions, fetchTransitionsAction)
-            .flatMap { tuple -> Observable<[Issue]> in
+            .flatMap { t -> Observable<[Issue]> in
                 var issues = [Issue]()
-                for i in 0..<tuple.0.count {
+                for i in 0..<t.0.count {
                     var issue = issues[i]
-                    issue.transitions = tuple.1[i].transitions
+                    issue.transitions = t.1[i].transitions
                     issues.append(issue)
                 }
                 
