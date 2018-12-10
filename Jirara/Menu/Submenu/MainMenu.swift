@@ -8,15 +8,28 @@
 
 import Cocoa
 
+import RxSwift
+import RxCocoa
+
 class MainMenu: NSMenu {
     let aboutController = AboutWindowController()
     let preferenceController = PreferencesWindowController()
+    
+    lazy var viewModel = IssuesViewModel()
+    
+    init() {
+        super.init(title: "")
+        
+        setup()
+    }
+    
+    required init(coder decoder: NSCoder) {
+        super.init(coder: decoder)
+    }
 }
 
 extension MainMenu {
-    func setupMainMenu() {
-        delegate = self
-        
+    func setup() {
         // Send
         let firstMenuItem = NSMenuItem(title: "Scrums", action: nil, keyEquivalent: "")
         addItem(firstMenuItem)
@@ -31,14 +44,16 @@ extension MainMenu {
         addItem(NSMenuItem.separator())
         
         // Preferences... About Quit Items
-        let preferenceItem = NSMenuItem(title: "Preferences...", action: #selector(clickOnPreference), keyEquivalent: "")
+        let preferencesItem = NSMenuItem(title: "Preferences...", action: #selector(clickOnPreference), keyEquivalent: "")
         let aboutItem = NSMenuItem(title: "About", action: #selector(clickOnAbout), keyEquivalent: "")
         let quitItem = NSMenuItem(title: "Quit", action: #selector(clickOnQuit), keyEquivalent: "")
         
-        [preferenceItem, aboutItem, quitItem].forEach { item in
+        [preferencesItem, aboutItem, quitItem].forEach { item in
             item.target = self
             addItem(item)
         }
+        
+        binding()
     }
     
     @objc func clickOnPreference() {
@@ -55,15 +70,7 @@ extension MainMenu {
 }
 
 extension MainMenu {
-    
-}
-
-extension MainMenu: NSMenuDelegate {
-    func menuWillOpen(_ menu: NSMenu) {
-        
-    }
-    
-    func menuDidClose(_ menu: NSMenu) {
+    func binding() {
         
     }
 }
