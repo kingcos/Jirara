@@ -48,7 +48,7 @@ struct IssuesViewModel {
             }
             .share()
         
-        let fetchSprintAction = fetchRapidViewAction
+        let fetchActiveSprintAction = fetchRapidViewAction
             .flatMap {
                 JiraAPIService
                     .provider
@@ -67,7 +67,7 @@ struct IssuesViewModel {
             .share()
         
         let fetchIssuesAction = Observable
-            .zip(fetchRapidViewAction, fetchSprintAction)
+            .zip(fetchRapidViewAction, fetchActiveSprintAction)
             .flatMap {
                 JiraAPIService
                     .provider
