@@ -16,6 +16,7 @@ class MainMenu: NSMenu {
     let preferenceController = PreferencesWindowController()
     
     lazy var viewModel = IssuesViewModel()
+    let bag = DisposeBag()
     
     init() {
         super.init(title: "")
@@ -71,6 +72,47 @@ extension MainMenu {
 
 extension MainMenu {
     func binding() {
+        // NSMenu Open Event ==> ViewModel MenuOpen Input
+        rx.menuWillOpen.bind(to: viewModel.inputs.menuOpened).disposed(by: bag)
+        // NSMenu Close Event ==> ViewModel MenuClose Input
+        rx.menuDidClose.bind(to: viewModel.inputs.menuClosed).disposed(by: bag)
         
+        // ViewModel [Issue] Output ==> Menu View Update
+        viewModel
+            .outputs
+            .issues
+            .subscribe(onNext: { issues in
+                if let item = self.item(at: 1),
+                   let submenu = item.submenu {
+                    submenu.items[2..<submenu.items.count].forEach {
+                        submenu.removeItem($0)
+                    }
+                }
+
+                guard !issues.isEmpty else { return }
+                if let menuItem = self.item(at: 1) {
+                    if let submenu = menuItem.submenu,
+                        submenu.items.count > 2 {
+                        submenu.removeItem(at: 2)
+                    }
+                    issues
+                        .filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
+                        .forEach {
+                            menuItem.submenu?.addItem(NSMenuItem(title: $0.summary, action: nil, keyEquivalent: ""))
+                    }
+                }
+            })
+            .disposed(by: self.bag)
+        
+        // NSMenu Open Event ==> ViewModel MenuOpen Input
+        rx
+            .menuWillOpen
+            .subscribe(onNext: {
+                if let item = self.item(at: 1) {
+                    let menu = IssuesMenu()
+                    self.setSubmenu(menu, for: item)
+                }
+            })
+        .disposed(by: bag)
     }
 }
