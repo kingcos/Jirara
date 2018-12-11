@@ -44,7 +44,7 @@ struct IssuesViewModel {
             .flatMap {
                 Observable
                     .from(optional: $0
-                        .filter({ $0.name == UserDefaults.get(by: .scrumName) })
+                        .filter { $0.name == UserDefaults.get(by: .scrumName) }
                         .first)
             }
             .share()
@@ -73,7 +73,8 @@ struct IssuesViewModel {
                 JiraAPIService
                     .provider
                     .rx
-                    .request(.fetchSprintReport(rapidViewID: $0.0.id, sprintID: $0.1.id))
+                    .request(.fetchSprintReport(rapidViewID: $0.0.id,
+                                                sprintID: $0.1.id))
                     .asObservable()
                     .mapModel(SprintReport.self)
                     .map { $0.completedIssues + $0.incompletedIssues }
