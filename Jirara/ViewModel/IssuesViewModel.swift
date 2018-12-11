@@ -13,10 +13,11 @@ import Moya
 struct IssuesViewModel {
     struct Input {
         let menuOpened = PublishSubject<Void>()
+        let menuClosed = PublishSubject<Void>()
     }
     
     struct Output {
-        let issues = BehaviorSubject<[Issue]>(value: [])
+        let issues = PublishSubject<[Issue]>()
     }
     
     let inputs = Input()
@@ -65,7 +66,7 @@ struct IssuesViewModel {
                         .first)
             }
             .share()
-        
+
         let fetchIssuesAction = Observable
             .zip(fetchRapidViewAction, fetchActiveSprintAction)
             .flatMap {
@@ -88,13 +89,17 @@ struct IssuesViewModel {
                             .mapModel(Issue.self)
                     })
             }
+            .catchErrorJustReturn([])
             .share()
-
+        
         let fetchFullIssuesActions = Observable
             .merge(
-                fetchIssuesAction, fetchIssuesAction
+                fetchIssuesAction,
+                fetchIssuesAction
                     .map {
-                        $0.compactMap { Int($0.id) }
+                        $0.flatMap {
+                            $0.subtasks.compactMap { Int($0.id) }
+                        }
                     }
                     .flatMap {
                         Observable
@@ -107,8 +112,10 @@ struct IssuesViewModel {
                                     .mapModel(Issue.self)
                             })
                     }
-            ).share()
-        
+            )
+            .catchErrorJustReturn([])
+            .share()
+
         let fetchTransitionsAction = fetchFullIssuesActions
             .map {
                 $0.compactMap { Int($0.id) }
@@ -125,8 +132,8 @@ struct IssuesViewModel {
                                 .mapModel(Transitions.self)
                         }
                     )
-                    .catchErrorJustReturn([])
             }
+            .catchErrorJustReturn([])
             .share()
         
         Observable
@@ -134,14 +141,22 @@ struct IssuesViewModel {
             .flatMap { t -> Observable<[Issue]> in
                 var issues = [Issue]()
                 for i in 0..<t.0.count {
-                    var issue = issues[i]
+                    var issue = t.0[i]
                     issue.transitions = t.1[i].transitions
                     issues.append(issue)
                 }
-                
+
                 return Observable.from(optional: issues)
             }
+            .catchErrorJustReturn([])
             .bind(to: outputs.issues)
+            .disposed(by: bag)
+        
+        inputs
+            .menuClosed
+            .subscribe(onNext: {
+                // Do sth...
+            })
             .disposed(by: bag)
     }
 }
