@@ -103,16 +103,5 @@ extension MainMenu {
                 }
             })
             .disposed(by: self.bag)
-        
-        // NSMenu Open Event ==> ViewModel MenuOpen Input
-        rx
-            .menuWillOpen
-            .subscribe(onNext: {
-                if let item = self.item(at: 1) {
-                    let menu = IssuesMenu()
-                    self.setSubmenu(menu, for: item)
-                }
-            })
-        .disposed(by: bag)
     }
 }

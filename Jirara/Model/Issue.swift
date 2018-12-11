@@ -43,6 +43,16 @@ struct Issue: Mappable {
     }
 }
 
+extension Issue: Comparable {
+    static func < (lhs: Issue, rhs: Issue) -> Bool {
+        return lhs.id < rhs.id
+    }
+    
+    static func == (lhs: Issue, rhs: Issue) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
 struct IssueSubtask: Mappable {
     var id: String
 

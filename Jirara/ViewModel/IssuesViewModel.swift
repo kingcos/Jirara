@@ -147,8 +147,9 @@ struct IssuesViewModel {
                     issues.append(issue)
                 }
 
-                return Observable.from(optional: issues)
+                return Observable.from(optional: issues.sorted())
             }
+            .distinctUntilChanged({ $0 == $1 })
             .catchErrorJustReturn([])
             .bind(to: outputs.issues)
             .disposed(by: bag)
