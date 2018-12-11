@@ -98,7 +98,17 @@ extension MainMenu {
                     issues
                         .filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
                         .forEach {
-                            menuItem.submenu?.addItem(NSMenuItem(title: $0.summary, action: nil, keyEquivalent: ""))
+                            let issueItem = NSMenuItem(title: $0.summary, action: nil, keyEquivalent: "")
+                            issueItem.submenu = NSMenu(title: "")
+                            let state = $0.status
+                            $0.transitions.forEach {
+                                let trantitionItem = NSMenuItem(title: $0.name, action: nil, keyEquivalent: "")
+                                if state == $0.name {
+                                    trantitionItem.state = .on
+                                }
+                                issueItem.submenu?.addItem(trantitionItem)
+                            }
+                            menuItem.submenu?.addItem(issueItem)
                     }
                 }
             })
