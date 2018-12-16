@@ -70,7 +70,7 @@ extension JiraAPIService: TargetType {
                                       encoding: URLEncoding.queryString)
         case .updateIssueTransition(_, let transitionID):
             return .requestParameters(parameters: ["transition" : ["id" : transitionID]],
-                                      encoding: URLEncoding.queryString)
+                                      encoding: JSONEncoding.default)
         default:
             return .requestPlain
         }

@@ -14,6 +14,7 @@ struct IssuesViewModel {
     struct Input {
         let menuOpened = PublishSubject<Void>()
         let menuClosed = PublishSubject<Void>()
+        let clickOnTransition = PublishSubject<(String, String)>()
     }
     
     struct Output {
@@ -43,9 +44,7 @@ struct IssuesViewModel {
             }
             .flatMap {
                 Observable
-                    .from(optional: $0
-                        .filter { $0.name == UserDefaults.get(by: .scrumName) }
-                        .first)
+                    .from(optional: $0.first { $0.name == UserDefaults.get(by: .scrumName) })
             }
             .share()
         
@@ -61,9 +60,7 @@ struct IssuesViewModel {
             }
             .flatMap {
                 Observable
-                    .from(optional: $0
-                        .filter { $0.state == "ACTIVE" }
-                        .first)
+                    .from(optional: $0.first { $0.state == "ACTIVE" })
             }
             .share()
 
@@ -93,7 +90,7 @@ struct IssuesViewModel {
             .catchErrorJustReturn([])
             .share()
         
-        let fetchFullIssuesActions = Observable
+        let fetchIssuesAndSubissuesActions = Observable
             .merge(
                 fetchIssuesAction,
                 fetchIssuesAction
@@ -114,10 +111,11 @@ struct IssuesViewModel {
                             })
                     }
             )
+            .map { $0.sorted() }
             .catchErrorJustReturn([])
             .share()
 
-        let fetchTransitionsAction = fetchFullIssuesActions
+        let fetchTransitionsAction = fetchIssuesAndSubissuesActions
             .map {
                 $0.compactMap { Int($0.id) }
             }
@@ -137,8 +135,8 @@ struct IssuesViewModel {
             .catchErrorJustReturn([])
             .share()
         
-        Observable
-            .zip(fetchFullIssuesActions, fetchTransitionsAction)
+        let fetchIssueWithTransitionsAction = Observable
+            .zip(fetchIssuesAndSubissuesActions, fetchTransitionsAction)
             .flatMap { t -> Observable<[Issue]> in
                 var issues = [Issue]()
                 for i in 0..<t.0.count {
@@ -151,6 +149,9 @@ struct IssuesViewModel {
             }
             .distinctUntilChanged({ $0 == $1 })
             .catchErrorJustReturn([])
+            .share()
+        
+        fetchIssueWithTransitionsAction
             .bind(to: outputs.issues)
             .disposed(by: bag)
         
@@ -158,6 +159,24 @@ struct IssuesViewModel {
             .menuClosed
             .subscribe(onNext: {
                 // Do sth...
+            })
+            .disposed(by: bag)
+        
+        Observable
+            .zip(inputs.clickOnTransition.asObservable(),
+                 fetchIssueWithTransitionsAction)
+            .flatMap { t -> Observable<(String?, String?)> in
+                let issueID = t.1.first { $0.summary == t.0.0 }?.id
+                let transionID = t.1.first { $0.summary == t.0.0 }?.transitions.first { $0.name == t.0.1 }?.id
+                return Observable.just((issueID, transionID))
+            }
+            .flatMap {
+                Observable.just((Int($0.0 ?? "-1") ?? -1, Int($0.1 ?? "-1") ?? -1))
+            }
+            .subscribe(onNext: {
+                JiraAPIService
+                    .provider
+                    .request(.updateIssueTransition(issueID: $0.0, transitionID: $0.1)) { _ in }
             })
             .disposed(by: bag)
     }
