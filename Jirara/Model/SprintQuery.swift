@@ -26,6 +26,17 @@ struct Sprint: Mappable {
     }
 }
 
+extension Sprint: Comparable {
+    static func < (lhs: Sprint, rhs: Sprint) -> Bool {
+        return lhs.id < rhs.id
+    }
+    
+    static func == (lhs: Sprint, rhs: Sprint) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+
 struct SprintQuery: Mappable {
     var sprints: [Sprint]
     

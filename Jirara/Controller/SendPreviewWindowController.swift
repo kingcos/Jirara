@@ -61,6 +61,7 @@ class SendPreviewWindowController: NSWindowController {
         NSApp.activate(ignoringOtherApps: true)
         
         setupHeaderContent()
+        
         markdownTextView.string = ""
         try? markdownView.update(markdownString: "")
     }
@@ -71,14 +72,14 @@ class SendPreviewWindowController: NSWindowController {
         emailFromTextField.stringValue = UserDefaults.get(by: .emailAddress)
         subjectTextField.stringValue = UserDefaults.get(by: .mailSubject)
         
-//        subjectTextField.isEditable = false
-//        emailToTextField.isEditable = false
-//        emailCcTextField.isEditable = false
-//        emailFromTextField.isEditable = false
-//
-//        emailSendButton.isEnabled = false
-//        progressIndicator.isHidden = false
-//        progressIndicator.startAnimation(nil)
+        progressIndicator.isHidden = false
+        subjectTextField.isEditable = false
+        emailToTextField.isEditable = false
+        emailCcTextField.isEditable = false
+        emailFromTextField.isEditable = false
+
+        emailSendButton.isEnabled = false
+        progressIndicator.isHidden = false
         
 //        MailUtil.send { subject, content in
 //            self.content = content
@@ -160,6 +161,21 @@ class SendPreviewWindowController: NSWindowController {
         })
         .disposed(by: bag)
         
-        
+        viewModel
+            .outputs
+            .mailContent
+            .subscribe(onNext: {
+                self.markdownTextView.string = $0
+                try? self.markdownView.update(markdownString: $0)
+                
+                self.subjectTextField.isEditable = true
+                self.emailToTextField.isEditable = true
+                self.emailCcTextField.isEditable = true
+                self.progressIndicator.isHidden = true
+                self.emailSendButton.isEnabled = true
+                
+                
+            })
+            .disposed(by: bag)
     }
 }

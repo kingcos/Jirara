@@ -140,13 +140,10 @@ struct MainMenuViewModel {
         let fetchIssueWithTransitionsAction = Observable
             .zip(fetchIssuesAndSubissuesActions, fetchTransitionsAction)
             .flatMap { t -> Observable<[Issue]> in
-                var issues = [Issue]()
+                var issues = t.0
                 for i in 0..<t.0.count {
-                    var issue = t.0[i]
-                    issue.transitions = t.1[i].transitions
-                    issues.append(issue)
+                    issues[i].transitions = t.1[i].transitions
                 }
-
                 return Observable.from(optional: issues.sorted())
             }
             .distinctUntilChanged({ $0 == $1 })
