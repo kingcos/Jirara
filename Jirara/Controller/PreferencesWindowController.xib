@@ -328,7 +328,7 @@
                                             </customSpacing>
                                         </stackView>
                                         <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="87" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KqC-u5-m18">
-                                            <rect key="frame" x="40" y="182" width="500" height="22"/>
+                                            <rect key="frame" x="40" y="155" width="500" height="22"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ve9-Xc-2uy">
                                                     <rect key="frame" x="-2" y="5" width="80" height="17"/>
@@ -357,7 +357,7 @@
                                             </customSpacing>
                                         </stackView>
                                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="18" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="94D-0E-2bp">
-                                            <rect key="frame" x="40" y="214" width="500" height="22"/>
+                                            <rect key="frame" x="40" y="187" width="500" height="22"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="u0O-zs-qEV">
                                                     <rect key="frame" x="-2" y="3" width="21" height="17"/>
@@ -386,7 +386,7 @@
                                             </customSpacing>
                                         </stackView>
                                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RiU-54-7hu">
-                                            <rect key="frame" x="40" y="150" width="500" height="22"/>
+                                            <rect key="frame" x="40" y="123" width="500" height="22"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="84z-eW-EBX">
                                                     <rect key="frame" x="-2" y="3" width="147" height="17"/>
@@ -415,7 +415,7 @@
                                             </customSpacing>
                                         </stackView>
                                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="90" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dap-hY-PQN">
-                                            <rect key="frame" x="40" y="118" width="500" height="22"/>
+                                            <rect key="frame" x="40" y="91" width="500" height="22"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vn8-fg-9xP">
                                                     <rect key="frame" x="-2" y="3" width="77" height="17"/>
@@ -443,16 +443,26 @@
                                                 <real value="3.4028234663852886e+38"/>
                                             </customSpacing>
                                         </stackView>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O0Y-cR-Oxo">
+                                            <rect key="frame" x="270" y="219" width="272" height="17"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="* use space to separate different addresses." id="SJo-ph-WZU">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="94D-0E-2bp" firstAttribute="top" secondItem="aMJ-G0-1NR" secondAttribute="bottom" constant="10" id="1lM-ga-i5Y"/>
                                         <constraint firstItem="94D-0E-2bp" firstAttribute="leading" secondItem="aMJ-G0-1NR" secondAttribute="leading" id="3E7-fp-iNk"/>
                                         <constraint firstItem="94D-0E-2bp" firstAttribute="trailing" secondItem="aMJ-G0-1NR" secondAttribute="trailing" id="5Se-Ja-7cY"/>
+                                        <constraint firstItem="O0Y-cR-Oxo" firstAttribute="trailing" secondItem="aMJ-G0-1NR" secondAttribute="trailing" id="6JJ-bb-obL"/>
                                         <constraint firstItem="KqC-u5-m18" firstAttribute="top" secondItem="94D-0E-2bp" secondAttribute="bottom" constant="10" id="9hD-9c-aKp"/>
                                         <constraint firstItem="dap-hY-PQN" firstAttribute="trailing" secondItem="aMJ-G0-1NR" secondAttribute="trailing" id="BWA-Z6-dwv"/>
+                                        <constraint firstItem="O0Y-cR-Oxo" firstAttribute="top" secondItem="aMJ-G0-1NR" secondAttribute="bottom" constant="10" id="Ic8-GT-Fiw"/>
                                         <constraint firstItem="RiU-54-7hu" firstAttribute="top" secondItem="KqC-u5-m18" secondAttribute="bottom" constant="10" id="Io9-TO-GgQ"/>
                                         <constraint firstItem="aMJ-G0-1NR" firstAttribute="leading" secondItem="fgW-wX-9CI" secondAttribute="leading" constant="40" id="L9M-D8-W2W"/>
                                         <constraint firstItem="aMJ-G0-1NR" firstAttribute="top" secondItem="fgW-wX-9CI" secondAttribute="top" constant="20" id="M6H-eA-Pdg"/>
+                                        <constraint firstItem="94D-0E-2bp" firstAttribute="top" secondItem="O0Y-cR-Oxo" secondAttribute="bottom" constant="10" id="Qdr-sH-6pF"/>
                                         <constraint firstItem="RiU-54-7hu" firstAttribute="trailing" secondItem="aMJ-G0-1NR" secondAttribute="trailing" id="R7h-vo-bFl"/>
                                         <constraint firstItem="dap-hY-PQN" firstAttribute="top" secondItem="RiU-54-7hu" secondAttribute="bottom" constant="10" id="ZGH-eH-kJn"/>
                                         <constraint firstItem="RiU-54-7hu" firstAttribute="leading" secondItem="aMJ-G0-1NR" secondAttribute="leading" id="Za7-ma-KOw"/>
