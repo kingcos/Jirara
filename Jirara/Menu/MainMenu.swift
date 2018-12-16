@@ -15,7 +15,7 @@ class MainMenu: NSMenu {
     let aboutController = AboutWindowController()
     let preferenceController = PreferencesWindowController()
     
-    lazy var viewModel = IssuesViewModel()
+    lazy var viewModel = MainMenuViewModel()
     let bag = DisposeBag()
     
     init() {
@@ -100,6 +100,12 @@ extension MainMenu {
                         .forEach {
                             let issueItem = NSMenuItem(title: $0.summary, action: nil, keyEquivalent: "")
                             issueItem.submenu = NSMenu(title: "")
+                            
+                            let viewDetailsItem = NSMenuItem(title: "View Details...", action: #selector(self.clickOnViewDetails(_:)), keyEquivalent: "")
+                            viewDetailsItem.target = self
+                            issueItem.submenu?.addItem(viewDetailsItem)
+                            issueItem.submenu?.addItem(NSMenuItem.separator())
+                            
                             let state = $0.status
                             $0.transitions.forEach {
                                 let transitionItem = NSMenuItem(title: $0.name, action: #selector(self.selectedTransitionItem(_:)), keyEquivalent: "")
@@ -114,6 +120,10 @@ extension MainMenu {
                 }
             })
             .disposed(by: self.bag)
+    }
+    
+    @objc func clickOnViewDetails(_ item: NSMenuItem) {
+        
     }
     
     @objc func selectedTransitionItem(_ item: NSMenuItem) {
