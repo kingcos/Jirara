@@ -1,5 +1,5 @@
 //
-//  IssuesViewModel.swift
+//  MainMenuViewModel.swift
 //  Jirara
 //
 //  Created by kingcos on 2018/12/7.
@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import Moya
 
-struct IssuesViewModel {
+struct MainMenuViewModel {
     struct Input {
         let menuOpened = PublishSubject<Void>()
         let menuClosed = PublishSubject<Void>()
