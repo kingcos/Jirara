@@ -10,17 +10,6 @@ import Foundation
 import RxSwift
 import Moya
 
-struct JiraAPI {
-    static let Prefix = "https://"
-    
-    static let RapidView = "/rest/greenhopper/1.0/rapidview"
-    static let SprintQuery = "/rest/greenhopper/1.0/sprintquery/"
-    static let SprintReport = "/rest/greenhopper/1.0/rapid/charts/sprintreport"
-    static let User = "/rest/api/2/user"
-    static let Issue = "/rest/api/2/issue/"
-    static let Transitions = "/transitions"
-}
-
 enum JiraAPIService {
     case fetchRapidViewID
     case fetchSprintID(rapidViewID: Int)
@@ -32,11 +21,12 @@ enum JiraAPIService {
     case updateIssueTransition(issueID: Int, transitionID: Int)
     
     static let provider = MoyaProvider<JiraAPIService>()
+    static let scheme = "https://"
 }
 
 extension JiraAPIService: TargetType {
     var baseURL: URL {
-        return URL(string: JiraAPI.Prefix + UserDefaults.get(by: .accountJiraDomain))!
+        return URL(string: UserDefaults.get(by: .accountJiraDomain))!
     }
     
     var path: String {
