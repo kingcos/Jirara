@@ -9,7 +9,6 @@ target 'Jirara' do
   pod 'Mappable'
   pod 'mailcore2-osx'
   pod 'Down'
-  pod 'SnapKit'
   
   pod 'RxSwift'
   pod 'RxCocoa'
