@@ -102,16 +102,23 @@ extension MainMenu {
                             issueItem.submenu = NSMenu(title: "")
                             let state = $0.status
                             $0.transitions.forEach {
-                                let trantitionItem = NSMenuItem(title: $0.name, action: nil, keyEquivalent: "")
+                                let transitionItem = NSMenuItem(title: $0.name, action: #selector(self.selectedTransitionItem(_:)), keyEquivalent: "")
+                                transitionItem.target = self
                                 if state == $0.name {
-                                    trantitionItem.state = .on
+                                    transitionItem.state = .on
                                 }
-                                issueItem.submenu?.addItem(trantitionItem)
+                                issueItem.submenu?.addItem(transitionItem)
                             }
                             menuItem.submenu?.addItem(issueItem)
                     }
                 }
             })
             .disposed(by: self.bag)
+    }
+    
+    @objc func selectedTransitionItem(_ item: NSMenuItem) {
+        if let parent = item.parent {
+            viewModel.inputs.clickOnTransition.onNext((parent.title, item.title))
+        }
     }
 }
