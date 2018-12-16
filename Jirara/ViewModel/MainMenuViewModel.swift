@@ -16,6 +16,7 @@ struct MainMenuViewModel {
         let menuClosed = PublishSubject<Void>()
         let clickOnTransition = PublishSubject<(String, String)>()
         let clickOnViewDetails = PublishSubject<String>()
+        let clickOnScrums = PublishSubject<Void>()
     }
     
     struct Output {
@@ -163,6 +164,7 @@ struct MainMenuViewModel {
             })
             .disposed(by: bag)
         
+        //
         Observable
             .zip(inputs.clickOnTransition.asObservable(), fetchIssueWithTransitionsAction)
             .flatMap { t -> Observable<(String?, String?)> in
@@ -191,5 +193,8 @@ struct MainMenuViewModel {
                 }
             })
             .disposed(by: bag)
+        
+        // ---
+        
     }
 }

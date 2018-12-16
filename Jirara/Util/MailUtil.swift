@@ -61,14 +61,14 @@ struct MailUtil {
         }
     }
     
-    static func send(_ type: SummaryType, _ completion: @escaping (String, String) -> Void) {
+//    static func send(_ type: SummaryType, _ completion: @escaping (String, String) -> Void) {
 //        switch type {
 //        case .team:
 //            sendTeam(completion)
 //        case .individual:
 //            sendIndividual(completion)
 //        }
-    }
+//    }
     
 //    static private func sendIndividual(_ completion: @escaping (String, String) -> Void) {
 //        func generateIndivitualList(_ content: inout String,

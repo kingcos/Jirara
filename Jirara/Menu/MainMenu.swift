@@ -14,6 +14,7 @@ import RxCocoa
 class MainMenu: NSMenu {
     let aboutController = AboutWindowController()
     let preferenceController = PreferencesWindowController()
+    let previewController = SendPreviewWindowController()
     
     lazy var viewModel = MainMenuViewModel()
     let bag = DisposeBag()
@@ -31,15 +32,15 @@ class MainMenu: NSMenu {
 
 extension MainMenu {
     func setup() {
-        // Send
-        let firstMenuItem = NSMenuItem(title: "Scrums", action: nil, keyEquivalent: "")
-        addItem(firstMenuItem)
-        setSubmenu(SendMenu(), for: firstMenuItem)
+        // Scrums
+        let scrumsMenuItem = NSMenuItem(title: "Scrums", action: #selector(clickOnScrums), keyEquivalent: "")
+        scrumsMenuItem.target = self
+        addItem(scrumsMenuItem)
         
         // Issues
-        let secondMenuItem = NSMenuItem(title: "Issues", action: nil, keyEquivalent: "")
-        addItem(secondMenuItem)
-        setSubmenu(IssuesMenu(), for: secondMenuItem)
+        let issuesMenuItem = NSMenuItem(title: "Issues", action: nil, keyEquivalent: "")
+        addItem(issuesMenuItem)
+        setSubmenu(IssuesMenu(), for: issuesMenuItem)
         
         // ---
         addItem(NSMenuItem.separator())
@@ -89,12 +90,17 @@ extension MainMenu {
                     }
                 }
 
-                guard !issues.isEmpty else { return }
                 if let menuItem = self.item(at: 1) {
                     if let submenu = menuItem.submenu,
                         submenu.items.count > 2 {
                         submenu.removeItem(at: 2)
                     }
+                    
+                    guard !issues.isEmpty else {
+                        menuItem.submenu?.addItem(NSMenuItem(title: "There's no issues now.", action: nil, keyEquivalent: ""))
+                        return
+                    }
+                    
                     issues
                         .filter { $0.assignee == UserDefaults.get(by: .accountUsername) }
                         .forEach {
@@ -120,6 +126,10 @@ extension MainMenu {
                 }
             })
             .disposed(by: self.bag)
+    }
+    
+    @objc func clickOnScrums() {
+        previewController.showWindow(nil)
     }
     
     @objc func clickOnViewDetails(_ item: NSMenuItem) {
