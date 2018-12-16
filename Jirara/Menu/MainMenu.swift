@@ -123,7 +123,16 @@ extension MainMenu {
     }
     
     @objc func clickOnViewDetails(_ item: NSMenuItem) {
+//        guard let selectedIssueIndex = selectedIssueIndex,
+//            let url = URL(string: JiraAPI.prefix.rawValue + UserDefaults.get(by: .accountJiraDomain) + "/browse/" + issues[selectedIssueIndex - issueMenuStickItemsCount].key) else {
+//                fatalError()
+//        }
+//
+//        NSWorkspace.shared.open(url)
         
+        if let parent = item.parent {
+            viewModel.inputs.clickOnViewDetails.onNext(parent.title)
+        }
     }
     
     @objc func selectedTransitionItem(_ item: NSMenuItem) {

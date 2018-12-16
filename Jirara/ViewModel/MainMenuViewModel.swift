@@ -15,6 +15,7 @@ struct MainMenuViewModel {
         let menuOpened = PublishSubject<Void>()
         let menuClosed = PublishSubject<Void>()
         let clickOnTransition = PublishSubject<(String, String)>()
+        let clickOnViewDetails = PublishSubject<String>()
     }
     
     struct Output {
@@ -163,8 +164,7 @@ struct MainMenuViewModel {
             .disposed(by: bag)
         
         Observable
-            .zip(inputs.clickOnTransition.asObservable(),
-                 fetchIssueWithTransitionsAction)
+            .zip(inputs.clickOnTransition.asObservable(), fetchIssueWithTransitionsAction)
             .flatMap { t -> Observable<(String?, String?)> in
                 let issueID = t.1.first { $0.summary == t.0.0 }?.id
                 let transionID = t.1.first { $0.summary == t.0.0 }?.transitions.first { $0.name == t.0.1 }?.id
@@ -177,6 +177,18 @@ struct MainMenuViewModel {
                 JiraAPIService
                     .provider
                     .request(.updateIssueTransition(issueID: $0.0, transitionID: $0.1)) { _ in }
+            })
+            .disposed(by: bag)
+        
+        Observable
+            .zip(inputs.clickOnViewDetails.asObservable(), fetchIssueWithTransitionsAction)
+            .flatMap { t -> Observable<String> in
+                Observable.from(optional: t.1.first { $0.summary == t.0 }?.key)
+            }
+            .subscribe(onNext: {
+                if let url = URL(string: UserDefaults.get(by: .accountJiraDomain) + "/browse/" + $0) {
+                    NSWorkspace.shared.open(url)
+                }
             })
             .disposed(by: bag)
     }
