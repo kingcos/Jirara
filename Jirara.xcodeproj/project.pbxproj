@@ -12,7 +12,6 @@
 		841CFFE721C67B7F00EF79EF /* NSTextView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CFFE621C67B7F00EF79EF /* NSTextView+Rx.swift */; };
 		841CFFE921C67C4000EF79EF /* PreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CFFE821C67C4000EF79EF /* PreviewViewModel.swift */; };
 		841CFFEB21C7E55C00EF79EF /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CFFEA21C7E55C00EF79EF /* Date+Extension.swift */; };
-		8426D4DF20D18F350007F180 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4DE20D18F350007F180 /* MainViewModel.swift */; };
 		8426D4E120D194D70007F180 /* SprintQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E020D194D70007F180 /* SprintQuery.swift */; };
 		8426D4E520D197E60007F180 /* RapidViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E420D197E60007F180 /* RapidViews.swift */; };
 		8426D4E720D1A2670007F180 /* SprintReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8426D4E620D1A2670007F180 /* SprintReport.swift */; };
@@ -64,7 +63,6 @@
 		841CFFE621C67B7F00EF79EF /* NSTextView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextView+Rx.swift"; sourceTree = "<group>"; };
 		841CFFE821C67C4000EF79EF /* PreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewModel.swift; sourceTree = "<group>"; };
 		841CFFEA21C7E55C00EF79EF /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
-		8426D4DE20D18F350007F180 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		8426D4E020D194D70007F180 /* SprintQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintQuery.swift; sourceTree = "<group>"; };
 		8426D4E420D197E60007F180 /* RapidViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidViews.swift; sourceTree = "<group>"; };
 		8426D4E620D1A2670007F180 /* SprintReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintReport.swift; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				847E4F6521BA841E00106E7F /* MainMenuViewModel.swift */,
-				8426D4DE20D18F350007F180 /* MainViewModel.swift */,
 				841CFFE821C67C4000EF79EF /* PreviewViewModel.swift */,
 			);
 			path = ViewModel;
@@ -420,7 +417,6 @@
 				847E4F6E21BB7F6300106E7F /* Response+Rx.swift in Sources */,
 				8426D4E720D1A2670007F180 /* SprintReport.swift in Sources */,
 				84A06E8A20E0F1110048798F /* PreferencesWindowController.swift in Sources */,
-				8426D4DF20D18F350007F180 /* MainViewModel.swift in Sources */,
 				8450C33B20E3A25D009C0843 /* SendPreviewWindowController.swift in Sources */,
 				84A06E8D20E0F69F0048798F /* NSNib+Extension.swift in Sources */,
 				845A4EB42109D1F300E6E2A6 /* MainMenu.swift in Sources */,
