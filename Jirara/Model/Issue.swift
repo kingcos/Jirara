@@ -43,6 +43,29 @@ struct Issue: Mappable {
     }
 }
 
+extension Issue: Comparable {
+    static func < (lhs: Issue, rhs: Issue) -> Bool {
+        return lhs.id < rhs.id
+    }
+    
+    static func == (lhs: Issue, rhs: Issue) -> Bool {
+        let result = lhs.id == rhs.id
+                  && lhs.key == rhs.key
+                  && lhs.summary == rhs.summary
+                  && lhs.priority == rhs.priority
+                  && lhs.assignee == rhs.assignee
+                  && lhs.status == rhs.status
+                  && lhs.parentSummary == rhs.parentSummary
+                  && lhs.subtasks == rhs.subtasks
+                  && lhs.comments == rhs.comments
+                  && lhs.transitions == rhs.transitions
+                  && lhs.subissues == rhs.subissues
+                  && lhs.engineer == rhs.engineer
+                  && lhs.type == rhs.type
+        return result
+    }
+}
+
 struct IssueSubtask: Mappable {
     var id: String
 
@@ -50,6 +73,17 @@ struct IssueSubtask: Mappable {
         id = try map.from("id")
     }
 }
+
+extension IssueSubtask: Comparable {
+    static func < (lhs: IssueSubtask, rhs: IssueSubtask) -> Bool {
+        return lhs.id < rhs.id
+    }
+    
+    static func == (lhs: IssueSubtask, rhs: IssueSubtask) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
 
 struct IssueComment: Mappable {
     var id: String
@@ -60,5 +94,15 @@ struct IssueComment: Mappable {
         id = try map.from("id")
         authorName = try map.from("author.name")
         body = try map.from("body")
+    }
+}
+
+extension IssueComment: Comparable {
+    static func < (lhs: IssueComment, rhs: IssueComment) -> Bool {
+        return lhs.id < rhs.id
+    }
+    
+    static func == (lhs: IssueComment, rhs: IssueComment) -> Bool {
+        return lhs.id == rhs.id && lhs.authorName == rhs.authorName && lhs.body == rhs.body
     }
 }

@@ -99,7 +99,12 @@ extension PreferencesWindowController {
         accLoadingIndicator.startAnimation(nil)
         
         // Save to UserDefaults
-        UserDefaults.save(accJiraDomainTextField.stringValue, for: .accountJiraDomain)
+        if accJiraDomainTextField.stringValue.starts(with: JiraAPIService.scheme) {
+            UserDefaults.save(accJiraDomainTextField.stringValue, for: .accountJiraDomain)
+        } else {
+            UserDefaults.save(JiraAPIService.scheme + accJiraDomainTextField.stringValue, for: .accountJiraDomain)
+        }
+        
         UserDefaults.save(accUsernameTextField.stringValue, for: .accountUsername)
         UserDefaults.save(accPasswordTextField.stringValue, for: .accountPassword)
         
@@ -120,54 +125,47 @@ extension PreferencesWindowController {
             UserDefaults.save("on", for: .emailAccountUniversalState)
         }
         
-//        MainViewModel.fetchEngineer(UserDefaults.get(by: .accountUsername)) { engineer in
-//            MailUtil().send(UserDefaults.get(by: .emailAddress),
-//                            [UserDefaults.get(by: .emailAddress)],
-//                            [UserDefaults.get(by: .emailAddress)],
-//                            "Jirara 测试邮件",
-//                            "请确保您能收到该邮件，以保证您能使用 Jirara 的周报系统。<br>by Jirara") { emailErrorMessage in
-//                                let message = "Test Result "
-//                                if let emailErrorMessage = emailErrorMessage {
-//                                    if let jiraErrorMessage = jiraErrorMessage {
-//                                        NSAlert.show(message + "FAILURE",
-//                                                     ["I got it."],
-//                                                     "Jira FAILURE: " + jiraErrorMessage + "\nE-mail FAILURE:" + emailErrorMessage)
-//                                    } else {
-//                                        NSAlert.show(message + "FAILURE",
-//                                                     ["I got it."],
-//                                                     "Jira SUCCESS!\nBut E-mail FAILURE:" + emailErrorMessage)
-//                                    }
+        MailUtil().send(UserDefaults.get(by: .emailAddress),
+                        [UserDefaults.get(by: .emailAddress)],
+                        [UserDefaults.get(by: .emailAddress)],
+                        "Jirara Test E-mail",
+                        "Please make sure you can receive this letter for using Jirara system.<br>by Jirara") { emailErrorMessage in
+                            let message = "Test Result: "
+                            if let emailErrorMessage = emailErrorMessage {
+//                                if let jiraErrorMessage = jiraErrorMessage {
+//                                    NSAlert.show(message + "FAILURE",
+//                                                 ["I got it."],
+//                                                 "Jira FAILURE: " + jiraErrorMessage + "\nE-mail FAILURE:" + emailErrorMessage)
 //                                } else {
-//                                    if let jiraErrorMessage = jiraErrorMessage {
-//                                        NSAlert.show(message + "FAILURE",
-//                                                     ["I got it."],
-//                                                     "E-mail SUCCESS!\nBut Jira FAILURE:" + jiraErrorMessage)
-//                                    } else {
-//                                        NSAlert.show(message + "SUCCESS",
-//                                                     ["I got it."],
-//                                                     "Jira & E-mail SUCCESS!")
-//                                        MainViewModel.fetch(Constants.RapidViewName, false) {
-//                                            MainViewModel.fetch(Constants.RapidViewName) {
-//                                                NSUserNotification.send("Data has been updated!")
-//                                            }
-//                                        }
-//                                    }
+                                    NSAlert.show(message + "FAILURE",
+                                                 ["I got it."],
+                                                 "Jira SUCCESS!\nBut E-mail FAILURE:" + emailErrorMessage)
 //                                }
-//
-//                                self.accJiraDomainTextField.isEnabled = true
-//                                self.accUsernameTextField.isEnabled = true
-//                                self.accPasswordTextField.isEnabled = true
-//
-//                                self.accEmailSMTPTextField.isEnabled = true
-//                                self.accEmailAddressTextField.isEnabled = true
-//                                self.accEmailPasswordTextField.isEnabled = true
-//                                self.accEmailPortTextField.isEnabled = true
-//                                self.accIsUniversalAccountSwitch.isEnabled = true
-//                                self.accTestAndSaveButton.isEnabled = true
-//                                self.accLoadingIndicator.isHidden = true
-//                                self.accLoadingIndicator.stopAnimation(nil)
-//            }
-//        }
+                            } else {
+//                                if let jiraErrorMessage = jiraErrorMessage {
+//                                    NSAlert.show(message + "FAILURE",
+//                                                 ["I got it."],
+//                                                 "E-mail SUCCESS!\nBut Jira FAILURE:" + jiraErrorMessage)
+//                                } else {
+                                    NSAlert.show(message + "SUCCESS",
+                                                 ["I got it."],
+                                                 "Jira & E-mail SUCCESS!")
+//                                }
+                            }
+                            
+                            self.accJiraDomainTextField.isEnabled = true
+                            self.accUsernameTextField.isEnabled = true
+                            self.accPasswordTextField.isEnabled = true
+                            
+                            self.accEmailSMTPTextField.isEnabled = true
+                            self.accEmailAddressTextField.isEnabled = true
+                            self.accEmailPasswordTextField.isEnabled = true
+                            self.accEmailPortTextField.isEnabled = true
+                            self.accIsUniversalAccountSwitch.isEnabled = true
+                            self.accTestAndSaveButton.isEnabled = true
+                            self.accLoadingIndicator.isHidden = true
+                            self.accLoadingIndicator.stopAnimation(nil)
+        }
     }
     
     @IBAction func clickOnIsSameAsAD(_ sender: NSButton) {

@@ -20,21 +20,13 @@
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="i7L-E6-Umg">
-                        <rect key="frame" x="204" y="20" width="73" height="17"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="2018~2018" id="e5k-3z-nsv">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H1K-pL-2Me">
-                        <rect key="frame" x="38" y="125" width="405" height="21"/>
+                        <rect key="frame" x="45" y="20" width="391" height="25"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="895-Xr-VfM">
-                                <rect key="frame" x="-2" y="2" width="209" height="17"/>
+                                <rect key="frame" x="-2" y="4" width="209" height="17"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="For more, please visit my GitHub: " id="Ovn-fD-A6M">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -42,8 +34,8 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c9c-he-cg4">
-                                <rect key="frame" x="207" y="-7" width="204" height="32"/>
-                                <buttonCell key="cell" type="push" title="https://github.com/kingcos" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Odp-RP-mFR">
+                                <rect key="frame" x="213" y="0.0" width="178" height="25"/>
+                                <buttonCell key="cell" type="square" title="https://github.com/kingcos" bezelStyle="shadowlessSquare" imagePosition="left" borderStyle="border" inset="2" id="Odp-RP-mFR">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -61,22 +53,25 @@
                             <real value="3.4028234663852886e+38"/>
                         </customSpacing>
                     </stackView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K4f-n8-ivR">
-                        <rect key="frame" x="20" y="45" width="440" height="17"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="Jirara is a tiny helper for Jira on macOS which wrote in Swift by kingcos." id="KgG-lO-zeB">
-                            <font key="font" usesAppearanceFont="YES"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="keq-1A-lL2">
+                        <rect key="frame" x="18" y="165" width="444" height="85"/>
+                        <textFieldCell key="cell" selectable="YES" id="nkb-qS-JzM">
+                            <font key="font" metaFont="system"/>
+                            <string key="title">Thank you for your using Jirara!
+
+Jirara is a tiny helper for Jira on macOS which wrote in Swift by kingcos.
+It has been purely open-source on GitHub.com. Please feel free to issue me if you find bugs.</string>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="K4f-n8-ivR" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="1np-9C-5YH"/>
-                    <constraint firstItem="H1K-pL-2Me" firstAttribute="centerY" secondItem="se5-gp-TjO" secondAttribute="centerY" id="2H0-0L-WnZ"/>
-                    <constraint firstItem="i7L-E6-Umg" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="F3c-2X-DFQ"/>
-                    <constraint firstItem="H1K-pL-2Me" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="PWb-1g-GAt"/>
-                    <constraint firstAttribute="bottom" secondItem="i7L-E6-Umg" secondAttribute="bottom" constant="20" id="fLE-PF-dVJ"/>
-                    <constraint firstItem="i7L-E6-Umg" firstAttribute="top" secondItem="K4f-n8-ivR" secondAttribute="bottom" constant="8" id="j2h-S0-dSM"/>
+                    <constraint firstAttribute="bottom" secondItem="H1K-pL-2Me" secondAttribute="bottom" constant="20" id="5Oz-OI-AQZ"/>
+                    <constraint firstItem="keq-1A-lL2" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="Zgx-iA-pb1"/>
+                    <constraint firstItem="H1K-pL-2Me" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="ssJ-Af-iQ7"/>
+                    <constraint firstAttribute="trailing" secondItem="keq-1A-lL2" secondAttribute="trailing" constant="20" id="v8f-Ki-vHo"/>
+                    <constraint firstItem="keq-1A-lL2" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="wUV-kA-5mQ"/>
                 </constraints>
             </view>
             <connections>

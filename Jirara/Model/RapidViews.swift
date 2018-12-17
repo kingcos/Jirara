@@ -22,6 +22,16 @@ struct RapidView: Mappable {
     }
 }
 
+extension RapidView: Comparable {
+    static func < (lhs: RapidView, rhs: RapidView) -> Bool {
+        return lhs.id < rhs.id
+    }
+    
+    static func == (lhs: RapidView, rhs: RapidView) -> Bool {
+        return lhs.id == rhs.id && lhs.name == rhs.name
+    }
+}
+
 struct RapidViews: Mappable {
     var views: [RapidView]
     

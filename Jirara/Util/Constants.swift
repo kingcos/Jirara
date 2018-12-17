@@ -28,7 +28,5 @@ struct Constants {
         "十二月" : "12"
     ]
     
-    static let dateFormat = "yyyy.MM.dd"
-    
-    static let JiraRefresherDurationDefault: Int32 = 30
+    static let DateFormat = "yyyy.MM.dd"
 }

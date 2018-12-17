@@ -20,6 +20,7 @@ class LoadingItemView: NSView {
         
         for obj in arr ?? [] {
             if let view = obj as? LoadingItemView {
+                view.spinIndicator.startAnimation(owner)
                 return view
             }
         }

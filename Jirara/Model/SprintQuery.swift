@@ -16,13 +16,21 @@ struct Sprint: Mappable {
     var id: Int
     var name: String
     var state: String
-    var startDate: String = ""
-    var endDate: String = ""
     
     init(map: Mapper) throws {
         id = try map.from("id")
         name = try map.from("name")
         state = try map.from("state")
+    }
+}
+
+extension Sprint: Comparable {
+    static func < (lhs: Sprint, rhs: Sprint) -> Bool {
+        return lhs.id < rhs.id
+    }
+    
+    static func == (lhs: Sprint, rhs: Sprint) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 
