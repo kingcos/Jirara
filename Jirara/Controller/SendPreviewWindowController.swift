@@ -61,10 +61,22 @@ class SendPreviewWindowController: NSWindowController {
         NSApp.activate(ignoringOtherApps: true)
         
         setupHeaderContent()
+        setupUIControlsTo(false)
         
         markdownTextView.string = ""
         try? markdownView.update(markdownString: "")
-        markdownTextView.isEditable = false
+        
+    }
+    
+    func setupUIControlsTo(_ enabled: Bool = true) {
+        subjectTextField.isEditable = enabled
+        emailToTextField.isEditable = enabled
+        emailCcTextField.isEditable = enabled
+        emailFromTextField.isEditable = enabled
+        markdownTextView.isEditable = enabled
+        
+        emailSendButton.isEnabled = enabled
+        progressIndicator.isHidden = enabled
     }
     
     func setupHeaderContent() {
@@ -73,32 +85,7 @@ class SendPreviewWindowController: NSWindowController {
         emailFromTextField.stringValue = UserDefaults.get(by: .emailAddress)
         subjectTextField.stringValue = UserDefaults.get(by: .mailSubject)
         
-        subjectTextField.isEditable = false
-        emailToTextField.isEditable = false
-        emailCcTextField.isEditable = false
-        emailFromTextField.isEditable = false
-
-        emailSendButton.isEnabled = false
-        progressIndicator.isHidden = false
-        
         progressIndicator.startAnimation(nil)
-        
-//        MailUtil.send { subject, content in
-//            self.content = content
-//
-//            self.subjectTextField.stringValue = subject
-//            self.markdownTextView.string = content
-//
-//            try? self.downView.update(markdownString: content)
-//
-//            self.progressIndicator.stopAnimation(nil)
-//            self.progressIndicator.isHidden = true
-//
-//            self.subjectTextField.isEditable = true
-//            self.emailToTextField.isEditable = true
-//            self.emailCcTextField.isEditable = true
-//            self.emailSendButton.isEnabled = true
-//        }
     }
     
     func setupMardownViews() {
@@ -114,41 +101,31 @@ class SendPreviewWindowController: NSWindowController {
     
     func binding() {
         emailSendButton.rx.tap.subscribe(onNext: {
-//            subjectTextField.isEditable = false
-//            emailToTextField.isEditable = false
-//            emailCcTextField.isEditable = false
-//
-//            progressIndicator.isHidden = false
-//            progressIndicator.startAnimation(nil)
-//
-//            emailSendButton.isEnabled = false
-//
-//            let from = emailFromTextField.stringValue
-//            let to = emailToTextField.stringValue.split(separator: " ").map { String($0) }
-//            let cc = emailCcTextField.stringValue.split(separator: " ").map { String($0) }
-//            let subject = subjectTextField.stringValue
-//
-//            let down = Down(markdownString: markdownTextView.string)
-//            if let markdown = try? down.toHTML() {
-//                content = markdown
-//            } else {
-//                NSAlert.show("Parse ERROR", ["OK"])
-//                return
-//            }
-//            MailUtil().send(from, to, cc, subject, content) { errorMessage in
-//                self.progressIndicator.stopAnimation(nil)
-//                self.subjectTextField.isEditable = true
-//                self.emailToTextField.isEditable = true
-//                self.emailCcTextField.isEditable = true
-//                self.progressIndicator.isHidden = true
-//                self.emailSendButton.isEnabled = true
-//
-//                if let errorMessage = errorMessage {
-//                    NSAlert.show("Send failed!", ["OK"], errorMessage)
-//                } else {
-//                    NSAlert.show("Send successfully!", ["OK"])
-//                }
-//            }
+            self.setupUIControlsTo(false)
+
+            let from = self.emailFromTextField.stringValue
+            let to = self.emailToTextField.stringValue.split(separator: " ").map { String($0) }
+            let cc = self.emailCcTextField.stringValue.split(separator: " ").map { String($0) }
+            let subject = self.subjectTextField.stringValue
+
+            let down = Down(markdownString: self.markdownTextView.string)
+            
+            do {
+                let markdown = try down.toHTML()
+                
+                MailUtil().send(from, to, cc, subject, markdown) { errorMessage in
+                    self.setupUIControlsTo(true)
+                    
+                    if let errorMessage = errorMessage {
+                        NSAlert.show("Send failed!", ["OK"], errorMessage)
+                    } else {
+                        NSAlert.show("Send successfully!", ["OK"])
+                    }
+                }
+            } catch {
+                NSAlert.show("Parse ERROR", ["OK"])
+                return
+            }
         })
         .disposed(by: bag)
         
@@ -170,11 +147,7 @@ class SendPreviewWindowController: NSWindowController {
                 self.markdownTextView.string = $0
                 try? self.markdownView.update(markdownString: $0)
                 
-                self.subjectTextField.isEditable = true
-                self.emailToTextField.isEditable = true
-                self.emailCcTextField.isEditable = true
-                self.progressIndicator.isHidden = true
-                self.emailSendButton.isEnabled = true
+                self.setupUIControlsTo()
                 
                 
             })
