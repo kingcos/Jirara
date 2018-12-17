@@ -29,3 +29,13 @@ struct Transition: Mappable {
         name = try map.from("name")
     }
 }
+
+extension Transition: Comparable {
+    static func < (lhs: Transition, rhs: Transition) -> Bool {
+        return lhs.id < rhs.id
+    }
+    
+    static func == (lhs: Transition, rhs: Transition) -> Bool {
+        return lhs.id == rhs.id && lhs.name == rhs.name
+    }
+}

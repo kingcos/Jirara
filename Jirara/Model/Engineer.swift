@@ -26,3 +26,17 @@ struct Engineer: Mappable {
         displayName = try map.from("displayName")
     }
 }
+
+extension Engineer: Comparable {
+    static func < (lhs: Engineer, rhs: Engineer) -> Bool {
+        return lhs.name < rhs.name
+    }
+    
+    static func == (lhs: Engineer, rhs: Engineer) -> Bool {
+        let result = lhs.name == rhs.name
+            && lhs.emailAddress == rhs.emailAddress
+            && lhs.avatarURL == rhs.avatarURL
+            && lhs.issues == rhs.issues
+        return result
+    }
+}

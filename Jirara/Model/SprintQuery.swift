@@ -36,7 +36,6 @@ extension Sprint: Comparable {
     }
 }
 
-
 struct SprintQuery: Mappable {
     var sprints: [Sprint]
     
