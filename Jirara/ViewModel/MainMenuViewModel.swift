@@ -13,7 +13,6 @@ import Moya
 struct MainMenuViewModel {
     struct Input {
         let menuOpened = PublishSubject<Void>()
-        let menuClosed = PublishSubject<Void>()
         let clickOnTransition = PublishSubject<(String, String)>()
         let clickOnViewDetails = PublishSubject<String>()
         let clickOnScrums = PublishSubject<Void>()
@@ -139,26 +138,18 @@ struct MainMenuViewModel {
         
         let fetchIssueWithTransitionsAction = Observable
             .zip(fetchIssuesAndSubissuesActions, fetchTransitionsAction)
-            .flatMap { t -> Observable<[Issue]> in
+            .flatMapLatest { t -> Observable<[Issue]> in
                 var issues = t.0
                 for i in 0..<t.0.count {
                     issues[i].transitions = t.1[i].transitions
                 }
                 return Observable.from(optional: issues.sorted())
             }
-            .distinctUntilChanged({ $0 == $1 })
             .catchErrorJustReturn([])
             .share()
         
         fetchIssueWithTransitionsAction
             .bind(to: outputs.issues)
-            .disposed(by: bag)
-        
-        inputs
-            .menuClosed
-            .subscribe(onNext: {
-                // Do sth...
-            })
             .disposed(by: bag)
         
         //
