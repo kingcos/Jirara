@@ -30,7 +30,7 @@ struct PreviewViewModel {
     let formatter = DateFormatter()
     
     init() {
-        formatter.dateFormat = Constants.dateFormat
+        formatter.dateFormat = Constants.DateFormat
         
         binding()
     }
@@ -57,17 +57,30 @@ struct PreviewViewModel {
         
         let fetchActiveSprintAction = fetchRapidViewAction
             .flatMap {
-                JiraAPIService
-                    .provider
-                    .rx
-                    .request(.fetchSprintID(rapidViewID: $0.id))
-                    .asObservable()
-                    .mapModel(SprintQuery.self)
-                    .map { $0.sprints }
+                Observable.zip(
+                    Observable.just($0),
+                    JiraAPIService
+                        .provider
+                        .rx
+                        .request(.fetchSprintID(rapidViewID: $0.id))
+                        .asObservable()
+                        .mapModel(SprintQuery.self)
+                        .map { $0.sprints }
+                )
             }
             .flatMap {
                 Observable
-                    .from(optional: $0.first { $0.state == "ACTIVE" })
+                    .zip(Observable.just($0.0),
+                         Observable.from(optional: $0.1.first { $0.state == "ACTIVE" }))
+            }
+            .flatMap {
+                JiraAPIService
+                    .provider
+                    .rx
+                    .request(.fetchSprintReport(rapidViewID: $0.0.id,
+                                                sprintID: $0.1.id))
+                    .asObservable()
+                    .mapModel(SprintReport.self)
             }
             .share()
         
@@ -152,8 +165,68 @@ struct PreviewViewModel {
         Observable
             .zip(fetchActiveSprintAction, fetchIssueWithEngineersAction)
             .flatMap { t -> Observable<String> in
-            
-                return Observable.just("content")
+                func generate(_ content: inout String,
+                              _ issues: [Issue]) {
+                    guard !issues.isEmpty else { return }
+                    
+                    for type in Array(Set(issues.map { $0.type })).sorted() {
+                        if type != "" {
+                            content.append(
+"""
+
+- \(type)
+
+"""
+                            )
+                        }
+                        
+                        content.append(
+"""
+
+<table style="border-collapse:collapse">
+<tr><td width=600>任务</td><td width=180>负责人</td><td width=80>状态</td></tr>
+
+"""
+)
+                        let filteredIssues = issues
+                            .filter { $0.type == type }
+                            .sorted { $0.assignee < $1.assignee }
+                        
+                        for issue in filteredIssues {
+                            content.append(
+"""
+<tr><td>\(issue.summary)</td><td>\(issue.engineer?.displayName ?? issue.assignee)</td><td>\(issue.status)</td></tr>
+
+"""
+                            )
+                            
+                            for subissue in issue.subissues {
+                                content.append(
+"""
+<tr><td>┗─ \(subissue.summary)</td><td>\(subissue.engineer?.displayName ?? subissue.assignee)</td><td>\(subissue.status)</td></tr>
+
+"""
+                                )
+                            }
+                        }
+                        content.append("</table><br>\n")
+                    }
+                    content.append("<br>\n")
+                }
+                var content =
+"""
+<style>
+  td { border:1px solid #B0B0B0 }
+</style>
+                
+<h2>\(UserDefaults.get(by: .mailSubject))</h2>
+                
+<h4>周期：\(t.0.startDate) ~ \(t.0.endDate) 统计日期：\(Date.today)</h4>
+
+
+"""
+                generate(&content, t.1)
+                return Observable.just(content)
             }
             .bind(to: outputs.mailContent)
             .disposed(by: bag)
