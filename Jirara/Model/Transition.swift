@@ -20,6 +20,16 @@ struct Transitions: Mappable {
     }
 }
 
+extension Transitions: Comparable {
+    static func < (lhs: Transitions, rhs: Transitions) -> Bool {
+        fatalError("< has not been implemented")
+    }
+    
+    static func == (lhs: Transitions, rhs: Transitions) -> Bool {
+        return lhs.transitions == rhs.transitions
+    }
+}
+
 struct Transition: Mappable {
     var id: String
     var name: String
