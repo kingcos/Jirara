@@ -65,7 +65,7 @@ extension SprintReport {
         formatter.dateFormat = "dd/MM/yy"
         let date = formatter.date(from: String(substrings[0])) ?? Date()
         
-        formatter.dateFormat = Constants.dateFormat
+        formatter.dateFormat = Constants.DateFormat
         return formatter.string(from: date)
     }
 }
