@@ -53,8 +53,12 @@ extension SprintReport {
     func formatDate(_ origin: String) -> String {
         // 15/06/18 dd/mm/yy
         // 26/十一月/18 9:00 上午
-        let chineseMonth = origin.split(separator: "/")[1]
-        let numberMonth = Constants.MonthNumberDict[String(chineseMonth)]
+        guard origin.split(separator: "/").count > 2 else { return origin }
+        let chineseMonth = String(origin.split(separator: "/")[1])
+        
+        guard Constants.MonthNumberDict.keys.contains(chineseMonth) else { return origin }
+        let numberMonth = Constants.MonthNumberDict[chineseMonth]
+        
         let substrings = origin.replacingOccurrences(of: chineseMonth, with: numberMonth ?? "").split(separator: " ")
         
         let formatter = DateFormatter()
