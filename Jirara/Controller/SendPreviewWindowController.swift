@@ -64,6 +64,7 @@ class SendPreviewWindowController: NSWindowController {
         
         markdownTextView.string = ""
         try? markdownView.update(markdownString: "")
+        markdownTextView.isEditable = false
     }
     
     func setupHeaderContent() {
@@ -72,7 +73,6 @@ class SendPreviewWindowController: NSWindowController {
         emailFromTextField.stringValue = UserDefaults.get(by: .emailAddress)
         subjectTextField.stringValue = UserDefaults.get(by: .mailSubject)
         
-        progressIndicator.isHidden = false
         subjectTextField.isEditable = false
         emailToTextField.isEditable = false
         emailCcTextField.isEditable = false
@@ -80,6 +80,8 @@ class SendPreviewWindowController: NSWindowController {
 
         emailSendButton.isEnabled = false
         progressIndicator.isHidden = false
+        
+        progressIndicator.startAnimation(nil)
         
 //        MailUtil.send { subject, content in
 //            self.content = content
