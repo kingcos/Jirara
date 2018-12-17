@@ -75,8 +75,20 @@ extension MainMenu {
     func binding() {
         // NSMenu Open Event ==> ViewModel MenuOpen Input
         rx.menuWillOpen.bind(to: viewModel.inputs.menuOpened).disposed(by: bag)
-        // NSMenu Close Event ==> ViewModel MenuClose Input
-        rx.menuDidClose.bind(to: viewModel.inputs.menuClosed).disposed(by: bag)
+        
+        rx.menuWillOpen.subscribe(onNext: {
+            if let item = self.item(at: 1),
+                let submenu = item.submenu {
+                submenu.items[2..<submenu.items.count].forEach {
+                    submenu.removeItem($0)
+                }
+                
+                let loadingItem = NSMenuItem()
+                loadingItem.view = LoadingItemView.load(self)
+                submenu.addItem(loadingItem)
+            }
+        })
+        .disposed(by: bag)
         
         // ViewModel [Issue] Output ==> Menu View Update
         viewModel

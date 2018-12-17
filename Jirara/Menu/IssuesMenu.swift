@@ -29,11 +29,6 @@ class IssuesMenu: NSMenu {
         
         // ---
         addItem(NSMenuItem.separator())
-        
-        // Loading
-        let loadingItem = NSMenuItem()
-        loadingItem.view = LoadingItemView.load(self)
-        addItem(loadingItem)
     }
     
     @objc func clickOnNewIssue() {
