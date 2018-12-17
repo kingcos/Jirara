@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8407BA1620F86FF700CE5DE7 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407BA1520F86FF700CE5DE7 /* Transition.swift */; };
 		8407BA1820F877CC00CE5DE7 /* NSUserNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407BA1720F877CC00CE5DE7 /* NSUserNotification+Extension.swift */; };
-		8417D2CF21BD56370084E031 /* ScrumsMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417D2CE21BD56370084E031 /* ScrumsMenuViewModel.swift */; };
 		841CFFE721C67B7F00EF79EF /* NSTextView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CFFE621C67B7F00EF79EF /* NSTextView+Rx.swift */; };
 		841CFFE921C67C4000EF79EF /* PreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CFFE821C67C4000EF79EF /* PreviewViewModel.swift */; };
 		841CFFEB21C7E55C00EF79EF /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CFFEA21C7E55C00EF79EF /* Date+Extension.swift */; };
@@ -62,7 +61,6 @@
 		840AB50E20DA5CF40038D329 /* libswiftCryptoTokenKit.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftCryptoTokenKit.tbd; path = System/Library/PrivateFrameworks/Swift/libswiftCryptoTokenKit.tbd; sourceTree = SDKROOT; };
 		840AB51420DA5D6A0038D329 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../Desktop/libcrypto.a; sourceTree = "<group>"; };
 		840AB51620DA5F490038D329 /* libcrypto.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.0.0.dylib; path = ../../../Desktop/libcrypto.1.0.0.dylib; sourceTree = "<group>"; };
-		8417D2CE21BD56370084E031 /* ScrumsMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrumsMenuViewModel.swift; sourceTree = "<group>"; };
 		841CFFE621C67B7F00EF79EF /* NSTextView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextView+Rx.swift"; sourceTree = "<group>"; };
 		841CFFE821C67C4000EF79EF /* PreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewModel.swift; sourceTree = "<group>"; };
 		841CFFEA21C7E55C00EF79EF /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -145,7 +143,6 @@
 			children = (
 				847E4F6521BA841E00106E7F /* MainMenuViewModel.swift */,
 				8426D4DE20D18F350007F180 /* MainViewModel.swift */,
-				8417D2CE21BD56370084E031 /* ScrumsMenuViewModel.swift */,
 				841CFFE821C67C4000EF79EF /* PreviewViewModel.swift */,
 			);
 			path = ViewModel;
@@ -429,7 +426,6 @@
 				845A4EB42109D1F300E6E2A6 /* MainMenu.swift in Sources */,
 				8442048820E6007300DB9837 /* AboutWindowController.swift in Sources */,
 				841CFFEB21C7E55C00EF79EF /* Date+Extension.swift in Sources */,
-				8417D2CF21BD56370084E031 /* ScrumsMenuViewModel.swift in Sources */,
 				841CFFE721C67B7F00EF79EF /* NSTextView+Rx.swift in Sources */,
 				842B9B2A210734E60016B66F /* NSLayoutConstraint+Extension.swift in Sources */,
 				8426D4E120D194D70007F180 /* SprintQuery.swift in Sources */,

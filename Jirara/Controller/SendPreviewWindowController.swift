@@ -148,8 +148,6 @@ class SendPreviewWindowController: NSWindowController {
                 try? self.markdownView.update(markdownString: $0)
                 
                 self.setupUIControlsTo()
-                
-                
             })
             .disposed(by: bag)
     }

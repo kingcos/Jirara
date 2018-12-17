@@ -162,57 +162,9 @@ struct PreviewViewModel {
             .catchErrorJustReturn([])
             .share()
         
-        Observable
+        let latestScrumAction = Observable
             .zip(fetchActiveSprintAction, fetchIssueWithEngineersAction)
             .flatMap { t -> Observable<String> in
-                func generate(_ content: inout String,
-                              _ issues: [Issue]) {
-                    guard !issues.isEmpty else { return }
-                    
-                    for type in Array(Set(issues.map { $0.type })).sorted() {
-                        if type != "" {
-                            content.append(
-"""
-
-- \(type)
-
-"""
-                            )
-                        }
-                        
-                        content.append(
-"""
-
-<table style="border-collapse:collapse">
-<tr><td width=600>任务</td><td width=180>负责人</td><td width=80>状态</td></tr>
-
-"""
-)
-                        let filteredIssues = issues
-                            .filter { $0.type == type }
-                            .sorted { $0.assignee < $1.assignee }
-                        
-                        for issue in filteredIssues {
-                            content.append(
-"""
-<tr><td>\(issue.summary)</td><td>\(issue.engineer?.displayName ?? issue.assignee)</td><td>\(issue.status)</td></tr>
-
-"""
-                            )
-                            
-                            for subissue in issue.subissues {
-                                content.append(
-"""
-<tr><td>┗─ \(subissue.summary)</td><td>\(subissue.engineer?.displayName ?? subissue.assignee)</td><td>\(subissue.status)</td></tr>
-
-"""
-                                )
-                            }
-                        }
-                        content.append("</table><br>\n")
-                    }
-                    content.append("<br>\n")
-                }
                 var content =
 """
 <style>
@@ -225,106 +177,188 @@ struct PreviewViewModel {
 
 
 """
-                generate(&content, t.1)
+                self.generate(&content, t.1)
                 return Observable.just(content)
             }
-            .bind(to: outputs.mailContent)
-            .disposed(by: bag)
+            .share()
         
         // Last week
-//        let fetchLatestInactiveSprintAction = fetchRapidViewAction
-//            .flatMap {
-//                JiraAPIService
-//                    .provider
-//                    .rx
-//                    .request(.fetchSprintID(rapidViewID: $0.id))
-//                    .asObservable()
-//                    .mapModel(SprintQuery.self)
-//                    .map { $0.sprints }
-//            }
-//            .flatMap {
-//                Observable
-//                    .from(optional: $0.sorted().last { $0.state != "ACTIVE" })
-//            }
-//            .share()
-//
-//        let fetchLastIssuesAction = Observable
-//            .zip(fetchRapidViewAction, fetchLatestInactiveSprintAction)
-//            .flatMap {
-//                JiraAPIService
-//                    .provider
-//                    .rx
-//                    .request(.fetchSprintReport(rapidViewID: $0.0.id,
-//                                                sprintID: $0.1.id))
-//                    .asObservable()
-//                    .mapModel(SprintReport.self)
-//                    .map { $0.completedIssues + $0.incompletedIssues }
-//            }
-//            .flatMap {
-//                Observable
-//                    .zip($0.map {
-//                        JiraAPIService
-//                            .provider
-//                            .rx
-//                            .request(.fetchIssue(id: $0.id))
-//                            .asObservable()
-//                            .mapModel(Issue.self)
-//                    })
-//            }
-//            .catchErrorJustReturn([])
-//            .share()
-//
-//        let fetchLastIssuesAndSubissuesActions = Observable
-//            .merge(
-//                fetchLastIssuesAction,
-//                fetchLastIssuesAction
-//                    .map {
-//                        $0.flatMap {
-//                            $0.subtasks.compactMap { Int($0.id) }
-//                        }
-//                    }
-//                    .flatMap {
-//                        Observable
-//                            .zip($0.map {
-//                                JiraAPIService
-//                                    .provider
-//                                    .rx
-//                                    .request(.fetchIssue(id: $0))
-//                                    .asObservable()
-//                                    .mapModel(Issue.self)
-//                            })
-//                }
-//            )
-//            .map { $0.sorted() }
-//            .catchErrorJustReturn([])
-//            .share()
-//
-//        let fetchLastEngineersAction = fetchLastIssuesAndSubissuesActions
-//            .map { Array(Set($0.map { $0.assignee })) }
-//            .flatMap {
-//                Observable.zip($0.map {
-//                    JiraAPIService
-//                        .provider
-//                        .rx
-//                        .request(.fetchEngineer(name: $0))
-//                        .asObservable()
-//                        .mapModel(Engineer.self)
-//                })
-//            }
-//            .catchErrorJustReturn([])
-//            .share()
-//
-//        let fetchLastIssueWithEngineersAction = Observable
-//            .zip(fetchLastIssuesAndSubissuesActions, fetchLastEngineersAction)
-//            .flatMap { t -> Observable<[Issue]> in
-//                var issues = t.0
-//                for i in 0..<t.0.count {
-//                    issues[i].engineer = t.1.first { $0.name == issues[i].assignee }
-//                }
-//                return Observable.from(optional: issues.sorted())
-//            }
-//            .catchErrorJustReturn([])
-//            .share()
-//
+        let fetchInactiveSprintAction = fetchRapidViewAction
+            .flatMap {
+                Observable.zip(
+                    Observable.just($0),
+                    JiraAPIService
+                        .provider
+                        .rx
+                        .request(.fetchSprintID(rapidViewID: $0.id))
+                        .asObservable()
+                        .mapModel(SprintQuery.self)
+                        .map { $0.sprints }
+                )
+            }
+            .flatMap {
+                Observable
+                    .zip(Observable.just($0.0),
+                         Observable.from(optional: $0.1.sorted().last { $0.state != "ACTIVE" }))
+            }
+            .flatMap {
+                JiraAPIService
+                    .provider
+                    .rx
+                    .request(.fetchSprintReport(rapidViewID: $0.0.id,
+                                                sprintID: $0.1.id))
+                    .asObservable()
+                    .mapModel(SprintReport.self)
+            }
+            .share()
+        
+        let fetchInactiveIssuesAction = Observable
+            .zip(fetchRapidViewAction, fetchInactiveSprintAction)
+            .flatMap {
+                JiraAPIService
+                    .provider
+                    .rx
+                    .request(.fetchSprintReport(rapidViewID: $0.0.id,
+                                                sprintID: $0.1.id))
+                    .asObservable()
+                    .mapModel(SprintReport.self)
+                    .map { $0.completedIssues + $0.incompletedIssues }
+            }
+            .flatMap {
+                Observable
+                    .zip($0.map {
+                        JiraAPIService
+                            .provider
+                            .rx
+                            .request(.fetchIssue(id: $0.id))
+                            .asObservable()
+                            .mapModel(Issue.self)
+                    })
+            }
+            .catchErrorJustReturn([])
+            .share()
+        
+        let fetchInactiveIssuesAndSubissuesActions = Observable
+            .merge(
+                fetchInactiveIssuesAction,
+                fetchInactiveIssuesAction
+                    .map {
+                        $0.flatMap {
+                            $0.subtasks.compactMap { Int($0.id) }
+                        }
+                    }
+                    .flatMap {
+                        Observable
+                            .zip($0.map {
+                                JiraAPIService
+                                    .provider
+                                    .rx
+                                    .request(.fetchIssue(id: $0))
+                                    .asObservable()
+                                    .mapModel(Issue.self)
+                            })
+                }
+            )
+            .map { $0.sorted() }
+            .catchErrorJustReturn([])
+            .share()
+        
+        let fetchInactiveEngineersAction = fetchInactiveIssuesAndSubissuesActions
+            .map { Array(Set($0.map { $0.assignee })) }
+            .flatMap {
+                Observable.zip($0.map {
+                    JiraAPIService
+                        .provider
+                        .rx
+                        .request(.fetchEngineer(name: $0))
+                        .asObservable()
+                        .mapModel(Engineer.self)
+                })
+            }
+            .catchErrorJustReturn([])
+            .share()
+        
+        let fetchInactiveIssueWithEngineersAction = Observable
+            .zip(fetchInactiveIssuesAndSubissuesActions, fetchInactiveEngineersAction)
+            .flatMap { t -> Observable<[Issue]> in
+                var issues = t.0
+                for i in 0..<t.0.count {
+                    issues[i].engineer = t.1.first { $0.name == issues[i].assignee }
+                }
+                return Observable.from(optional: issues.sorted())
+            }
+            .catchErrorJustReturn([])
+            .share()
+        
+        let lastScrumAction = Observable
+            .zip(fetchInactiveSprintAction, fetchInactiveIssueWithEngineersAction)
+            .flatMap { t -> Observable<String> in
+                var content =
+                """
+                
+                <h4>周期：\(t.0.startDate) ~ \(t.0.endDate)</h4>
+                
+                
+                """
+                self.generate(&content, t.1)
+                return Observable.just(content)
+            }
+            .share()
+        
+        
+        Observable
+            .zip(latestScrumAction, lastScrumAction)
+            .map { $0.0 + $0.1 }
+            .bind(to: outputs.mailContent)
+            .disposed(by: bag)
+    }
+    
+    func generate(_ content: inout String,
+                  _ issues: [Issue]) {
+        guard !issues.isEmpty else { return }
+        
+        for type in Array(Set(issues.map { $0.type })).sorted() {
+            if type != "" {
+                content.append(
+                    """
+                    
+                    - \(type)
+                    
+                    """
+                )
+            }
+            
+            content.append(
+                """
+
+<table style="border-collapse:collapse">
+<tr><td width=600>任务</td><td width=180>负责人</td><td width=80>状态</td></tr>
+
+"""
+            )
+            let filteredIssues = issues
+                .filter { $0.type == type }
+                .sorted { $0.assignee < $1.assignee }
+            
+            for issue in filteredIssues {
+                content.append(
+                    """
+                    <tr><td>\(issue.summary)</td><td>\(issue.engineer?.displayName ?? issue.assignee)</td><td>\(issue.status)</td></tr>
+                    
+                    """
+                )
+                
+                for subissue in issue.subissues {
+                    content.append(
+                        """
+                        <tr><td>┗─ \(subissue.summary)</td><td>\(subissue.engineer?.displayName ?? subissue.assignee)</td><td>\(subissue.status)</td></tr>
+                        
+                        """
+                    )
+                }
+            }
+            content.append("</table><br>\n")
+        }
+        content.append("<br>\n")
     }
 }
