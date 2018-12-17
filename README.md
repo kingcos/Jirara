@@ -4,7 +4,7 @@
 
 A tiny helper for Jira in your macOS menu bar.
 
-**Status:** ***Basic functions has been released, icon & UI maybe update in the futrue. The master branch code is writing with RxSwift & MVVM.***
+**Status:** ***Basic functions has been released, icon & UI maybe update in the future. The master branch code is writing with RxSwift & MVVM.***
 
 > **Attension**
 > 
