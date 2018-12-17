@@ -128,9 +128,9 @@ extension PreferencesWindowController {
         MailUtil().send(UserDefaults.get(by: .emailAddress),
                         [UserDefaults.get(by: .emailAddress)],
                         [UserDefaults.get(by: .emailAddress)],
-                        "Jirara 测试邮件",
-                        "请确保您能收到该邮件，以保证您能使用 Jirara 的周报系统。<br>by Jirara") { emailErrorMessage in
-                            let message = "Test Result "
+                        "Jirara Test E-mail",
+                        "Please make sure you can receive this letter for using Jirara system.<br>by Jirara") { emailErrorMessage in
+                            let message = "Test Result: "
                             if let emailErrorMessage = emailErrorMessage {
 //                                if let jiraErrorMessage = jiraErrorMessage {
 //                                    NSAlert.show(message + "FAILURE",
