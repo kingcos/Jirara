@@ -32,7 +32,7 @@ struct MainMenuViewModel {
     }
     
     func binding() {
-        let fetchRapidViewAction = inputs
+        let fetchIssuesAction = inputs
             .menuOpened
             .flatMap {
                 JiraAPIService
@@ -47,26 +47,23 @@ struct MainMenuViewModel {
                 Observable
                     .from(optional: $0.first { $0.name == UserDefaults.get(by: .scrumName) })
             }
-            .share()
-        
-        let fetchActiveSprintAction = fetchRapidViewAction
             .flatMap {
-                JiraAPIService
-                    .provider
-                    .rx
-                    .request(.fetchSprintID(rapidViewID: $0.id))
-                    .asObservable()
-                    .mapModel(SprintQuery.self)
-                    .map { $0.sprints }
+                Observable.zip(
+                    Observable.just($0),
+                    JiraAPIService
+                        .provider
+                        .rx
+                        .request(.fetchSprintID(rapidViewID: $0.id))
+                        .asObservable()
+                        .mapModel(SprintQuery.self)
+                        .map { $0.sprints }
+                )
             }
             .flatMap {
                 Observable
-                    .from(optional: $0.first { $0.state == "ACTIVE" })
+                    .zip(Observable.just($0.0),
+                         Observable.from(optional: $0.1.first { $0.state == "ACTIVE" }))
             }
-            .share()
-
-        let fetchIssuesAction = Observable
-            .zip(fetchRapidViewAction, fetchActiveSprintAction)
             .flatMap {
                 JiraAPIService
                     .provider
