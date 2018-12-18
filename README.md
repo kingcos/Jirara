@@ -25,7 +25,8 @@ A tiny helper for Jira in your macOS menu bar.
 ## Build
 
 - Download this repository (Download ZIP or git clone as you like)
-- `pod install`, then enjoy it!
+- `pod install`
+- `xed .`, then enjoy it!
 
 ## LICENSE
 
