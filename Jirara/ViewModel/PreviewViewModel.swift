@@ -167,13 +167,8 @@ struct PreviewViewModel {
             .flatMap { t -> Observable<String> in
                 var content =
 """
-<style>
-  td { border:1px solid #B0B0B0 }
-</style>
-                
-<h2>\(UserDefaults.get(by: .mailSubject))</h2>
-                
-<h4>周期：\(t.0.startDate) ~ \(t.0.endDate) 统计日期：\(Date.today)</h4>
+
+<h4>周期：\(t.0.startDate) ~ \(t.0.endDate)</h4>
 
 
 """
@@ -294,12 +289,17 @@ struct PreviewViewModel {
             .zip(fetchInactiveSprintAction, fetchInactiveIssueWithEngineersAction)
             .flatMap { t -> Observable<String> in
                 var content =
-                """
-                
-                <h4>周期：\(t.0.startDate) ~ \(t.0.endDate)</h4>
-                
-                
-                """
+"""
+<style>
+td { border:1px solid #B0B0B0 }
+</style>
+
+<h2>\(UserDefaults.get(by: .mailSubject))</h2>
+
+<h4>周期：\(t.0.startDate) ~ \(t.0.endDate) 统计日期：\(Date.today)</h4>
+
+
+"""
                 self.generate(&content, t.1)
                 return Observable.just(content)
             }
@@ -307,7 +307,7 @@ struct PreviewViewModel {
         
         
         Observable
-            .zip(latestScrumAction, lastScrumAction)
+            .zip(lastScrumAction, latestScrumAction)
             .map { $0.0 + $0.1 }
             .bind(to: outputs.mailContent)
             .disposed(by: bag)
