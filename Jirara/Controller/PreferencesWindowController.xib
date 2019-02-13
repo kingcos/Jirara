@@ -34,11 +34,11 @@
             <rect key="contentRect" x="196" y="240" width="550" height="350"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" wantsLayer="YES" misplaced="YES" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="626" height="350"/>
+                <rect key="frame" x="0.0" y="0.0" width="550" height="350"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <tabView translatesAutoresizingMaskIntoConstraints="NO" id="ep5-y5-YoC">
-                        <rect key="frame" x="13" y="10" width="600" height="334"/>
+                        <rect key="frame" x="13" y="10" width="524" height="334"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Account" identifier="" id="3MI-Tp-Xvp">
@@ -472,34 +472,6 @@
                                         <constraint firstItem="KqC-u5-m18" firstAttribute="trailing" secondItem="aMJ-G0-1NR" secondAttribute="trailing" id="u9t-GO-DXy"/>
                                         <constraint firstItem="dap-hY-PQN" firstAttribute="leading" secondItem="aMJ-G0-1NR" secondAttribute="leading" id="uow-3c-ZbO"/>
                                         <constraint firstAttribute="trailing" secondItem="aMJ-G0-1NR" secondAttribute="trailing" constant="40" id="zqc-L6-DTn"/>
-                                    </constraints>
-                                </view>
-                            </tabViewItem>
-                            <tabViewItem label="Others" identifier="" id="Yeb-Dx-LSq">
-                                <view key="view" id="kak-yx-caE">
-                                    <rect key="frame" x="10" y="33" width="504" height="288"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XZV-Sv-AKD">
-                                            <rect key="frame" x="217" y="13" width="70" height="32"/>
-                                            <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v4r-Am-RJh">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                        </button>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GrT-3J-hG8">
-                                            <rect key="frame" x="17" y="232" width="37" height="17"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" id="KYK-tO-NgM">
-                                                <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="XZV-Sv-AKD" firstAttribute="centerX" secondItem="kak-yx-caE" secondAttribute="centerX" id="7Yh-V2-C5Z"/>
-                                        <constraint firstAttribute="bottom" secondItem="XZV-Sv-AKD" secondAttribute="bottom" constant="20" id="EKf-4t-EUx"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
